@@ -1,93 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AlaminEdge</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #0d1117;
-      color: #e6edf3;
-    }
-
-    header {
-      background-color: #161b22;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 40px;
-      border-bottom: 1px solid #30363d;
-    }
-
-    header img {
-      height: 50px;
-      border-radius: 10px;
-    }
-
-    nav a {
-      color: #e6edf3;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #58a6ff;
-    }
-
-    main {
-      padding: 60px 40px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      color: #58a6ff;
-    }
-
-    p {
-      font-size: 1.1rem;
-      color: #c9d1d9;
-      line-height: 1.6;
-      max-width: 700px;
-      margin: 20px auto;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      border-top: 1px solid #30363d;
-      color: #8b949e;
-      font-size: 0.9rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlaminEdge - Innovative Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h2>Alamin<span>Edge</span></h2>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#services" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#web-dev">Web Development</a></li>
+                        <li><a href="#mobile-dev">Mobile Apps</a></li>
+                        <li><a href="#cloud">Cloud Solutions</a></li>
+                        <li><a href="#ai">AI & ML</a></li>
+                        <li><a href="#consulting">IT Consulting</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#solutions" class="nav-link">Solutions <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#enterprise">Enterprise</a></li>
+                        <li><a href="#startup">Startup Solutions</a></li>
+                        <li><a href="#ecommerce">E-Commerce</a></li>
+                        <li><a href="#education">Education</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#portfolio" class="nav-link">Portfolio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#company" class="nav-link">Company <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link btn-primary">Get Quote</a>
+                </li>
+            </ul>
 
-  <header>
-    <img src="logo.png" alt="Auralian Edge Logo" style="width:200px; margin-top:20px;">
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Courses</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-    </nav>
-  </header>
+            <!-- Three Bar Hamburger Menu -->
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
 
-  <main>
-    <h1>Welcome to AlaminEdge</h1>
-    <p>
-      Empowering learners through technology and innovation.  
-      Explore our smart courses, live mentorship, and cutting-edge educational tools designed for the future.
-    </p>
-  </main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to <span>AlaminEdge</span></h1>
+            <p>Cutting-edge technology solutions for modern businesses. We deliver innovative digital experiences that drive growth and success.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Our Services</a>
+                <a href="#portfolio" class="btn btn-secondary">View Work</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="floating-card">
+                <i class="fas fa-code"></i>
+                <h4>Web Development</h4>
+            </div>
+            <div class="floating-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h4>Mobile Apps</h4>
+            </div>
+            <div class="floating-card">
+                <i class="fas fa-cloud"></i>
+                <h4>Cloud Solutions</h4>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    © 2025 AlaminEdge — Powered by Md. Al Amin
-  </footer>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Web Development</h3>
+                    <p>Custom web applications built with modern technologies.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Development</h3>
+                    <p>iOS & Android apps that deliver exceptional user experiences.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud Solutions</h3>
+                    <p>Scalable cloud infrastructure and deployment solutions.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI & ML</h3>
+                    <p>Intelligent solutions powered by artificial intelligence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AlaminEdge</h3>
+                    <p>Innovating the future, one solution at a time.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@alaminedge.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
