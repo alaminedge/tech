@@ -1,64 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlaminEdge - Innovative Solutions</title>
+    <title>AlaminEdge | Enterprise-Grade Digital Solutions</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header class="header">
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="logo-loader">
+                <div class="logo-shape"></div>
+                <div class="logo-text">AlaminEdge</div>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button class="theme-btn" data-theme="dark"><i class="fas fa-moon"></i></button>
+        <button class="theme-btn" data-theme="light"><i class="fas fa-sun"></i></button>
+        <button class="theme-btn" data-theme="neon"><i class="fas fa-palette"></i></button>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel">
+        <div class="settings-toggle">
+            <i class="fas fa-cog"></i>
+        </div>
+        <div class="settings-content">
+            <h4>Customize Experience</h4>
+            <div class="setting-group">
+                <label>Animation Intensity</label>
+                <input type="range" id="animation-intensity" min="0" max="100" value="80">
+            </div>
+            <div class="setting-group">
+                <label>Particle Density</label>
+                <input type="range" id="particle-density" min="10" max="200" value="80">
+            </div>
+            <div class="setting-group">
+                <label>Color Scheme</label>
+                <select id="color-scheme">
+                    <option value="default">Deep Blue</option>
+                    <option value="purple">Royal Purple</option>
+                    <option value="emerald">Emerald Green</option>
+                    <option value="amber">Amber Gold</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <button id="reset-settings" class="btn btn-outline">Reset to Default</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header glass">
         <nav class="navbar">
             <div class="nav-brand">
-                <h2>Alamin<span>Edge</span></h2>
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <span class="logo-text">Alamin<span>Edge</span></span>
+                </div>
             </div>
             
+            <!-- Mega Menu -->
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#home" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
                 </li>
+                
+                <li class="nav-item mega-dropdown">
+                    <a href="#solutions" class="nav-link">
+                        <i class="fas fa-cube"></i>
+                        Solutions
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-content">
+                            <div class="mega-column">
+                                <h4>Enterprise Solutions</h4>
+                                <ul>
+                                    <li><a href="#ai-solutions"><i class="fas fa-brain"></i> AI & Machine Learning</a></li>
+                                    <li><a href="#blockchain"><i class="fas fa-link"></i> Blockchain Technology</a></li>
+                                    <li><a href="#cloud-native"><i class="fas fa-cloud"></i> Cloud Native Architecture</a></li>
+                                    <li><a href="#iot"><i class="fas fa-satellite"></i> IoT Ecosystems</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-column">
+                                <h4>Digital Transformation</h4>
+                                <ul>
+                                    <li><a href="#digital-strategy"><i class="fas fa-chess-queen"></i> Digital Strategy</a></li>
+                                    <li><a href="#ux-consulting"><i class="fas fa-palette"></i> UX/UI Consulting</a></li>
+                                    <li><a href="#devops"><i class="fas fa-rocket"></i> DevOps & CI/CD</a></li>
+                                    <li><a href="#cybersecurity"><i class="fas fa-shield-alt"></i> Cybersecurity</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-column">
+                                <h4>Innovation Labs</h4>
+                                <ul>
+                                    <li><a href="#ar-vr"><i class="fas fa-vr-cardboard"></i> AR/VR Solutions</a></li>
+                                    <li><a href="#quantum"><i class="fas fa-atom"></i> Quantum Computing</a></li>
+                                    <li><a href="#biotech"><i class="fas fa-dna"></i> Bio-Tech Software</a></li>
+                                    <li><a href="#fintech"><i class="fas fa-chart-line"></i> FinTech Platforms</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
                 <li class="nav-item dropdown">
-                    <a href="#services" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                    <a href="#services" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        Services
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#web-dev">Web Development</a></li>
-                        <li><a href="#mobile-dev">Mobile Apps</a></li>
-                        <li><a href="#cloud">Cloud Solutions</a></li>
-                        <li><a href="#ai">AI & ML</a></li>
-                        <li><a href="#consulting">IT Consulting</a></li>
+                        <li><a href="#custom-dev"><i class="fas fa-code"></i> Custom Development</a></li>
+                        <li><a href="#saas"><i class="fas fa-layer-group"></i> SaaS Platforms</a></li>
+                        <li><a href="#mobile-enterprise"><i class="fas fa-mobile-alt"></i> Enterprise Mobile</a></li>
+                        <li><a href="#data-analytics"><i class="fas fa-chart-bar"></i> Data Analytics</a></li>
+                        <li><a href="#consulting"><i class="fas fa-headset"></i> 24/7 Support</a></li>
                     </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a href="#case-studies" class="nav-link">
+                        <i class="fas fa-briefcase"></i>
+                        Case Studies
+                    </a>
+                </li>
+
                 <li class="nav-item dropdown">
-                    <a href="#solutions" class="nav-link">Solutions <i class="fas fa-chevron-down"></i></a>
+                    <a href="#company" class="nav-link">
+                        <i class="fas fa-building"></i>
+                        Company
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#enterprise">Enterprise</a></li>
-                        <li><a href="#startup">Startup Solutions</a></li>
-                        <li><a href="#ecommerce">E-Commerce</a></li>
-                        <li><a href="#education">Education</a></li>
+                        <li><a href="#about"><i class="fas fa-eye"></i> About Us</a></li>
+                        <li><a href="#leadership"><i class="fas fa-users"></i> Leadership</a></li>
+                        <li><a href="#careers"><i class="fas fa-user-plus"></i> Careers</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
-                    <a href="#portfolio" class="nav-link">Portfolio</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#company" class="nav-link">Company <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#team">Our Team</a></li>
-                        <li><a href="#careers">Careers</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link btn-primary">Get Quote</a>
+                    <a href="#pricing" class="nav-link">
+                        <i class="fas fa-tag"></i>
+                        Pricing
+                    </a>
                 </li>
             </ul>
 
-            <!-- Three Bar Hamburger Menu -->
+            <div class="nav-actions">
+                <button class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Client Portal
+                </button>
+                <button class="btn-cta">
+                    <i class="fas fa-paper-plane"></i>
+                    Start Project
+                </button>
+            </div>
+
+            <!-- Three Bar Hamburger -->
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -67,87 +184,153 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Welcome to <span>AlaminEdge</span></h1>
-            <p>Cutting-edge technology solutions for modern businesses. We deliver innovative digital experiences that drive growth and success.</p>
-            <div class="hero-buttons">
-                <a href="#services" class="btn btn-primary">Our Services</a>
-                <a href="#portfolio" class="btn btn-secondary">View Work</a>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-background">
+                <div class="gradient-orbs">
+                    <div class="orb orb-1"></div>
+                    <div class="orb orb-2"></div>
+                    <div class="orb orb-3"></div>
+                </div>
             </div>
-        </div>
-        <div class="hero-image">
-            <div class="floating-card">
-                <i class="fas fa-code"></i>
-                <h4>Web Development</h4>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>ENTERPRISE GRADE</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="title-line">Redefining</span>
+                        <span class="title-line accent">Digital Excellence</span>
+                        <span class="title-line">for Global Enterprises</span>
+                    </h1>
+                    <p class="hero-description">
+                        AlaminEdge delivers cutting-edge technology solutions that drive innovation, 
+                        transform businesses, and create sustainable competitive advantages in the digital age.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number" data-count="150">0</div>
+                            <div class="stat-label">Enterprise Clients</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" data-count="99.9">0</div>
+                            <div class="stat-label">Uptime %</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" data-count="24">0</div>
+                            <div class="stat-label">/7 Support</div>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-large">
+                            <span>Explore Solutions</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-outline btn-large">
+                            <span>Watch Demo</span>
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-dashboard">
+                        <div class="dashboard-header">
+                            <div class="window-controls">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="dashboard-content">
+                            <div class="metric-card">
+                                <i class="fas fa-chart-line"></i>
+                                <div class="metric-value">+47%</div>
+                                <div class="metric-label">Revenue Growth</div>
+                            </div>
+                            <div class="metric-card">
+                                <i class="fas fa-bolt"></i>
+                                <div class="metric-value">3.2s</div>
+                                <div class="metric-label">Load Time</div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="hero-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="floating-card">
-                <i class="fas fa-mobile-alt"></i>
-                <h4>Mobile Apps</h4>
-            </div>
-            <div class="floating-card">
-                <i class="fas fa-cloud"></i>
-                <h4>Cloud Solutions</h4>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>Web Development</h3>
-                    <p>Custom web applications built with modern technologies.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Mobile Development</h3>
-                    <p>iOS & Android apps that deliver exceptional user experiences.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-cloud"></i>
-                    <h3>Cloud Solutions</h3>
-                    <p>Scalable cloud infrastructure and deployment solutions.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>AI & ML</h3>
-                    <p>Intelligent solutions powered by artificial intelligence.</p>
+        <!-- Trust Bar -->
+        <section class="trust-bar">
+            <div class="container">
+                <div class="trust-label">Trusted by industry leaders</div>
+                <div class="trust-logos">
+                    <div class="logo-item">FORBES</div>
+                    <div class="logo-item">TECHCRUNCH</div>
+                    <div class="logo-item">MICROSOFT</div>
+                    <div class="logo-item">GOOGLE</div>
+                    <div class="logo-item">AMAZON</div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Features Grid -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Enterprise-Grade Capabilities</h2>
+                    <p>Comprehensive solutions designed for scale, security, and performance</p>
+                </div>
+                <div class="features-grid">
+                    <!-- Feature cards will be dynamically loaded -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Transform Your Digital Presence?</h2>
+                    <p>Join the elite group of enterprises leveraging AlaminEdge technology</p>
+                    <button class="btn btn-glow">
+                        <span>Schedule Executive Briefing</span>
+                        <i class="fas fa-arrow-up-right-from-square"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3>AlaminEdge</h3>
-                    <p>Innovating the future, one solution at a time.</p>
+                <!-- Footer sections -->
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2024 AlaminEdge Technologies. All rights reserved.
                 </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <p><i class="fas fa-envelope"></i> info@alaminedge.com</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Security</a>
+                    <a href="#">Compliance</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
+    <script src="assets/js/particles-config.js"></script>
+    <script src="assets/js/animations.js"></script>
 </body>
 </html>
