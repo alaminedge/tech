@@ -3,50 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Calculus Mastery | AlaminEdge</title>
+    <title>Premium Calculus Course | AlaminEdge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #8a2be2;
-            --primary-dark: #6a0dad;
-            --secondary: #00bfff;
-            --dark-bg: #0a0a0f;
-            --dark-card: #12121f;
-            --dark-border: #252540;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0d0;
-            --accent: #ff4081;
-            --success: #00e676;
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #0f172a;
+            --accent: #10b981;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --background: #0f0f0f;
+            --card-bg: #1e1e1e;
+            --border: #334155;
+            --success: #10b981;
+            --error: #ef4444;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
         }
         
         body {
-            background: var(--dark-bg);
-            color: var(--text-primary);
+            background: var(--background);
+            color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
+            min-height: 100vh;
         }
         
-        /* Header & Navigation */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
         header {
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
             position: sticky;
             top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--dark-border);
+            z-index: 100;
         }
         
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -58,61 +62,29 @@
             gap: 10px;
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--text-primary);
-        }
-        
-        .logo span {
             color: var(--primary);
         }
         
-        .nav-links {
+        .logo i {
+            font-size: 1.8rem;
+        }
+        
+        .auth-section {
             display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--text-primary);
-        }
-        
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--primary);
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
+            align-items: center;
+            gap: 15px;
         }
         
         .btn {
-            padding: 0.6rem 1.5rem;
+            padding: 10px 20px;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             border: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
         }
         
         .btn-primary {
@@ -123,216 +95,298 @@
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
         }
         
         .btn-outline:hover {
-            background: rgba(138, 43, 226, 0.1);
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 5rem 2rem;
-            background: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(18, 18, 31, 0.9) 100%), 
-                        url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 20%, rgba(138, 43, 226, 0.2) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(0, 191, 255, 0.15) 0%, transparent 50%);
-            z-index: 0;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .badge {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--dark-border);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
         
-        /* Course Sections */
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-        
-        .section-subtitle {
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .course-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-        
-        .course-card {
-            background: var(--dark-card);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--dark-border);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary);
-        }
-        
-        .card-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--dark-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        
-        .card-badge {
-            background: var(--primary);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .card-content {
-            padding: 1.5rem;
-        }
-        
-        .lecture-list {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-        
-        .lecture-item {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .lecture-item:last-child {
-            border-bottom: none;
-        }
-        
-        .lecture-title {
+        .user-info {
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .lecture-icon {
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--background) 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .price-tag {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        /* Course Sections */
+        .course-section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
             color: var(--primary);
         }
         
-        .lecture-duration {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .lectures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
         }
         
-        .card-footer {
+        .lecture-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .lecture-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .lecture-thumbnail {
+            height: 180px;
+            background: var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lecture-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lecture-card:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .lecture-info {
             padding: 1.5rem;
-            border-top: 1px solid var(--dark-border);
+        }
+        
+        .lecture-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .lecture-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .notes-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .notes-link:hover {
+            color: var(--accent);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 1.5rem;
         }
         
-        .price {
+        .modal-title {
             font-size: 1.5rem;
-            font-weight: 700;
             color: var(--primary);
         }
         
-        /* Video Player */
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            color: var(--text);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .error-message {
+            color: var(--error);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        /* Video Player Modal */
+        .video-modal {
+            z-index: 1001;
+        }
+        
+        .video-modal-content {
+            width: 95%;
+            max-width: 1000px;
+            padding: 0;
+            overflow: hidden;
+        }
+        
         .player-container {
             width: 100%;
-            max-width: 1000px;
-            margin: 0 auto 3rem;
             background: #000;
             border-radius: 12px;
             overflow: hidden;
@@ -414,7 +468,7 @@
         
         .progress {
             height: 100%;
-            background: var(--primary);
+            background: #ff0000;
             border-radius: 2px;
             width: 0%;
             transition: width 0.1s;
@@ -424,7 +478,7 @@
             position: absolute;
             width: 12px;
             height: 12px;
-            background: var(--primary);
+            background: #ff0000;
             border-radius: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
@@ -493,7 +547,7 @@
         }
         
         .menu-item.active {
-            color: var(--primary);
+            color: #ff0000;
         }
         
         .fullscreen-btn {
@@ -558,394 +612,69 @@
         .block-overlay i {
             font-size: 48px;
             margin-bottom: 16px;
-            color: var(--accent);
-        }
-        
-        /* Fullscreen styles */
-        .player-container:-webkit-full-screen {
-            width: 100%;
-            height: 100%;
-            border-radius: 0;
-            max-width: none;
-        }
-        
-        .player-container:-moz-full-screen {
-            width: 100%;
-            height: 100%;
-            border-radius: 0;
-            max-width: none;
-        }
-        
-        .player-container:-ms-fullscreen {
-            width: 100%;
-            height: 100%;
-            border-radius: 0;
-            max-width: none;
-        }
-        
-        .player-container:fullscreen {
-            width: 100%;
-            height: 100%;
-            border-radius: 0;
-            max-width: none;
-        }
-        
-        .player-container:-webkit-full-screen .video-container {
-            width: 100%;
-            height: 100%;
-            padding-top: 0;
-        }
-        
-        .player-container:-moz-full-screen .video-container {
-            width: 100%;
-            height: 100%;
-            padding-top: 0;
-        }
-        
-        .player-container:-ms-fullscreen .video-container {
-            width: 100%;
-            height: 100%;
-            padding-top: 0;
-        }
-        
-        .player-container:fullscreen .video-container {
-            width: 100%;
-            height: 100%;
-            padding-top: 0;
-        }
-        
-        .player-container:-webkit-full-screen #player {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .player-container:-moz-full-screen #player {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .player-container:-ms-fullscreen #player {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .player-container:fullscreen #player {
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Controls visibility in fullscreen */
-        .player-container:fullscreen .controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            transition: opacity 0.3s ease;
-        }
-        
-        .player-container:-webkit-full-screen .controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            transition: opacity 0.3s ease;
-        }
-        
-        .player-container:-moz-full-screen .controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            transition: opacity 0.3s ease;
-        }
-        
-        .player-container:-ms-fullscreen .controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            transition: opacity 0.3s ease;
-        }
-        
-        /* Hide controls in fullscreen by default */
-        .player-container:fullscreen .controls.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .player-container:-webkit-full-screen .controls.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .player-container:-moz-full-screen .controls.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .player-container:-ms-fullscreen .controls.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        /* Purchase Section */
-        .purchase-section {
-            background: var(--dark-card);
-            border-radius: 12px;
-            padding: 3rem;
-            text-align: center;
-            border: 1px solid var(--dark-border);
-            margin-top: 3rem;
-        }
-        
-        .purchase-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .purchase-subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .purchase-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .feature {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            border: 1px solid var(--dark-border);
-        }
-        
-        .feature-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .feature-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .feature-desc {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        .purchase-cta {
-            margin-top: 2rem;
-        }
-        
-        .price-tag {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .price-note {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
+            color: #ff0000;
         }
         
         /* Footer */
         footer {
-            background: var(--dark-card);
-            border-top: 1px solid var(--dark-border);
-            padding: 3rem 2rem;
+            background: var(--secondary);
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            margin-top: 4rem;
         }
         
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .footer-col h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--primary);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--text-primary);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: all 0.3s;
-        }
-        
-        .social-link:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid var(--dark-border);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* Access Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background: var(--dark-card);
-            border-radius: 12px;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            border: 1px solid var(--dark-border);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
-        
-        .modal-header {
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .modal-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .modal-subtitle {
-            color: var(--text-secondary);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--dark-border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .modal-footer {
+        .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 2rem;
         }
         
-        .error-message {
-            color: var(--accent);
+        .copyright {
+            color: var(--text-muted);
             font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: none;
         }
         
-        /* Responsive Design */
+        .powered-by {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Access Restricted */
+        .access-restricted {
+            text-align: center;
+            padding: 4rem 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .restricted-icon {
+            font-size: 4rem;
+            color: var(--error);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .header-container {
+            .header-content {
                 flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
+                gap: 15px;
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
-            .section {
-                padding: 3rem 1rem;
-            }
-            
-            .course-cards {
+            .lectures-grid {
                 grid-template-columns: 1fr;
             }
             
-            .purchase-section {
-                padding: 2rem 1rem;
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
             }
         }
     </style>
@@ -953,553 +682,596 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-infinity"></i>
-                <span>Alamin</span>Edge
-            </div>
-            
-            <nav class="nav-links">
-                <a href="#" class="active">Home</a>
-                <a href="#differentiation">Differentiation</a>
-                <a href="#integration">Integration</a>
-                <a href="#purchase">Purchase</a>
-            </nav>
-            
-            <div class="auth-buttons">
-                <button class="btn btn-outline" id="login-btn">
-                    <i class="fas fa-user"></i> Login
-                </button>
-                <button class="btn btn-primary" id="register-btn">
-                    <i class="fas fa-lock"></i> Register
-                </button>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-infinity"></i>
+                    <span>Calculus Premium</span>
+                </div>
+                <div class="auth-section" id="auth-section">
+                    <!-- Will be populated by JavaScript -->
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Master Calculus with Premium Video Courses</h1>
-            <p>Unlock the power of differentiation and integration with our expertly crafted video lectures, premium notes, and secure learning platform.</p>
-            
-            <div class="hero-badges">
-                <div class="badge">
-                    <i class="fas fa-play-circle"></i> 20+ Video Lectures
-                </div>
-                <div class="badge">
-                    <i class="fas fa-file-pdf"></i> Premium Notes
-                </div>
-                <div class="badge">
-                    <i class="fas fa-shield-alt"></i> Secure Platform
-                </div>
+        <div class="container">
+            <h1>Master Calculus with Premium Content</h1>
+            <p>Comprehensive course covering both differentiation and integration with expert instruction, premium materials, and secure access.</p>
+            <div class="price-tag">
+                <i class="fas fa-tag"></i>
+                <span>Course Fee: $100</span>
             </div>
-            
-            <button class="btn btn-primary" id="hero-cta">
-                <i class="fas fa-rocket"></i> Start Learning Now
+            <button class="btn btn-primary" id="purchase-btn">
+                <i class="fas fa-shopping-cart"></i>
+                Purchase Course
             </button>
         </div>
     </section>
 
-    <!-- Differentiation Section -->
-    <section class="section" id="differentiation">
-        <div class="section-header">
-            <h2 class="section-title">Differentiation</h2>
-            <p class="section-subtitle">Master the art of finding derivatives with our comprehensive video lectures and premium notes.</p>
-        </div>
-        
-        <!-- Video Player for Differentiation -->
-        <div class="player-container">
-            <div class="video-container">
-                <div id="player-diff"></div>
-                <div class="secure-overlay" id="secure-overlay-diff"></div>
-                <div class="preview-thumbnail" id="preview-thumbnail-diff">
-                    <img src="" alt="Preview">
-                    <div class="preview-time" id="preview-time-diff">0:00</div>
-                </div>
-                <div class="security-notice" id="security-notice-diff">
-                    <i class="fas fa-shield-alt"></i> Secure Mode: Right-click disabled
-                </div>
-                <div class="block-overlay" id="block-overlay-diff">
-                    <i class="fas fa-ban"></i>
-                    <div>Navigation to YouTube is blocked</div>
-                </div>
-            </div>
-            
-            <div class="controls" id="controls-diff">
-                <button class="control-btn play-pause-btn" id="play-pause-btn-diff" title="Play/Pause">
-                    <i class="fas fa-play" id="play-icon-diff"></i>
-                    <i class="fas fa-pause" id="pause-icon-diff" style="display:none"></i>
-                </button>
-                
-                <button class="control-btn rewind-btn" id="rewind-btn-diff" title="Rewind 10s">
-                    <i class="fas fa-backward"></i> 10s
-                </button>
-                
-                <button class="control-btn forward-btn" id="forward-btn-diff" title="Forward 10s">
-                    <i class="fas fa-forward"></i> 10s
-                </button>
-                
-                <div class="progress-container" id="progress-container-diff">
-                    <div class="progress-bar">
-                        <div class="progress" id="progress-diff"></div>
-                        <div class="progress-thumb" id="progress-thumb-diff"></div>
+    <!-- Course Content (Visible only when authenticated) -->
+    <div id="course-content" style="display: none;">
+        <!-- Differentiation Section -->
+        <section class="course-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line"></i>
+                    Differentiation
+                </h2>
+                <div class="lectures-grid">
+                    <div class="lecture-card">
+                        <div class="lecture-thumbnail">
+                            <img src="https://img.youtube.com/vi/D_KBH3GzEyc/hqdefault.jpg" alt="Differentiation Lecture 1">
+                            <div class="play-overlay">
+                                <div class="play-btn" data-video-id="D_KBH3GzEyc">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lecture-info">
+                            <h3 class="lecture-title">Differentiation Lecture 1</h3>
+                            <div class="lecture-meta">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                                <span><i class="far fa-calendar"></i> Oct 15, 2023</span>
+                            </div>
+                            <a href="https://drive.google.com/file/d/13sY0KBN1Ez-3pHaqD-Dduhmfqg6KmqCx/view?usp=drivesdk" target="_blank" class="notes-link">
+                                <i class="fas fa-file-pdf"></i>
+                                Download Notes
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="lecture-card">
+                        <div class="lecture-thumbnail">
+                            <img src="https://img.youtube.com/vi/_oHatvRx9h4/hqdefault.jpg" alt="Differentiation Lecture 2">
+                            <div class="play-overlay">
+                                <div class="play-btn" data-video-id="_oHatvRx9h4">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lecture-info">
+                            <h3 class="lecture-title">Differentiation Lecture 2</h3>
+                            <div class="lecture-meta">
+                                <span><i class="far fa-clock"></i> 52 min</span>
+                                <span><i class="far fa-calendar"></i> Oct 22, 2023</span>
+                            </div>
+                            <a href="https://drive.google.com/file/d/1o09k10L1okaLUwX5Ojb5dApxZdHW2AkW/view?usp=drivesdk" target="_blank" class="notes-link">
+                                <i class="fas fa-file-pdf"></i>
+                                Download Notes
+                            </a>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="time-display">
-                    <span class="current-time" id="current-time-diff">0:00</span> / <span class="duration" id="duration-diff">0:00</span>
-                </div>
-                
-                <div class="volume-container">
-                    <button class="control-btn volume-btn" id="volume-btn-diff" title="Mute/Unmute">
-                        <i class="fas fa-volume-up" id="volume-high-diff"></i>
-                        <i class="fas fa-volume-mute" id="volume-mute-diff" style="display:none"></i>
-                    </button>
-                    <input type="range" class="volume-slider" id="volume-slider-diff" min="0" max="100" value="100">
-                </div>
-                
-                <button class="control-btn speed-btn" id="speed-btn-diff" title="Playback Speed">1x</button>
-                
-                <button class="control-btn settings-btn" id="settings-btn-diff" title="Settings">
-                    <i class="fas fa-cog"></i>
-                </button>
-                
-                <button class="control-btn fullscreen-btn" id="fullscreen-btn-diff" title="Fullscreen">
-                    <i class="fas fa-expand" id="expand-icon-diff"></i>
-                    <i class="fas fa-compress" id="compress-icon-diff" style="display:none"></i>
-                </button>
-                
-                <div class="settings-menu" id="settings-menu-diff">
-                    <div class="menu-item" data-quality="auto">Quality: Auto</div>
-                    <div class="menu-item" data-quality="hd1080">1080p</div>
-                    <div class="menu-item" data-quality="hd720">720p</div>
-                    <div class="menu-item" data-quality="medium">480p</div>
-                    <div class="menu-item" data-quality="small">360p</div>
-                </div>
-                
-                <div class="speed-menu" id="speed-menu-diff">
-                    <div class="menu-item" data-speed="0.25">0.25x</div>
-                    <div class="menu-item" data-speed="0.5">0.5x</div>
-                    <div class="menu-item" data-speed="0.75">0.75x</div>
-                    <div class="menu-item active" data-speed="1">Normal</div>
-                    <div class="menu-item" data-speed="1.25">1.25x</div>
-                    <div class="menu-item" data-speed="1.5">1.5x</div>
-                    <div class="menu-item" data-speed="2">2x</div>
-                </div>
             </div>
-        </div>
-        
-        <div class="course-cards">
-            <div class="course-card">
-                <div class="card-header">
-                    <div class="card-title">Differentiation Lecture 1</div>
-                    <div class="card-badge">Free Preview</div>
-                </div>
-                <div class="card-content">
-                    <ul class="lecture-list">
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Introduction to Derivatives
-                            </div>
-                            <div class="lecture-duration">15:30</div>
-                        </li>
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Basic Differentiation Rules
-                            </div>
-                            <div class="lecture-duration">22:15</div>
-                        </li>
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Power Rule and Examples
-                            </div>
-                            <div class="lecture-duration">18:45</div>
-                        </li>
-                    </ul>
-                    <p>Download premium notes with detailed explanations and practice problems.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://drive.google.com/file/d/13sY0KBN1Ez-3pHaqD-Dduhmfqg6KmqCx/view?usp=drivesdk" class="btn btn-outline" target="_blank">
-                        <i class="fas fa-download"></i> Download Notes
-                    </a>
-                </div>
-            </div>
-            
-            <div class="course-card">
-                <div class="card-header">
-                    <div class="card-title">Differentiation Lecture 2</div>
-                    <div class="card-badge">Premium</div>
-                </div>
-                <div class="card-content">
-                    <ul class="lecture-list">
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Product and Quotient Rules
-                            </div>
-                            <div class="lecture-duration">25:10</div>
-                        </li>
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Chain Rule Applications
-                            </div>
-                            <div class="lecture-duration">20:35</div>
-                        </li>
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Implicit Differentiation
-                            </div>
-                            <div class="lecture-duration">28:20</div>
-                        </li>
-                    </ul>
-                    <p>Advanced differentiation techniques with real-world applications.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://drive.google.com/file/d/1o09k10L1okaLUwX5Ojb5dApxZdHW2AkW/view?usp=drivesdk" class="btn btn-outline" target="_blank">
-                        <i class="fas fa-download"></i> Download Notes
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Integration Section -->
-    <section class="section" id="integration">
-        <div class="section-header">
-            <h2 class="section-title">Integration</h2>
-            <p class="section-subtitle">Learn integration techniques from basic to advanced with step-by-step video tutorials.</p>
-        </div>
-        
-        <!-- Video Player for Integration -->
-        <div class="player-container">
-            <div class="video-container">
-                <div id="player-int"></div>
-                <div class="secure-overlay" id="secure-overlay-int"></div>
-                <div class="preview-thumbnail" id="preview-thumbnail-int">
-                    <img src="" alt="Preview">
-                    <div class="preview-time" id="preview-time-int">0:00</div>
-                </div>
-                <div class="security-notice" id="security-notice-int">
-                    <i class="fas fa-shield-alt"></i> Secure Mode: Right-click disabled
-                </div>
-                <div class="block-overlay" id="block-overlay-int">
-                    <i class="fas fa-ban"></i>
-                    <div>Navigation to YouTube is blocked</div>
-                </div>
-            </div>
-            
-            <div class="controls" id="controls-int">
-                <button class="control-btn play-pause-btn" id="play-pause-btn-int" title="Play/Pause">
-                    <i class="fas fa-play" id="play-icon-int"></i>
-                    <i class="fas fa-pause" id="pause-icon-int" style="display:none"></i>
-                </button>
-                
-                <button class="control-btn rewind-btn" id="rewind-btn-int" title="Rewind 10s">
-                    <i class="fas fa-backward"></i> 10s
-                </button>
-                
-                <button class="control-btn forward-btn" id="forward-btn-int" title="Forward 10s">
-                    <i class="fas fa-forward"></i> 10s
-                </button>
-                
-                <div class="progress-container" id="progress-container-int">
-                    <div class="progress-bar">
-                        <div class="progress" id="progress-int"></div>
-                        <div class="progress-thumb" id="progress-thumb-int"></div>
+        <!-- Integration Section -->
+        <section class="course-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    Integration
+                </h2>
+                <div class="lectures-grid">
+                    <div class="lecture-card">
+                        <div class="lecture-thumbnail">
+                            <img src="https://img.youtube.com/vi/ydf10na_XDg/hqdefault.jpg" alt="Integration Lecture 1">
+                            <div class="play-overlay">
+                                <div class="play-btn" data-video-id="ydf10na_XDg">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lecture-info">
+                            <h3 class="lecture-title">Integration Lecture 1</h3>
+                            <div class="lecture-meta">
+                                <span><i class="far fa-clock"></i> 48 min</span>
+                                <span><i class="far fa-calendar"></i> Oct 29, 2023</span>
+                            </div>
+                            <a href="https://drive.google.com/file/d/1ZR8xP69l9IBBdoTzJ-8xT8GApsvPCeKp/view?usp=drivesdk" target="_blank" class="notes-link">
+                                <i class="fas fa-file-pdf"></i>
+                                Download Notes
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="lecture-card">
+                        <div class="lecture-thumbnail">
+                            <img src="https://img.youtube.com/vi/i_Q3yzQxcQE/hqdefault.jpg" alt="Integration Lecture 2">
+                            <div class="play-overlay">
+                                <div class="play-btn" data-video-id="i_Q3yzQxcQE">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lecture-info">
+                            <h3 class="lecture-title">Integration Lecture 2</h3>
+                            <div class="lecture-meta">
+                                <span><i class="far fa-clock"></i> 55 min</span>
+                                <span><i class="far fa-calendar"></i> Nov 5, 2023</span>
+                            </div>
+                            <a href="https://drive.google.com/file/d/1MI3GfzJAo3AYIuaOd2SbHZ0Yol63coTU/view?usp=drivesdk" target="_blank" class="notes-link">
+                                <i class="fas fa-file-pdf"></i>
+                                Download Notes
+                            </a>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="time-display">
-                    <span class="current-time" id="current-time-int">0:00</span> / <span class="duration" id="duration-int">0:00</span>
-                </div>
-                
-                <div class="volume-container">
-                    <button class="control-btn volume-btn" id="volume-btn-int" title="Mute/Unmute">
-                        <i class="fas fa-volume-up" id="volume-high-int"></i>
-                        <i class="fas fa-volume-mute" id="volume-mute-int" style="display:none"></i>
-                    </button>
-                    <input type="range" class="volume-slider" id="volume-slider-int" min="0" max="100" value="100">
-                </div>
-                
-                <button class="control-btn speed-btn" id="speed-btn-int" title="Playback Speed">1x</button>
-                
-                <button class="control-btn settings-btn" id="settings-btn-int" title="Settings">
-                    <i class="fas fa-cog"></i>
-                </button>
-                
-                <button class="control-btn fullscreen-btn" id="fullscreen-btn-int" title="Fullscreen">
-                    <i class="fas fa-expand" id="expand-icon-int"></i>
-                    <i class="fas fa-compress" id="compress-icon-int" style="display:none"></i>
-                </button>
-                
-                <div class="settings-menu" id="settings-menu-int">
-                    <div class="menu-item" data-quality="auto">Quality: Auto</div>
-                    <div class="menu-item" data-quality="hd1080">1080p</div>
-                    <div class="menu-item" data-quality="hd720">720p</div>
-                    <div class="menu-item" data-quality="medium">480p</div>
-                    <div class="menu-item" data-quality="small">360p</div>
-                </div>
-                
-                <div class="speed-menu" id="speed-menu-int">
-                    <div class="menu-item" data-speed="0.25">0.25x</div>
-                    <div class="menu-item" data-speed="0.5">0.5x</div>
-                    <div class="menu-item" data-speed="0.75">0.75x</div>
-                    <div class="menu-item active" data-speed="1">Normal</div>
-                    <div class="menu-item" data-speed="1.25">1.25x</div>
-                    <div class="menu-item" data-speed="1.5">1.5x</div>
-                    <div class="menu-item" data-speed="2">2x</div>
-                </div>
             </div>
-        </div>
-        
-        <div class="course-cards">
-            <div class="course-card">
-                <div class="card-header">
-                    <div class="card-title">Integration Lecture 1</div>
-                    <div class="card-badge">Free Preview</div>
-                </div>
-                <div class="card-content">
-                    <ul class="lecture-list">
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Introduction to Integrals
-                            </div>
-                            <div class="lecture-duration">17:25</div>
-                        </li>
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Basic Integration Rules
-                            </div>
-                            <div class="lecture-duration">21:40</div>
-                        </li>
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Definite vs Indefinite Integrals
-                            </div>
-                            <div class="lecture-duration">19:15</div>
-                        </li>
-                    </ul>
-                    <p>Master the fundamentals of integration with clear explanations and examples.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://drive.google.com/file/d/1ZR8xP69l9IBBdoTzJ-8xT8GApsvPCeKp/view?usp=drivesdk" class="btn btn-outline" target="_blank">
-                        <i class="fas fa-download"></i> Download Notes
-                    </a>
-                </div>
-            </div>
-            
-            <div class="course-card">
-                <div class="card-header">
-                    <div class="card-title">Integration Lecture 2</div>
-                    <div class="card-badge">Premium</div>
-                </div>
-                <div class="card-content">
-                    <ul class="lecture-list">
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Integration by Substitution
-                            </div>
-                            <div class="lecture-duration">26:30</div>
-                        </li>
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Integration by Parts
-                            </div>
-                            <div class="lecture-duration">24:50</div>
-                        </li>
-                        <li class="lecture-item">
-                            <div class="lecture-title">
-                                <i class="fas fa-play-circle lecture-icon"></i>
-                                Applications of Integration
-                            </div>
-                            <div class="lecture-duration">29:10</div>
-                        </li>
-                    </ul>
-                    <p>Advanced integration techniques with practical problem-solving approaches.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://drive.google.com/file/d/1MI3GfzJAo3AYIuaOd2SbHZ0Yol63coTU/view?usp=drivesdk" class="btn btn-outline" target="_blank">
-                        <i class="fas fa-download"></i> Download Notes
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Purchase Section -->
-    <section class="section" id="purchase">
-        <div class="section-header">
-            <h2 class="section-title">Get Full Course Access</h2>
-            <p class="section-subtitle">Unlock all premium content with a one-time payment. Lifetime access to all current and future calculus materials.</p>
+    <!-- Access Restricted Message -->
+    <div id="access-restricted" class="access-restricted">
+        <div class="restricted-icon">
+            <i class="fas fa-lock"></i>
         </div>
-        
-        <div class="purchase-section">
-            <h3 class="purchase-title">Complete Calculus Mastery Package</h3>
-            <p class="purchase-subtitle">Everything you need to master differentiation and integration in one comprehensive package.</p>
-            
-            <div class="purchase-features">
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <h4 class="feature-title">20+ Video Lectures</h4>
-                    <p class="feature-desc">High-quality videos with detailed explanations</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <h4 class="feature-title">Premium Notes</h4>
-                    <p class="feature-desc">Downloadable PDFs with examples and exercises</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h4 class="feature-title">Secure Access</h4>
-                    <p class="feature-desc">Protected content with no redistribution</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-infinity"></i>
-                    </div>
-                    <h4 class="feature-title">Lifetime Access</h4>
-                    <p class="feature-desc">All future updates included at no extra cost</p>
-                </div>
-            </div>
-            
-            <div class="price-tag">$100</div>
-            <p class="price-note">One-time payment • No subscription • 30-day money-back guarantee</p>
-            
-            <div class="purchase-cta">
-                <button class="btn btn-primary" id="purchase-btn">
-                    <i class="fas fa-shopping-cart"></i> Purchase Full Course
-                </button>
-                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
-                    Contact @adamzampas on Telegram for purchase assistance
-                </p>
-            </div>
-        </div>
-    </section>
+        <h2>Access Restricted</h2>
+        <p>Please register or login to access the premium calculus course content.</p>
+        <button class="btn btn-primary" id="register-now-btn">
+            <i class="fas fa-user-plus"></i>
+            Register Now
+        </button>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <div class="footer-col">
-                <h3>AlaminEdge</h3>
-                <p>Premium educational content with a focus on mathematics and sciences. Delivering high-quality courses with secure access.</p>
-                <div class="social-links">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-twitter"></i>
-                    </a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    &copy; 2023 Calculus Premium. All rights reserved.
+                </div>
+                <div class="powered-by">
+                    <span>Powered by</span>
+                    <span class="logo">AlaminEdge</span>
                 </div>
             </div>
-            
-            <div class="footer-col">
-                <h3>Courses</h3>
-                <ul class="footer-links">
-                    <li><a href="#differentiation">Differentiation</a></li>
-                    <li><a href="#integration">Integration</a></li>
-                    <li><a href="#">Linear Algebra</a></li>
-                    <li><a href="#">Differential Equations</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Resources</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Study Guides</a></li>
-                    <li><a href="#">Practice Problems</a></li>
-                    <li><a href="#">Video Tutorials</a></li>
-                    <li><a href="#">Premium Notes</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Support</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Refund Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            &copy; 2023 AlaminEdge. All rights reserved. Premium Calculus Course Platform.
         </div>
     </footer>
 
-    <!-- Access Modal -->
-    <div class="modal" id="access-modal">
+    <!-- Registration Modal -->
+    <div class="modal" id="registration-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Course Access</h3>
-                <p class="modal-subtitle">Enter your credentials to access premium content</p>
+                <h3 class="modal-title">Course Registration</h3>
+                <button class="close-btn" id="close-registration-modal">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            
-            <form id="access-form">
+            <form id="registration-form">
                 <div class="form-group">
-                    <label class="form-label" for="registration">Registration Code</label>
-                    <input type="text" class="form-input" id="registration" placeholder="Enter registration code">
-                    <div class="error-message" id="registration-error">Invalid registration code</div>
+                    <label class="form-label" for="registration-code">Registration Code</label>
+                    <input type="text" id="registration-code" class="form-input" placeholder="Enter registration code">
+                    <div class="error-message" id="registration-code-error"></div>
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="password">Password</label>
-                    <input type="password" class="form-input" id="password" placeholder="Enter password">
-                    <div class="error-message" id="password-error">Invalid password</div>
+                    <input type="password" id="password" class="form-input" placeholder="Enter password">
+                    <div class="error-message" id="password-error"></div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-check"></i>
+                    Register & Access Course
+                </button>
+            </form>
+            <div class="form-footer">
+                <p>To purchase the course, contact @adamzampas on Telegram</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="modal" id="purchase-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Purchase Course</h3>
+                <button class="close-btn" id="close-purchase-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="form-group">
+                <p>To purchase this calculus course for $100, please contact @adamzampas on Telegram.</p>
+                <p>After payment, you will receive the registration code and password to access all course content.</p>
+            </div>
+            <div class="form-footer">
+                <button class="btn btn-primary" id="contact-telegram-btn">
+                    <i class="fab fa-telegram"></i>
+                    Contact on Telegram
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div class="modal video-modal" id="video-modal">
+        <div class="modal-content video-modal-content">
+            <div class="player-container">
+                <div class="video-container">
+                    <div id="player"></div>
+                    <div class="secure-overlay" id="secure-overlay"></div>
+                    <div class="preview-thumbnail" id="preview-thumbnail">
+                        <img src="" alt="Preview">
+                        <div class="preview-time" id="preview-time">0:00</div>
+                    </div>
+                    <div class="security-notice" id="security-notice">
+                        <i class="fas fa-shield-alt"></i> Secure Mode: Right-click disabled
+                    </div>
+                    <div class="block-overlay" id="block-overlay">
+                        <i class="fas fa-ban"></i>
+                        <div>Navigation to YouTube is blocked</div>
+                    </div>
                 </div>
                 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline" id="cancel-btn">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Access Course</button>
+                <div class="controls" id="controls">
+                    <button class="control-btn play-pause-btn" id="play-pause-btn" title="Play/Pause">
+                        <i class="fas fa-play" id="play-icon"></i>
+                        <i class="fas fa-pause" id="pause-icon" style="display:none"></i>
+                    </button>
+                    
+                    <button class="control-btn rewind-btn" id="rewind-btn" title="Rewind 10s">
+                        <i class="fas fa-backward"></i> 10s
+                    </button>
+                    
+                    <button class="control-btn forward-btn" id="forward-btn" title="Forward 10s">
+                        <i class="fas fa-forward"></i> 10s
+                    </button>
+                    
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" id="progress"></div>
+                            <div class="progress-thumb" id="progress-thumb"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-display">
+                        <span class="current-time" id="current-time">0:00</span> / <span class="duration" id="duration">0:00</span>
+                    </div>
+                    
+                    <div class="volume-container">
+                        <button class="control-btn volume-btn" id="volume-btn" title="Mute/Unmute">
+                            <i class="fas fa-volume-up" id="volume-high"></i>
+                            <i class="fas fa-volume-mute" id="volume-mute" style="display:none"></i>
+                        </button>
+                        <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="100">
+                    </div>
+                    
+                    <button class="control-btn speed-btn" id="speed-btn" title="Playback Speed">1x</button>
+                    
+                    <button class="control-btn settings-btn" id="settings-btn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    
+                    <button class="control-btn fullscreen-btn" id="fullscreen-btn" title="Fullscreen">
+                        <i class="fas fa-expand" id="expand-icon"></i>
+                        <i class="fas fa-compress" id="compress-icon" style="display:none"></i>
+                    </button>
+                    
+                    <div class="settings-menu" id="settings-menu">
+                        <div class="menu-item" data-quality="auto">Quality: Auto</div>
+                        <div class="menu-item" data-quality="hd1080">1080p</div>
+                        <div class="menu-item" data-quality="hd720">720p</div>
+                        <div class="menu-item" data-quality="medium">480p</div>
+                        <div class="menu-item" data-quality="small">360p</div>
+                    </div>
+                    
+                    <div class="speed-menu" id="speed-menu">
+                        <div class="menu-item" data-speed="0.25">0.25x</div>
+                        <div class="menu-item" data-speed="0.5">0.5x</div>
+                        <div class="menu-item" data-speed="0.75">0.75x</div>
+                        <div class="menu-item active" data-speed="1">Normal</div>
+                        <div class="menu-item" data-speed="1.25">1.25x</div>
+                        <div class="menu-item" data-speed="1.5">1.5x</div>
+                        <div class="menu-item" data-speed="2">2x</div>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // YouTube video IDs
-        const videoIds = {
-            diff: 'D_KBH3GzEyc',
-            int: 'ydf10na_XDg'
-        };
-        
-        // Player instances
-        let players = {};
-        
-        // Load YouTube IFrame API and create players
-        function onYouTubeIframeAPIReady() {
-            players.diff = createPlayer('player-diff', videoIds.diff, 'diff');
-            players.int = createPlayer('player-int', videoIds.int, 'int');
+        // Constants
+        const REGISTRATION_CODE = "67890";
+        const PASSWORD = "difintA25";
+        const COURSE_FEE = 100;
+
+        // DOM Elements
+        const authSection = document.getElementById('auth-section');
+        const courseContent = document.getElementById('course-content');
+        const accessRestricted = document.getElementById('access-restricted');
+        const registrationModal = document.getElementById('registration-modal');
+        const purchaseModal = document.getElementById('purchase-modal');
+        const videoModal = document.getElementById('video-modal');
+        const registrationForm = document.getElementById('registration-form');
+        const registrationCodeInput = document.getElementById('registration-code');
+        const passwordInput = document.getElementById('password');
+        const registrationCodeError = document.getElementById('registration-code-error');
+        const passwordError = document.getElementById('password-error');
+        const purchaseBtn = document.getElementById('purchase-btn');
+        const registerNowBtn = document.getElementById('register-now-btn');
+        const closeRegistrationModal = document.getElementById('close-registration-modal');
+        const closePurchaseModal = document.getElementById('close-purchase-modal');
+        const contactTelegramBtn = document.getElementById('contact-telegram-btn');
+        const playButtons = document.querySelectorAll('.play-btn');
+
+        // Check if user is already registered
+        function checkRegistrationStatus() {
+            const isRegistered = localStorage.getItem('calculusCourseRegistered');
+            if (isRegistered === 'true') {
+                showCourseContent();
+            } else {
+                showAccessRestricted();
+            }
         }
-        
-        // Create a YouTube player
-        function createPlayer(elementId, videoId, type) {
-            return new YT.Player(elementId, {
+
+        // Show course content
+        function showCourseContent() {
+            courseContent.style.display = 'block';
+            accessRestricted.style.display = 'none';
+            updateAuthSection(true);
+        }
+
+        // Show access restricted message
+        function showAccessRestricted() {
+            courseContent.style.display = 'none';
+            accessRestricted.style.display = 'block';
+            updateAuthSection(false);
+        }
+
+        // Update authentication section in header
+        function updateAuthSection(isRegistered) {
+            if (isRegistered) {
+                authSection.innerHTML = `
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Premium Member</span>
+                    </div>
+                    <button class="btn btn-outline" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                `;
+                document.getElementById('logout-btn').addEventListener('click', logout);
+            } else {
+                authSection.innerHTML = `
+                    <button class="btn btn-outline" id="login-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </button>
+                    <button class="btn btn-primary" id="register-btn">
+                        <i class="fas fa-user-plus"></i>
+                        Register
+                    </button>
+                `;
+                document.getElementById('login-btn').addEventListener('click', openRegistrationModal);
+                document.getElementById('register-btn').addEventListener('click', openRegistrationModal);
+            }
+        }
+
+        // Open registration modal
+        function openRegistrationModal() {
+            registrationModal.classList.add('active');
+        }
+
+        // Close registration modal
+        function closeRegistrationModalFunc() {
+            registrationModal.classList.remove('active');
+            clearFormErrors();
+        }
+
+        // Open purchase modal
+        function openPurchaseModal() {
+            purchaseModal.classList.add('active');
+        }
+
+        // Close purchase modal
+        function closePurchaseModalFunc() {
+            purchaseModal.classList.remove('active');
+        }
+
+        // Open video modal
+        function openVideoModal(videoId) {
+            currentVideoId = videoId;
+            videoModal.classList.add('active');
+            initializePlayer(videoId);
+        }
+
+        // Close video modal
+        function closeVideoModal() {
+            videoModal.classList.remove('active');
+            if (player) {
+                player.stopVideo();
+            }
+        }
+
+        // Clear form errors
+        function clearFormErrors() {
+            registrationCodeError.style.display = 'none';
+            passwordError.style.display = 'none';
+        }
+
+        // Handle registration form submission
+        function handleRegistration(e) {
+            e.preventDefault();
+            clearFormErrors();
+            
+            const enteredCode = registrationCodeInput.value.trim();
+            const enteredPassword = passwordInput.value.trim();
+            
+            let isValid = true;
+            
+            if (enteredCode !== REGISTRATION_CODE) {
+                registrationCodeError.textContent = 'Invalid registration code';
+                registrationCodeError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (enteredPassword !== PASSWORD) {
+                passwordError.textContent = 'Invalid password';
+                passwordError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Save registration status to local storage
+                localStorage.setItem('calculusCourseRegistered', 'true');
+                localStorage.setItem('registrationDate', new Date().toISOString());
+                
+                // Show success message and course content
+                closeRegistrationModalFunc();
+                showCourseContent();
+                
+                // Show success notification
+                showNotification('Registration successful! Welcome to the premium calculus course.', 'success');
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('calculusCourseRegistered');
+            localStorage.removeItem('registrationDate');
+            showAccessRestricted();
+            showNotification('You have been logged out successfully.', 'info');
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                max-width: 400px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            
+            if (type === 'success') {
+                notification.style.background = 'var(--success)';
+            } else if (type === 'error') {
+                notification.style.background = 'var(--error)';
+            } else {
+                notification.style.background = 'var(--primary)';
+            }
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 5000);
+        }
+
+        // Contact on Telegram
+        function contactOnTelegram() {
+            window.open('https://t.me/adamzampas', '_blank');
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            checkRegistrationStatus();
+            
+            // Modal event listeners
+            purchaseBtn.addEventListener('click', openPurchaseModal);
+            registerNowBtn.addEventListener('click', openRegistrationModal);
+            closeRegistrationModal.addEventListener('click', closeRegistrationModalFunc);
+            closePurchaseModal.addEventListener('click', closePurchaseModalFunc);
+            contactTelegramBtn.addEventListener('click', contactOnTelegram);
+            
+            // Registration form
+            registrationForm.addEventListener('submit', handleRegistration);
+            
+            // Play buttons for videos
+            playButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const videoId = this.getAttribute('data-video-id');
+                    openVideoModal(videoId);
+                });
+            });
+            
+            // Close modals when clicking outside
+            [registrationModal, purchaseModal, videoModal].forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        if (this === videoModal) {
+                            closeVideoModal();
+                        } else if (this === registrationModal) {
+                            closeRegistrationModalFunc();
+                        } else if (this === purchaseModal) {
+                            closePurchaseModalFunc();
+                        }
+                    }
+                });
+            });
+            
+            // Close video modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                    closeVideoModal();
+                }
+            });
+        });
+
+        // YouTube Player Code
+        let player;
+        let currentVideoId;
+        let isPlaying = false;
+        let isMuted = false;
+        let currentVolume = 100;
+        let isDragging = false;
+        let securityCheckInterval;
+        let isFullscreen = false;
+        let controlsTimeout;
+
+        // Load YouTube IFrame API and create player
+        function onYouTubeIframeAPIReady() {
+            // Player will be initialized when a video is selected
+        }
+
+        function initializePlayer(videoId) {
+            player = new YT.Player('player', {
                 height: '100%',
                 width: '100%',
                 videoId: videoId,
@@ -1515,120 +1287,109 @@
                     'origin': window.location.origin
                 },
                 events: {
-                    'onReady': (event) => onPlayerReady(event, type),
-                    'onStateChange': (event) => onPlayerStateChange(event, type),
-                    'onError': (event) => onPlayerError(event, type)
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError
                 }
             });
         }
-        
+
         // When player is ready
-        function onPlayerReady(event, type) {
-            updateTimeDisplay(type);
-            startSecurityMonitoring(type);
-            setInterval(() => updateProgress(type), 200);
+        function onPlayerReady(event) {
+            updateTimeDisplay();
+            startSecurityMonitoring();
+            setInterval(updateProgress, 200);
             
             // Hide YouTube branding after a delay
-            setTimeout(() => hideYouTubeBranding(type), 1000);
+            setTimeout(hideYouTubeBranding, 1000);
             
             // Listen for fullscreen changes
-            document.addEventListener('fullscreenchange', () => handleFullscreenChange(type));
-            document.addEventListener('webkitfullscreenchange', () => handleFullscreenChange(type));
-            document.addEventListener('mozfullscreenchange', () => handleFullscreenChange(type));
-            document.addEventListener('MSFullscreenChange', () => handleFullscreenChange(type));
+            document.addEventListener('fullscreenchange', handleFullscreenChange);
+            document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+            document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+            document.addEventListener('MSFullscreenChange', handleFullscreenChange);
             
             // Add click event to show controls in fullscreen
-            document.getElementById(`secure-overlay-${type}`).addEventListener('click', () => handleScreenClick(type));
+            document.getElementById('secure-overlay').addEventListener('click', handleScreenClick);
         }
-        
+
         // Handle player state changes
-        function onPlayerStateChange(event, type) {
-            const isPlaying = event.data === YT.PlayerState.PLAYING;
-            
-            if (isPlaying) {
-                document.getElementById(`play-icon-${type}`).style.display = 'none';
-                document.getElementById(`pause-icon-${type}`).style.display = 'block';
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                document.getElementById('play-icon').style.display = 'none';
+                document.getElementById('pause-icon').style.display = 'block';
             } else {
-                document.getElementById(`play-icon-${type}`).style.display = 'block';
-                document.getElementById(`pause-icon-${type}`).style.display = 'none';
+                isPlaying = false;
+                document.getElementById('play-icon').style.display = 'block';
+                document.getElementById('pause-icon').style.display = 'none';
             }
         }
-        
+
         // Handle player errors
-        function onPlayerError(event, type) {
-            console.error(`YouTube Player Error (${type}):`, event.data);
+        function onPlayerError(event) {
+            console.error('YouTube Player Error:', event.data);
         }
-        
+
         // Handle fullscreen changes
-        function handleFullscreenChange(type) {
-            const isFullscreen = !!(document.fullscreenElement || 
+        function handleFullscreenChange() {
+            isFullscreen = !!(document.fullscreenElement || 
                              document.webkitFullscreenElement || 
                              document.mozFullScreenElement || 
                              document.msFullscreenElement);
             
             if (isFullscreen) {
-                document.getElementById(`expand-icon-${type}`).style.display = 'none';
-                document.getElementById(`compress-icon-${type}`).style.display = 'block';
+                document.getElementById('expand-icon').style.display = 'none';
+                document.getElementById('compress-icon').style.display = 'block';
                 // Hide controls initially in fullscreen
-                document.getElementById(`controls-${type}`).classList.add('hidden');
+                document.getElementById('controls').classList.add('hidden');
             } else {
-                document.getElementById(`expand-icon-${type}`).style.display = 'block';
-                document.getElementById(`compress-icon-${type}`).style.display = 'none';
+                document.getElementById('expand-icon').style.display = 'block';
+                document.getElementById('compress-icon').style.display = 'none';
                 // Show controls when exiting fullscreen
-                document.getElementById(`controls-${type}`).classList.remove('hidden');
+                document.getElementById('controls').classList.remove('hidden');
+                // Clear any existing timeout
+                clearTimeout(controlsTimeout);
             }
         }
-        
+
         // Handle screen click in fullscreen
-        function handleScreenClick(type) {
-            const playerContainer = document.querySelector(`#player-${type}`).closest('.player-container');
-            const isFullscreen = !!(document.fullscreenElement || 
-                             document.webkitFullscreenElement || 
-                             document.mozFullScreenElement || 
-                             document.msFullscreenElement);
-            
+        function handleScreenClick() {
             if (isFullscreen) {
-                showControlsTemporarily(type);
+                showControlsTemporarily();
             } else {
                 // Toggle play/pause when clicking in non-fullscreen mode
-                togglePlayPause(type);
+                togglePlayPause();
             }
         }
-        
+
         // Show controls for 5 seconds in fullscreen
-        function showControlsTemporarily(type) {
-            const isFullscreen = !!(document.fullscreenElement || 
-                             document.webkitFullscreenElement || 
-                             document.mozFullScreenElement || 
-                             document.msFullscreenElement);
-            
+        function showControlsTemporarily() {
             if (isFullscreen) {
                 // Show controls
-                document.getElementById(`controls-${type}`).classList.remove('hidden');
+                document.getElementById('controls').classList.remove('hidden');
                 
                 // Clear existing timeout
-                if (window[`controlsTimeout-${type}`]) {
-                    clearTimeout(window[`controlsTimeout-${type}`]);
-                }
+                clearTimeout(controlsTimeout);
                 
                 // Set timeout to hide controls after 5 seconds
-                window[`controlsTimeout-${type}`] = setTimeout(() => {
+                controlsTimeout = setTimeout(() => {
                     if (isFullscreen) {
-                        document.getElementById(`controls-${type}`).classList.add('hidden');
+                        document.getElementById('controls').classList.add('hidden');
                     }
                 }, 5000);
             }
         }
-        
+
         // Security monitoring functions
-        function startSecurityMonitoring(type) {
+        function startSecurityMonitoring() {
             // Monitor for navigation attempts
-            const securityCheckInterval = setInterval(() => checkSecurity(type), 1000);
+            securityCheckInterval = setInterval(checkSecurity, 1000);
             
             // Block right-click
-            document.getElementById(`player-${type}`).addEventListener('contextmenu', function(e) {
+            document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
-                showSecurityNotice(type);
+                showSecurityNotice();
                 return false;
             });
             
@@ -1637,36 +1398,62 @@
                 // Block Ctrl+ combinations
                 if (e.ctrlKey || e.metaKey) {
                     e.preventDefault();
-                    showSecurityNotice(type);
+                    showSecurityNotice();
                 }
                 
                 // Block F12, Ctrl+Shift+I, etc.
                 if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
                     e.preventDefault();
-                    showSecurityNotice(type);
+                    showSecurityNotice();
+                }
+                
+                // Allow space bar for play/pause
+                if (e.keyCode === 32 && e.target === document.body) {
+                    e.preventDefault();
+                    togglePlayPause();
+                }
+                
+                // Allow arrow keys for seeking
+                if (e.keyCode === 37) { // Left arrow
+                    e.preventDefault();
+                    rewind10();
+                }
+                if (e.keyCode === 39) { // Right arrow
+                    e.preventDefault();
+                    forward10();
+                }
+            });
+            
+            // Prevent iframe navigation
+            window.addEventListener('beforeunload', function(e) {
+                if (window.location.href.includes('youtube.com') || window.location.href.includes('youtu.be')) {
+                    e.preventDefault();
+                    e.returnValue = 'Navigation blocked';
+                    showBlockOverlay();
+                    return 'Navigation blocked';
                 }
             });
         }
-        
-        function checkSecurity(type) {
+
+        function checkSecurity() {
             // Check if player tries to navigate away
             try {
-                const iframe = document.getElementById(`player-${type}`);
+                const iframe = document.getElementById('player');
                 if (iframe && iframe.contentWindow) {
                     const iframeUrl = iframe.contentWindow.location.href;
                     if (iframeUrl.includes('youtube.com') || iframeUrl.includes('youtu.be')) {
-                        showBlockOverlay(type);
-                        players[type].stopVideo();
+                        showBlockOverlay();
+                        player.stopVideo();
                     }
                 }
             } catch (e) {
                 // Cross-origin access blocked - this is good for security
             }
         }
-        
-        function hideYouTubeBranding(type) {
+
+        function hideYouTubeBranding() {
             // Hide YouTube logo and other elements
-            const iframe = document.getElementById(`player-${type}`);
+            const iframe = document.getElementById('player');
             if (iframe) {
                 try {
                     const doc = iframe.contentDocument || iframe.contentWindow.document;
@@ -1677,65 +1464,74 @@
                 }
             }
         }
-        
-        function showSecurityNotice(type) {
-            const notice = document.getElementById(`security-notice-${type}`);
+
+        function showSecurityNotice() {
+            const notice = document.getElementById('security-notice');
             notice.style.display = 'block';
             setTimeout(() => {
                 notice.style.display = 'none';
             }, 2000);
         }
-        
-        function showBlockOverlay(type) {
-            const overlay = document.getElementById(`block-overlay-${type}`);
+
+        function showBlockOverlay() {
+            const overlay = document.getElementById('block-overlay');
             overlay.style.display = 'flex';
             setTimeout(() => {
                 overlay.style.display = 'none';
             }, 3000);
         }
-        
+
         // Player control functions
-        function togglePlayPause(type) {
-            if (players[type].getPlayerState() === YT.PlayerState.PLAYING) {
-                players[type].pauseVideo();
+        function togglePlayPause() {
+            if (isPlaying) {
+                player.pauseVideo();
             } else {
-                players[type].playVideo();
+                player.playVideo();
             }
         }
-        
-        function rewind10(type) {
-            const currentTime = players[type].getCurrentTime();
-            players[type].seekTo(currentTime - 10, true);
+
+        function rewind10() {
+            const currentTime = player.getCurrentTime();
+            player.seekTo(currentTime - 10, true);
         }
-        
-        function forward10(type) {
-            const currentTime = players[type].getCurrentTime();
-            players[type].seekTo(currentTime + 10, true);
+
+        function forward10() {
+            const currentTime = player.getCurrentTime();
+            player.seekTo(currentTime + 10, true);
         }
+
+        // Toggle play/pause
+        document.getElementById('play-pause-btn').addEventListener('click', togglePlayPause);
+        
+        // Rewind 10 seconds
+        document.getElementById('rewind-btn').addEventListener('click', rewind10);
+        
+        // Forward 10 seconds
+        document.getElementById('forward-btn').addEventListener('click', forward10);
         
         // Update progress bar
-        function updateProgress(type) {
-            if (!players[type] || !players[type].getDuration) return;
+        function updateProgress() {
+            if (!player || !player.getDuration) return;
             
-            const currentTime = players[type].getCurrentTime();
-            const duration = players[type].getDuration();
+            const currentTime = player.getCurrentTime();
+            const duration = player.getDuration();
             const progressPercent = (currentTime / duration) * 100;
             
-            document.getElementById(`progress-${type}`).style.width = `${progressPercent}%`;
-            document.getElementById(`progress-thumb-${type}`).style.left = `${progressPercent}%`;
+            document.getElementById('progress').style.width = `${progressPercent}%`;
+            document.getElementById('progress-thumb').style.left = `${progressPercent}%`;
             
-            updateTimeDisplay(type);
+            updateTimeDisplay();
         }
         
         // Update time display
-        function updateTimeDisplay(type) {
-            if (!players[type] || !players[type].getDuration) return;
+        function updateTimeDisplay() {
+            if (!player || !player.getDuration) return;
             
-            const currentTime = players[type].getCurrentTime();
-            const duration = players[type].getDuration();
+            const currentTime = player.getCurrentTime();
+            const duration = player.getDuration();
             
-            document.getElementById(`current-time-${type}`).textContent = formatTime(currentTime);
-            document.getElementById(`duration-${type}`).textContent = formatTime(duration);
+            document.getElementById('current-time').textContent = formatTime(currentTime);
+            document.getElementById('duration').textContent = formatTime(duration);
         }
         
         // Format time in MM:SS
@@ -1745,236 +1541,189 @@
             return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
         }
         
-        // Initialize player controls for each type
-        ['diff', 'int'].forEach(type => {
-            // Toggle play/pause
-            document.getElementById(`play-pause-btn-${type}`).addEventListener('click', () => togglePlayPause(type));
+        // Seek on progress bar click
+        document.getElementById('progress-container').addEventListener('click', (e) => {
+            if (!player || !player.getDuration) return;
             
-            // Rewind 10 seconds
-            document.getElementById(`rewind-btn-${type}`).addEventListener('click', () => rewind10(type));
+            const rect = e.currentTarget.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            const duration = player.getDuration();
+            const newTime = percent * duration;
             
-            // Forward 10 seconds
-            document.getElementById(`forward-btn-${type}`).addEventListener('click', () => forward10(type));
-            
-            // Seek on progress bar click
-            document.getElementById(`progress-container-${type}`).addEventListener('click', (e) => {
-                if (!players[type] || !players[type].getDuration) return;
-                
-                const rect = e.currentTarget.getBoundingClientRect();
-                const percent = (e.clientX - rect.left) / rect.width;
-                const duration = players[type].getDuration();
-                const newTime = percent * duration;
-                
-                players[type].seekTo(newTime, true);
-            });
-            
-            // Volume control
-            document.getElementById(`volume-slider-${type}`).addEventListener('input', (e) => {
-                const volume = e.target.value;
-                players[type].setVolume(volume);
-                
-                if (volume == 0) {
-                    document.getElementById(`volume-high-${type}`).style.display = 'none';
-                    document.getElementById(`volume-mute-${type}`).style.display = 'block';
-                } else {
-                    document.getElementById(`volume-high-${type}`).style.display = 'block';
-                    document.getElementById(`volume-mute-${type}`).style.display = 'none';
-                }
-            });
-            
-            // Mute/unmute
-            document.getElementById(`volume-btn-${type}`).addEventListener('click', () => {
-                if (players[type].isMuted()) {
-                    players[type].unMute();
-                    document.getElementById(`volume-high-${type}`).style.display = 'block';
-                    document.getElementById(`volume-mute-${type}`).style.display = 'none';
-                    document.getElementById(`volume-slider-${type}`).value = players[type].getVolume();
-                } else {
-                    players[type].mute();
-                    document.getElementById(`volume-high-${type}`).style.display = 'none';
-                    document.getElementById(`volume-mute-${type}`).style.display = 'block';
-                    document.getElementById(`volume-slider-${type}`).value = 0;
-                }
-            });
-            
-            // Playback speed
-            document.getElementById(`speed-btn-${type}`).addEventListener('click', () => {
-                document.getElementById(`speed-menu-${type}`).classList.toggle('active');
-                document.getElementById(`settings-menu-${type}`).classList.remove('active');
-            });
-            
-            document.querySelectorAll(`#speed-menu-${type} .menu-item`).forEach(item => {
-                item.addEventListener('click', () => {
-                    const speed = parseFloat(item.getAttribute('data-speed'));
-                    players[type].setPlaybackRate(speed);
-                    document.getElementById(`speed-btn-${type}`).textContent = `${speed}x`;
-                    
-                    document.querySelectorAll(`#speed-menu-${type} .menu-item`).forEach(i => {
-                        i.classList.remove('active');
-                    });
-                    item.classList.add('active');
-                    
-                    document.getElementById(`speed-menu-${type}`).classList.remove('active');
-                });
-            });
-            
-            // Settings menu
-            document.getElementById(`settings-btn-${type}`).addEventListener('click', () => {
-                document.getElementById(`settings-menu-${type}`).classList.toggle('active');
-                document.getElementById(`speed-menu-${type}`).classList.remove('active');
-            });
-            
-            // Fullscreen
-            document.getElementById(`fullscreen-btn-${type}`).addEventListener('click', () => {
-                const container = document.querySelector(`#player-${type}`).closest('.player-container');
-                
-                if (!(document.fullscreenElement || 
-                      document.webkitFullscreenElement || 
-                      document.mozFullScreenElement || 
-                      document.msFullscreenElement)) {
-                    if (container.requestFullscreen) {
-                        container.requestFullscreen();
-                    } else if (container.webkitRequestFullscreen) {
-                        container.webkitRequestFullscreen();
-                    } else if (container.mozRequestFullScreen) {
-                        container.mozRequestFullScreen();
-                    } else if (container.msRequestFullscreen) {
-                        container.msRequestFullscreen();
-                    }
-                } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                    }
-                }
-            });
-            
-            // Preview thumbnail on hover (simulated)
-            document.getElementById(`progress-container-${type}`).addEventListener('mousemove', (e) => {
-                if (!players[type] || !players[type].getDuration) return;
-                
-                const rect = e.currentTarget.getBoundingClientRect();
-                const percent = (e.clientX - rect.left) / rect.width;
-                const duration = players[type].getDuration();
-                const hoverTime = percent * duration;
-                
-                const preview = document.getElementById(`preview-thumbnail-${type}`);
-                document.getElementById(`preview-time-${type}`).textContent = formatTime(hoverTime);
-                
-                // Position the preview
-                preview.style.left = `${e.clientX - rect.left - 80}px`;
-                preview.style.opacity = '1';
-                
-                // Use the video ID for the preview thumbnail
-                preview.querySelector('img').src = `https://img.youtube.com/vi/${videoIds[type]}/hqdefault.jpg`;
-            });
-            
-            document.getElementById(`progress-container-${type}`).addEventListener('mouseleave', () => {
-                document.getElementById(`preview-thumbnail-${type}`).style.opacity = '0';
-            });
-            
-            // Close menus when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest(`#settings-btn-${type}`) && !e.target.closest(`#settings-menu-${type}`)) {
-                    document.getElementById(`settings-menu-${type}`).classList.remove('active');
-                }
-                if (!e.target.closest(`#speed-btn-${type}`) && !e.target.closest(`#speed-menu-${type}`)) {
-                    document.getElementById(`speed-menu-${type}`).classList.remove('active');
-                }
-            });
+            player.seekTo(newTime, true);
         });
         
-        // Modal functionality
-        const accessModal = document.getElementById('access-modal');
-        const accessForm = document.getElementById('access-form');
-        const cancelBtn = document.getElementById('cancel-btn');
-        const purchaseBtn = document.getElementById('purchase-btn');
-        const heroCta = document.getElementById('hero-cta');
-        const registerBtn = document.getElementById('register-btn');
-        const loginBtn = document.getElementById('login-btn');
+        // Progress bar dragging
+        document.getElementById('progress-container').addEventListener('mousedown', (e) => {
+            isDragging = true;
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', stopDrag);
+        });
         
-        // Show modal
-        function showAccessModal() {
-            accessModal.style.display = 'flex';
-        }
-        
-        // Hide modal
-        function hideAccessModal() {
-            accessModal.style.display = 'none';
-            // Reset form
-            accessForm.reset();
-            document.getElementById('registration-error').style.display = 'none';
-            document.getElementById('password-error').style.display = 'none';
-        }
-        
-        // Validate access credentials
-        function validateAccess(registration, password) {
-            return registration === '67890' && password === 'difintA25';
-        }
-        
-        // Form submission
-        accessForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        function onDrag(e) {
+            if (!isDragging || !player || !player.getDuration) return;
             
-            const registration = document.getElementById('registration').value;
-            const password = document.getElementById('password').value;
+            const rect = document.getElementById('progress-container').getBoundingClientRect();
+            let percent = (e.clientX - rect.left) / rect.width;
+            percent = Math.max(0, Math.min(1, percent));
             
-            if (validateAccess(registration, password)) {
-                // Successful login - redirect or show success message
-                alert('Access granted! You now have full access to the premium content.');
-                hideAccessModal();
-                // In a real implementation, you would set a session or token here
+            const duration = player.getDuration();
+            const newTime = percent * duration;
+            
+            player.seekTo(newTime, true);
+        }
+        
+        function stopDrag() {
+            isDragging = false;
+            document.removeEventListener('mousemove', onDrag);
+            document.removeEventListener('mouseup', stopDrag);
+        }
+        
+        // Volume control
+        document.getElementById('volume-slider').addEventListener('input', (e) => {
+            const volume = e.target.value;
+            currentVolume = volume;
+            player.setVolume(volume);
+            
+            if (volume == 0) {
+                isMuted = true;
+                document.getElementById('volume-high').style.display = 'none';
+                document.getElementById('volume-mute').style.display = 'block';
             } else {
-                // Show error messages
-                if (registration !== '67890') {
-                    document.getElementById('registration-error').style.display = 'block';
-                } else {
-                    document.getElementById('registration-error').style.display = 'none';
-                }
-                
-                if (password !== 'difintA25') {
-                    document.getElementById('password-error').style.display = 'block';
-                } else {
-                    document.getElementById('password-error').style.display = 'none';
-                }
+                isMuted = false;
+                document.getElementById('volume-high').style.display = 'block';
+                document.getElementById('volume-mute').style.display = 'none';
             }
         });
         
-        // Event listeners for buttons that trigger the modal
-        purchaseBtn.addEventListener('click', showAccessModal);
-        heroCta.addEventListener('click', showAccessModal);
-        registerBtn.addEventListener('click', showAccessModal);
-        loginBtn.addEventListener('click', showAccessModal);
-        cancelBtn.addEventListener('click', hideAccessModal);
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', function(e) {
-            if (e.target === accessModal) {
-                hideAccessModal();
+        // Mute/unmute
+        document.getElementById('volume-btn').addEventListener('click', () => {
+            if (isMuted) {
+                player.unMute();
+                document.getElementById('volume-slider').value = currentVolume;
+                document.getElementById('volume-high').style.display = 'block';
+                document.getElementById('volume-mute').style.display = 'none';
+                isMuted = false;
+            } else {
+                player.mute();
+                document.getElementById('volume-slider').value = 0;
+                document.getElementById('volume-high').style.display = 'none';
+                document.getElementById('volume-mute').style.display = 'block';
+                isMuted = true;
             }
         });
         
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+        // Playback speed
+        document.getElementById('speed-btn').addEventListener('click', () => {
+            document.getElementById('speed-menu').classList.toggle('active');
+            document.getElementById('settings-menu').classList.remove('active');
+        });
+        
+        document.querySelectorAll('#speed-menu .menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const speed = parseFloat(item.getAttribute('data-speed'));
+                player.setPlaybackRate(speed);
+                document.getElementById('speed-btn').textContent = `${speed}x`;
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                document.querySelectorAll('#speed-menu .menu-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                item.classList.add('active');
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
+                document.getElementById('speed-menu').classList.remove('active');
             });
+        });
+        
+        // Settings menu
+        document.getElementById('settings-btn').addEventListener('click', () => {
+            document.getElementById('settings-menu').classList.toggle('active');
+            document.getElementById('speed-menu').classList.remove('active');
+        });
+        
+        document.querySelectorAll('#settings-menu .menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const quality = item.getAttribute('data-quality');
+                // In a real implementation, you would set the video quality here
+                // player.setPlaybackQuality(quality);
+                
+                document.querySelectorAll('#settings-menu .menu-item').forEach(i => {
+                    i.textContent = i.textContent.replace(' ✓', '');
+                });
+                item.textContent += ' ✓';
+                
+                document.getElementById('settings-menu').classList.remove('active');
+            });
+        });
+        
+        // Fullscreen with YouTube-like behavior
+        document.getElementById('fullscreen-btn').addEventListener('click', () => {
+            const container = document.querySelector('.player-container');
+            
+            if (!isFullscreen) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.mozRequestFullScreen) {
+                    container.mozRequestFullScreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        });
+        
+        // Preview thumbnail on hover (simulated)
+        document.getElementById('progress-container').addEventListener('mousemove', (e) => {
+            if (!player || !player.getDuration) return;
+            
+            const rect = e.currentTarget.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            const duration = player.getDuration();
+            const hoverTime = percent * duration;
+            
+            const preview = document.getElementById('preview-thumbnail');
+            document.getElementById('preview-time').textContent = formatTime(hoverTime);
+            
+            // Position the preview
+            preview.style.left = `${e.clientX - rect.left - 80}px`;
+            preview.style.opacity = '1';
+            
+            // Use the current video ID for the preview thumbnail
+            preview.querySelector('img').src = `https://img.youtube.com/vi/${currentVideoId}/hqdefault.jpg`;
+        });
+        
+        document.getElementById('progress-container').addEventListener('mouseleave', () => {
+            document.getElementById('preview-thumbnail').style.opacity = '0';
+        });
+        
+        // Close menus when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#settings-btn') && !e.target.closest('#settings-menu')) {
+                document.getElementById('settings-menu').classList.remove('active');
+            }
+            if (!e.target.closest('#speed-btn') && !e.target.closest('#speed-menu')) {
+                document.getElementById('speed-menu').classList.remove('active');
+            }
+        });
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+            if (securityCheckInterval) {
+                clearInterval(securityCheckInterval);
+            }
+            if (controlsTimeout) {
+                clearTimeout(controlsTimeout);
+            }
         });
     </script>
 </body>
