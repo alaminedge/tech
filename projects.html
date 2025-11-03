@@ -3,135 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AlaminEdge | Breaking Beyond Limits</title>
+  <title>AlaminEdge | Logo Preview</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
     body {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      min-height: 100vh;
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
       display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
-      padding: 15px 10%;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-
-    .logo img {
-      height: 60px;
-      width: auto;
-      transition: transform 0.3s ease;
-    }
-
-    .logo img:hover {
-      transform: scale(1.1);
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 25px;
-    }
-
-    nav ul li a {
-      text-decoration: none;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
       color: #fff;
-      font-weight: 500;
-      transition: color 0.3s;
     }
 
-    nav ul li a:hover {
-      color: #00d4ff;
-    }
-
-    .hero {
+    .logo-box {
       text-align: center;
-      margin: auto;
-      padding: 80px 10%;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      color: #00d4ff;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: #ddd;
-      margin-bottom: 25px;
-    }
-
-    .btn {
-      background: #00d4ff;
-      color: #000;
-      padding: 10px 25px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: bold;
+      border: 2px solid #00d4ff;
+      padding: 25px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 25px #00d4ff44;
       transition: 0.3s;
     }
 
-    .btn:hover {
-      background: #fff;
-      color: #000;
+    .logo-box:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 35px #00d4ffaa;
     }
 
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: rgba(0, 0, 0, 0.5);
-      font-size: 0.9rem;
-      margin-top: auto;
+    .logo-box img {
+      width: 200px;
+      height: auto;
+      border-radius: 15px;
+      transition: transform 0.4s;
     }
 
-    footer span {
+    .logo-box img:hover {
+      transform: rotate(2deg) scale(1.1);
+    }
+
+    .caption {
+      margin-top: 15px;
+      font-size: 1rem;
       color: #00d4ff;
-      font-weight: 600;
+      letter-spacing: 1px;
     }
   </style>
 </head>
 <body>
-
-<header>
-  <div class="logo">
-    <img src="tech/logo.png" alt="AlaminEdge Logo" class="preload-logo">
+  <div class="logo-box">
+    <a href="https://freeimage.host/i/KQTiJg2" target="_blank">
+      <img src="https://iili.io/KQTiJg2.md.png" alt="AlaminEdge Logo">
+    </a>
+    <div class="caption">AlaminEdge Official Logo</div>
   </div>
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">News</a></li>
-      <li><a href="#">Features</a></li>
-      <li><a href="#">Videos</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-  <section class="hero">
-    <h1>Welcome to AlaminEdge</h1>
-    <p>Your edge of truth, insight, and innovation — powered by Md. Al Amin.</p>
-    <button class="btn">Explore Now</button>
-  </section>
-
-  <footer>
-    <p>© 2025 <span>AlaminEdge</span>. Powered by Md. Al Amin.</p>
-  </footer>
-
 </body>
 </html>
