@@ -1,394 +1,345 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Calculus Course | AlaminEdge</title>
+    <title>Calculus Course | AlaminEdge Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #8a2be2;
-            --primary-dark: #6a1cb0;
-            --secondary: #00b4d8;
-            --dark-bg: #0a0a0a;
-            --dark-card: #151515;
-            --dark-border: #2a2a2a;
-            --text-primary: #ffffff;
+            --primary-color: #00bfff;
+            --primary-dark: #0099cc;
+            --primary-light: #33ccff;
+            --secondary-color: #8a2be2;
+            --accent-color: #ff6b6b;
+            --bg-color: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-color: #ffffff;
             --text-secondary: #b0b0b0;
-            --accent: #ff6b6b;
-            --success: #4caf50;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
+            --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
             overflow-x: hidden;
+            line-height: 1.6;
         }
-        
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--dark-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .logo-icon {
-            color: var(--primary);
-            font-size: 2rem;
-        }
-        
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .powered-by {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-left: 10px;
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            font-size: 0.9rem;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--dark-border);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        /* Main Content */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-bg) 100%);
-            border-radius: 16px;
-            margin-bottom: 3rem;
-            border: 1px solid var(--dark-border);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
+
+        body::before {
             content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
-            z-index: 0;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-        
-        .price-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 1rem 0;
-            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
-        }
-        
-        /* Course Sections */
-        .course-section {
-            margin-bottom: 4rem;
-        }
-        
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--dark-border);
-        }
-        
-        .section-title {
-            font-size: 2rem;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-icon {
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-        
-        .lectures-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        
-        .lecture-card {
-            background: var(--dark-card);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--dark-border);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .lecture-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary);
-        }
-        
-        .lecture-thumbnail {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--dark-bg), var(--dark-card));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .play-icon {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .lecture-card:hover .play-icon {
-            background: var(--primary);
-            transform: scale(1.1);
-        }
-        
-        .lecture-content {
-            padding: 1.5rem;
-        }
-        
-        .lecture-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-        
-        .lecture-desc {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        
-        .lecture-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-        
-        .notes-link {
-            color: var(--secondary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.3s ease;
-        }
-        
-        .notes-link:hover {
-            color: var(--primary);
-        }
-        
-        /* Authentication Modal */
-        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: var(--shadow);
+            padding: 10px 40px;
+        }
+
+        .logo-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            gap: 12px;
         }
-        
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
         }
-        
-        .modal {
-            background: var(--dark-card);
-            border-radius: 16px;
-            width: 90%;
-            max-width: 500px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--dark-border);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
+
+        .logo:hover {
+            transform: rotate(15deg);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
         }
-        
-        .modal-overlay.active .modal {
-            transform: translateY(0);
+
+        .brand-name {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
         }
-        
-        .modal-header {
-            text-align: center;
-            margin-bottom: 2rem;
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
         }
-        
-        .modal-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-        
-        .modal-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+
+        .nav-links a {
+            position: relative;
             font-weight: 500;
+            padding: 8px 0;
+            transition: var(--transition);
         }
-        
-        .form-input {
+
+        .nav-links a:not(.btn):hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:not(.btn):hover::after,
+        .nav-links a.active::after {
             width: 100%;
-            padding: 12px 16px;
-            background: var(--dark-bg);
-            border: 1px solid var(--dark-border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
         }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
+
+        .nav-links .btn {
+            background: var(--gradient-primary);
+            color: #000;
+            padding: 10px 25px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
-        
-        .form-footer {
+
+        .nav-links .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition-slow);
+        }
+
+        .nav-links .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
+        }
+
+        .nav-links .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        /* Course Hero */
+        .course-hero {
+            padding: 3rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .course-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .course-hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
             margin-top: 2rem;
         }
-        
-        .form-link {
-            color: var(--secondary);
-            text-decoration: none;
-            margin-top: 1rem;
-            display: inline-block;
-            transition: color 0.3s ease;
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
         }
-        
-        .form-link:hover {
-            color: var(--primary);
+
+        .meta-item i {
+            color: var(--primary-color);
         }
-        
+
+        /* Authentication Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-content {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
         .close-modal {
             position: absolute;
             top: 20px;
@@ -398,562 +349,1231 @@
             color: var(--text-secondary);
             font-size: 1.5rem;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: var(--transition);
         }
-        
+
         .close-modal:hover {
-            color: var(--text-primary);
+            color: var(--primary-color);
         }
-        
-        /* Video Player */
-        .video-player-container {
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .auth-header p {
+            color: var(--text-secondary);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-group input {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.2);
+        }
+
+        .auth-btn {
+            background: var(--gradient-primary);
+            color: #000;
+            border: none;
+            border-radius: var(--radius-xl);
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .auth-footer a {
+            color: var(--primary-color);
+        }
+
+        /* Course Content */
+        .course-content {
+            padding: 3rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .module-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .module-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .module-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: #000;
+        }
+
+        .module-title {
+            font-size: 1.3rem;
+            color: var(--text-color);
+        }
+
+        .module-content {
+            padding: 1.5rem;
+        }
+
+        .lecture-list {
+            list-style: none;
+        }
+
+        .lecture-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .lecture-item:last-child {
+            border-bottom: none;
+        }
+
+        .lecture-info {
+            flex: 1;
+        }
+
+        .lecture-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: var(--text-color);
+        }
+
+        .lecture-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .lecture-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-primary);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        /* Video Player Modal */
+        .video-modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            align-items: center;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
             justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            align-items: center;
+            padding: 20px;
         }
-        
-        .video-player-container.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .video-player {
-            width: 90%;
+
+        .video-modal-content {
+            width: 100%;
             max-width: 1200px;
-            height: 80%;
             background: #000;
             border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             position: relative;
         }
-        
-        .close-player {
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        #player {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border: none;
-            color: white;
+        }
+
+        .secure-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 8px;
+            padding: 6px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            margin: 0 16px;
+            position: relative;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: #ff0000;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .progress-thumb {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ff0000;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .progress-container:hover .progress-thumb {
+            opacity: 1;
+        }
+
+        .time-display {
+            font-size: 14px;
+            color: #aaa;
+            white-space: nowrap;
+            margin: 0 16px;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            margin: 0 16px;
+        }
+
+        .volume-slider {
+            width: 80px;
+            margin-left: 8px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .volume-container:hover .volume-slider {
+            opacity: 1;
+        }
+
+        .fullscreen-btn {
+            margin-left: auto;
+        }
+
+        .security-notice {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 25;
+            display: none;
+        }
+
+        .block-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 40;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            flex-direction: column;
+        }
+
+        .block-overlay i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: #ff0000;
+        }
+
+        /* Purchase Section */
+        .purchase-section {
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .purchase-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .purchase-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .purchase-content p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        .purchase-btn {
+            background: var(--gradient-primary);
+            color: #000;
+            padding: 14px 30px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+        }
+
+        .purchase-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+        }
+
+        /* Other Courses */
+        .other-courses {
+            padding: 4rem 0;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .course-info {
+            padding: 1.5rem;
+        }
+
+        .course-category {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .course-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .course-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-meta-small {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
             width: 40px;
             height: 40px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: background 0.3s ease;
+            transition: var(--transition);
         }
-        
-        .close-player:hover {
-            background: rgba(0, 0, 0, 0.9);
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            color: #000;
+            transform: translateY(-3px);
         }
-        
-        /* Footer */
-        footer {
-            background: var(--dark-card);
-            padding: 3rem 2rem;
-            border-top: 1px solid var(--dark-border);
-            margin-top: 4rem;
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.875rem;
         }
-        
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+        .footer-links-bottom {
+            display: flex;
             gap: 2rem;
         }
-        
-        .footer-section h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
+
+        .footer-links-bottom a {
+            color: var(--text-muted);
+            transition: var(--transition);
         }
-        
-        .footer-links {
-            list-style: none;
+
+        .footer-links-bottom a:hover {
+            color: var(--primary-color);
         }
-        
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid var(--dark-border);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .hero h1 {
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .course-hero h1 {
                 font-size: 2.5rem;
             }
             
-            .lectures-grid {
+            .module-grid {
                 grid-template-columns: 1fr;
             }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
             
-            .section-header {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
-                align-items: flex-start;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .course-hero h1 {
+                font-size: 2rem;
+            }
+
+            .course-hero p {
+                font-size: 1.125rem;
+            }
+
+            .course-meta {
+                flex-direction: column;
                 gap: 1rem;
             }
+
+            .auth-content {
+                padding: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-links-bottom {
+                justify-content: center;
+            }
         }
-        
-        /* Utility Classes */
-        .hidden {
-            display: none !important;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .mt-2 {
-            margin-top: 2rem;
-        }
-        
-        .mb-2 {
-            margin-bottom: 2rem;
+
+        @media (max-width: 480px) {
+            .course-hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+            
+            .module-card,
+            .course-card {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Navbar -->
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-infinity logo-icon"></i>
-                <div>
-                    <div class="logo-text">Calculus Pro</div>
-                    <div class="powered-by">Powered by AlaminEdge</div>
-                </div>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="https://iili.io/KQTiJg2.md.png" alt="AlaminEdge Logo" class="logo">
+                <span class="brand-name">AlaminEdge</span>
             </div>
-            <div class="auth-buttons">
-                <button class="btn btn-secondary" id="login-btn">Login</button>
-                <button class="btn btn-primary" id="register-btn">Register</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="courses.html" class="active">Courses</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="live.html">Live</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" id="login-btn" class="btn">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-        </div>
+        </nav>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Master Calculus with Premium Content</h1>
-                <p>Comprehensive video lectures, detailed notes, and premium support to help you master differentiation and integration.</p>
-                <div class="price-tag">$100</div>
-                <button class="btn btn-primary" id="purchase-btn">Purchase Course</button>
+    <!-- Authentication Modal -->
+    <div class="auth-modal" id="auth-modal">
+        <div class="auth-content">
+            <button class="close-modal" id="close-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="auth-header">
+                <h2>Access Premium Content</h2>
+                <p>Enter your credentials to access the calculus course</p>
             </div>
-        </section>
-
-        <!-- Differentiation Section -->
-        <section class="course-section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-chart-line section-icon"></i>
-                    Differentiation
-                </h2>
-                <div class="section-description">
-                    Master the fundamentals of calculus with comprehensive differentiation lectures
+            <form class="auth-form" id="auth-form">
+                <div class="form-group">
+                    <label for="registration">Registration Code</label>
+                    <input type="text" id="registration" placeholder="Enter registration code" required>
                 </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="auth-btn">Access Course</button>
+            </form>
+            <div class="auth-footer">
+                <p>Don't have access? <a href="#" id="purchase-link">Purchase the course</a></p>
             </div>
-            
-            <div class="lectures-grid">
-                <!-- Lecture 1 -->
-                <div class="lecture-card">
-                    <div class="lecture-thumbnail">
-                        <div class="play-icon" data-video="D_KBH3GzEyc">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <div class="lecture-content">
-                        <h3 class="lecture-title">Lecture 1: From the existence of limits to the beginning of periodic differentiation</h3>
-                        <p class="lecture-desc">Understand the foundation of calculus by exploring limits and their role in differentiation.</p>
-                        <div class="lecture-meta">
-                            <a href="https://drive.google.com/file/d/13sY0KBN1Ez-3pHaqD-Dduhmfqg6KmqCx/view?usp=drivesdk" target="_blank" class="notes-link">
-                                <i class="fas fa-file-pdf"></i> Lecture Notes
-                            </a>
-                            <span>45 min</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Lecture 2 -->
-                <div class="lecture-card">
-                    <div class="lecture-thumbnail">
-                        <div class="play-icon" data-video="_oHatvRx9h4">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <div class="lecture-content">
-                        <h3 class="lecture-title">Lecture 2: From periodic differentiation to maximum and minimum values</h3>
-                        <p class="lecture-desc">Learn how to apply differentiation to find critical points and optimize functions.</p>
-                        <div class="lecture-meta">
-                            <a href="https://drive.google.com/file/d/1o09k10L1okaLUwX5Ojb5dApxZdHW2AkW/view?usp=drivesdk" target="_blank" class="notes-link">
-                                <i class="fas fa-file-pdf"></i> Lecture Notes
-                            </a>
-                            <span>52 min</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Integration Section -->
-        <section class="course-section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-calculator section-icon"></i>
-                    Integration
-                </h2>
-                <div class="section-description">
-                    Master integration techniques and applications to solve complex problems
-                </div>
-            </div>
-            
-            <div class="lectures-grid">
-                <!-- Lecture 1 -->
-                <div class="lecture-card">
-                    <div class="lecture-thumbnail">
-                        <div class="play-icon" data-video="ydf10na_XDg">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <div class="lecture-content">
-                        <h3 class="lecture-title">Lecture 1: All types of indefinite integrals</h3>
-                        <p class="lecture-desc">Explore various techniques for solving indefinite integrals with practical examples.</p>
-                        <div class="lecture-meta">
-                            <a href="https://drive.google.com/file/d/1ZR8xP69l9IBBdoTzJ-8xT8GApsvPCeKp/view?usp=drivesdk" target="_blank" class="notes-link">
-                                <i class="fas fa-file-pdf"></i> Lecture Notes
-                            </a>
-                            <span>58 min</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Lecture 2 -->
-                <div class="lecture-card">
-                    <div class="lecture-thumbnail">
-                        <div class="play-icon" data-video="i_Q3yzQxcQE">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <div class="lecture-content">
-                        <h3 class="lecture-title">Lecture 2: Finding the area through definite integrals and integration</h3>
-                        <p class="lecture-desc">Learn how to apply definite integrals to calculate areas and solve real-world problems.</p>
-                        <div class="lecture-meta">
-                            <a href="https://drive.google.com/file/d/1MI3GfzJAo3AYIuaOd2SbHZ0Yol63coTU/view?usp=drivesdk" target="_blank" class="notes-link">
-                                <i class="fas fa-file-pdf"></i> Lecture Notes
-                            </a>
-                            <span>47 min</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
+
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="video-modal">
+        <div class="video-modal-content">
+            <div class="video-container">
+                <div id="player"></div>
+                <div class="secure-overlay" id="secure-overlay"></div>
+                <div class="security-notice" id="security-notice">
+                    <i class="fas fa-shield-alt"></i> Secure Mode: Right-click disabled
+                </div>
+                <div class="block-overlay" id="block-overlay">
+                    <i class="fas fa-ban"></i>
+                    <div>Navigation to YouTube is blocked</div>
+                </div>
+            </div>
+            
+            <div class="player-controls" id="controls">
+                <button class="control-btn play-pause-btn" id="play-pause-btn" title="Play/Pause">
+                    <i class="fas fa-play" id="play-icon"></i>
+                    <i class="fas fa-pause" id="pause-icon" style="display:none"></i>
+                </button>
+                
+                <button class="control-btn rewind-btn" id="rewind-btn" title="Rewind 10s">
+                    <i class="fas fa-backward"></i> 10s
+                </button>
+                
+                <button class="control-btn forward-btn" id="forward-btn" title="Forward 10s">
+                    <i class="fas fa-forward"></i> 10s
+                </button>
+                
+                <div class="progress-container" id="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" id="progress"></div>
+                        <div class="progress-thumb" id="progress-thumb"></div>
+                    </div>
+                </div>
+                
+                <div class="time-display">
+                    <span class="current-time" id="current-time">0:00</span> / <span class="duration" id="duration">0:00</span>
+                </div>
+                
+                <div class="volume-container">
+                    <button class="control-btn volume-btn" id="volume-btn" title="Mute/Unmute">
+                        <i class="fas fa-volume-up" id="volume-high"></i>
+                        <i class="fas fa-volume-mute" id="volume-mute" style="display:none"></i>
+                    </button>
+                    <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="100">
+                </div>
+                
+                <button class="control-btn fullscreen-btn" id="fullscreen-btn" title="Fullscreen">
+                    <i class="fas fa-expand" id="expand-icon"></i>
+                    <i class="fas fa-compress" id="compress-icon" style="display:none"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Course Hero -->
+            <section class="course-hero">
+                <div class="hero-badge">
+                    <i class="fas fa-calculator"></i>
+                    <span>PREMIUM CALCULUS COURSE</span>
+                </div>
+                <h1>Master Calculus: From Fundamentals to Advanced Applications</h1>
+                <p>Unlock the power of calculus with our comprehensive course covering differentiation, integration, and real-world applications. Learn from industry experts and build a strong mathematical foundation.</p>
+                <div class="course-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>8+ Hours of Content</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>4 Comprehensive Notes</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Beginner to Advanced</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certificate of Completion</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Course Content -->
+            <section class="course-content">
+                <div class="section-header">
+                    <h2>Course Curriculum</h2>
+                    <p>Structured learning path with comprehensive video lectures and downloadable resources</p>
+                </div>
+
+                <!-- Differentiation Module -->
+                <div class="module-grid">
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="module-title">Differentiation</h3>
+                        </div>
+                        <div class="module-content">
+                            <ul class="lecture-list">
+                                <li class="lecture-item">
+                                    <div class="lecture-info">
+                                        <div class="lecture-title">Lecture 1: From the existence of limits to the beginning of periodic differentiation</div>
+                                        <div class="lecture-meta">
+                                            <span><i class="far fa-clock"></i> 2h 15m</span>
+                                            <span><i class="far fa-file-pdf"></i> PDF Notes</span>
+                                        </div>
+                                    </div>
+                                    <div class="lecture-actions">
+                                        <button class="btn btn-primary watch-btn" data-video="D_KBH3GzEyc" data-notes="https://drive.google.com/file/d/13sY0KBN1Ez-3pHaqD-Dduhmfqg6KmqCx/view?usp=drivesdk">
+                                            <i class="fas fa-play"></i> Watch
+                                        </button>
+                                        <a href="https://drive.google.com/file/d/13sY0KBN1Ez-3pHaqD-Dduhmfqg6KmqCx/view?usp=drivesdk" target="_blank" class="btn btn-secondary">
+                                            <i class="fas fa-download"></i> Notes
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="lecture-item">
+                                    <div class="lecture-info">
+                                        <div class="lecture-title">Lecture 2: From periodic differentiation to maximum and minimum values</div>
+                                        <div class="lecture-meta">
+                                            <span><i class="far fa-clock"></i> 2h 30m</span>
+                                            <span><i class="far fa-file-pdf"></i> PDF Notes</span>
+                                        </div>
+                                    </div>
+                                    <div class="lecture-actions">
+                                        <button class="btn btn-primary watch-btn" data-video="_oHatvRx9h4" data-notes="https://drive.google.com/file/d/1o09k10L1okaLUwX5Ojb5dApxZdHW2AkW/view?usp=drivesdk">
+                                            <i class="fas fa-play"></i> Watch
+                                        </button>
+                                        <a href="https://drive.google.com/file/d/1o09k10L1okaLUwX5Ojb5dApxZdHW2AkW/view?usp=drivesdk" target="_blank" class="btn btn-secondary">
+                                            <i class="fas fa-download"></i> Notes
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Integration Module -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-integral"></i>
+                            </div>
+                            <h3 class="module-title">Integration</h3>
+                        </div>
+                        <div class="module-content">
+                            <ul class="lecture-list">
+                                <li class="lecture-item">
+                                    <div class="lecture-info">
+                                        <div class="lecture-title">Lecture 1: All types of indefinite integrals</div>
+                                        <div class="lecture-meta">
+                                            <span><i class="far fa-clock"></i> 2h 45m</span>
+                                            <span><i class="far fa-file-pdf"></i> PDF Notes</span>
+                                        </div>
+                                    </div>
+                                    <div class="lecture-actions">
+                                        <button class="btn btn-primary watch-btn" data-video="ydf10na_XDg" data-notes="https://drive.google.com/file/d/1ZR8xP69l9IBBdoTzJ-8xT8GApsvPCeKp/view?usp=drivesdk">
+                                            <i class="fas fa-play"></i> Watch
+                                        </button>
+                                        <a href="https://drive.google.com/file/d/1ZR8xP69l9IBBdoTzJ-8xT8GApsvPCeKp/view?usp=drivesdk" target="_blank" class="btn btn-secondary">
+                                            <i class="fas fa-download"></i> Notes
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="lecture-item">
+                                    <div class="lecture-info">
+                                        <div class="lecture-title">Lecture 2: Finding the area through definite integrals and integration</div>
+                                        <div class="lecture-meta">
+                                            <span><i class="far fa-clock"></i> 2h 20m</span>
+                                            <span><i class="far fa-file-pdf"></i> PDF Notes</span>
+                                        </div>
+                                    </div>
+                                    <div class="lecture-actions">
+                                        <button class="btn btn-primary watch-btn" data-video="i_Q3yzQxcQE" data-notes="https://drive.google.com/file/d/1MI3GfzJAo3AYIuaOd2SbHZ0Yol63coTU/view?usp=drivesdk">
+                                            <i class="fas fa-play"></i> Watch
+                                        </button>
+                                        <a href="https://drive.google.com/file/d/1MI3GfzJAo3AYIuaOd2SbHZ0Yol63coTU/view?usp=drivesdk" target="_blank" class="btn btn-secondary">
+                                            <i class="fas fa-download"></i> Notes
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Purchase Section -->
+            <section class="purchase-section">
+                <div class="purchase-content">
+                    <h2>Get Full Access to This Course</h2>
+                    <p>Unlock all lectures, downloadable resources, and certificate of completion for just $100. Contact us on Telegram to purchase the course.</p>
+                    <a href="https://t.me/adamzampas" target="_blank" class="purchase-btn">
+                        <i class="fab fa-telegram"></i>
+                        <span>Purchase Course - $100</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Other Courses -->
+            <section class="other-courses">
+                <div class="section-header">
+                    <h2>Other Premium Courses</h2>
+                    <p>Explore more courses to enhance your skills</p>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Python Programming" class="course-image">
+                        <div class="course-info">
+                            <span class="course-category">Programming</span>
+                            <h3 class="course-title">Python for Data Science</h3>
+                            <p class="course-description">Master Python programming and data analysis with real-world projects and applications.</p>
+                            <div class="course-meta-small">
+                                <span><i class="far fa-clock"></i> 12h</span>
+                                <span><i class="far fa-file-pdf"></i> 8 Notes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Web Development" class="course-image">
+                        <div class="course-info">
+                            <span class="course-category">Web Development</span>
+                            <h3 class="course-title">Full-Stack Web Development</h3>
+                            <p class="course-description">Build modern web applications with React, Node.js, and MongoDB from scratch.</p>
+                            <div class="course-meta-small">
+                                <span><i class="far fa-clock"></i> 20h</span>
+                                <span><i class="far fa-file-pdf"></i> 12 Notes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Machine Learning" class="course-image">
+                        <div class="course-info">
+                            <span class="course-category">AI & ML</span>
+                            <h3 class="course-title">Machine Learning Fundamentals</h3>
+                            <p class="course-description">Learn the core concepts of machine learning and build predictive models.</p>
+                            <div class="course-meta-small">
+                                <span><i class="far fa-clock"></i> 15h</span>
+                                <span><i class="far fa-file-pdf"></i> 10 Notes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Calculus Pro</h3>
-                <p>Premium calculus course with comprehensive video lectures and detailed notes to help you master differentiation and integration.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo-container">
+                        <img src="https://iili.io/KQTiJg2.md.png" alt="AlaminEdge Logo" class="logo">
+                        <h3>AlaminEdge</h3>
+                    </div>
+                    <p>Where Learning Meets Innovation. Empowering the next generation of tech professionals through premium education.</p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@PrimeviaLearn" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://t.me/adamzampas" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="live.html">Live Sessions</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Career Support</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@alaminedge.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Tech Innovation Hub, Digital City</p>
+                </div>
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Differentiation</a></li>
-                    <li><a href="#">Integration</a></li>
-                    <li><a href="#">Purchase Course</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>© 2025 AlaminEdge | Powered by Md. Al Amin</p>
+                </div>
+                <div class="footer-links-bottom">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
             </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <ul class="footer-links">
-                    <li><a href="https://t.me/adamzampas" target="_blank">Telegram: @adamzampas</a></li>
-                    <li><a href="#">Support</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2023 Calculus Pro. Powered by AlaminEdge. All rights reserved.
         </div>
     </footer>
 
-    <!-- Authentication Modals -->
-    <!-- Login Modal -->
-    <div class="modal-overlay" id="login-modal">
-        <div class="modal">
-            <button class="close-modal" id="close-login">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="modal-header">
-                <h2 class="modal-title">Login to Your Account</h2>
-                <p class="modal-subtitle">Access your premium calculus course</p>
-            </div>
-            <form id="login-form">
-                <div class="form-group">
-                    <label class="form-label" for="login-username">Username</label>
-                    <input type="text" id="login-username" class="form-input" placeholder="Enter your username" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="login-password">Password</label>
-                    <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-                <div class="form-footer">
-                    <a href="#" class="form-link" id="show-register">Don't have an account? Register</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Register Modal -->
-    <div class="modal-overlay" id="register-modal">
-        <div class="modal">
-            <button class="close-modal" id="close-register">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="modal-header">
-                <h2 class="modal-title">Create an Account</h2>
-                <p class="modal-subtitle">Register to purchase the premium calculus course</p>
-            </div>
-            <form id="register-form">
-                <div class="form-group">
-                    <label class="form-label" for="register-username">Username</label>
-                    <input type="text" id="register-username" class="form-input" placeholder="Choose a username" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="register-email">Email</label>
-                    <input type="email" id="register-email" class="form-input" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="register-password">Password</label>
-                    <input type="password" id="register-password" class="form-input" placeholder="Create a password" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="register-code">Registration Code</label>
-                    <input type="text" id="register-code" class="form-input" placeholder="Enter registration code" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
-                <div class="form-footer">
-                    <a href="#" class="form-link" id="show-login">Already have an account? Login</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Video Player -->
-    <div class="video-player-container" id="video-player">
-        <div class="video-player">
-            <button class="close-player" id="close-player">
-                <i class="fas fa-times"></i>
-            </button>
-            <div id="player"></div>
-        </div>
-    </div>
-
+    <!-- YouTube IFrame API -->
     <script src="https://www.youtube.com/iframe_api"></script>
+    
     <script>
-        // DOM Elements
-        const loginBtn = document.getElementById('login-btn');
-        const registerBtn = document.getElementById('register-btn');
-        const purchaseBtn = document.getElementById('purchase-btn');
-        const loginModal = document.getElementById('login-modal');
-        const registerModal = document.getElementById('register-modal');
-        const closeLogin = document.getElementById('close-login');
-        const closeRegister = document.getElementById('close-register');
-        const showRegister = document.getElementById('show-register');
-        const showLogin = document.getElementById('show-login');
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
-        const videoPlayer = document.getElementById('video-player');
-        const closePlayer = document.getElementById('close-player');
-        const playIcons = document.querySelectorAll('.play-icon');
+        // Authentication and Local Storage
+        const AUTH_REGISTRATION = "67890";
+        const AUTH_PASSWORD = "difintA25";
+        const STORAGE_KEY = "alaminedge_auth";
         
-        // YouTube Player
-        let player;
-        
-        // Check if user is logged in
-        function checkAuthStatus() {
-            const user = localStorage.getItem('calculusUser');
-            if (user) {
-                const userData = JSON.parse(user);
-                loginBtn.textContent = userData.username;
-                registerBtn.textContent = 'Logout';
-                registerBtn.onclick = logout;
-            }
-        }
-        
-        // Logout function
-        function logout() {
-            localStorage.removeItem('calculusUser');
-            loginBtn.textContent = 'Login';
-            registerBtn.textContent = 'Register';
-            registerBtn.onclick = () => registerModal.classList.add('active');
-            alert('You have been logged out.');
-        }
-        
-        // Show login modal
-        loginBtn.addEventListener('click', () => {
-            const user = localStorage.getItem('calculusUser');
-            if (user) {
-                const userData = JSON.parse(user);
-                alert(`You are logged in as ${userData.username}`);
-            } else {
-                loginModal.classList.add('active');
-            }
-        });
-        
-        // Show register modal
-        registerBtn.addEventListener('click', () => {
-            registerModal.classList.add('active');
-        });
-        
-        // Close modals
-        closeLogin.addEventListener('click', () => {
-            loginModal.classList.remove('active');
-        });
-        
-        closeRegister.addEventListener('click', () => {
-            registerModal.classList.remove('active');
-        });
-        
-        // Switch between login and register
-        showRegister.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.classList.remove('active');
-            registerModal.classList.add('active');
-        });
-        
-        showLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            registerModal.classList.remove('active');
-            loginModal.classList.add('active');
-        });
-        
-        // Login form submission
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-            
-            // Check if user exists in localStorage
-            const user = localStorage.getItem('calculusUser');
-            if (user) {
-                const userData = JSON.parse(user);
-                if (userData.username === username && userData.password === password) {
-                    alert('Login successful!');
-                    loginModal.classList.remove('active');
-                    checkAuthStatus();
-                } else {
-                    alert('Invalid username or password.');
+        // Check if user is already authenticated
+        function checkAuth() {
+            const authData = localStorage.getItem(STORAGE_KEY);
+            if (authData) {
+                const { registration, password } = JSON.parse(authData);
+                if (registration === AUTH_REGISTRATION && password === AUTH_PASSWORD) {
+                    return true;
                 }
-            } else {
-                alert('No account found. Please register first.');
             }
-        });
-        
-        // Register form submission
-        registerForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('register-username').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const code = document.getElementById('register-code').value;
-            
-            // Check registration code
-            if (code !== '67890') {
-                alert('Invalid registration code.');
-                return;
-            }
-            
-            // Save user to localStorage
-            const userData = {
-                username,
-                email,
-                password,
-                registered: new Date().toISOString()
-            };
-            
-            localStorage.setItem('calculusUser', JSON.stringify(userData));
-            alert('Registration successful! You can now login.');
-            registerModal.classList.remove('active');
-            loginModal.classList.add('active');
-        });
-        
-        // Purchase button
-        purchaseBtn.addEventListener('click', () => {
-            const user = localStorage.getItem('calculusUser');
-            if (user) {
-                alert('Thank you for your purchase! You now have full access to the course.');
-                // In a real application, you would process payment here
-            } else {
-                alert('Please register or login first to purchase the course.');
-                registerModal.classList.add('active');
-            }
-        });
-        
-        // Video player functionality
-        function onYouTubeIframeAPIReady() {
-            // Player will be created when a video is selected
+            return false;
         }
         
-        // Play video when play icon is clicked
-        playIcons.forEach(icon => {
-            icon.addEventListener('click', () => {
-                const user = localStorage.getItem('calculusUser');
-                if (!user) {
-                    alert('Please register or login first to access the videos.');
-                    loginModal.classList.add('active');
+        // Save authentication data
+        function saveAuth(registration, password) {
+            const authData = { registration, password };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(authData));
+        }
+        
+        // Clear authentication data
+        function clearAuth() {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+        
+        // DOM Elements
+        const authModal = document.getElementById('auth-modal');
+        const loginBtn = document.getElementById('login-btn');
+        const closeModal = document.getElementById('close-modal');
+        const authForm = document.getElementById('auth-form');
+        const purchaseLink = document.getElementById('purchase-link');
+        const videoModal = document.getElementById('video-modal');
+        const watchButtons = document.querySelectorAll('.watch-btn');
+        
+        // Player variables
+        let player;
+        let isPlaying = false;
+        let isMuted = false;
+        let currentVolume = 100;
+        let isDragging = false;
+        let securityCheckInterval;
+        let isFullscreen = false;
+        let currentVideoId = '';
+        
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!checkAuth()) {
+                // Show auth modal if not authenticated
+                setTimeout(() => {
+                    authModal.style.display = 'flex';
+                }, 1000);
+            } else {
+                // User is authenticated, update login button
+                loginBtn.textContent = 'Logout';
+                loginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    clearAuth();
+                    window.location.reload();
+                });
+            }
+            
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        });
+        
+        // Authentication Modal Events
+        loginBtn.addEventListener('click', function(e) {
+            if (!checkAuth()) {
+                e.preventDefault();
+                authModal.style.display = 'flex';
+            }
+        });
+        
+        closeModal.addEventListener('click', function() {
+            authModal.style.display = 'none';
+        });
+        
+        purchaseLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            authModal.style.display = 'none';
+            document.querySelector('.purchase-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // Authentication Form Submission
+        authForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const registration = document.getElementById('registration').value;
+            const password = document.getElementById('password').value;
+            
+            if (registration === AUTH_REGISTRATION && password === AUTH_PASSWORD) {
+                // Authentication successful
+                saveAuth(registration, password);
+                authModal.style.display = 'none';
+                loginBtn.textContent = 'Logout';
+                
+                // Add logout functionality
+                loginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    clearAuth();
+                    window.location.reload();
+                });
+            } else {
+                // Authentication failed
+                alert('Invalid registration code or password. Please try again.');
+            }
+        });
+        
+        // Watch Button Events
+        watchButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (!checkAuth()) {
+                    authModal.style.display = 'flex';
                     return;
                 }
                 
-                const videoId = icon.getAttribute('data-video');
+                const videoId = this.getAttribute('data-video');
+                currentVideoId = videoId;
                 openVideoPlayer(videoId);
             });
         });
         
-        // Open video player
+        // Open Video Player
         function openVideoPlayer(videoId) {
-            videoPlayer.classList.add('active');
+            videoModal.style.display = 'flex';
             
+            // Initialize YouTube player
             if (player) {
                 player.loadVideoById(videoId);
             } else {
@@ -966,52 +1586,318 @@
                         'modestbranding': 1,
                         'rel': 0,
                         'showinfo': 0,
-                        'controls': 1,
-                        'disablekb': 0,
-                        'fs': 1
+                        'controls': 0,
+                        'disablekb': 1,
+                        'fs': 0,
+                        'iv_load_policy': 3,
+                        'origin': window.location.origin
                     },
                     events: {
                         'onReady': onPlayerReady,
-                        'onStateChange': onPlayerStateChange
+                        'onStateChange': onPlayerStateChange,
+                        'onError': onPlayerError
                     }
                 });
             }
+            
+            startSecurityMonitoring();
         }
         
-        function onPlayerReady(event) {
-            // Player is ready
-        }
-        
-        function onPlayerStateChange(event) {
-            // Player state changed
-        }
-        
-        // Close video player
-        closePlayer.addEventListener('click', () => {
-            videoPlayer.classList.remove('active');
-            if (player) {
-                player.stopVideo();
+        // Close Video Player when clicking outside
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                closeVideoPlayer();
             }
         });
         
-        // Close modals when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                loginModal.classList.remove('active');
+        function closeVideoPlayer() {
+            videoModal.style.display = 'none';
+            if (player) {
+                player.stopVideo();
             }
-            if (e.target === registerModal) {
-                registerModal.classList.remove('active');
+            if (securityCheckInterval) {
+                clearInterval(securityCheckInterval);
             }
-            if (e.target === videoPlayer) {
-                videoPlayer.classList.remove('active');
-                if (player) {
-                    player.stopVideo();
+        }
+        
+        // YouTube Player Events
+        function onPlayerReady(event) {
+            updateTimeDisplay();
+            setInterval(updateProgress, 200);
+            
+            // Hide YouTube branding after a delay
+            setTimeout(hideYouTubeBranding, 1000);
+            
+            // Listen for fullscreen changes
+            document.addEventListener('fullscreenchange', handleFullscreenChange);
+            document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+            document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+            document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+            
+            // Add click event to show controls in fullscreen
+            document.getElementById('secure-overlay').addEventListener('click', handleScreenClick);
+        }
+        
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                document.getElementById('play-icon').style.display = 'none';
+                document.getElementById('pause-icon').style.display = 'block';
+            } else {
+                isPlaying = false;
+                document.getElementById('play-icon').style.display = 'block';
+                document.getElementById('pause-icon').style.display = 'none';
+            }
+        }
+        
+        function onPlayerError(event) {
+            console.error('YouTube Player Error:', event.data);
+        }
+        
+        // Security monitoring functions
+        function startSecurityMonitoring() {
+            // Monitor for navigation attempts
+            securityCheckInterval = setInterval(checkSecurity, 1000);
+            
+            // Block right-click
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showSecurityNotice();
+                return false;
+            });
+            
+            // Block keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Block Ctrl+ combinations
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    showSecurityNotice();
+                }
+                
+                // Block F12, Ctrl+Shift+I, etc.
+                if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
+                    e.preventDefault();
+                    showSecurityNotice();
+                }
+                
+                // Allow space bar for play/pause
+                if (e.keyCode === 32 && e.target === document.body) {
+                    e.preventDefault();
+                    togglePlayPause();
+                }
+                
+                // Allow arrow keys for seeking
+                if (e.keyCode === 37) { // Left arrow
+                    e.preventDefault();
+                    rewind10();
+                }
+                if (e.keyCode === 39) { // Right arrow
+                    e.preventDefault();
+                    forward10();
+                }
+            });
+        }
+        
+        function checkSecurity() {
+            // Check if player tries to navigate away
+            try {
+                const iframe = document.getElementById('player');
+                if (iframe && iframe.contentWindow) {
+                    const iframeUrl = iframe.contentWindow.location.href;
+                    if (iframeUrl.includes('youtube.com') || iframeUrl.includes('youtu.be')) {
+                        showBlockOverlay();
+                        player.stopVideo();
+                    }
+                }
+            } catch (e) {
+                // Cross-origin access blocked - this is good for security
+            }
+        }
+        
+        function hideYouTubeBranding() {
+            // Hide YouTube logo and other elements
+            const iframe = document.getElementById('player');
+            if (iframe) {
+                try {
+                    const doc = iframe.contentDocument || iframe.contentWindow.document;
+                    const elements = doc.querySelectorAll('.ytp-chrome-top, .ytp-watermark');
+                    elements.forEach(el => el.style.display = 'none');
+                } catch (e) {
+                    // Cross-origin access blocked - expected behavior
+                }
+            }
+        }
+        
+        function showSecurityNotice() {
+            const notice = document.getElementById('security-notice');
+            notice.style.display = 'block';
+            setTimeout(() => {
+                notice.style.display = 'none';
+            }, 2000);
+        }
+        
+        function showBlockOverlay() {
+            const overlay = document.getElementById('block-overlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Player control functions
+        function togglePlayPause() {
+            if (isPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+        
+        function rewind10() {
+            const currentTime = player.getCurrentTime();
+            player.seekTo(currentTime - 10, true);
+        }
+        
+        function forward10() {
+            const currentTime = player.getCurrentTime();
+            player.seekTo(currentTime + 10, true);
+        }
+        
+        // Toggle play/pause
+        document.getElementById('play-pause-btn').addEventListener('click', togglePlayPause);
+        
+        // Rewind 10 seconds
+        document.getElementById('rewind-btn').addEventListener('click', rewind10);
+        
+        // Forward 10 seconds
+        document.getElementById('forward-btn').addEventListener('click', forward10);
+        
+        // Update progress bar
+        function updateProgress() {
+            if (!player || !player.getDuration) return;
+            
+            const currentTime = player.getCurrentTime();
+            const duration = player.getDuration();
+            const progressPercent = (currentTime / duration) * 100;
+            
+            document.getElementById('progress').style.width = `${progressPercent}%`;
+            document.getElementById('progress-thumb').style.left = `${progressPercent}%`;
+            
+            updateTimeDisplay();
+        }
+        
+        // Update time display
+        function updateTimeDisplay() {
+            if (!player || !player.getDuration) return;
+            
+            const currentTime = player.getCurrentTime();
+            const duration = player.getDuration();
+            
+            document.getElementById('current-time').textContent = formatTime(currentTime);
+            document.getElementById('duration').textContent = formatTime(duration);
+        }
+        
+        // Format time in MM:SS
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+        
+        // Seek on progress bar click
+        document.getElementById('progress-container').addEventListener('click', (e) => {
+            if (!player || !player.getDuration) return;
+            
+            const rect = e.currentTarget.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            const duration = player.getDuration();
+            const newTime = percent * duration;
+            
+            player.seekTo(newTime, true);
+        });
+        
+        // Volume control
+        document.getElementById('volume-slider').addEventListener('input', (e) => {
+            const volume = e.target.value;
+            currentVolume = volume;
+            player.setVolume(volume);
+            
+            if (volume == 0) {
+                isMuted = true;
+                document.getElementById('volume-high').style.display = 'none';
+                document.getElementById('volume-mute').style.display = 'block';
+            } else {
+                isMuted = false;
+                document.getElementById('volume-high').style.display = 'block';
+                document.getElementById('volume-mute').style.display = 'none';
+            }
+        });
+        
+        // Mute/unmute
+        document.getElementById('volume-btn').addEventListener('click', () => {
+            if (isMuted) {
+                player.unMute();
+                document.getElementById('volume-slider').value = currentVolume;
+                document.getElementById('volume-high').style.display = 'block';
+                document.getElementById('volume-mute').style.display = 'none';
+                isMuted = false;
+            } else {
+                player.mute();
+                document.getElementById('volume-slider').value = 0;
+                document.getElementById('volume-high').style.display = 'none';
+                document.getElementById('volume-mute').style.display = 'block';
+                isMuted = true;
+            }
+        });
+        
+        // Fullscreen
+        document.getElementById('fullscreen-btn').addEventListener('click', () => {
+            const container = document.querySelector('.video-modal-content');
+            
+            if (!isFullscreen) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.mozRequestFullScreen) {
+                    container.mozRequestFullScreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
                 }
             }
         });
         
-        // Initialize
-        checkAuthStatus();
+        // Handle fullscreen changes
+        function handleFullscreenChange() {
+            isFullscreen = !!(document.fullscreenElement || 
+                             document.webkitFullscreenElement || 
+                             document.mozFullScreenElement || 
+                             document.msFullscreenElement);
+            
+            if (isFullscreen) {
+                document.getElementById('expand-icon').style.display = 'none';
+                document.getElementById('compress-icon').style.display = 'block';
+            } else {
+                document.getElementById('expand-icon').style.display = 'block';
+                document.getElementById('compress-icon').style.display = 'none';
+            }
+        }
+        
+        // Handle screen click in fullscreen
+        function handleScreenClick() {
+            // Toggle play/pause when clicking on the video
+            togglePlayPause();
+        }
     </script>
 </body>
 </html>
