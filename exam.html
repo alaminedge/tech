@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search Console Verification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        
+        header {
+            background: #f8f9fa;
+            padding: 25px 30px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        h1 {
+            color: #1a73e8;
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        h1 i {
+            color: #34a853;
+        }
+        
+        .subtitle {
+            color: #5f6368;
+            font-size: 16px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .verification-box {
+            background: #f1f8fe;
+            border: 1px solid #c2e7ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .verification-code {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px dashed #1a73e8;
+            margin: 15px 0;
+            font-size: 18px;
+            text-align: center;
+            word-break: break-all;
+        }
+        
+        .info-section {
+            margin-bottom: 25px;
+        }
+        
+        h2 {
+            color: #1a73e8;
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        .steps {
+            list-style-type: none;
+            counter-reset: step-counter;
+        }
+        
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+        }
+        
+        .steps li:before {
+            content: counter(step-counter);
+            background: #1a73e8;
+            color: white;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #1a73e8;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0d62da;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #f1f3f4;
+            color: #5f6368;
+            border: 1px solid #dadce0;
+        }
+        
+        .btn-secondary:hover {
+            background: #e8eaed;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #5f6368;
+            font-size: 14px;
+            border-top: 1px solid #e8e8e8;
+            background: #f8f9fa;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 8px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <i>✓</i> Google Search Console Verification
+            </h1>
+            <p class="subtitle">Verify your website ownership with Google</p>
+        </header>
+        
+        <div class="content">
+            <div class="verification-box">
+                <h2>Verification File</h2>
+                <p>This file is used to verify your website with Google Search Console. The content should be:</p>
+                <div class="verification-code">google-site-verification: googlefeb6da7adeac1010.html</div>
+                <p>Upload this file to your website's root directory to complete verification.</p>
+            </div>
+            
+            <div class="info-section">
+                <h2>How to Verify Your Website</h2>
+                <ol class="steps">
+                    <li>Save this file as <strong>googlefeb6da7adeac1010.html</strong></li>
+                    <li>Upload it to the root directory of your website (the main folder where your homepage is located)</li>
+                    <li>Ensure the file is accessible via: <strong>https://yourdomain.com/googlefeb6da7adeac1010.html</strong></li>
+                    <li>Return to Google Search Console and click "Verify"</li>
+                    <li>Once verified, you can safely remove this file from your server</li>
+                </ol>
+            </div>
+            
+            <div class="info-section">
+                <h2>About Google Search Console</h2>
+                <p>Google Search Console is a free service offered by Google that helps you monitor, maintain, and troubleshoot your site's presence in Google Search results.</p>
+                <p>With Search Console, you can:</p>
+                <ul>
+                    <li>See which queries bring users to your site</li>
+                    <li>Identify and fix indexing issues</li>
+                    <li>Submit sitemaps and individual URLs for crawling</li>
+                    <li>Monitor your site's search performance</li>
+                </ul>
+            </div>
+            
+            <div class="actions">
+                <a href="https://search.google.com/search-console" class="btn btn-primary" target="_blank">
+                    Go to Search Console
+                </a>
+                <a href="https://support.google.com/webmasters/answer/9008080" class="btn btn-secondary" target="_blank">
+                    Verification Help
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>This verification file is for website: <strong>googlefeb6da7adeac1010.html</strong></p>
+            <p>Google Search Console Verification • This is not a regular HTML file</p>
+        </footer>
+    </div>
+</body>
+</html>
