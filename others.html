@@ -1,1 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher Math Admission Course | Premium Video Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --gray: #95a5a6;
+            --dark-gray: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--secondary), var(--light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--light);
+            border: 1px solid var(--light);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 320px;
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar h2 i {
+            color: var(--secondary);
+        }
+
+        .course-list {
+            list-style: none;
+        }
+
+        .course-item {
+            margin-bottom: 8px;
+        }
+
+        .course-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+            gap: 12px;
+        }
+
+        .course-link:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .course-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left: 3px solid var(--secondary);
+        }
+
+        .course-link i {
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+        }
+
+        .course-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        .badge {
+            background: var(--secondary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .video-section {
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .video-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-header h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        #player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(15, 15, 15, 0.95);
+            gap: 15px;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--light);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            position: relative;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            margin-top: 9px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .progress-thumb {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--secondary);
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .progress-container:hover .progress-thumb {
+            opacity: 1;
+        }
+
+        .time-display {
+            font-size: 14px;
+            color: var(--light);
+            white-space: nowrap;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volume-slider {
+            width: 80px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .volume-container:hover .volume-slider {
+            opacity: 1;
+        }
+
+        .settings-menu, .speed-menu {
+            position: absolute;
+            bottom: 60px;
+            background: rgba(28, 28, 28, 0.95);
+            border-radius: 8px;
+            padding: 8px 0;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .settings-menu.active, .speed-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--light);
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item.active {
+            color: var(--secondary);
+        }
+
+        .content-section {
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .content-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section h3 i {
+            color: var(--secondary);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            font-size: 24px;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .resource-card h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .resource-card p {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: rgba(44, 62, 80, 0.95);
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Higher Math Admission Course</h1>
+            </div>
+            <div class="user-actions">
+                <button class="btn btn-outline">
+                    <i class="fas fa-bookmark"></i> Save Progress
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-user"></i> Student Dashboard
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2><i class="fas fa-book"></i> Course Content</h2>
+            <ul class="course-list">
+                <li class="course-item">
+                    <a href="#" class="course-link active">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Matrix & Determinant</div>
+                            <div class="course-meta">
+                                <span class="badge">Available</span>
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Straight Line</div>
+                            <div class="course-meta">
+                                <span class="badge">Available</span>
+                                <span><i class="far fa-clock"></i> 60 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Circle</div>
+                            <div class="course-meta">
+                                <span class="badge">Available</span>
+                                <span><i class="far fa-clock"></i> 55 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Trigonometric Ratios of Allied Angles</div>
+                            <div class="course-meta">
+                                <span class="badge">Available</span>
+                                <span><i class="far fa-clock"></i> 40 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Differentiation</div>
+                            <div class="course-meta">
+                                <span class="badge">Available</span>
+                                <span><i class="far fa-clock"></i> 75 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Integration</div>
+                            <div class="course-meta">
+                                <span class="badge">Available</span>
+                                <span><i class="far fa-clock"></i> 80 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <h2 style="margin-top: 30px;"><i class="fas fa-book-open"></i> Second Paper</h2>
+            <ul class="course-list">
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Complex Numbers</div>
+                            <div class="course-meta">
+                                <span class="badge">Coming Soon</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Polynomial Equations</div>
+                            <div class="course-meta">
+                                <span class="badge">Coming Soon</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Conic Sections</div>
+                            <div class="course-meta">
+                                <span class="badge">Coming Soon</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Inverse Trigonometric Functions</div>
+                            <div class="course-meta">
+                                <span class="badge">Available</span>
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Statics</div>
+                            <div class="course-meta">
+                                <span class="badge">Coming Soon</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="course-item">
+                    <a href="#" class="course-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div>Particle Motion in a Plane</div>
+                            <div class="course-meta">
+                                <span class="badge">Coming Soon</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <section class="video-section">
+                <div class="video-header">
+                    <h2>Matrix & Determinant</h2>
+                    <div class="video-meta">
+                        <span><i class="far fa-clock"></i> 45 minutes</span>
+                        <span><i class="fas fa-chart-bar"></i> Intermediate</span>
+                        <span><i class="far fa-eye"></i> 1,245 views</span>
+                    </div>
+                </div>
+                
+                <div class="video-container">
+                    <div id="player"></div>
+                </div>
+                
+                <div class="player-controls">
+                    <button class="control-btn play-pause-btn" id="play-pause-btn" title="Play/Pause">
+                        <i class="fas fa-play" id="play-icon"></i>
+                        <i class="fas fa-pause" id="pause-icon" style="display:none"></i>
+                    </button>
+                    
+                    <button class="control-btn rewind-btn" id="rewind-btn" title="Rewind 10s">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    
+                    <button class="control-btn forward-btn" id="forward-btn" title="Forward 10s">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                    
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" id="progress"></div>
+                            <div class="progress-thumb" id="progress-thumb"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-display">
+                        <span class="current-time" id="current-time">0:00</span> / <span class="duration" id="duration">0:00</span>
+                    </div>
+                    
+                    <div class="volume-container">
+                        <button class="control-btn volume-btn" id="volume-btn" title="Mute/Unmute">
+                            <i class="fas fa-volume-up" id="volume-high"></i>
+                            <i class="fas fa-volume-mute" id="volume-mute" style="display:none"></i>
+                        </button>
+                        <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="100">
+                    </div>
+                    
+                    <button class="control-btn speed-btn" id="speed-btn" title="Playback Speed">1x</button>
+                    
+                    <button class="control-btn settings-btn" id="settings-btn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    
+                    <button class="control-btn fullscreen-btn" id="fullscreen-btn" title="Fullscreen">
+                        <i class="fas fa-expand" id="expand-icon"></i>
+                        <i class="fas fa-compress" id="compress-icon" style="display:none"></i>
+                    </button>
+                    
+                    <div class="settings-menu" id="settings-menu">
+                        <div class="menu-item" data-quality="auto">Quality: Auto</div>
+                        <div class="menu-item" data-quality="hd1080">1080p</div>
+                        <div class="menu-item" data-quality="hd720">720p</div>
+                        <div class="menu-item" data-quality="medium">480p</div>
+                        <div class="menu-item" data-quality="small">360p</div>
+                    </div>
+                    
+                    <div class="speed-menu" id="speed-menu">
+                        <div class="menu-item" data-speed="0.25">0.25x</div>
+                        <div class="menu-item" data-speed="0.5">0.5x</div>
+                        <div class="menu-item" data-speed="0.75">0.75x</div>
+                        <div class="menu-item active" data-speed="1">Normal</div>
+                        <div class="menu-item" data-speed="1.25">1.25x</div>
+                        <div class="menu-item" data-speed="1.5">1.5x</div>
+                        <div class="menu-item" data-speed="2">2x</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h3><i class="fas fa-download"></i> Course Resources</h3>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h4>Lecture Slides</h4>
+                        <p>PDF presentation with key concepts</p>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4>Practice Problems</h4>
+                        <p>Exercises with step-by-step solutions</p>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h4>Formula Sheet</h4>
+                        <p>Important formulas and theorems</p>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h4>Quiz</h4>
+                        <p>Test your understanding</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h3><i class="fas fa-info-circle"></i> About This Chapter</h3>
+                <p>In this chapter, you will learn about matrices and determinants, which are fundamental concepts in linear algebra. We'll cover:</p>
+                <ul style="margin: 15px 0 15px 20px;">
+                    <li>Matrix operations and properties</li>
+                    <li>Determinants and their properties</li>
+                    <li>Applications in solving systems of equations</li>
+                    <li>Inverse matrices and their computation</li>
+                </ul>
+                <p>This knowledge forms the foundation for more advanced topics in mathematics and is essential for success in higher education mathematics courses.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">Courses</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Higher Math Admission Course. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        // YouTube video ID from the provided URL
+        const videoId = 'Wxhpdp_Dyr8';
+        
+        // Player variables
+        let player;
+        let isPlaying = false;
+        let isMuted = false;
+        let currentVolume = 100;
+        let isDragging = false;
+        
+        // Load YouTube IFrame API and create player
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: videoId,
+                playerVars: {
+                    'playsinline': 1,
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'showinfo': 0,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'iv_load_policy': 3
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError
+                }
+            });
+        }
+        
+        // When player is ready
+        function onPlayerReady(event) {
+            updateTimeDisplay();
+            setInterval(updateProgress, 200);
+        }
+        
+        // Handle player state changes
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                document.getElementById('play-icon').style.display = 'none';
+                document.getElementById('pause-icon').style.display = 'block';
+            } else {
+                isPlaying = false;
+                document.getElementById('play-icon').style.display = 'block';
+                document.getElementById('pause-icon').style.display = 'none';
+            }
+        }
+        
+        // Handle player errors
+        function onPlayerError(event) {
+            console.error('YouTube Player Error:', event.data);
+        }
+        
+        // Player control functions
+        function togglePlayPause() {
+            if (isPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+        
+        function rewind10() {
+            const currentTime = player.getCurrentTime();
+            player.seekTo(currentTime - 10, true);
+        }
+        
+        function forward10() {
+            const currentTime = player.getCurrentTime();
+            player.seekTo(currentTime + 10, true);
+        }
+        
+        // Toggle play/pause
+        document.getElementById('play-pause-btn').addEventListener('click', togglePlayPause);
+        
+        // Rewind 10 seconds
+        document.getElementById('rewind-btn').addEventListener('click', rewind10);
+        
+        // Forward 10 seconds
+        document.getElementById('forward-btn').addEventListener('click', forward10);
+        
+        // Update progress bar
+        function updateProgress() {
+            if (!player || !player.getDuration) return;
+            
+            const currentTime = player.getCurrentTime();
+            const duration = player.getDuration();
+            const progressPercent = (currentTime / duration) * 100;
+            
+            document.getElementById('progress').style.width = `${progressPercent}%`;
+            document.getElementById('progress-thumb').style.left = `${progressPercent}%`;
+            
+            updateTimeDisplay();
+        }
+        
+        // Update time display
+        function updateTimeDisplay() {
+            if (!player || !player.getDuration) return;
+            
+            const currentTime = player.getCurrentTime();
+            const duration = player.getDuration();
+            
+            document.getElementById('current-time').textContent = formatTime(currentTime);
+            document.getElementById('duration').textContent = formatTime(duration);
+        }
+        
+        // Format time in MM:SS
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+        
+        // Seek on progress bar click
+        document.getElementById('progress-container').addEventListener('click', (e) => {
+            if (!player || !player.getDuration) return;
+            
+            const rect = e.currentTarget.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            const duration = player.getDuration();
+            const newTime = percent * duration;
+            
+            player.seekTo(newTime, true);
+        });
+        
+        // Volume control
+        document.getElementById('volume-slider').addEventListener('input', (e) => {
+            const volume = e.target.value;
+            currentVolume = volume;
+            player.setVolume(volume);
+            
+            if (volume == 0) {
+                isMuted = true;
+                document.getElementById('volume-high').style.display = 'none';
+                document.getElementById('volume-mute').style.display = 'block';
+            } else {
+                isMuted = false;
+                document.getElementById('volume-high').style.display = 'block';
+                document.getElementById('volume-mute').style.display = 'none';
+            }
+        });
+        
+        // Mute/unmute
+        document.getElementById('volume-btn').addEventListener('click', () => {
+            if (isMuted) {
+                player.unMute();
+                document.getElementById('volume-slider').value = currentVolume;
+                document.getElementById('volume-high').style.display = 'block';
+                document.getElementById('volume-mute').style.display = 'none';
+                isMuted = false;
+            } else {
+                player.mute();
+                document.getElementById('volume-slider').value = 0;
+                document.getElementById('volume-high').style.display = 'none';
+                document.getElementById('volume-mute').style.display = 'block';
+                isMuted = true;
+            }
+        });
+        
+        // Playback speed
+        document.getElementById('speed-btn').addEventListener('click', () => {
+            document.getElementById('speed-menu').classList.toggle('active');
+            document.getElementById('settings-menu').classList.remove('active');
+        });
+        
+        document.querySelectorAll('#speed-menu .menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const speed = parseFloat(item.getAttribute('data-speed'));
+                player.setPlaybackRate(speed);
+                document.getElementById('speed-btn').textContent = `${speed}x`;
+                
+                document.querySelectorAll('#speed-menu .menu-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                item.classList.add('active');
+                
+                document.getElementById('speed-menu').classList.remove('active');
+            });
+        });
+        
+        // Settings menu
+        document.getElementById('settings-btn').addEventListener('click', () => {
+            document.getElementById('settings-menu').classList.toggle('active');
+            document.getElementById('speed-menu').classList.remove('active');
+        });
+        
+        document.querySelectorAll('#settings-menu .menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const quality = item.getAttribute('data-quality');
+                // In a real implementation, you would set the video quality here
+                // player.setPlaybackQuality(quality);
+                
+                document.querySelectorAll('#settings-menu .menu-item').forEach(i => {
+                    i.textContent = i.textContent.replace(' ✓', '');
+                });
+                item.textContent += ' ✓';
+                
+                document.getElementById('settings-menu').classList.remove('active');
+            });
+        });
+        
+        // Fullscreen
+        document.getElementById('fullscreen-btn').addEventListener('click', () => {
+            const container = document.querySelector('.video-section');
+            
+            if (!document.fullscreenElement) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.mozRequestFullScreen) {
+                    container.mozRequestFullScreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                
+                document.getElementById('expand-icon').style.display = 'none';
+                document.getElementById('compress-icon').style.display = 'block';
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                
+                document.getElementById('expand-icon').style.display = 'block';
+                document.getElementById('compress-icon').style.display = 'none';
+            }
+        });
+        
+        // Close menus when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#settings-btn') && !e.target.closest('#settings-menu')) {
+                document.getElementById('settings-menu').classList.remove('active');
+            }
+            if (!e.target.closest('#speed-btn') && !e.target.closest('#speed-menu')) {
+                document.getElementById('speed-menu').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
