@@ -1,191 +1,1071 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AlaminEdge | Contact Us</title>
+  <title>Contact Us | AlaminEdge Premium</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@400;600&display=swap');
-
     :root {
       --primary-color: #00bfff;
-      --bg-color: #0b0b0b;
+      --primary-dark: #0099cc;
+      --primary-light: #33ccff;
+      --secondary-color: #8a2be2;
+      --accent-color: #ff6b6b;
+      --bg-color: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-tertiary: #1a1a1a;
       --text-color: #ffffff;
+      --text-secondary: #b0b0b0;
+      --text-muted: #888888;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-light: rgba(255, 255, 255, 0.05);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+      --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+      --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
+      --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
       --font-primary: 'Poppins', sans-serif;
       --font-secondary: 'Montserrat', sans-serif;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 30px;
     }
 
-    /* Global */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-primary); overflow-x: hidden; }
+    /* Global Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-secondary);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .navbar.scrolled {
+      background: rgba(10, 10, 10, 0.98);
+      box-shadow: var(--shadow);
+      padding: 10px 40px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      transition: var(--transition);
+      border: 2px solid var(--primary-color);
+    }
+
+    .logo:hover {
+      transform: rotate(15deg);
+      box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+    }
+
+    .brand-name {
+      font-family: var(--font-secondary);
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      position: relative;
+      font-weight: 500;
+      padding: 8px 0;
+      transition: var(--transition);
+    }
+
+    .nav-links a:not(.btn):hover,
+    .nav-links a.active {
+      color: var(--primary-color);
+    }
+
+    .nav-links a:not(.btn)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: var(--transition);
+    }
+
+    .nav-links a:not(.btn):hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links .btn {
+      background: var(--gradient-primary);
+      color: #000;
+      padding: 10px 25px;
+      border-radius: var(--radius-xl);
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-links .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: var(--transition-slow);
+    }
+
+    .nav-links .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
+    }
+
+    .nav-links .btn:hover::before {
+      left: 100%;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--text-color);
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-top: 100px;
+      padding: 2rem 0;
+    }
+
+    /* Contact Hero */
+    .contact-hero {
+      padding: 3rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+    }
+
+    .contact-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+
+    .contact-hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     /* Contact Section */
     .contact-section {
-      min-height: 100vh;
+      padding: 4rem 0;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-info {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .contact-info h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .contact-details {
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 100px 20px;
-      background: linear-gradient(180deg, #0b0b0b 0%, #121212 100%);
-      text-align: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-md);
+      transition: var(--transition);
     }
 
-    .contact-section .container {
-      max-width: 600px;
-      width: 100%;
-      padding: 30px;
-      background: #0d0d0d;
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(0, 191, 255, 0.4);
+    .contact-item:hover {
+      transform: translateX(5px);
+      border-left: 3px solid var(--primary-color);
     }
 
-    .contact-section h1 {
-      font-family: var(--font-secondary);
-      color: var(--primary-color);
-      margin-bottom: 15px;
-      font-size: 2.5rem;
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: #000;
     }
 
-    .contact-section p {
-      color: #ccc;
-      margin-bottom: 30px;
-      font-size: 1rem;
+    .contact-text h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
     }
 
-    .contact-section .contact-form input,
-    .contact-section .contact-form textarea {
-      width: 100%;
-      padding: 12px 15px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      border: 1px solid #333;
-      background: #1a1a1a;
-      color: #fff;
-      font-size: 1rem;
-      font-family: var(--font-primary);
-      transition: 0.3s;
+    .contact-text p {
+      color: var(--text-secondary);
+      margin-bottom: 0;
     }
 
-    .contact-section .contact-form input:focus,
-    .contact-section .contact-form textarea:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 8px var(--primary-color);
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
     }
 
-    .contact-section .btn {
+    .social-links a {
+      width: 50px;
+      height: 50px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
       background: var(--primary-color);
       color: #000;
-      padding: 12px 25px;
-      border-radius: 25px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s;
-      border: none;
+      transform: translateY(-3px);
     }
 
-    .contact-section .btn:hover {
-      background: #0099cc;
-      color: #fff;
+    /* Contact Form */
+    .contact-form-container {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      border: 1px solid var(--border-color);
     }
 
-    .contact-section .back-btn {
-      display: inline-block;
-      margin-top: 25px;
-      color: var(--primary-color);
-      text-decoration: none;
+    .contact-form-container h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
       font-weight: 500;
-      transition: 0.3s;
     }
 
-    .contact-section .back-btn:hover {
-      color: #0099cc;
-      text-decoration: underline;
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-color);
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.2);
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 30px;
+      border-radius: var(--radius-xl);
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: #000;
+      box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-color);
+      border: 2px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 4rem 0;
+      background: var(--bg-secondary);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .faq-item {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    .faq-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .faq-item h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .faq-item p {
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 70% 30%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 30% 70%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cta-content p {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
     }
 
     /* Footer */
     footer {
-      background: #0a0a0a;
-      text-align: center;
-      padding: 20px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 50px;
+      background: var(--bg-secondary);
+      padding: 60px 0 30px;
+      border-top: 1px solid var(--border-color);
     }
 
-    footer .socials a {
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-section p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
       color: var(--primary-color);
-      margin: 0 10px;
-      text-decoration: none;
-      transition: 0.3s;
     }
 
-    footer .socials a:hover {
-      color: #fff;
+    .footer-social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
     }
 
-    /* Scroll to top */
+    .footer-social-links a {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .footer-social-links a:hover {
+      background: var(--primary-color);
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .footer-links-bottom {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links-bottom a {
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .footer-links-bottom a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Scroll to Top Button */
     #scrollTopBtn {
       position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: var(--primary-color);
+      bottom: 30px;
+      right: 30px;
+      background: var(--gradient-primary);
       color: #000;
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
+      width: 50px;
+      height: 50px;
+      font-size: 1.25rem;
       cursor: pointer;
       display: none;
-      transition: 0.4s;
+      transition: var(--transition);
+      z-index: 99;
+      box-shadow: var(--shadow);
     }
 
     #scrollTopBtn:hover {
-      background: #0099cc;
-      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .contact-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 15px 20px;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .contact-hero h1 {
+        font-size: 2rem;
+      }
+
+      .contact-hero p {
+        font-size: 1.125rem;
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .footer-links-bottom {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-hero h1 {
+        font-size: 1.75rem;
+      }
+      
+      .section-header h2 {
+        font-size: 1.75rem;
+      }
+      
+      .contact-info,
+      .contact-form-container {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <section class="contact-section">
-    <div class="container">
-      <h1>Contact Us</h1>
-      <p>Have questions or feedback? Send us a message and we'll get back to you promptly.</p>
-      
-      <form action="https://formspree.io/f/xpwoyobe" method="POST" class="contact-form">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-      </form>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo-container">
+        <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
+        <span class="brand-name">AlaminEdge</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="live.html">Live</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="registration.html" class="btn">Register</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
 
-      <!-- Back Button -->
-      <a href="index.html" class="back-btn">← Back to Home</a>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Contact Hero -->
+      <section class="contact-hero">
+        <div class="hero-badge">
+          <i class="fas fa-headset"></i>
+          <span>PREMIUM SUPPORT</span>
+        </div>
+        <h1>Get In Touch With Us</h1>
+        <p>Have questions, feedback, or need assistance? Our team is here to help you succeed in your learning journey.</p>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact-section">
+        <div class="contact-container">
+          <!-- Contact Information -->
+          <div class="contact-info">
+            <h2>Contact Information</h2>
+            <div class="contact-details">
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Email Address</h4>
+                  <p>info@alaminedge.com</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Phone Number</h4>
+                  <p>+1 (555) 123-4567</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Office Location</h4>
+                  <p>Tech Innovation Hub, Digital City</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Working Hours</h4>
+                  <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                </div>
+              </div>
+            </div>
+            <h3>Follow Us</h3>
+            <div class="social-links">
+              <a href="https://www.youtube.com/@PrimeviaLearn" target="_blank"><i class="fab fa-youtube"></i></a>
+              <a href="https://t.me/adamzampas" target="_blank"><i class="fab fa-telegram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-container">
+            <h2>Send Us a Message</h2>
+            <form action="https://formspree.io/f/xpwoyobe" method="POST" class="contact-form">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter the subject" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" class="form-control" placeholder="Tell us how we can help you..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i>
+                <span>Send Message</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="faq-section">
+        <div class="section-header">
+          <h2>Frequently Asked Questions</h2>
+          <p>Find quick answers to common questions about our services and support</p>
+        </div>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>How can I enroll in a course?</h3>
+            <p>You can enroll in any course by visiting our Courses page, selecting your desired course, and completing the registration process.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Do you offer certificate upon completion?</h3>
+            <p>Yes, we provide certificates for all completed courses that you can showcase on your resume and professional profiles.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What payment methods do you accept?</h3>
+            <p>We accept all major credit cards, PayPal, and bank transfers for your convenience.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Can I get a refund if I'm not satisfied?</h3>
+            <p>We offer a 30-day money-back guarantee if you're not satisfied with our courses for any reason.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Do you provide career support?</h3>
+            <p>Yes, we offer career guidance, resume reviews, and interview preparation to help you land your dream job.</p>
+          </div>
+          <div class="faq-item">
+            <h3>How do I access live sessions?</h3>
+            <p>Once enrolled, you'll receive access to our live session schedule and can join through your student dashboard.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="container">
+          <div class="cta-content">
+            <h2>Ready to Start Your Learning Journey?</h2>
+            <p>Join thousands of students who have transformed their careers with AlaminEdge's premium courses and support.</p>
+            <a href="registration.html" class="btn btn-primary">
+              <i class="fas fa-user-plus"></i>
+              <span>Register Now</span>
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
+  </main>
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 AlaminEdge | Powered by Md. Al Amin</p>
-    <div class="socials">
-      <a href="https://www.youtube.com/@PrimeviaLearn" target="_blank">YouTube</a>
-      <a href="https://t.me/adamzampas" target="_blank">Telegram</a>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="logo-container">
+            <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
+            <h3>AlaminEdge</h3>
+          </div>
+          <p>Where Learning Meets Innovation. Empowering the next generation of tech professionals through premium education.</p>
+          <div class="footer-social-links">
+            <a href="https://www.youtube.com/@PrimeviaLearn" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/adamzampas" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <ul class="footer-links">
+            <li><a href="live.html">Live Sessions</a></li>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Career Support</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Info</h4>
+          <p><i class="fas fa-envelope"></i> info@alaminedge.com</p>
+          <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+          <p><i class="fas fa-map-marker-alt"></i> Tech Innovation Hub, Digital City</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="copyright">
+          <p>© 2025 AlaminEdge | Powered by Md. Al Amin</p>
+        </div>
+        <div class="footer-links-bottom">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- Scroll to Top Button -->
-  <button id="scrollTopBtn">↑</button>
+  <!-- Scroll to Top -->
+  <button id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
 
   <script>
-    // Scroll to Top Button
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) scrollTopBtn.style.display = "block";
-      else scrollTopBtn.style.display = "none";
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
     });
-    scrollTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Scroll to Top Button
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        scrollTopBtn.style.display = 'block';
+      } else {
+        scrollTopBtn.style.display = 'none';
+      }
+    });
+    
+    scrollTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Add animation to contact items and FAQ items on scroll
+    const animatedItems = document.querySelectorAll('.contact-item, .faq-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    animatedItems.forEach(item => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(20px)';
+      item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(item);
     });
   </script>
 </body>
