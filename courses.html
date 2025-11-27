@@ -437,6 +437,7 @@
         /* Course Content */
         .course-content {
             padding: 3rem 0;
+            display: none; /* Hidden by default */
         }
 
         .section-header {
@@ -964,6 +965,38 @@
             color: var(--primary-color);
         }
 
+        /* Access Denied Section */
+        .access-denied {
+            padding: 4rem 0;
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+
+        .access-denied-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .access-denied-icon {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .access-denied h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .access-denied p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .course-hero h1 {
@@ -1191,8 +1224,23 @@
                 </div>
             </section>
 
-            <!-- Course Content -->
-            <section class="course-content">
+            <!-- Access Denied Section (Shown when not authenticated) -->
+            <section class="access-denied" id="access-denied">
+                <div class="access-denied-content">
+                    <div class="access-denied-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h2>Access Restricted</h2>
+                    <p>This premium course content is only available to enrolled students. Please authenticate to access the lectures and notes.</p>
+                    <button class="btn btn-primary" id="access-btn">
+                        <i class="fas fa-key"></i>
+                        <span>Authenticate to Access</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Course Content (Hidden until authenticated) -->
+            <section class="course-content" id="course-content">
                 <div class="section-header">
                     <h2>Course Curriculum</h2>
                     <p>Structured learning path with comprehensive video lectures and downloadable resources</p>
@@ -1423,29 +1471,6 @@
         const AUTH_PASSWORD = "difintA25";
         const STORAGE_KEY = "alaminedge_auth";
         
-        // Check if user is already authenticated
-        function checkAuth() {
-            const authData = localStorage.getItem(STORAGE_KEY);
-            if (authData) {
-                const { registration, password } = JSON.parse(authData);
-                if (registration === AUTH_REGISTRATION && password === AUTH_PASSWORD) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        
-        // Save authentication data
-        function saveAuth(registration, password) {
-            const authData = { registration, password };
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(authData));
-        }
-        
-        // Clear authentication data
-        function clearAuth() {
-            localStorage.removeItem(STORAGE_KEY);
-        }
-        
         // DOM Elements
         const authModal = document.getElementById('auth-modal');
         const loginBtn = document.getElementById('login-btn');
@@ -1454,6 +1479,9 @@
         const purchaseLink = document.getElementById('purchase-link');
         const videoModal = document.getElementById('video-modal');
         const watchButtons = document.querySelectorAll('.watch-btn');
+        const courseContent = document.getElementById('course-content');
+        const accessDenied = document.getElementById('access-denied');
+        const accessBtn = document.getElementById('access-btn');
         
         // Player variables
         let player;
@@ -1467,19 +1495,22 @@
         
         // Check authentication on page load
         document.addEventListener('DOMContentLoaded', function() {
-            if (!checkAuth()) {
-                // Show auth modal if not authenticated
-                setTimeout(() => {
-                    authModal.style.display = 'flex';
-                }, 1000);
-            } else {
-                // User is authenticated, update login button
+            if (checkAuth()) {
+                // User is authenticated, show course content
+                showCourseContent();
                 loginBtn.textContent = 'Logout';
                 loginBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     clearAuth();
                     window.location.reload();
                 });
+            } else {
+                // User is not authenticated, show access denied
+                showAccessDenied();
+                // Show auth modal if not authenticated
+                setTimeout(() => {
+                    authModal.style.display = 'flex';
+                }, 1000);
             }
             
             // Navbar scroll effect
@@ -1510,6 +1541,41 @@
             });
         });
         
+        // Check if user is already authenticated
+        function checkAuth() {
+            const authData = localStorage.getItem(STORAGE_KEY);
+            if (authData) {
+                const { registration, password } = JSON.parse(authData);
+                if (registration === AUTH_REGISTRATION && password === AUTH_PASSWORD) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        // Save authentication data
+        function saveAuth(registration, password) {
+            const authData = { registration, password };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(authData));
+        }
+        
+        // Clear authentication data
+        function clearAuth() {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+        
+        // Show course content when authenticated
+        function showCourseContent() {
+            courseContent.style.display = 'block';
+            accessDenied.style.display = 'none';
+        }
+        
+        // Show access denied when not authenticated
+        function showAccessDenied() {
+            courseContent.style.display = 'none';
+            accessDenied.style.display = 'block';
+        }
+        
         // Authentication Modal Events
         loginBtn.addEventListener('click', function(e) {
             if (!checkAuth()) {
@@ -1530,6 +1596,10 @@
             });
         });
         
+        accessBtn.addEventListener('click', function() {
+            authModal.style.display = 'flex';
+        });
+        
         // Authentication Form Submission
         authForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1542,6 +1612,7 @@
                 saveAuth(registration, password);
                 authModal.style.display = 'none';
                 loginBtn.textContent = 'Logout';
+                showCourseContent();
                 
                 // Add logout functionality
                 loginBtn.addEventListener('click', function(e) {
