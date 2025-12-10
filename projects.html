@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | AlaminEdge Premium</title>
+    <title>Calculators | AlaminEdge Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -34,6 +34,10 @@
             --radius-md: 12px;
             --radius-lg: 20px;
             --radius-xl: 30px;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --info: #2196F3;
         }
 
         * {
@@ -242,15 +246,15 @@
             padding: 2rem 0;
         }
 
-        /* Projects Hero */
-        .projects-hero {
+        /* Calculations Hero */
+        .calculations-hero {
             padding: 3rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .projects-hero::before {
+        .calculations-hero::before {
             content: '';
             position: absolute;
             top: 0;
@@ -278,7 +282,7 @@
             color: var(--primary-color);
         }
 
-        .projects-hero h1 {
+        .calculations-hero h1 {
             font-size: 3rem;
             margin-bottom: 1.5rem;
             background: var(--gradient-primary);
@@ -287,7 +291,7 @@
             line-height: 1.1;
         }
 
-        .projects-hero p {
+        .calculations-hero p {
             font-size: 1.25rem;
             color: var(--text-secondary);
             margin-bottom: 2.5rem;
@@ -296,34 +300,30 @@
             margin-right: auto;
         }
 
-        /* Quick Links */
-        .quick-links {
-            padding: 2rem 0;
-            background: var(--bg-secondary);
-        }
-
-        .quick-links-grid {
+        /* Calculators Grid */
+        .calculators-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
         }
 
-        .quick-link-card {
-            background: var(--bg-tertiary);
+        .calculator-card {
+            background: var(--bg-secondary);
             border-radius: var(--radius-lg);
             padding: 2rem;
-            text-align: center;
+            box-shadow: var(--shadow);
             transition: var(--transition);
             border: 1px solid var(--border-color);
         }
 
-        .quick-link-card:hover {
+        .calculator-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary-color);
         }
 
-        .quick-link-icon {
+        .calculator-icon {
             width: 70px;
             height: 70px;
             background: var(--gradient-primary);
@@ -331,21 +331,41 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
+            margin-bottom: 1.5rem;
             font-size: 1.5rem;
             color: #000;
         }
 
-        .quick-link-card h3 {
-            font-size: 1.3rem;
+        .calculator-card h3 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--text-color);
         }
 
-        .quick-link-card p {
+        .calculator-card p {
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .calculator-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-features li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
             font-size: 0.9rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .calculator-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
         }
 
         .btn {
@@ -359,6 +379,8 @@
             cursor: pointer;
             border: none;
             font-family: var(--font-primary);
+            width: 100%;
+            justify-content: center;
         }
 
         .btn-primary {
@@ -371,196 +393,177 @@
             box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-color);
+        /* Calculator Container */
+        .calculator-container {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
         }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--primary-color);
-        }
-
-        /* Projects Section */
-        .projects-section {
-            padding: 4rem 0;
-        }
-
-        .section-header {
+        .calculator-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
+        .calculator-header h2 {
+            font-size: 2rem;
             margin-bottom: 1rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .section-header p {
+        .calculator-header p {
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        .project-card {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow);
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            font-size: 1rem;
             transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.1);
+        }
+
+        .select-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .result-container {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .result-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .result-category {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .result-category.underweight {
+            background: rgba(33, 150, 243, 0.2);
+            color: var(--info);
+            border: 1px solid var(--info);
+        }
+
+        .result-category.normal {
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .result-category.overweight {
+            background: rgba(255, 152, 0, 0.2);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .result-category.obese {
+            background: rgba(244, 67, 54, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .grade-point {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            color: var(--primary-color);
+        }
+
+        .grade-letter {
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: var(--gradient-primary);
+            color: #000;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .age-result {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .age-box {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
             border: 1px solid var(--border-color);
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+        .age-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
         }
 
-        .project-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-category {
-            display: inline-block;
-            background: var(--gradient-primary);
-            color: #000;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .project-content h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-color);
-        }
-
-        .project-content p {
+        .age-label {
             color: var(--text-secondary);
             font-size: 0.9rem;
-            margin-bottom: 1.5rem;
         }
 
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-tech {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tag {
-            background: var(--bg-tertiary);
-            color: var(--text-secondary);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-        }
-
-        .project-actions {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        /* Stats Section */
-        .stats-section {
-            padding: 4rem 0;
-            background: var(--bg-secondary);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 4rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 70% 30%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 30% 70%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
-        }
-
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .cta-content p {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-        }
-
-        /* Footer */
+        /* Footer Styles matching your original design */
         footer {
             background: var(--bg-secondary);
             padding: 60px 0 30px;
@@ -568,23 +571,86 @@
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
             gap: 3rem;
             margin-bottom: 3rem;
         }
 
-        .footer-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .footer-brand {
+            flex: 1;
+            min-width: 300px;
         }
 
-        .footer-section p {
+        .footer-brand .logo-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        .footer-links-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            flex: 2;
+        }
+
+        .footer-links-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-links-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-primary);
         }
 
         .footer-links {
@@ -598,34 +664,12 @@
         .footer-links a {
             color: var(--text-secondary);
             transition: var(--transition);
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
             color: var(--primary-color);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background: var(--primary-color);
-            color: #000;
-            transform: translateY(-3px);
+            padding-left: 5px;
         }
 
         .footer-bottom {
@@ -654,11 +698,11 @@
 
         /* Responsive Design */
         @media (max-width: 1024px) {
-            .projects-hero h1 {
+            .calculations-hero h1 {
                 font-size: 2.5rem;
             }
             
-            .projects-grid {
+            .calculators-grid {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
         }
@@ -695,52 +739,67 @@
                 display: flex;
             }
 
-            .projects-hero h1 {
+            .calculations-hero h1 {
                 font-size: 2rem;
             }
 
-            .projects-hero p {
+            .calculations-hero p {
                 font-size: 1.125rem;
             }
 
-            .quick-links-grid {
+            .calculators-grid {
                 grid-template-columns: 1fr;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .calculator-container {
+                padding: 1.5rem;
             }
 
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .footer-main {
+                flex-direction: column;
+                gap: 2rem;
             }
-
+            
+            .footer-links-container {
+                gap: 2rem;
+            }
+            
             .footer-bottom {
                 flex-direction: column;
                 gap: 1rem;
                 text-align: center;
             }
-
+            
             .footer-links-bottom {
                 justify-content: center;
+                flex-wrap: wrap;
             }
         }
 
         @media (max-width: 480px) {
-            .projects-hero h1 {
+            .calculations-hero h1 {
                 font-size: 1.75rem;
             }
             
-            .section-header h2 {
-                font-size: 1.75rem;
+            .calculator-header h2 {
+                font-size: 1.5rem;
             }
             
-            .project-content {
-                padding: 1.5rem;
+            .result-value {
+                font-size: 2.5rem;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
+            footer {
+                padding: 40px 0 20px;
+            }
+            
+            .footer-links-column {
+                min-width: 100%;
+            }
+            
+            .footer-links-bottom {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
@@ -757,7 +816,8 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="courses.html">Courses</a></li>
-                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="projects-calculations.html" class="active">Calculations</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="live.html">Live</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -774,306 +834,304 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Projects Hero -->
-            <section class="projects-hero">
+            <!-- Calculations Hero -->
+            <section class="calculations-hero">
                 <div class="hero-badge">
-                    <i class="fas fa-rocket"></i>
-                    <span>INNOVATIVE SOLUTIONS</span>
+                    <i class="fas fa-calculator"></i>
+                    <span>USEFUL TOOLS</span>
                 </div>
-                <h1>Our Projects & Solutions</h1>
-                <p>Explore our portfolio of innovative projects, from educational platforms to cutting-edge applications. Each project represents our commitment to excellence and technological advancement.</p>
+                <h1>Interactive Calculators</h1>
+                <p>Access our collection of powerful calculators for various purposes. From academic calculations to health metrics, we've got you covered with accurate and easy-to-use tools.</p>
             </section>
 
-            <!-- Quick Links -->
-            <section class="quick-links">
-                <div class="container">
-                    <div class="quick-links-grid">
-                        <div class="quick-link-card">
-                            <div class="quick-link-icon">
-                                <i class="fas fa-user-graduate"></i>
-                            </div>
-                            <h3>Admission Portal</h3>
-                            <p>Streamlined admission process with automated application tracking and management system.</p>
-                            <a href="admission.html" class="btn btn-primary">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>Explore Admission</span>
-                            </a>
-                        </div>
-                        <div class="quick-link-card">
-                            <div class="quick-link-icon">
-                                <i class="fas fa-file-alt"></i>
-                            </div>
-                            <h3>Exam System</h3>
-                            <p>Comprehensive online examination platform with secure proctoring and automated grading.</p>
-                            <a href="exam.html" class="btn btn-primary">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>View Exam System</span>
-                            </a>
-                        </div>
-                        <div class="quick-link-card">
-                            <div class="quick-link-icon">
-                                <i class="fas fa-newspaper"></i>
-                            </div>
-                            <h3>News Portal</h3>
-                            <p>Dynamic news aggregation and publishing platform with real-time updates and analytics.</p>
-                            <a href="news.html" class="btn btn-primary">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>Read News</span>
-                            </a>
-                        </div>
-                        <!-- CALCULATIONS CARD ADDED HERE -->
-                        <div class="quick-link-card">
-                            <div class="quick-link-icon">
-                                <i class="fas fa-calculator"></i>
-                            </div>
-                            <h3>Calculations</h3>
-                            <p>Interactive calculators and project estimation tools for planning and analysis.</p>
-                            <a href="projects-calculations.html" class="btn btn-primary">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>Calculate</span>
-                            </a>
-                        </div>
-                        <!-- ORIGINAL OTHER PROJECTS CARD -->
-                        <div class="quick-link-card">
-                            <div class="quick-link-icon">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <h3>Other Projects</h3>
-                            <p>Various innovative solutions including mobile apps, web platforms, and enterprise systems.</p>
-                            <a href="others.html" class="btn btn-primary">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>Browse All</span>
-                            </a>
-                        </div>
+            <!-- Calculators Grid -->
+            <section class="calculators-grid">
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-birthday-cake"></i>
                     </div>
+                    <h3>Age Calculator</h3>
+                    <p>Calculate exact age in years, months, and days. Perfect for finding precise age for official purposes or personal use.</p>
+                    <ul class="calculator-features">
+                        <li>Calculate exact age</li>
+                        <li>Years, months, days breakdown</li>
+                        <li>Next birthday countdown</li>
+                        <li>Leap year consideration</li>
+                    </ul>
+                    <a href="projects-calculations-age-calculator.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Open Age Calculator</span>
+                    </a>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>HSC GPA Calculator</h3>
+                    <p>Calculate your Higher Secondary Certificate GPA with our specialized science stream calculator.</p>
+                    <ul class="calculator-features">
+                        <li>Science stream calculation</li>
+                        <li>Grade point conversion</li>
+                        <li>Overall GPA calculation</li>
+                        <li>Grade letter display</li>
+                    </ul>
+                    <a href="projects-calculations-hsc-gpa-calculator-science.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Open GPA Calculator</span>
+                    </a>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-weight-scale"></i>
+                    </div>
+                    <h3>BMI Calculator</h3>
+                    <p>Calculate your Body Mass Index to understand your weight status and get health recommendations.</p>
+                    <ul class="calculator-features">
+                        <li>BMI calculation</li>
+                        <li>Weight category</li>
+                        <li>Health recommendations</li>
+                        <li>Ideal weight range</li>
+                    </ul>
+                    <a href="projects-calculations-bmi.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Open BMI Calculator</span>
+                    </a>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Currency Converter</h3>
+                    <p>Convert between different currencies with real-time exchange rates. Coming soon!</p>
+                    <ul class="calculator-features">
+                        <li>Multiple currencies</li>
+                        <li>Real-time rates</li>
+                        <li>Historical data</li>
+                        <li>Offline mode</li>
+                    </ul>
+                    <button class="btn btn-primary" disabled>
+                        <i class="fas fa-clock"></i>
+                        <span>Coming Soon</span>
+                    </button>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h3>Unit Converter</h3>
+                    <p>Convert between different units of measurement. Length, weight, temperature and more. Coming soon!</p>
+                    <ul class="calculator-features">
+                        <li>Multiple unit types</li>
+                        <li>Instant conversion</li>
+                        <li>Custom units</li>
+                        <li>Save favorites</li>
+                    </ul>
+                    <button class="btn btn-primary" disabled>
+                        <i class="fas fa-clock"></i>
+                        <span>Coming Soon</span>
+                    </button>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>More Calculators</h3>
+                    <p>We're constantly adding new calculators. Suggest what you need!</p>
+                    <ul class="calculator-features">
+                        <li>Loan Calculator</li>
+                        <li>Tax Calculator</li>
+                        <li>Calorie Calculator</li>
+                        <li>Project Estimator</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Suggest a Tool</span>
+                    </a>
                 </div>
             </section>
 
-            <!-- Featured Projects -->
-            <section class="projects-section">
-                <div class="section-header">
-                    <h2>Featured Projects</h2>
-                    <p>Showcasing our most innovative and impactful solutions</p>
+            <!-- Age Calculator (Main Page Demo) -->
+            <section id="age-calculator-demo" class="calculator-container">
+                <div class="calculator-header">
+                    <h2>Age Calculator</h2>
+                    <p>Calculate your exact age in years, months, and days</p>
                 </div>
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="E-Learning Platform" class="project-image">
-                        <div class="project-content">
-                            <span class="project-category">Education</span>
-                            <h3>AlaminEdge Learning Platform</h3>
-                            <p>A comprehensive e-learning platform with interactive courses, live sessions, and progress tracking for students worldwide.</p>
-                            <div class="project-meta">
-                                <span><i class="far fa-calendar"></i> Completed: Jan 2024</span>
-                                <span><i class="far fa-user"></i> Team: 5 Members</span>
+                
+                <form id="ageCalculatorForm">
+                    <div class="form-group">
+                        <label for="birthDate">Date of Birth:</label>
+                        <input type="date" id="birthDate" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="currentDate">Current Date (Optional):</label>
+                        <input type="date" id="currentDate" class="form-control">
+                        <small style="color: var(--text-muted); margin-top: 5px; display: block;">
+                            Leave empty to use today's date
+                        </small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-calculator"></i>
+                        Calculate Age
+                    </button>
+                </form>
+                
+                <div id="ageResult" class="result-container">
+                    <h3>Your Age Is:</h3>
+                    <div class="age-result">
+                        <div class="age-box">
+                            <div class="age-value" id="years">0</div>
+                            <div class="age-label">Years</div>
+                        </div>
+                        <div class="age-box">
+                            <div class="age-value" id="months">0</div>
+                            <div class="age-label">Months</div>
+                        </div>
+                        <div class="age-box">
+                            <div class="age-value" id="days">0</div>
+                            <div class="age-label">Days</div>
+                        </div>
+                    </div>
+                    <p id="nextBirthday" style="margin-top: 1rem; color: var(--text-secondary);"></p>
+                </div>
+            </section>
+
+            <!-- BMI Calculator (Main Page Demo) -->
+            <section id="bmi-calculator-demo" class="calculator-container">
+                <div class="calculator-header">
+                    <h2>BMI Calculator</h2>
+                    <p>Calculate your Body Mass Index to understand your weight status</p>
+                </div>
+                
+                <form id="bmiCalculatorForm">
+                    <div class="select-group">
+                        <div class="form-group">
+                            <label for="measurementSystem">Measurement System:</label>
+                            <select id="measurementSystem" class="form-control" required>
+                                <option value="metric">Metric (kg, cm)</option>
+                                <option value="imperial">Imperial (lbs, feet)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select id="gender" class="form-control" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="metricInputs">
+                        <div class="select-group">
+                            <div class="form-group">
+                                <label for="weightKg">Weight (kg):</label>
+                                <input type="number" id="weightKg" class="form-control" min="20" max="300" step="0.1" required>
                             </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">React</span>
-                                <span class="tech-tag">Node.js</span>
-                                <span class="tech-tag">MongoDB</span>
-                                <span class="tech-tag">AWS</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Live Demo</span>
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <i class="fab fa-github"></i>
-                                    <span>Code</span>
-                                </a>
+                            
+                            <div class="form-group">
+                                <label for="heightCm">Height (cm):</label>
+                                <input type="number" id="heightCm" class="form-control" min="100" max="250" required>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="AI Assistant" class="project-image">
-                        <div class="project-content">
-                            <span class="project-category">AI & ML</span>
-                            <h3>Smart Learning Assistant</h3>
-                            <p>An AI-powered virtual assistant that provides personalized learning recommendations and answers student queries in real-time.</p>
-                            <div class="project-meta">
-                                <span><i class="far fa-calendar"></i> Completed: Dec 2023</span>
-                                <span><i class="far fa-user"></i> Team: 3 Members</span>
+                    
+                    <div id="imperialInputs" style="display: none;">
+                        <div class="select-group">
+                            <div class="form-group">
+                                <label for="weightLbs">Weight (lbs):</label>
+                                <input type="number" id="weightLbs" class="form-control" min="44" max="660" step="0.1">
                             </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">TensorFlow</span>
-                                <span class="tech-tag">React</span>
-                                <span class="tech-tag">Firebase</span>
+                            
+                            <div class="form-group">
+                                <label for="heightFeet">Height (feet):</label>
+                                <input type="number" id="heightFeet" class="form-control" min="3" max="8" placeholder="Feet">
                             </div>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Live Demo</span>
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <i class="fab fa-github"></i>
-                                    <span>Code</span>
-                                </a>
+                            
+                            <div class="form-group">
+                                <label for="heightInches">Height (inches):</label>
+                                <input type="number" id="heightInches" class="form-control" min="0" max="11" placeholder="Inches">
                             </div>
                         </div>
                     </div>
-
-                    <!-- Project 3 -->
-                    <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Analytics Dashboard" class="project-image">
-                        <div class="project-content">
-                            <span class="project-category">Data Analytics</span>
-                            <h3>Student Performance Dashboard</h3>
-                            <p>A comprehensive analytics dashboard that tracks student performance, engagement metrics, and learning patterns for educators.</p>
-                            <div class="project-meta">
-                                <span><i class="far fa-calendar"></i> Completed: Nov 2023</span>
-                                <span><i class="far fa-user"></i> Team: 4 Members</span>
-                            </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">Vue.js</span>
-                                <span class="tech-tag">D3.js</span>
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">PostgreSQL</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Live Demo</span>
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <i class="fab fa-github"></i>
-                                    <span>Code</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4 -->
-                    <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Mobile App" class="project-image">
-                        <div class="project-content">
-                            <span class="project-category">Mobile Development</span>
-                            <h3>AlaminEdge Mobile App</h3>
-                            <p>A feature-rich mobile application that allows students to access courses, submit assignments, and join live sessions on the go.</p>
-                            <div class="project-meta">
-                                <span><i class="far fa-calendar"></i> Completed: Oct 2023</span>
-                                <span><i class="far fa-user"></i> Team: 6 Members</span>
-                            </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">React Native</span>
-                                <span class="tech-tag">Node.js</span>
-                                <span class="tech-tag">MongoDB</span>
-                                <span class="tech-tag">AWS</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Live Demo</span>
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <i class="fab fa-github"></i>
-                                    <span>Code</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 5 -->
-                    <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="CMS" class="project-image">
-                        <div class="project-content">
-                            <span class="project-category">Content Management</span>
-                            <h3>Course Management System</h3>
-                            <p>A robust CMS that enables instructors to create, manage, and deliver interactive course content with advanced analytics.</p>
-                            <div class="project-meta">
-                                <span><i class="far fa-calendar"></i> Completed: Sep 2023</span>
-                                <span><i class="far fa-user"></i> Team: 4 Members</span>
-                            </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">Laravel</span>
-                                <span class="tech-tag">Vue.js</span>
-                                <span class="tech-tag">MySQL</span>
-                                <span class="tech-tag">Redis</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Live Demo</span>
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <i class="fab fa-github"></i>
-                                    <span>Code</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 6 -->
-                    <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Blockchain" class="project-image">
-                        <div class="project-content">
-                            <span class="project-category">Blockchain</span>
-                            <h3>Certificate Verification System</h3>
-                            <p>A blockchain-based solution for issuing and verifying digital certificates, ensuring authenticity and preventing fraud.</p>
-                            <div class="project-meta">
-                                <span><i class="far fa-calendar"></i> Completed: Aug 2023</span>
-                                <span><i class="far fa-user"></i> Team: 3 Members</span>
-                            </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">Ethereum</span>
-                                <span class="tech-tag">Solidity</span>
-                                <span class="tech-tag">React</span>
-                                <span class="tech-tag">IPFS</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Live Demo</span>
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <i class="fab fa-github"></i>
-                                    <span>Code</span>
-                                </a>
-                            </div>
-                        </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-weight-scale"></i>
+                        Calculate BMI
+                    </button>
+                </form>
+                
+                <div id="bmiResult" class="result-container">
+                    <h3>Your BMI Result:</h3>
+                    <div class="result-value" id="bmiValue">0.0</div>
+                    <div class="result-category" id="bmiCategory">Normal</div>
+                    <p id="bmiMessage" style="margin-top: 1rem; color: var(--text-secondary);"></p>
+                    <div id="idealWeight" style="margin-top: 1rem; padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-sm);">
+                        <strong>Healthy Weight Range:</strong>
+                        <p id="weightRange" style="margin-top: 0.5rem;"></p>
                     </div>
                 </div>
             </section>
 
-            <!-- Stats Section -->
-            <section class="stats-section">
-                <div class="container">
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Projects Completed</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">25+</div>
-                            <div class="stat-label">Happy Clients</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">15+</div>
-                            <div class="stat-label">Team Members</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">98%</div>
-                            <div class="stat-label">Client Satisfaction</div>
-                        </div>
+            <!-- How to Use Section -->
+            <section class="calculator-container">
+                <div class="calculator-header">
+                    <h2>How to Use Our Calculators</h2>
+                    <p>Get the most out of our calculation tools</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Age Calculator</h3>
+                        <ol style="padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li>Enter your date of birth</li>
+                            <li>Optionally enter a specific date</li>
+                            <li>Click "Calculate Age"</li>
+                            <li>View your exact age breakdown</li>
+                        </ol>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">GPA Calculator</h3>
+                        <ol style="padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li>Select your subjects</li>
+                            <li>Enter your marks or grades</li>
+                            <li>Add subject credits if needed</li>
+                            <li>View your calculated GPA</li>
+                        </ol>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">BMI Calculator</h3>
+                        <ol style="padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li>Choose measurement system</li>
+                            <li>Enter your weight and height</li>
+                            <li>Select your gender</li>
+                            <li>Get BMI and health category</li>
+                        </ol>
                     </div>
                 </div>
             </section>
 
             <!-- CTA Section -->
-            <section class="cta-section">
-                <div class="container">
-                    <div class="cta-content">
-                        <h2>Have a Project in Mind?</h2>
-                        <p>Let's collaborate to bring your ideas to life. Our team of experts is ready to create innovative solutions tailored to your needs.</p>
-                        <a href="contact.html" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>Start a Project</span>
-                        </a>
-                    </div>
+            <section class="calculator-container" style="text-align: center; background: var(--gradient-dark);">
+                <div class="calculator-header">
+                    <h2>Need More Calculators?</h2>
+                    <p>We're constantly expanding our collection of useful tools</p>
                 </div>
+                <p style="margin-bottom: 2rem; color: var(--text-secondary);">
+                    Have a specific calculator in mind? Let us know and we'll add it to our development roadmap.
+                </p>
+                <a href="contact.html" class="btn btn-primary">
+                    <i class="fas fa-lightbulb"></i>
+                    Suggest a Calculator
+                </a>
             </section>
         </div>
     </main>
@@ -1082,54 +1140,61 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <div class="logo-container">
-                        <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
-                        <h3>AlaminEdge</h3>
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="logo-container">
+                            <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
+                            <span class="brand-name">AlaminEdge</span>
+                        </div>
+                        <p>Where Learning Meets Innovation. Empowering the next generation of tech professionals through premium education.</p>
+                        <div class="social-links">
+                            <a href="https://www.youtube.com/@PrimeviaLearn" target="_blank" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://t.me/adamzampas" target="_blank" class="social-link">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
                     </div>
-                    <p>Where Learning Meets Innovation. Empowering the next generation of tech professionals through premium education.</p>
-                    <div class="social-links">
-                        <a href="https://www.youtube.com/@PrimeviaLearn" target="_blank"><i class="fab fa-youtube"></i></a>
-                        <a href="https://t.me/adamzampas" target="_blank"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    
+                    <div class="footer-links-container">
+                        <div class="footer-links-column">
+                            <h4>Quick Links</h4>
+                            <ul class="footer-links">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="courses.html">Courses</a></li>
+                                <li><a href="projects.html">Projects</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-links-column">
+                            <h4>Resources</h4>
+                            <ul class="footer-links">
+                                <li><a href="live.html">Live Sessions</a></li>
+                                <li><a href="projects-calculations.html">Calculators</a></li>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">Community</a></li>
+                                <li><a href="#">FAQ</a></li>
+                            </ul>
+                        </div>
+                
+                <div class="footer-bottom">
+                    <div class="copyright">
+                        <p>© 2025 AlaminEdge | Powered by Md. Al Amin</p>
                     </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="courses.html">Courses</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="live.html">Live Sessions</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Career Support</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <p><i class="fas fa-envelope"></i> info@alaminedge.com</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Tech Innovation Hub, Digital City</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="copyright">
-                    <p>© 2025 AlaminEdge | Powered by Md. Al Amin</p>
-                </div>
-                <div class="footer-links-bottom">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
+                    <div class="footer-links-bottom">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1163,46 +1228,161 @@
             });
         });
 
-        // Animate stats counter
-        function animateStats() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            const duration = 2000; // 2 seconds
-            const frameDuration = 1000 / 60; // 60fps
-            const totalFrames = Math.round(duration / frameDuration);
+        // Age Calculator Functionality
+        document.getElementById('ageCalculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            statNumbers.forEach(stat => {
-                const target = parseInt(stat.textContent);
-                let frame = 0;
-                
-                const counter = setInterval(() => {
-                    frame++;
-                    const progress = frame / totalFrames;
-                    const current = Math.round(target * progress);
-                    
-                    if (frame === totalFrames) {
-                        stat.textContent = target.toLocaleString();
-                        clearInterval(counter);
-                    } else {
-                        stat.textContent = current.toLocaleString();
-                    }
-                }, frameDuration);
-            });
-        }
+            const birthDate = new Date(document.getElementById('birthDate').value);
+            const currentDateInput = document.getElementById('currentDate').value;
+            const currentDate = currentDateInput ? new Date(currentDateInput) : new Date();
+            
+            if (birthDate >= currentDate) {
+                alert('Birth date must be before current date');
+                return;
+            }
+            
+            let years = currentDate.getFullYear() - birthDate.getFullYear();
+            let months = currentDate.getMonth() - birthDate.getMonth();
+            let days = currentDate.getDate() - birthDate.getDate();
+            
+            if (days < 0) {
+                months--;
+                // Get days in previous month
+                const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            // Update result display
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+            
+            // Calculate next birthday
+            const nextBirthday = new Date(currentDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+            if (nextBirthday < currentDate) {
+                nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
+            }
+            
+            const daysUntilBirthday = Math.ceil((nextBirthday - currentDate) / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('nextBirthday').textContent = 
+                `Next birthday in ${daysUntilBirthday} day${daysUntilBirthday !== 1 ? 's' : ''} (${nextBirthday.toDateString()})`;
+            
+            // Show result
+            document.getElementById('ageResult').classList.add('active');
+            
+            // Scroll to result
+            document.getElementById('ageResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
 
-        // Trigger animation when stats section is in view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+        // BMI Calculator Functionality
+        const measurementSystem = document.getElementById('measurementSystem');
+        const metricInputs = document.getElementById('metricInputs');
+        const imperialInputs = document.getElementById('imperialInputs');
 
-        observer.observe(document.querySelector('.stats-section'));
+        measurementSystem.addEventListener('change', function() {
+            if (this.value === 'metric') {
+                metricInputs.style.display = 'block';
+                imperialInputs.style.display = 'none';
+                document.getElementById('weightKg').required = true;
+                document.getElementById('heightCm').required = true;
+                document.getElementById('weightLbs').required = false;
+                document.getElementById('heightFeet').required = false;
+                document.getElementById('heightInches').required = false;
+            } else {
+                metricInputs.style.display = 'none';
+                imperialInputs.style.display = 'block';
+                document.getElementById('weightKg').required = false;
+                document.getElementById('heightCm').required = false;
+                document.getElementById('weightLbs').required = true;
+                document.getElementById('heightFeet').required = true;
+                document.getElementById('heightInches').required = true;
+            }
+        });
 
-        // Add animation to project cards on scroll
-        const projectCards = document.querySelectorAll('.project-card, .quick-link-card');
+        document.getElementById('bmiCalculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let weight, height, bmi;
+            
+            if (measurementSystem.value === 'metric') {
+                weight = parseFloat(document.getElementById('weightKg').value);
+                height = parseFloat(document.getElementById('heightCm').value) / 100; // Convert cm to m
+                bmi = weight / (height * height);
+            } else {
+                weight = parseFloat(document.getElementById('weightLbs').value);
+                const feet = parseFloat(document.getElementById('heightFeet').value);
+                const inches = parseFloat(document.getElementById('heightInches').value);
+                height = feet * 12 + inches; // Total height in inches
+                bmi = (weight / (height * height)) * 703;
+            }
+            
+            // Round to 1 decimal place
+            bmi = Math.round(bmi * 10) / 10;
+            
+            // Determine category
+            let category, message, categoryClass, idealWeight;
+            
+            if (bmi < 18.5) {
+                category = "Underweight";
+                message = "You may need to gain some weight. Consider consulting a nutritionist.";
+                categoryClass = "underweight";
+            } else if (bmi < 25) {
+                category = "Normal";
+                message = "Congratulations! You have a healthy weight. Maintain your current lifestyle.";
+                categoryClass = "normal";
+            } else if (bmi < 30) {
+                category = "Overweight";
+                message = "Consider some lifestyle changes to reach a healthier weight range.";
+                categoryClass = "overweight";
+            } else {
+                category = "Obese";
+                message = "It's recommended to consult with a healthcare professional for guidance.";
+                categoryClass = "obese";
+            }
+            
+            // Calculate ideal weight range
+            if (measurementSystem.value === 'metric') {
+                const minHeight = height - 0.05; // 5cm tolerance
+                const maxHeight = height + 0.05;
+                const minWeight = 18.5 * (minHeight * minHeight);
+                const maxWeight = 25 * (maxHeight * maxHeight);
+                idealWeight = `${Math.round(minWeight)}kg - ${Math.round(maxWeight)}kg`;
+            } else {
+                const minWeight = 18.5 * (height * height) / 703;
+                const maxWeight = 25 * (height * height) / 703;
+                idealWeight = `${Math.round(minWeight)}lbs - ${Math.round(maxWeight)}lbs`;
+            }
+            
+            // Update result display
+            document.getElementById('bmiValue').textContent = bmi;
+            document.getElementById('bmiCategory').textContent = category;
+            document.getElementById('bmiCategory').className = `result-category ${categoryClass}`;
+            document.getElementById('bmiMessage').textContent = message;
+            document.getElementById('weightRange').textContent = idealWeight;
+            
+            // Show result
+            document.getElementById('bmiResult').classList.add('active');
+            
+            // Scroll to result
+            document.getElementById('bmiResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        // Set today's date as max for birth date
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('birthDate').max = today;
+        document.getElementById('currentDate').max = today;
+
+        // Pre-fill current date field with today's date
+        document.getElementById('currentDate').value = today;
+
+        // Add animation to calculator cards on scroll
+        const calculatorCards = document.querySelectorAll('.calculator-card, .calculator-container');
         const cardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1212,7 +1392,7 @@
             });
         }, { threshold: 0.1 });
 
-        projectCards.forEach(card => {
+        calculatorCards.forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
