@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculators | AlaminEdge Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00bfff;
+            --primary-dark: #0099cc;
+            --primary-light: #33ccff;
+            --secondary-color: #8a2be2;
+            --accent-color: #ff6b6b;
+            --bg-color: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
+            --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --info: #2196F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: var(--shadow);
+            padding: 10px 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+        }
+
+        .logo:hover {
+            transform: rotate(15deg);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        }
+
+        .brand-name {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            position: relative;
+            font-weight: 500;
+            padding: 8px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:not(.btn):hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:not(.btn):hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links .btn {
+            background: var(--gradient-primary);
+            color: #000;
+            padding: 10px 25px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition-slow);
+        }
+
+        .nav-links .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
+        }
+
+        .nav-links .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        /* Calculations Hero */
+        .calculations-hero {
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculations-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .calculations-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .calculations-hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Calculators Grid */
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+
+        .calculator-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .calculator-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .calculator-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .calculator-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .calculator-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-features li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .calculator-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-primary);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+        }
+
+        /* Calculator Container */
+        .calculator-container {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-header h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .calculator-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.1);
+        }
+
+        .select-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .result-container {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .result-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .result-category {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .result-category.underweight {
+            background: rgba(33, 150, 243, 0.2);
+            color: var(--info);
+            border: 1px solid var(--info);
+        }
+
+        .result-category.normal {
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .result-category.overweight {
+            background: rgba(255, 152, 0, 0.2);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .result-category.obese {
+            background: rgba(244, 67, 54, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .grade-point {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            color: var(--primary-color);
+        }
+
+        .grade-letter {
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: var(--gradient-primary);
+            color: #000;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .age-result {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .age-box {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .age-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+
+        .age-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .calculations-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .calculators-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .calculations-hero h1 {
+                font-size: 2rem;
+            }
+
+            .calculations-hero p {
+                font-size: 1.125rem;
+            }
+
+            .calculators-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator-container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .calculations-hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .calculator-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .result-value {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
+                <span class="brand-name">AlaminEdge</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="projects-calculations.html" class="active">Calculations</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="live.html">Live</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="registration.html" class="btn">Register</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Calculations Hero -->
+            <section class="calculations-hero">
+                <div class="hero-badge">
+                    <i class="fas fa-calculator"></i>
+                    <span>USEFUL TOOLS</span>
+                </div>
+                <h1>Interactive Calculators</h1>
+                <p>Access our collection of powerful calculators for various purposes. From academic calculations to health metrics, we've got you covered with accurate and easy-to-use tools.</p>
+            </section>
+
+            <!-- Calculators Grid -->
+            <section class="calculators-grid">
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h3>Age Calculator</h3>
+                    <p>Calculate exact age in years, months, and days. Perfect for finding precise age for official purposes or personal use.</p>
+                    <ul class="calculator-features">
+                        <li>Calculate exact age</li>
+                        <li>Years, months, days breakdown</li>
+                        <li>Next birthday countdown</li>
+                        <li>Leap year consideration</li>
+                    </ul>
+                    <a href="projects-calculations-age-calculator.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Open Age Calculator</span>
+                    </a>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>HSC GPA Calculator</h3>
+                    <p>Calculate your Higher Secondary Certificate GPA with our specialized science stream calculator.</p>
+                    <ul class="calculator-features">
+                        <li>Science stream calculation</li>
+                        <li>Grade point conversion</li>
+                        <li>Overall GPA calculation</li>
+                        <li>Grade letter display</li>
+                    </ul>
+                    <a href="projects-calculations-hsc-gpa-calculator-science.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Open GPA Calculator</span>
+                    </a>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-weight-scale"></i>
+                    </div>
+                    <h3>BMI Calculator</h3>
+                    <p>Calculate your Body Mass Index to understand your weight status and get health recommendations.</p>
+                    <ul class="calculator-features">
+                        <li>BMI calculation</li>
+                        <li>Weight category</li>
+                        <li>Health recommendations</li>
+                        <li>Ideal weight range</li>
+                    </ul>
+                    <a href="projects-calculations-bmi.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Open BMI Calculator</span>
+                    </a>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Currency Converter</h3>
+                    <p>Convert between different currencies with real-time exchange rates. Coming soon!</p>
+                    <ul class="calculator-features">
+                        <li>Multiple currencies</li>
+                        <li>Real-time rates</li>
+                        <li>Historical data</li>
+                        <li>Offline mode</li>
+                    </ul>
+                    <button class="btn btn-primary" disabled>
+                        <i class="fas fa-clock"></i>
+                        <span>Coming Soon</span>
+                    </button>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h3>Unit Converter</h3>
+                    <p>Convert between different units of measurement. Length, weight, temperature and more. Coming soon!</p>
+                    <ul class="calculator-features">
+                        <li>Multiple unit types</li>
+                        <li>Instant conversion</li>
+                        <li>Custom units</li>
+                        <li>Save favorites</li>
+                    </ul>
+                    <button class="btn btn-primary" disabled>
+                        <i class="fas fa-clock"></i>
+                        <span>Coming Soon</span>
+                    </button>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>More Calculators</h3>
+                    <p>We're constantly adding new calculators. Suggest what you need!</p>
+                    <ul class="calculator-features">
+                        <li>Loan Calculator</li>
+                        <li>Tax Calculator</li>
+                        <li>Calorie Calculator</li>
+                        <li>Project Estimator</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Suggest a Tool</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Age Calculator (Main Page Demo) -->
+            <section id="age-calculator-demo" class="calculator-container">
+                <div class="calculator-header">
+                    <h2>Age Calculator</h2>
+                    <p>Calculate your exact age in years, months, and days</p>
+                </div>
+                
+                <form id="ageCalculatorForm">
+                    <div class="form-group">
+                        <label for="birthDate">Date of Birth:</label>
+                        <input type="date" id="birthDate" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="currentDate">Current Date (Optional):</label>
+                        <input type="date" id="currentDate" class="form-control">
+                        <small style="color: var(--text-muted); margin-top: 5px; display: block;">
+                            Leave empty to use today's date
+                        </small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-calculator"></i>
+                        Calculate Age
+                    </button>
+                </form>
+                
+                <div id="ageResult" class="result-container">
+                    <h3>Your Age Is:</h3>
+                    <div class="age-result">
+                        <div class="age-box">
+                            <div class="age-value" id="years">0</div>
+                            <div class="age-label">Years</div>
+                        </div>
+                        <div class="age-box">
+                            <div class="age-value" id="months">0</div>
+                            <div class="age-label">Months</div>
+                        </div>
+                        <div class="age-box">
+                            <div class="age-value" id="days">0</div>
+                            <div class="age-label">Days</div>
+                        </div>
+                    </div>
+                    <p id="nextBirthday" style="margin-top: 1rem; color: var(--text-secondary);"></p>
+                </div>
+            </section>
+
+            <!-- BMI Calculator (Main Page Demo) -->
+            <section id="bmi-calculator-demo" class="calculator-container">
+                <div class="calculator-header">
+                    <h2>BMI Calculator</h2>
+                    <p>Calculate your Body Mass Index to understand your weight status</p>
+                </div>
+                
+                <form id="bmiCalculatorForm">
+                    <div class="select-group">
+                        <div class="form-group">
+                            <label for="measurementSystem">Measurement System:</label>
+                            <select id="measurementSystem" class="form-control" required>
+                                <option value="metric">Metric (kg, cm)</option>
+                                <option value="imperial">Imperial (lbs, feet)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select id="gender" class="form-control" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="metricInputs">
+                        <div class="select-group">
+                            <div class="form-group">
+                                <label for="weightKg">Weight (kg):</label>
+                                <input type="number" id="weightKg" class="form-control" min="20" max="300" step="0.1" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="heightCm">Height (cm):</label>
+                                <input type="number" id="heightCm" class="form-control" min="100" max="250" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="imperialInputs" style="display: none;">
+                        <div class="select-group">
+                            <div class="form-group">
+                                <label for="weightLbs">Weight (lbs):</label>
+                                <input type="number" id="weightLbs" class="form-control" min="44" max="660" step="0.1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="heightFeet">Height (feet):</label>
+                                <input type="number" id="heightFeet" class="form-control" min="3" max="8" placeholder="Feet">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="heightInches">Height (inches):</label>
+                                <input type="number" id="heightInches" class="form-control" min="0" max="11" placeholder="Inches">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-weight-scale"></i>
+                        Calculate BMI
+                    </button>
+                </form>
+                
+                <div id="bmiResult" class="result-container">
+                    <h3>Your BMI Result:</h3>
+                    <div class="result-value" id="bmiValue">0.0</div>
+                    <div class="result-category" id="bmiCategory">Normal</div>
+                    <p id="bmiMessage" style="margin-top: 1rem; color: var(--text-secondary);"></p>
+                    <div id="idealWeight" style="margin-top: 1rem; padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-sm);">
+                        <strong>Healthy Weight Range:</strong>
+                        <p id="weightRange" style="margin-top: 0.5rem;"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How to Use Section -->
+            <section class="calculator-container">
+                <div class="calculator-header">
+                    <h2>How to Use Our Calculators</h2>
+                    <p>Get the most out of our calculation tools</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Age Calculator</h3>
+                        <ol style="padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li>Enter your date of birth</li>
+                            <li>Optionally enter a specific date</li>
+                            <li>Click "Calculate Age"</li>
+                            <li>View your exact age breakdown</li>
+                        </ol>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">GPA Calculator</h3>
+                        <ol style="padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li>Select your subjects</li>
+                            <li>Enter your marks or grades</li>
+                            <li>Add subject credits if needed</li>
+                            <li>View your calculated GPA</li>
+                        </ol>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">BMI Calculator</h3>
+                        <ol style="padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li>Choose measurement system</li>
+                            <li>Enter your weight and height</li>
+                            <li>Select your gender</li>
+                            <li>Get BMI and health category</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="calculator-container" style="text-align: center; background: var(--gradient-dark);">
+                <div class="calculator-header">
+                    <h2>Need More Calculators?</h2>
+                    <p>We're constantly expanding our collection of useful tools</p>
+                </div>
+                <p style="margin-bottom: 2rem; color: var(--text-secondary);">
+                    Have a specific calculator in mind? Let us know and we'll add it to our development roadmap.
+                </p>
+                <a href="contact.html" class="btn btn-primary">
+                    <i class="fas fa-lightbulb"></i>
+                    Suggest a Calculator
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo-container">
+                        <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
+                        <h3>AlaminEdge</h3>
+                    </div>
+                    <p>Where Learning Meets Innovation. Empowering the next generation of tech professionals through premium education.</p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@PrimeviaLearn" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://t.me/adamzampas" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Calculators</h4>
+                    <ul class="footer-links">
+                        <li><a href="projects-calculations-age-calculator.html">Age Calculator</a></li>
+                        <li><a href="projects-calculations-hsc-gpa-calculator-science.html">HSC GPA Calculator</a></li>
+                        <li><a href="projects-calculations-bmi.html">BMI Calculator</a></li>
+                        <li><a href="projects-calculations.html">All Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@alaminedge.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Tech Innovation Hub, Digital City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>© 2025 AlaminEdge | Powered by Md. Al Amin</p>
+                </div>
+                <div class="footer-links-bottom">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Age Calculator Functionality
+        document.getElementById('ageCalculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const birthDate = new Date(document.getElementById('birthDate').value);
+            const currentDateInput = document.getElementById('currentDate').value;
+            const currentDate = currentDateInput ? new Date(currentDateInput) : new Date();
+            
+            if (birthDate >= currentDate) {
+                alert('Birth date must be before current date');
+                return;
+            }
+            
+            let years = currentDate.getFullYear() - birthDate.getFullYear();
+            let months = currentDate.getMonth() - birthDate.getMonth();
+            let days = currentDate.getDate() - birthDate.getDate();
+            
+            if (days < 0) {
+                months--;
+                // Get days in previous month
+                const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            // Update result display
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+            
+            // Calculate next birthday
+            const nextBirthday = new Date(currentDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+            if (nextBirthday < currentDate) {
+                nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
+            }
+            
+            const daysUntilBirthday = Math.ceil((nextBirthday - currentDate) / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('nextBirthday').textContent = 
+                `Next birthday in ${daysUntilBirthday} day${daysUntilBirthday !== 1 ? 's' : ''} (${nextBirthday.toDateString()})`;
+            
+            // Show result
+            document.getElementById('ageResult').classList.add('active');
+            
+            // Scroll to result
+            document.getElementById('ageResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        // BMI Calculator Functionality
+        const measurementSystem = document.getElementById('measurementSystem');
+        const metricInputs = document.getElementById('metricInputs');
+        const imperialInputs = document.getElementById('imperialInputs');
+
+        measurementSystem.addEventListener('change', function() {
+            if (this.value === 'metric') {
+                metricInputs.style.display = 'block';
+                imperialInputs.style.display = 'none';
+                document.getElementById('weightKg').required = true;
+                document.getElementById('heightCm').required = true;
+                document.getElementById('weightLbs').required = false;
+                document.getElementById('heightFeet').required = false;
+                document.getElementById('heightInches').required = false;
+            } else {
+                metricInputs.style.display = 'none';
+                imperialInputs.style.display = 'block';
+                document.getElementById('weightKg').required = false;
+                document.getElementById('heightCm').required = false;
+                document.getElementById('weightLbs').required = true;
+                document.getElementById('heightFeet').required = true;
+                document.getElementById('heightInches').required = true;
+            }
+        });
+
+        document.getElementById('bmiCalculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let weight, height, bmi;
+            
+            if (measurementSystem.value === 'metric') {
+                weight = parseFloat(document.getElementById('weightKg').value);
+                height = parseFloat(document.getElementById('heightCm').value) / 100; // Convert cm to m
+                bmi = weight / (height * height);
+            } else {
+                weight = parseFloat(document.getElementById('weightLbs').value);
+                const feet = parseFloat(document.getElementById('heightFeet').value);
+                const inches = parseFloat(document.getElementById('heightInches').value);
+                height = feet * 12 + inches; // Total height in inches
+                bmi = (weight / (height * height)) * 703;
+            }
+            
+            // Round to 1 decimal place
+            bmi = Math.round(bmi * 10) / 10;
+            
+            // Determine category
+            let category, message, categoryClass, idealWeight;
+            
+            if (bmi < 18.5) {
+                category = "Underweight";
+                message = "You may need to gain some weight. Consider consulting a nutritionist.";
+                categoryClass = "underweight";
+            } else if (bmi < 25) {
+                category = "Normal";
+                message = "Congratulations! You have a healthy weight. Maintain your current lifestyle.";
+                categoryClass = "normal";
+            } else if (bmi < 30) {
+                category = "Overweight";
+                message = "Consider some lifestyle changes to reach a healthier weight range.";
+                categoryClass = "overweight";
+            } else {
+                category = "Obese";
+                message = "It's recommended to consult with a healthcare professional for guidance.";
+                categoryClass = "obese";
+            }
+            
+            // Calculate ideal weight range
+            if (measurementSystem.value === 'metric') {
+                const minHeight = height - 0.05; // 5cm tolerance
+                const maxHeight = height + 0.05;
+                const minWeight = 18.5 * (minHeight * minHeight);
+                const maxWeight = 25 * (maxHeight * maxHeight);
+                idealWeight = `${Math.round(minWeight)}kg - ${Math.round(maxWeight)}kg`;
+            } else {
+                const minWeight = 18.5 * (height * height) / 703;
+                const maxWeight = 25 * (height * height) / 703;
+                idealWeight = `${Math.round(minWeight)}lbs - ${Math.round(maxWeight)}lbs`;
+            }
+            
+            // Update result display
+            document.getElementById('bmiValue').textContent = bmi;
+            document.getElementById('bmiCategory').textContent = category;
+            document.getElementById('bmiCategory').className = `result-category ${categoryClass}`;
+            document.getElementById('bmiMessage').textContent = message;
+            document.getElementById('weightRange').textContent = idealWeight;
+            
+            // Show result
+            document.getElementById('bmiResult').classList.add('active');
+            
+            // Scroll to result
+            document.getElementById('bmiResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        // Set today's date as max for birth date
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('birthDate').max = today;
+        document.getElementById('currentDate').max = today;
+
+        // Pre-fill current date field with today's date
+        document.getElementById('currentDate').value = today;
+
+        // Add animation to calculator cards on scroll
+        const calculatorCards = document.querySelectorAll('.calculator-card, .calculator-container');
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        calculatorCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            cardObserver.observe(card);
+        });
+    </script>
+</body>
+</html>
