@@ -1,1030 +1,753 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AlaminEdge | Where Learning Meets Innovation</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-color: #00bfff;
-      --primary-dark: #0099cc;
-      --primary-light: #33ccff;
-      --secondary-color: #8a2be2;
-      --accent-color: #ff6b6b;
-      --bg-color: #0a0a0a;
-      --bg-secondary: #111111;
-      --bg-tertiary: #1a1a1a;
-      --text-color: #ffffff;
-      --text-secondary: #b0b0b0;
-      --text-muted: #888888;
-      --border-color: rgba(255, 255, 255, 0.1);
-      --border-light: rgba(255, 255, 255, 0.05);
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
-      --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
-      --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
-      --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-      --font-primary: 'Poppins', sans-serif;
-      --font-secondary: 'Montserrat', sans-serif;
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 20px;
-      --radius-xl: 30px;
-    }
-
-    /* Global Reset & Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: var(--font-primary);
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-secondary);
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    p {
-      margin-bottom: 1rem;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-      transition: var(--transition);
-    }
-
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Preloader */
-    #preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-
-    #preloader.fade-out {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .preload-logo {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      animation: pulse 2s ease-in-out infinite, rotate 3s linear infinite;
-      border: 2px solid var(--primary-color);
-      box-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
-    }
-
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      background: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(20px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-      border-bottom: 1px solid var(--border-color);
-      z-index: 1000;
-      transition: var(--transition);
-    }
-
-    .navbar.scrolled {
-      background: rgba(10, 10, 10, 0.98);
-      box-shadow: var(--shadow);
-      padding: 10px 40px;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      object-fit: cover;
-      transition: var(--transition);
-      border: 2px solid var(--primary-color);
-    }
-
-    .logo:hover {
-      transform: rotate(15deg);
-      box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
-    }
-
-    .brand-name {
-      font-family: var(--font-secondary);
-      font-weight: 800;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 1.5rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      position: relative;
-      font-weight: 500;
-      padding: 8px 0;
-      transition: var(--transition);
-    }
-
-    .nav-links a:not(.btn):hover,
-    .nav-links a.active {
-      color: var(--primary-color);
-    }
-
-    .nav-links a:not(.btn)::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gradient-primary);
-      transition: var(--transition);
-    }
-
-    .nav-links a:not(.btn):hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .nav-links .btn {
-      background: var(--gradient-primary);
-      color: #000;
-      padding: 10px 25px;
-      border-radius: var(--radius-xl);
-      font-weight: 600;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nav-links .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: var(--transition-slow);
-    }
-
-    .nav-links .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
-    }
-
-    .nav-links .btn:hover::before {
-      left: 100%;
-    }
-
-    /* Hamburger Menu (Mobile) */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 5px;
-    }
-
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: var(--text-color);
-      transition: var(--transition);
-      border-radius: 2px;
-    }
-
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(6px, 6px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 120px 20px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 30% 30%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 70% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
-      z-index: -1;
-    }
-
-    .hero-content {
-      max-width: 800px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border-color);
-      padding: 8px 16px;
-      border-radius: 50px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      color: var(--primary-color);
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.1;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
-      margin-bottom: 2.5rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 30px;
-      border-radius: var(--radius-xl);
-      font-weight: 600;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary {
-      background: var(--gradient-primary);
-      color: #000;
-      box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-color);
-      border: 2px solid var(--border-color);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--primary-color);
-      transform: translateY(-3px);
-    }
-
-    /* Features Section */
-    .features {
-      padding: 100px 0;
-      background: var(--bg-secondary);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-header h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section-header p {
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .feature-card {
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--gradient-primary);
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .feature-card:hover::before {
-      opacity: 0.05;
-    }
-
-    .feature-icon {
-      width: 70px;
-      height: 70px;
-      background: var(--gradient-primary);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.75rem;
-      color: #000;
-    }
-
-    .feature-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--text-color);
-    }
-
-    .feature-card p {
-      color: var(--text-secondary);
-    }
-
-    /* CTA Section */
-    .cta-section {
-      padding: 100px 0;
-      background: var(--bg-color);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 70% 30%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 30% 70%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
-    }
-
-    .cta-content {
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .cta-content p {
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      margin-bottom: 2.5rem;
-    }
-
-    .btn-glow {
-      background: var(--gradient-primary);
-      color: #000;
-      box-shadow: 
-        0 4px 15px rgba(0, 191, 255, 0.3),
-        0 0 30px rgba(0, 191, 255, 0.2);
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--bg-secondary);
-      padding: 60px 0 30px;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-section h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .footer-section p {
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 0.75rem;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      transition: var(--transition);
-    }
-
-    .footer-links a:hover {
-      color: var(--primary-color);
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .social-links a {
-      width: 40px;
-      height: 40px;
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
-
-    .social-links a:hover {
-      background: var(--primary-color);
-      color: #000;
-      transform: translateY(-3px);
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-color);
-      color: var(--text-muted);
-      font-size: 0.875rem;
-    }
-
-    .footer-links-bottom {
-      display: flex;
-      gap: 2rem;
-    }
-
-    .footer-links-bottom a {
-      color: var(--text-muted);
-      transition: var(--transition);
-    }
-
-    .footer-links-bottom a:hover {
-      color: var(--primary-color);
-    }
-
-    /* Scroll to Top Button */
-    #scrollTopBtn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: var(--gradient-primary);
-      color: #000;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 1.25rem;
-      cursor: pointer;
-      display: none;
-      transition: var(--transition);
-      z-index: 99;
-      box-shadow: var(--shadow);
-    }
-
-    #scrollTopBtn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
-    }
-
-    /* Animations */
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes glow {
-      from {
-        box-shadow: 
-          0 4px 15px rgba(0, 191, 255, 0.3),
-          0 0 30px rgba(0, 191, 255, 0.2);
-      }
-      to {
-        box-shadow: 
-          0 4px 20px rgba(0, 191, 255, 0.4),
-          0 0 40px rgba(0, 191, 255, 0.3);
-      }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 1024px) {
-      .hero h1 {
-        font-size: 3rem;
-      }
-      
-      .section-header h2 {
-        font-size: 2.25rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .navbar {
-        padding: 15px 20px;
-      }
-      
-      .nav-links {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background: rgba(10, 10, 10, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 2rem;
-        gap: 1.5rem;
+<!DOCTYPE html><html lang="en" data-theme="dark"><head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AlaminEdge | Where Learning Meets Innovation</title> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <style> :root { --primary-color: #00bfff; --primary-dark: #0099cc; --primary-light: #33ccff; --secondary-color: #8a2be2; --accent-color: #ff6b6b; --bg-color: #0a0a0a; --bg-secondary: #111111; --bg-tertiary: #1a1a1a; --text-color: #ffffff; --text-secondary: #b0b0b0; --text-muted: #888888; --border-color: rgba(255, 255, 255, 0.1); --border-light: rgba(255, 255, 255, 0.05); --shadow: 0 4px 20px rgba(0, 0, 0, 0.25); --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4); --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%); --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%); --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); --font-primary: 'Poppins', sans-serif; --font-secondary: 'Montserrat', sans-serif; --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 30px; }
+
+/* Global Reset & Base Styles */ * { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-primary); overflow-x: hidden; line-height: 1.6; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%); pointer-events: none; z-index: -1; }
+
+/* Typography */ h1, h2, h3, h4, h5, h6 { font-family: var(--font-secondary); font-weight: 700; line-height: 1.2; }
+p { margin-bottom: 1rem; }
+a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+/* Container */ .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Enhanced Victory Day Banner Styles */
+.victory-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #006a4e 0%, #006a4e 40%, #f42a41 60%, #f42a41 100%);
+    color: white;
+    padding: 18px 20px;
+    z-index: 9998;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    animation: bannerSlideDown 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transform: translateY(-100%);
+    backdrop-filter: blur(10px);
+}
+
+.victory-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1;
+}
+
+.banner-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    padding: 8px;
+    flex-shrink: 0;
+}
+
+.banner-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: #ffde59;
+    filter: drop-shadow(0 0 6px rgba(255, 222, 89, 0.7));
+}
+
+.banner-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+    flex: 1;
+}
+
+.banner-text strong {
+    font-family: var(--font-secondary);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 0.4px;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.banner-text span {
+    font-size: 0.95rem;
+    opacity: 0.95;
+    max-width: 700px;
+    font-weight: 400;
+}
+
+.banner-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 20px;
+    flex-shrink: 0;
+}
+
+.banner-link {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 20px;
+    border-radius: var(--radius-xl);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+}
+
+.banner-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.banner-close {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-left: 5px;
+}
+
+.banner-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* Animation for banner */
+@keyframes bannerSlideDown {
+    0% {
         transform: translateY(-100%);
         opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
-        border-bottom: 1px solid var(--border-color);
-      }
-
-      .nav-links.active {
+    }
+    70% {
+        transform: translateY(10px);
+        opacity: 0.8;
+    }
+    100% {
         transform: translateY(0);
         opacity: 1;
-        visibility: visible;
-      }
+    }
+}
 
-      .hamburger {
-        display: flex;
-      }
+/* Pulsing effect for the icon */
+@keyframes gentlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
 
-      .hero h1 {
-        font-size: 2.5rem;
-      }
+.victory-banner .banner-icon {
+    animation: gentlePulse 2s ease-in-out infinite;
+}
 
-      .hero p {
-        font-size: 1.125rem;
-      }
+/* Adjust body padding to prevent content from being hidden under banner */
+body.has-victory-banner {
+    padding-top: 75px;
+}
 
-      .hero-actions {
+body.has-victory-banner .navbar {
+    top: 75px;
+}
+
+body.has-victory-banner .hero {
+    padding-top: 195px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .victory-banner {
+        padding: 15px 18px;
+    }
+    
+    .banner-text strong {
+        font-size: 1.1rem;
+    }
+    
+    .banner-text span {
+        font-size: 0.9rem;
+    }
+    
+    .banner-link {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .victory-banner {
+        padding: 12px 15px;
         flex-direction: column;
-        align-items: center;
-      }
-
-      .btn {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 1rem;
+        align-items: stretch;
         text-align: center;
-      }
-
-      .footer-links-bottom {
+        gap: 12px;
+    }
+    
+    .victory-banner-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        margin-bottom: 0;
+    }
+    
+    .banner-icon {
+        width: 36px;
+        height: 36px;
+        margin: 0 auto;
+    }
+    
+    .banner-text {
+        text-align: center;
+    }
+    
+    .banner-actions {
+        margin-left: 0;
         justify-content: center;
-      }
+        width: 100%;
+        gap: 10px;
     }
+    
+    .banner-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        margin-left: 0;
+    }
+    
+    body.has-victory-banner {
+        padding-top: 120px;
+    }
+    
+    body.has-victory-banner .navbar {
+        top: 120px;
+    }
+    
+    body.has-victory-banner .hero {
+        padding-top: 200px;
+    }
+}
 
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-      
-      .section-header h2 {
-        font-size: 1.75rem;
-      }
-      
-      .feature-card {
-        padding: 2rem;
-      }
+@media (max-width: 480px) {
+    .victory-banner {
+        padding: 10px 12px;
     }
-  </style>
-</head>
+    
+    .banner-text strong {
+        font-size: 1rem;
+    }
+    
+    .banner-text span {
+        font-size: 0.85rem;
+    }
+    
+    .banner-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .banner-link, .banner-close {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .banner-close {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: 5px;
+    }
+    
+    body.has-victory-banner {
+        padding-top: 150px;
+    }
+    
+    body.has-victory-banner .navbar {
+        top: 150px;
+    }
+    
+    body.has-victory-banner .hero {
+        padding-top: 230px;
+    }
+}
+
+/* Preloader */ #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease, visibility 0.5s ease; }
+#preloader.fade-out { opacity: 0; visibility: hidden; }
+.preload-logo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; animation: pulse 2s ease-in-out infinite, rotate 3s linear infinite; border: 2px solid var(--primary-color); box-shadow: 0 0 30px rgba(0, 191, 255, 0.5); }
+
+/* Navbar */ .navbar { position: fixed; width: 100%; top: 0; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; border-bottom: 1px solid var(--border-color); z-index: 1000; transition: var(--transition); }
+.navbar.scrolled { background: rgba(10, 10, 10, 0.98); box-shadow: var(--shadow); padding: 10px 40px; }
+.logo-container { display: flex; align-items: center; gap: 12px; }
+.logo { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; transition: var(--transition); border: 2px solid var(--primary-color); }
+.logo:hover { transform: rotate(15deg); box-shadow: 0 0 20px rgba(0, 191, 255, 0.5); }
+.brand-name { font-family: var(--font-secondary); font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.5rem; }
+.nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
+.nav-links a { position: relative; font-weight: 500; padding: 8px 0; transition: var(--transition); }
+.nav-links a:not(.btn):hover, .nav-links a.active { color: var(--primary-color); }
+.nav-links a:not(.btn)::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gradient-primary); transition: var(--transition); }
+.nav-links a:not(.btn):hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links .btn { background: var(--gradient-primary); color: #000; padding: 10px 25px; border-radius: var(--radius-xl); font-weight: 600; transition: var(--transition); position: relative; overflow: hidden; }
+.nav-links .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: var(--transition-slow); }
+.nav-links .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3); }
+.nav-links .btn:hover::before { left: 100%; }
+
+/* Hamburger Menu (Mobile) */ .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+.hamburger span { width: 25px; height: 3px; background: var(--text-color); transition: var(--transition); border-radius: 2px; }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+/* Hero Section */ .hero { min-height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 80px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 30% 30%, rgba(0, 191, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%); z-index: -1; }
+.hero-content { max-width: 800px; position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 2rem; color: var(--primary-color); }
+.hero h1 { font-size: 3.5rem; margin-bottom: 1.5rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
+.hero p { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; border-radius: var(--radius-xl); font-weight: 600; transition: var(--transition); position: relative; overflow: hidden; }
+.btn-primary { background: var(--gradient-primary); color: #000; box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4); }
+.btn-secondary { background: transparent; color: var(--text-color); border: 2px solid var(--border-color); }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--primary-color); transform: translateY(-3px); }
+
+/* Features Section */ .features { padding: 100px 0; background: var(--bg-secondary); }
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.section-header p { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.feature-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; transition: var(--transition); position: relative; overflow: hidden; }
+.feature-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--gradient-primary); opacity: 0; transition: var(--transition); }
+.feature-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+.feature-card:hover::before { opacity: 0.05; }
+.feature-icon { width: 70px; height: 70px; background: var(--gradient-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.75rem; color: #000; }
+.feature-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-color); }
+.feature-card p { color: var(--text-secondary); }
+
+/* CTA Section */ .cta-section { padding: 100px 0; background: var(--bg-color); text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 70% 30%, rgba(0, 191, 255, 0.05) 0%, transparent 50%), radial-gradient(circle at 30% 70%, rgba(138, 43, 226, 0.05) 0%, transparent 50%); }
+.cta-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+.cta-content h2 { font-size: 2.5rem; margin-bottom: 1.5rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.cta-content p { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
+.btn-glow { background: var(--gradient-primary); color: #000; box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3), 0 0 30px rgba(0, 191, 255, 0.2); animation: glow 2s ease-in-out infinite alternate; }
+
+/* Footer */ footer { background: var(--bg-secondary); padding: 60px 0 30px; border-top: 1px solid var(--border-color); }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+.footer-section h3 { font-size: 1.5rem; margin-bottom: 1.5rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.footer-section p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 0.75rem; }
+.footer-links a { color: var(--text-secondary); transition: var(--transition); }
+.footer-links a:hover { color: var(--primary-color); }
+.social-links { display: flex; gap: 1rem; margin-top: 1.5rem; }
+.social-links a { width: 40px; height: 40px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+.social-links a:hover { background: var(--primary-color); color: #000; transform: translateY(-3px); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.875rem; }
+.footer-links-bottom { display: flex; gap: 2rem; }
+.footer-links-bottom a { color: var(--text-muted); transition: var(--transition); }
+.footer-links-bottom a:hover { color: var(--primary-color); }
+
+/* Scroll to Top Button */ #scrollTopBtn { position: fixed; bottom: 30px; right: 30px; background: var(--gradient-primary); color: #000; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 1.25rem; cursor: pointer; display: none; transition: var(--transition); z-index: 99; box-shadow: var(--shadow); }
+#scrollTopBtn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4); }
+
+/* Animations */ @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes glow { from { box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3), 0 0 30px rgba(0, 191, 255, 0.2); } to { box-shadow: 0 4px 20px rgba(0, 191, 255, 0.4), 0 0 40px rgba(0, 191, 255, 0.3); } }
+
+/* Responsive Design */ @media (max-width: 1024px) { .hero h1 { font-size: 3rem; } .section-header h2 { font-size: 2.25rem; } }
+@media (max-width: 768px) { .navbar { padding: 15px 20px; } .nav-links { position: fixed; top: 80px; left: 0; width: 100%; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px); flex-direction: column; padding: 2rem; gap: 1.5rem; transform: translateY(-100%); opacity: 0; visibility: hidden; transition: var(--transition); border-bottom: 1px solid var(--border-color); }
+.nav-links.active { transform: translateY(0); opacity: 1; visibility: visible; }
+.hamburger { display: flex; }
+.hero h1 { font-size: 2.5rem; }
+.hero p { font-size: 1.125rem; }
+.hero-actions { flex-direction: column; align-items: center; }
+.btn { width: 100%; max-width: 300px; justify-content: center; }
+.footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+.footer-links-bottom { justify-content: center; } }
+@media (max-width: 480px) { .hero h1 { font-size: 2rem; } .section-header h2 { font-size: 1.75rem; } .feature-card { padding: 2rem; } } </style></head>
+
 <body>
-  <!-- Preloader -->
-  <div id="preloader">
-    <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="preload-logo" style="width: 100px; height: 100px; border-radius: 50%;">
-  </div>
-
-  <!-- Navbar -->
-  <header>
-    <nav class="navbar">
-      <div class="logo-container">
-        <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo" style="width: 50px; height: 50px;">
-        <span class="brand-name">AlaminEdge</span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="live.html">Live</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="registration.html" class="btn">Register</a></li>
-      </ul>
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <i class="fas fa-star"></i>
-          <span>PREMIUM LEARNING EXPERIENCE</span>
-        </div>
-        <h1>Where Learning Meets Innovation</h1>
-        <p>Empowering learners through cutting-edge technology, creative solutions, and industry-relevant skills for the digital age.</p>
-        <div class="hero-actions">
-          <a href="courses.html" class="btn btn-primary">
-            <span>Explore Courses</span>
-            <i class="fas fa-arrow-right"></i>
-          </a>
-          <a href="registration.html" class="btn btn-secondary">
-            <span>Join Now</span>
-            <i class="fas fa-user-plus"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features">
-      <div class="container">
-        <div class="section-header">
-          <h2>Why Choose AlaminEdge?</h2>
-          <p>Discover the premium features that set us apart in the world of tech education</p>
-        </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-laptop-code"></i>
-            </div>
-            <h3>Industry-Relevant Curriculum</h3>
-            <p>Our courses are designed with input from industry experts to ensure you learn the most in-demand skills.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-chalkboard-teacher"></i>
-            </div>
-            <h3>Expert Instructors</h3>
-            <p>Learn from professionals with years of experience in their fields and a passion for teaching.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-hands-helping"></i>
-            </div>
-            <h3>Hands-On Projects</h3>
-            <p>Apply your knowledge through real-world projects that build your portfolio and confidence.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <h3>Community Support</h3>
-            <p>Join a vibrant community of learners and mentors to accelerate your growth and network.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-certificate"></i>
-            </div>
-            <h3>Career Guidance</h3>
-            <p>Get personalized career advice, resume reviews, and interview preparation to land your dream job.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-rocket"></i>
-            </div>
-            <h3>Cutting-Edge Technology</h3>
-            <p>Stay ahead of the curve with courses on the latest technologies and industry trends.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <div class="container">
-        <div class="cta-content">
-          <h2>Ready to Transform Your Career?</h2>
-          <p>Join thousands of students who have accelerated their careers with AlaminEdge's premium learning platform.</p>
-          <a href="registration.html" class="btn btn-primary btn-glow">
-            <span>Start Your Journey Today</span>
-            <i class="fas fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <div class="logo-container">
-            <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo" style="width: 50px; height: 50px;">
-            <h3>AlaminEdge</h3>
-          </div>
-          <p>Where Learning Meets Innovation. Empowering the next generation of tech professionals through premium education.</p>
-          <div class="social-links">
-            <a href="https://www.youtube.com/@PrimeviaLearn" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://t.me/adamzampas" target="_blank"><i class="fab fa-telegram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="courses.html">Courses</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="blog.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>Resources</h4>
-          <ul class="footer-links">
-            <li><a href="live.html">Live Sessions</a></li>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">Community</a></li>
-            <li><a href="#">Career Support</a></li>
-            <li><a href="#">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>Contact Info</h4>
-          <p><i class="fas fa-envelope"></i> info@alaminedge.com</p>
-          <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-          <p><i class="fas fa-map-marker-alt"></i> Tech Innovation Hub, Digital City</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="copyright">
-          <p>© 2025 AlaminEdge | Powered by Md. Al Amin</p>
-        </div>
-        <div class="footer-links-bottom">
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
-          <a href="cookies.html">Cookie Policy</a>
-        </div>
-      </div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="preload-logo" style="width: 100px; height: 100px; border-radius: 50%;">
     </div>
-  </footer>
 
-  <!-- Scroll to Top -->
-  <button id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
+    <!-- Enhanced Victory Day Banner -->
+    <div id="victoryDayBanner" class="victory-banner">
+        <div class="victory-banner-content">
+            <div class="banner-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L15 9H21L16 14L18 21L12 17L6 21L8 14L3 9H9L12 2Z" />
+                </svg>
+            </div>
+            <div class="banner-text">
+                <strong>Happy Victory Day of Bangladesh 🇧🇩</strong>
+                <span>We honor the courage and sacrifice of the heroes of 1971. Let's remember their legacy and build a brighter future together.</span>
+            </div>
+        </div>
+        <div class="banner-actions">
+            <a href="victory-day.html" class="banner-link">
+                <i class="fas fa-book-open"></i>
+                <span>Learn More</span>
+            </a>
+            <button id="closeBanner" class="banner-close" aria-label="Close banner">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
 
-  <script>
-    // Enhanced Premium JavaScript
-    document.addEventListener('DOMContentLoaded', function() {
-      // Preloader
-      window.addEventListener('load', function() {
-        const preloader = document.getElementById('preloader');
-        setTimeout(function() {
-          preloader.classList.add('fade-out');
-          setTimeout(function() {
-            preloader.style.display = 'none';
-          }, 500);
-        }, 1500);
-      });
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo" style="width: 50px; height: 50px;">
+                <span class="brand-name">AlaminEdge</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="live.html">Live</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="registration.html" class="btn">Register</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
 
-      // Navbar scroll effect
-      const navbar = document.querySelector('.navbar');
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
-        }
-      });
+    <!-- Hero Section -->
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    <span>PREMIUM LEARNING EXPERIENCE</span>
+                </div>
+                <h1>Where Learning Meets Innovation</h1>
+                <p>Empowering learners through cutting-edge technology, creative solutions, and industry-relevant skills for the digital age.</p>
+                <div class="hero-actions">
+                    <a href="courses.html" class="btn btn-primary">
+                        <span>Explore Courses</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="registration.html" class="btn btn-secondary">
+                        <span>Join Now</span>
+                        <i class="fas fa-user-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-      // Mobile menu toggle
-      const hamburger = document.querySelector('.hamburger');
-      const navLinks = document.querySelector('.nav-links');
-      
-      hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-      });
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Choose AlaminEdge?</h2>
+                    <p>Discover the premium features that set us apart in the world of tech education</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Industry-Relevant Curriculum</h3>
+                        <p>Our courses are designed with input from industry experts to ensure you learn the most in-demand skills.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>Expert Instructors</h3>
+                        <p>Learn from professionals with years of experience in their fields and a passion for teaching.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Hands-On Projects</h3>
+                        <p>Apply your knowledge through real-world projects that build your portfolio and confidence.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community Support</h3>
+                        <p>Join a vibrant community of learners and mentors to accelerate your growth and network.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Career Guidance</h3>
+                        <p>Get personalized career advice, resume reviews, and interview preparation to land your dream job.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Cutting-Edge Technology</h3>
+                        <p>Stay ahead of the curve with courses on the latest technologies and industry trends.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      // Close mobile menu when clicking on a link
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function() {
-          hamburger.classList.remove('active');
-          navLinks.classList.remove('active');
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Transform Your Career?</h2>
+                    <p>Join thousands of students who have accelerated their careers with AlaminEdge's premium learning platform.</p>
+                    <a href="registration.html" class="btn btn-primary btn-glow">
+                        <span>Start Your Journey Today</span>
+                        <i class="fas fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo-container">
+                        <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo" style="width: 50px; height: 50px;">
+                        <h3>AlaminEdge</h3>
+                    </div>
+                    <p>Where Learning Meets Innovation. Empowering the next generation of tech professionals through premium education.</p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@PrimeviaLearn" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://t.me/adamzampas" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="live.html">Live Sessions</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Career Support</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@alaminedge.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Tech Innovation Hub, Digital City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>© 2025 AlaminEdge | Powered by Md. Al Amin</p>
+                </div>
+                <div class="footer-links-bottom">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
+
+    <script>
+        // Enhanced Premium JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced Victory Day Banner Logic
+            (function() {
+                // Check if today is December 16
+                const today = new Date();
+                const isVictoryDay = today.getDate() === 16 && today.getMonth() === 11; // December is 11
+                
+                if (!isVictoryDay) return;
+                
+                // Check if user has already dismissed the banner today
+                const lastDismissed = localStorage.getItem('victoryBannerDismissed');
+                if (lastDismissed === today.toDateString()) return;
+                
+                const banner = document.getElementById('victoryDayBanner');
+                const closeBtn = document.getElementById('closeBanner');
+                
+                // Show banner after page loads (for better visual effect)
+                setTimeout(() => {
+                    banner.style.display = 'flex';
+                    document.body.classList.add('has-victory-banner');
+                    
+                    // Add entrance animation with delay
+                    setTimeout(() => {
+                        banner.style.transform = 'translateY(0)';
+                        banner.style.opacity = '1';
+                    }, 100);
+                    
+                    // Add floating effect to icon
+                    const bannerIcon = document.querySelector('.banner-icon');
+                    bannerIcon.style.animation = 'gentlePulse 2s ease-in-out infinite';
+                    
+                }, 1200); // Slight delay after preloader
+                
+                // Close button functionality
+                closeBtn.addEventListener('click', function() {
+                    // Store dismissal in localStorage
+                    localStorage.setItem('victoryBannerDismissed', today.toDateString());
+                    
+                    // Animate out
+                    banner.style.transform = 'translateY(-100%)';
+                    banner.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        banner.style.display = 'none';
+                        document.body.classList.remove('has-victory-banner');
+                    }, 500);
+                });
+                
+                // Add hover effect to "Learn More" link
+                const learnMoreLink = document.querySelector('.banner-link');
+                learnMoreLink.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.25)';
+                });
+                
+                learnMoreLink.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            })();
+
+            // Preloader
+            window.addEventListener('load', function() {
+                const preloader = document.getElementById('preloader');
+                setTimeout(function() {
+                    preloader.classList.add('fade-out');
+                    setTimeout(function() {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 1500);
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Scroll to Top Button
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.style.display = 'block';
+                } else {
+                    scrollTopBtn.style.display = 'none';
+                }
+            });
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Add hover effects to buttons
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add animation to feature cards on scroll
+            const featureCards = document.querySelectorAll('.feature-card');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Add click effect to feature cards
+            featureCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-10px)';
+                    }, 150);
+                });
+            });
         });
-      });
-
-      // Scroll to Top Button
-      const scrollTopBtn = document.getElementById('scrollTopBtn');
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-          scrollTopBtn.style.display = 'block';
-        } else {
-          scrollTopBtn.style.display = 'none';
-        }
-      });
-      
-      scrollTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-
-      // Add hover effects to buttons
-      document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-3px)';
-        });
-        
-        btn.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0)';
-        });
-      });
-
-      // Add animation to feature cards on scroll
-      const featureCards = document.querySelectorAll('.feature-card');
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
-        });
-      }, observerOptions);
-
-      featureCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-      });
-
-      // Add click effect to feature cards
-      featureCards.forEach(card => {
-        card.addEventListener('click', function() {
-          this.style.transform = 'translateY(-10px) scale(1.02)';
-          setTimeout(() => {
-            this.style.transform = 'translateY(-10px)';
-          }, 150);
-        });
-      });
-    });
-  </script>
+    </script>
 </body>
-</html>
+                          </html>
