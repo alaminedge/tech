@@ -1,0 +1,31 @@
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+  const supabase = supabase.createClient(
+    "https://xqjedvpgbxnnmksqjwxx.supabase.co",     // replace with your Supabase project URL
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxamVkdnBnYnhubm1rc3Fqd3h4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4OTE0NjEsImV4cCI6MjA4MTQ2NzQ2MX0.wrlQ_nKANP9fWospehSOgM5Pw4WEAo5uwtREoZi3mY0"   // replace with your anon key
+  );
+
+  async function loadData() {
+    const { data, error } = await supabase
+      .from("your_table_name")
+      .select("*");   // fetch all columns
+
+    if(error) {
+      console.error("Error fetching data:", error);
+    } else {
+      console.log("Table data:", data);
+      // Display on page
+      const list = document.getElementById("dataList");
+      list.innerHTML = ""; // clear existing
+      data.forEach(row => {
+        const li = document.createElement("li");
+        li.textContent = row.id + " | " + row.name + " | " + row.created_at;
+        list.appendChild(li);
+      });
+    }
+  }
+
+  loadData();
+</script>
+
+<ul id="dataList"></ul>
