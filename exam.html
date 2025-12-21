@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantitative Chemistry - Course Materials</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+        
+        body {
+            background: #0f0f0f;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        
+        .course-description {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #ccc;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .lecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .lecture-card {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .lecture-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lecture-thumbnail {
+            width: 100%;
+            height: 180px;
+            background-color: #000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lecture-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+        
+        .lecture-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .lecture-info {
+            padding: 20px;
+        }
+        
+        .lecture-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .lecture-description {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #cc0000;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #ff0000;
+            color: #ff0000;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 0, 0, 0.1);
+        }
+        
+        .player-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .player-container {
+            width: 100%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        #player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .secure-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .control-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 8px;
+            padding: 6px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-container {
+            flex-grow: 1;
+            margin: 0 16px;
+            position: relative;
+            height: 24px;
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #ff0000;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        .progress-thumb {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ff0000;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .progress-container:hover .progress-thumb {
+            opacity: 1;
+        }
+        
+        .time-display {
+            font-size: 14px;
+            color: #aaa;
+            white-space: nowrap;
+            margin: 0 16px;
+        }
+        
+        .volume-container {
+            display: flex;
+            align-items: center;
+            margin: 0 16px;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            margin-left: 8px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        
+        .volume-container:hover .volume-slider {
+            opacity: 1;
+        }
+        
+        .settings-menu, .speed-menu {
+            position: absolute;
+            bottom: 60px;
+            background: rgba(28, 28, 28, 0.95);
+            border-radius: 8px;
+            padding: 8px 0;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 100;
+        }
+        
+        .settings-menu.active, .speed-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .menu-item {
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .menu-item.active {
+            color: #ff0000;
+        }
+        
+        .fullscreen-btn {
+            margin-left: auto;
+        }
+        
+        .preview-thumbnail {
+            position: absolute;
+            bottom: 40px;
+            background: #000;
+            border-radius: 4px;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            z-index: 50;
+        }
+        
+        .preview-thumbnail img {
+            display: block;
+            width: 160px;
+            height: 90px;
+        }
+        
+        .preview-time {
+            padding: 4px 8px;
+            font-size: 12px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+        
+        .security-notice {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 25;
+            display: none;
+        }
+        
+        .block-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 40;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            flex-direction: column;
+        }
+        
+        .block-overlay i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: #ff0000;
+        }
+        
+        /* Fullscreen styles */
+        .player-container:-webkit-full-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            max-width: none;
+        }
+        
+        .player-container:-moz-full-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            max-width: none;
+        }
+        
+        .player-container:-ms-fullscreen {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            max-width: none;
+        }
+        
+        .player-container:fullscreen {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            max-width: none;
+        }
+        
+        .player-container:-webkit-full-screen .video-container {
+            width: 100%;
+            height: 100%;
+            padding-top: 0;
+        }
+        
+        .player-container:-moz-full-screen .video-container {
+            width: 100%;
+            height: 100%;
+            padding-top: 0;
+        }
+        
+        .player-container:-ms-fullscreen .video-container {
+            width: 100%;
+            height: 100%;
+            padding-top: 0;
+        }
+        
+        .player-container:fullscreen .video-container {
+            width: 100%;
+            height: 100%;
+            padding-top: 0;
+        }
+        
+        .player-container:-webkit-full-screen #player {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .player-container:-moz-full-screen #player {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .player-container:-ms-fullscreen #player {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .player-container:fullscreen #player {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Controls visibility in fullscreen */
+        .player-container:fullscreen .controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transition: opacity 0.3s ease;
+        }
+        
+        .player-container:-webkit-full-screen .controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transition: opacity 0.3s ease;
+        }
+        
+        .player-container:-moz-full-screen .controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transition: opacity 0.3s ease;
+        }
+        
+        .player-container:-ms-fullscreen .controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Hide controls in fullscreen by default */
+        .player-container:fullscreen .controls.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .player-container:-webkit-full-screen .controls.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .player-container:-moz-full-screen .controls.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .player-container:-ms-fullscreen .controls.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .notes-section {
+            margin-top: 40px;
+        }
+        
+        .notes-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .note-item {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .note-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .note-icon {
+            font-size: 2.5rem;
+            color: #ff0000;
+            margin-bottom: 15px;
+        }
+        
+        .note-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .note-description {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .lecture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                flex-wrap: wrap;
+                padding: 8px;
+            }
+            
+            .progress-container {
+                order: 1;
+                flex-basis: 100%;
+                margin: 10px 0;
+            }
+            
+            .time-display {
+                margin-left: 0;
+            }
+            
+            .volume-container {
+                margin-left: 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Quantitative Chemistry</h1>
+            <p class="subtitle">Complete Course Materials</p>
+            <p class="course-description">
+                Master the fundamentals of quantitative chemistry with this comprehensive course. 
+                Explore key concepts through detailed lectures and annotated notes designed to enhance your understanding.
+            </p>
+        </header>
+        
+        <section class="player-section">
+            <h2 class="section-title">Current Lecture</h2>
+            <div class="player-container">
+                <div class="video-container">
+                    <div id="player"></div>
+                    <div class="secure-overlay" id="secure-overlay"></div>
+                    <div class="preview-thumbnail" id="preview-thumbnail">
+                        <img src="" alt="Preview">
+                        <div class="preview-time" id="preview-time">0:00</div>
+                    </div>
+                    <div class="security-notice" id="security-notice">
+                        <i class="fas fa-shield-alt"></i> Secure Mode: Right-click disabled
+                    </div>
+                    <div class="block-overlay" id="block-overlay">
+                        <i class="fas fa-ban"></i>
+                        <div>Navigation to YouTube is blocked</div>
+                    </div>
+                </div>
+                
+                <div class="controls" id="controls">
+                    <button class="control-btn play-pause-btn" id="play-pause-btn" title="Play/Pause">
+                        <i class="fas fa-play" id="play-icon"></i>
+                        <i class="fas fa-pause" id="pause-icon" style="display:none"></i>
+                    </button>
+                    
+                    <button class="control-btn rewind-btn" id="rewind-btn" title="Rewind 10s">
+                        <i class="fas fa-backward"></i> 10s
+                    </button>
+                    
+                    <button class="control-btn forward-btn" id="forward-btn" title="Forward 10s">
+                        <i class="fas fa-forward"></i> 10s
+                    </button>
+                    
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" id="progress"></div>
+                            <div class="progress-thumb" id="progress-thumb"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-display">
+                        <span class="current-time" id="current-time">0:00</span> / <span class="duration" id="duration">0:00</span>
+                    </div>
+                    
+                    <div class="volume-container">
+                        <button class="control-btn volume-btn" id="volume-btn" title="Mute/Unmute">
+                            <i class="fas fa-volume-up" id="volume-high"></i>
+                            <i class="fas fa-volume-mute" id="volume-mute" style="display:none"></i>
+                        </button>
+                        <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="100">
+                    </div>
+                    
+                    <button class="control-btn speed-btn" id="speed-btn" title="Playback Speed">1x</button>
+                    
+                    <button class="control-btn settings-btn" id="settings-btn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    
+                    <button class="control-btn fullscreen-btn" id="fullscreen-btn" title="Fullscreen">
+                        <i class="fas fa-expand" id="expand-icon"></i>
+                        <i class="fas fa-compress" id="compress-icon" style="display:none"></i>
+                    </button>
+                    
+                    <div class="settings-menu" id="settings-menu">
+                        <div class="menu-item" data-quality="auto">Quality: Auto</div>
+                        <div class="menu-item" data-quality="hd1080">1080p</div>
+                        <div class="menu-item" data-quality="hd720">720p</div>
+                        <div class="menu-item" data-quality="medium">480p</div>
+                        <div class="menu-item" data-quality="small">360p</div>
+                    </div>
+                    
+                    <div class="speed-menu" id="speed-menu">
+                        <div class="menu-item" data-speed="0.25">0.25x</div>
+                        <div class="menu-item" data-speed="0.5">0.5x</div>
+                        <div class="menu-item" data-speed="0.75">0.75x</div>
+                        <div class="menu-item active" data-speed="1">Normal</div>
+                        <div class="menu-item" data-speed="1.25">1.25x</div>
+                        <div class="menu-item" data-speed="1.5">1.5x</div>
+                        <div class="menu-item" data-speed="2">2x</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lecture-info" id="current-lecture-info">
+                <h3 id="current-lecture-title">Lecture 1: Introduction to Quantitative Chemistry</h3>
+                <p id="current-lecture-description">This lecture introduces the fundamental concepts of quantitative chemistry, including measurement techniques and data analysis.</p>
+                <a href="#" class="btn" id="current-notes-link" target="_blank">
+                    <i class="fas fa-file-pdf"></i> Download Annotated Notes
+                </a>
+            </div>
+        </section>
+        
+        <section class="lectures-section">
+            <h2 class="section-title">All Lectures</h2>
+            <div class="lecture-grid">
+                <div class="lecture-card" data-video-id="NGlEdouNJUU" data-notes-link="https://drive.google.com/file/d/18smYPZHP62H3b7w25YvlCS_eC_mNmeg8/view" data-title="Lecture 1: Introduction to Quantitative Chemistry" data-description="This lecture introduces the fundamental concepts of quantitative chemistry, including measurement techniques and data analysis.">
+                    <div class="lecture-thumbnail">
+                        <img src="https://img.youtube.com/vi/NGlEdouNJUU/hqdefault.jpg" alt="Lecture 1">
+                        <div class="lecture-number">Lecture 1</div>
+                    </div>
+                    <div class="lecture-info">
+                        <h3 class="lecture-title">Introduction to Quantitative Chemistry</h3>
+                        <p class="lecture-description">This lecture introduces the fundamental concepts of quantitative chemistry, including measurement techniques and data analysis.</p>
+                        <button class="btn btn-outline watch-btn">Watch Lecture</button>
+                    </div>
+                </div>
+                
+                <div class="lecture-card" data-video-id="bVhe3JEv1kA" data-notes-link="https://drive.google.com/file/d/18smYPZHP62H3b7w25YvlCS_eC_mNmeg8/view" data-title="Lecture 1.1: Basic Concepts Review" data-description="A review of basic concepts and problem-solving techniques in quantitative chemistry.">
+                    <div class="lecture-thumbnail">
+                        <img src="https://img.youtube.com/vi/bVhe3JEv1kA/hqdefault.jpg" alt="Lecture 1.1">
+                        <div class="lecture-number">Lecture 1.1</div>
+                    </div>
+                    <div class="lecture-info">
+                        <h3 class="lecture-title">Basic Concepts Review</h3>
+                        <p class="lecture-description">A review of basic concepts and problem-solving techniques in quantitative chemistry.</p>
+                        <button class="btn btn-outline watch-btn">Watch Lecture</button>
+                    </div>
+                </div>
+                
+                <div class="lecture-card" data-video-id="Hl-02bhqrow" data-notes-link="https://youtu.be/Hl-02bhqrow?si=S-sdgu2Iwau21-FJ" data-title="Lecture 2: Stoichiometry and Chemical Equations" data-description="Exploring stoichiometry, balancing chemical equations, and mole concept applications.">
+                    <div class="lecture-thumbnail">
+                        <img src="https://img.youtube.com/vi/Hl-02bhqrow/hqdefault.jpg" alt="Lecture 2">
+                        <div class="lecture-number">Lecture 2</div>
+                    </div>
+                    <div class="lecture-info">
+                        <h3 class="lecture-title">Stoichiometry and Chemical Equations</h3>
+                        <p class="lecture-description">Exploring stoichiometry, balancing chemical equations, and mole concept applications.</p>
+                        <button class="btn btn-outline watch-btn">Watch Lecture</button>
+                    </div>
+                </div>
+                
+                <div class="lecture-card" data-video-id="g53CucOCU1w" data-notes-link="https://drive.google.com/file/d/1EKNlJKbHaaUqUMLz3tlPhhuY8drs7h-U/view" data-title="Lecture 3: Solution Chemistry and Concentrations" data-description="Understanding solution chemistry, concentration calculations, and titration methods.">
+                    <div class="lecture-thumbnail">
+                        <img src="https://img.youtube.com/vi/g53CucOCU1w/hqdefault.jpg" alt="Lecture 3">
+                        <div class="lecture-number">Lecture 3</div>
+                    </div>
+                    <div class="lecture-info">
+                        <h3 class="lecture-title">Solution Chemistry and Concentrations</h3>
+                        <p class="lecture-description">Understanding solution chemistry, concentration calculations, and titration methods.</p>
+                        <button class="btn btn-outline watch-btn">Watch Lecture</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="notes-section">
+            <h2 class="section-title">Annotated Notes</h2>
+            <div class="notes-list">
+                <div class="note-item">
+                    <div class="note-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="note-title">Lecture 1 Notes</h3>
+                    <p class="note-description">Complete annotated notes for Lecture 1</p>
+                    <a href="https://drive.google.com/file/d/18smYPZHP62H3b7w25YvlCS_eC_mNmeg8/view" class="btn" target="_blank">Download PDF</a>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="note-title">Lecture 1.1 Notes</h3>
+                    <p class="note-description">Complete annotated notes for Lecture 1.1</p>
+                    <a href="https://drive.google.com/file/d/18smYPZHP62H3b7w25YvlCS_eC_mNmeg8/view" class="btn" target="_blank">Download PDF</a>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="note-title">Lecture 2 Notes</h3>
+                    <p class="note-description">Complete annotated notes for Lecture 2</p>
+                    <a href="https://youtu.be/Hl-02bhqrow?si=S-sdgu2Iwau21-FJ" class="btn" target="_blank">Download PDF</a>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="note-title">Lecture 3 Notes</h3>
+                    <p class="note-description">Complete annotated notes for Lecture 3</p>
+                    <a href="https://drive.google.com/file/d/1EKNlJKbHaaUqUMLz3tlPhhuY8drs7h-U/view" class="btn" target="_blank">Download PDF</a>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; 2023 Quantitative Chemistry Course. All rights reserved.</p>
+            <p>Educational materials for academic use only.</p>
+        </footer>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        // Player variables
+        let player;
+        let isPlaying = false;
+        let isMuted = false;
+        let currentVolume = 100;
+        let isDragging = false;
+        let securityCheckInterval;
+        let isFullscreen = false;
+        let controlsTimeout;
+        let currentVideoId = 'NGlEdouNJUU'; // Default to Lecture 1
+        
+        // Load YouTube IFrame API and create player
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: currentVideoId,
+                playerVars: {
+                    'playsinline': 1,
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'showinfo': 0,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'iv_load_policy': 3,
+                    'origin': window.location.origin
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError
+                }
+            });
+        }
+        
+        // When player is ready
+        function onPlayerReady(event) {
+            updateTimeDisplay();
+            startSecurityMonitoring();
+            setInterval(updateProgress, 200);
+            
+            // Hide YouTube branding after a delay
+            setTimeout(hideYouTubeBranding, 1000);
+            
+            // Listen for fullscreen changes
+            document.addEventListener('fullscreenchange', handleFullscreenChange);
+            document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+            document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+            document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+            
+            // Add click event to show controls in fullscreen
+            document.getElementById('secure-overlay').addEventListener('click', handleScreenClick);
+        }
+        
+        // Handle player state changes
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                document.getElementById('play-icon').style.display = 'none';
+                document.getElementById('pause-icon').style.display = 'block';
+            } else {
+                isPlaying = false;
+                document.getElementById('play-icon').style.display = 'block';
+                document.getElementById('pause-icon').style.display = 'none';
+            }
+        }
+        
+        // Handle player errors
+        function onPlayerError(event) {
+            console.error('YouTube Player Error:', event.data);
+        }
+        
+        // Handle fullscreen changes
+        function handleFullscreenChange() {
+            isFullscreen = !!(document.fullscreenElement || 
+                             document.webkitFullscreenElement || 
+                             document.mozFullScreenElement || 
+                             document.msFullscreenElement);
+            
+            if (isFullscreen) {
+                document.getElementById('expand-icon').style.display = 'none';
+                document.getElementById('compress-icon').style.display = 'block';
+                // Hide controls initially in fullscreen
+                document.getElementById('controls').classList.add('hidden');
+            } else {
+                document.getElementById('expand-icon').style.display = 'block';
+                document.getElementById('compress-icon').style.display = 'none';
+                // Show controls when exiting fullscreen
+                document.getElementById('controls').classList.remove('hidden');
+                // Clear any existing timeout
+                clearTimeout(controlsTimeout);
+            }
+        }
+        
+        // Handle screen click in fullscreen
+        function handleScreenClick() {
+            if (isFullscreen) {
+                showControlsTemporarily();
+            } else {
+                // Toggle play/pause when clicking in non-fullscreen mode
+                togglePlayPause();
+            }
+        }
+        
+        // Show controls for 5 seconds in fullscreen
+        function showControlsTemporarily() {
+            if (isFullscreen) {
+                // Show controls
+                document.getElementById('controls').classList.remove('hidden');
+                
+                // Clear existing timeout
+                clearTimeout(controlsTimeout);
+                
+                // Set timeout to hide controls after 5 seconds
+                controlsTimeout = setTimeout(() => {
+                    if (isFullscreen) {
+                        document.getElementById('controls').classList.add('hidden');
+                    }
+                }, 5000);
+            }
+        }
+        
+        // Security monitoring functions
+        function startSecurityMonitoring() {
+            // Monitor for navigation attempts
+            securityCheckInterval = setInterval(checkSecurity, 1000);
+            
+            // Block right-click
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showSecurityNotice();
+                return false;
+            });
+            
+            // Block keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Block Ctrl+ combinations
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    showSecurityNotice();
+                }
+                
+                // Block F12, Ctrl+Shift+I, etc.
+                if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
+                    e.preventDefault();
+                    showSecurityNotice();
+                }
+                
+                // Allow space bar for play/pause
+                if (e.keyCode === 32 && e.target === document.body) {
+                    e.preventDefault();
+                    togglePlayPause();
+                }
+                
+                // Allow arrow keys for seeking
+                if (e.keyCode === 37) { // Left arrow
+                    e.preventDefault();
+                    rewind10();
+                }
+                if (e.keyCode === 39) { // Right arrow
+                    e.preventDefault();
+                    forward10();
+                }
+            });
+            
+            // Prevent iframe navigation
+            window.addEventListener('beforeunload', function(e) {
+                if (window.location.href.includes('youtube.com') || window.location.href.includes('youtu.be')) {
+                    e.preventDefault();
+                    e.returnValue = 'Navigation blocked';
+                    showBlockOverlay();
+                    return 'Navigation blocked';
+                }
+            });
+        }
+        
+        function checkSecurity() {
+            // Check if player tries to navigate away
+            try {
+                const iframe = document.getElementById('player');
+                if (iframe && iframe.contentWindow) {
+                    const iframeUrl = iframe.contentWindow.location.href;
+                    if (iframeUrl.includes('youtube.com') || iframeUrl.includes('youtu.be')) {
+                        showBlockOverlay();
+                        player.stopVideo();
+                    }
+                }
+            } catch (e) {
+                // Cross-origin access blocked - this is good for security
+            }
+        }
+        
+        function hideYouTubeBranding() {
+            // Hide YouTube logo and other elements
+            const iframe = document.getElementById('player');
+            if (iframe) {
+                try {
+                    const doc = iframe.contentDocument || iframe.contentWindow.document;
+                    const elements = doc.querySelectorAll('.ytp-chrome-top, .ytp-watermark');
+                    elements.forEach(el => el.style.display = 'none');
+                } catch (e) {
+                    // Cross-origin access blocked - expected behavior
+                }
+            }
+        }
+        
+        function showSecurityNotice() {
+            const notice = document.getElementById('security-notice');
+            notice.style.display = 'block';
+            setTimeout(() => {
+                notice.style.display = 'none';
+            }, 2000);
+        }
+        
+        function showBlockOverlay() {
+            const overlay = document.getElementById('block-overlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Player control functions
+        function togglePlayPause() {
+            if (isPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+        
+        function rewind10() {
+            const currentTime = player.getCurrentTime();
+            player.seekTo(currentTime - 10, true);
+        }
+        
+        function forward10() {
+            const currentTime = player.getCurrentTime();
+            player.seekTo(currentTime + 10, true);
+        }
+        
+        // Toggle play/pause
+        document.getElementById('play-pause-btn').addEventListener('click', togglePlayPause);
+        
+        // Rewind 10 seconds
+        document.getElementById('rewind-btn').addEventListener('click', rewind10);
+        
+        // Forward 10 seconds
+        document.getElementById('forward-btn').addEventListener('click', forward10);
+        
+        // Update progress bar
+        function updateProgress() {
+            if (!player || !player.getDuration) return;
+            
+            const currentTime = player.getCurrentTime();
+            const duration = player.getDuration();
+            const progressPercent = (currentTime / duration) * 100;
+            
+            document.getElementById('progress').style.width = `${progressPercent}%`;
+            document.getElementById('progress-thumb').style.left = `${progressPercent}%`;
+            
+            updateTimeDisplay();
+        }
+        
+        // Update time display
+        function updateTimeDisplay() {
+            if (!player || !player.getDuration) return;
+            
+            const currentTime = player.getCurrentTime();
+            const duration = player.getDuration();
+            
+            document.getElementById('current-time').textContent = formatTime(currentTime);
+            document.getElementById('duration').textContent = formatTime(duration);
+        }
+        
+        // Format time in MM:SS
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+        
+        // Seek on progress bar click
+        document.getElementById('progress-container').addEventListener('click', (e) => {
+            if (!player || !player.getDuration) return;
+            
+            const rect = e.currentTarget.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            const duration = player.getDuration();
+            const newTime = percent * duration;
+            
+            player.seekTo(newTime, true);
+        });
+        
+        // Progress bar dragging
+        document.getElementById('progress-container').addEventListener('mousedown', (e) => {
+            isDragging = true;
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', stopDrag);
+        });
+        
+        function onDrag(e) {
+            if (!isDragging || !player || !player.getDuration) return;
+            
+            const rect = document.getElementById('progress-container').getBoundingClientRect();
+            let percent = (e.clientX - rect.left) / rect.width;
+            percent = Math.max(0, Math.min(1, percent));
+            
+            const duration = player.getDuration();
+            const newTime = percent * duration;
+            
+            player.seekTo(newTime, true);
+        }
+        
+        function stopDrag() {
+            isDragging = false;
+            document.removeEventListener('mousemove', onDrag);
+            document.removeEventListener('mouseup', stopDrag);
+        }
+        
+        // Volume control
+        document.getElementById('volume-slider').addEventListener('input', (e) => {
+            const volume = e.target.value;
+            currentVolume = volume;
+            player.setVolume(volume);
+            
+            if (volume == 0) {
+                isMuted = true;
+                document.getElementById('volume-high').style.display = 'none';
+                document.getElementById('volume-mute').style.display = 'block';
+            } else {
+                isMuted = false;
+                document.getElementById('volume-high').style.display = 'block';
+                document.getElementById('volume-mute').style.display = 'none';
+            }
+        });
+        
+        // Mute/unmute
+        document.getElementById('volume-btn').addEventListener('click', () => {
+            if (isMuted) {
+                player.unMute();
+                document.getElementById('volume-slider').value = currentVolume;
+                document.getElementById('volume-high').style.display = 'block';
+                document.getElementById('volume-mute').style.display = 'none';
+                isMuted = false;
+            } else {
+                player.mute();
+                document.getElementById('volume-slider').value = 0;
+                document.getElementById('volume-high').style.display = 'none';
+                document.getElementById('volume-mute').style.display = 'block';
+                isMuted = true;
+            }
+        });
+        
+        // Playback speed
+        document.getElementById('speed-btn').addEventListener('click', () => {
+            document.getElementById('speed-menu').classList.toggle('active');
+            document.getElementById('settings-menu').classList.remove('active');
+        });
+        
+        document.querySelectorAll('#speed-menu .menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const speed = parseFloat(item.getAttribute('data-speed'));
+                player.setPlaybackRate(speed);
+                document.getElementById('speed-btn').textContent = `${speed}x`;
+                
+                document.querySelectorAll('#speed-menu .menu-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                item.classList.add('active');
+                
+                document.getElementById('speed-menu').classList.remove('active');
+            });
+        });
+        
+        // Settings menu
+        document.getElementById('settings-btn').addEventListener('click', () => {
+            document.getElementById('settings-menu').classList.toggle('active');
+            document.getElementById('speed-menu').classList.remove('active');
+        });
+        
+        document.querySelectorAll('#settings-menu .menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const quality = item.getAttribute('data-quality');
+                // In a real implementation, you would set the video quality here
+                // player.setPlaybackQuality(quality);
+                
+                document.querySelectorAll('#settings-menu .menu-item').forEach(i => {
+                    i.textContent = i.textContent.replace(' ✓', '');
+                });
+                item.textContent += ' ✓';
+                
+                document.getElementById('settings-menu').classList.remove('active');
+            });
+        });
+        
+        // Fullscreen with YouTube-like behavior
+        document.getElementById('fullscreen-btn').addEventListener('click', () => {
+            const container = document.querySelector('.player-container');
+            
+            if (!isFullscreen) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.mozRequestFullScreen) {
+                    container.mozRequestFullScreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        });
+        
+        // Preview thumbnail on hover (simulated)
+        document.getElementById('progress-container').addEventListener('mousemove', (e) => {
+            if (!player || !player.getDuration) return;
+            
+            const rect = e.currentTarget.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            const duration = player.getDuration();
+            const hoverTime = percent * duration;
+            
+            const preview = document.getElementById('preview-thumbnail');
+            document.getElementById('preview-time').textContent = formatTime(hoverTime);
+            
+            // Position the preview
+            preview.style.left = `${e.clientX - rect.left - 80}px`;
+            preview.style.opacity = '1';
+            
+            // Use the current video ID for the preview thumbnail
+            preview.querySelector('img').src = `https://img.youtube.com/vi/${currentVideoId}/hqdefault.jpg`;
+        });
+        
+        document.getElementById('progress-container').addEventListener('mouseleave', () => {
+            document.getElementById('preview-thumbnail').style.opacity = '0';
+        });
+        
+        // Close menus when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#settings-btn') && !e.target.closest('#settings-menu')) {
+                document.getElementById('settings-menu').classList.remove('active');
+            }
+            if (!e.target.closest('#speed-btn') && !e.target.closest('#speed-menu')) {
+                document.getElementById('speed-menu').classList.remove('active');
+            }
+        });
+        
+        // Lecture selection functionality
+        document.querySelectorAll('.watch-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const lectureCard = this.closest('.lecture-card');
+                const videoId = lectureCard.getAttribute('data-video-id');
+                const notesLink = lectureCard.getAttribute('data-notes-link');
+                const title = lectureCard.getAttribute('data-title');
+                const description = lectureCard.getAttribute('data-description');
+                
+                // Update current video
+                currentVideoId = videoId;
+                
+                // Load new video
+                if (player && player.loadVideoById) {
+                    player.loadVideoById(videoId);
+                    player.playVideo();
+                }
+                
+                // Update lecture info
+                document.getElementById('current-lecture-title').textContent = title;
+                document.getElementById('current-lecture-description').textContent = description;
+                document.getElementById('current-notes-link').href = notesLink;
+                
+                // Update preview thumbnail
+                document.getElementById('preview-thumbnail').querySelector('img').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            });
+        });
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+            if (securityCheckInterval) {
+                clearInterval(securityCheckInterval);
+            }
+            if (controlsTimeout) {
+                clearTimeout(controlsTimeout);
+            }
+        });
+    </script>
+</body>
+</html>
