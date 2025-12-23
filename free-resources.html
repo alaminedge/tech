@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporary Download - Jagannath University Question Bank | AlaminEdge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00bfff;
+            --primary-dark: #0099cc;
+            --primary-light: #33ccff;
+            --secondary-color: #8a2be2;
+            --accent-color: #ff6b6b;
+            --warning-color: #ffa500;
+            --bg-color: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+            --gradient-warning: linear-gradient(135deg, #ffa500 0%, #ff6b6b 100%);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        /* Header */
+        .resource-header {
+            padding: 40px 0 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+
+        .brand-name {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
+        }
+
+        .resource-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .resource-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Warning Banner */
+        .warning-banner {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid var(--warning-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .warning-banner i {
+            color: var(--warning-color);
+            font-size: 1.8rem;
+        }
+
+        .warning-banner p {
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            text-align: center;
+            padding: 40px 0;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            margin: 30px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .countdown-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .countdown-box {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            min-width: 100px;
+            border: 1px solid var(--border-color);
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-warning);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .countdown-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .countdown-message {
+            color: var(--warning-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        /* Resource Card */
+        .resource-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .resource-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: #000;
+        }
+
+        .resource-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .resource-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Download Button */
+        .download-btn {
+            background: var(--gradient-primary);
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            border-radius: var(--radius-xl);
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .download-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
+        }
+
+        .download-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .download-info {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* Third Party Notice */
+        .notice-box {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .notice-title {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notice-content {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Temporary Page Notice */
+        .temporary-notice {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: var(--radius-lg);
+            margin: 30px 0;
+        }
+
+        .temporary-notice h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .temporary-notice p {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .resource-footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .resource-header h1 {
+                font-size: 2rem;
+            }
+            
+            .countdown-container {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-box {
+                min-width: 80px;
+                padding: 15px;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+            
+            .resource-meta {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .resource-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .resource-title {
+                font-size: 1.5rem;
+            }
+            
+            .countdown-box {
+                min-width: 70px;
+                padding: 12px;
+            }
+            
+            .countdown-value {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="resource-header">
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
+                <span class="brand-name">AlaminEdge</span>
+            </div>
+            <h1>Free Educational Resources</h1>
+            <p>Temporary access to valuable learning materials for Jagannath University students</p>
+        </header>
+
+        <!-- Warning Banner -->
+        <div class="warning-banner">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p><strong>Important Notice:</strong> This is a temporary resource page. The download will be available for <strong>2 days only</strong> from today (Dec 23, 2025). After this period, the page will no longer be accessible.</p>
+        </div>
+
+        <!-- Countdown Timer -->
+        <section class="countdown-section">
+            <h2 class="countdown-title">Time Remaining to Download</h2>
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <div class="countdown-value" id="days">02</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            <p class="countdown-message" id="countdown-message">Download will expire in: <span id="time-left">2 days</span></p>
+        </section>
+
+        <!-- Resource Card -->
+        <section class="resource-card">
+            <div class="resource-icon">
+                <i class="fas fa-file-pdf"></i>
+            </div>
+            <h2 class="resource-title">Jagannath University 25-26 A Unit Question Bank</h2>
+            <p class="resource-description">A comprehensive collection of questions for the A unit admission test of Jagannath University for the 2025-26 academic year. This PDF contains practice questions, previous patterns, and important topics to help you prepare effectively.</p>
+            
+            <div class="resource-meta">
+                <div class="meta-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>File Type: PDF Document</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Academic Year: 2025-26</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-university"></i>
+                    <span>University: Jagannath University</span>
+                </div>
+            </div>
+
+            <!-- Download Button -->
+            <p class="download-info">Click the button below to download the question bank PDF</p>
+            <button id="downloadButton" class="download-btn">
+                <i class="fas fa-download"></i>
+                <span>Download Question Bank PDF</span>
+            </button>
+            <p class="download-info"><small>The download will start immediately after clicking</small></p>
+        </section>
+
+        <!-- Third Party Notice -->
+        <div class="notice-box">
+            <h3 class="notice-title">
+                <i class="fas fa-info-circle"></i>
+                Third-Party Content Notice
+            </h3>
+            <p class="notice-content">
+                This PDF resource is provided by a third party and is shared here for educational purposes only. AlaminEdge does not claim ownership of this content. We are providing temporary access to assist students in their preparation. Please use this material responsibly and for personal study purposes only.
+            </p>
+        </div>
+
+        <!-- Temporary Page Notice -->
+        <div class="temporary-notice">
+            <h3><i class="fas fa-clock"></i> Temporary Webpage Notice</h3>
+            <p>This is a temporary webpage created exclusively for providing access to this specific resource. The page will be automatically deactivated after 2 days (on Dec 25, 2025). After this date, attempting to access this page will result in a "Page Not Found" error.</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="resource-footer">
+            <p>© 2025 AlaminEdge Premium | Educational Resources Portal</p>
+            <p>This temporary resource page will expire on: <strong>December 25, 2025, 11:59 PM</strong></p>
+            <a href="projects.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to All Projects
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // Set the expiration date (2 days from now)
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 2);
+        expirationDate.setHours(23, 59, 59, 999); // Set to end of day
+        
+        // Update the countdown every second
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeRemaining = expirationDate - now;
+            
+            // If time is up
+            if (timeRemaining <= 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.getElementById('time-left').textContent = 'EXPIRED';
+                document.getElementById('countdown-message').innerHTML = '<span style="color:#ff6b6b">Download link has expired!</span>';
+                document.getElementById('downloadButton').disabled = true;
+                document.getElementById('downloadButton').innerHTML = '<i class="fas fa-ban"></i><span>Download Expired</span>';
+                return;
+            }
+            
+            // Calculate days, hours, minutes, seconds
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            
+            // Update display
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            // Update time left message
+            let timeLeftMessage = '';
+            if (days > 0) {
+                timeLeftMessage = `${days} day${days !== 1 ? 's' : ''}`;
+                if (hours > 0) timeLeftMessage += `, ${hours} hour${hours !== 1 ? 's' : ''}`;
+            } else if (hours > 0) {
+                timeLeftMessage = `${hours} hour${hours !== 1 ? 's' : ''}`;
+                if (minutes > 0) timeLeftMessage += `, ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+            } else if (minutes > 0) {
+                timeLeftMessage = `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+                if (seconds > 0) timeLeftMessage += `, ${seconds} second${seconds !== 1 ? 's' : ''}`;
+            } else {
+                timeLeftMessage = `${seconds} second${seconds !== 1 ? 's' : ''}`;
+            }
+            
+            document.getElementById('time-left').textContent = timeLeftMessage;
+        }
+        
+        // Initialize countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Download button functionality
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            const button = this;
+            const originalContent = button.innerHTML;
+            
+            // Check if download has expired
+            const now = new Date().getTime();
+            if (expirationDate - now <= 0) {
+                alert('Sorry, the download link has expired. This resource is no longer available.');
+                return;
+            }
+            
+            // Show downloading state
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Downloading...</span>';
+            button.disabled = true;
+            
+            // Create a temporary link to trigger download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'https://drive.google.com/file/d/16287CcXMW_QGHruKzWE2PBt_WhUIk2uZ/view?usp=drivesdk';
+            downloadLink.target = '_blank';
+            downloadLink.download = 'JnU-25-26-A-unit-Question-Bank.pdf';
+            
+            // Simulate click to start download
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            
+            // Show download complete after a short delay
+            setTimeout(function() {
+                button.innerHTML = '<i class="fas fa-check"></i><span>Download Complete!</span>';
+                
+                // Revert to original state after 3 seconds
+                setTimeout(function() {
+                    button.innerHTML = originalContent;
+                    button.disabled = false;
+                }, 3000);
+            }, 1500);
+            
+            // Track download (you could add analytics here)
+            console.log('PDF download initiated:', new Date().toLocaleString());
+        });
+        
+        // Page expiration check on load
+        window.addEventListener('load', function() {
+            const now = new Date().getTime();
+            if (expirationDate - now <= 0) {
+                // If page has expired, show a message and disable download
+                document.getElementById('downloadButton').disabled = true;
+                document.getElementById('downloadButton').innerHTML = '<i class="fas fa-ban"></i><span>Download Expired</span>';
+                
+                // Update the warning banner
+                const warningBanner = document.querySelector('.warning-banner');
+                warningBanner.innerHTML = '<i class="fas fa-exclamation-triangle"></i><p><strong>Page Expired:</strong> This temporary resource page has expired as of December 25, 2025. The download is no longer available.</p>';
+                warningBanner.style.background = 'rgba(255, 107, 107, 0.1)';
+                warningBanner.style.borderColor = 'var(--accent-color)';
+            }
+        });
+    </script>
+</body>
+</html>
