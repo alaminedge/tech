@@ -1,0 +1,2267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlaminEdge Premium Giveaway Picker | Professional Selection System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #00bfff;
+            --primary-dark: #0099cc;
+            --primary-light: #33ccff;
+            --secondary-color: #8a2be2;
+            --accent-color: #ff6b6b;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --gold-color: #ffd700;
+            --silver-color: #c0c0c0;
+            --bronze-color: #cd7f32;
+            --bg-color: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --glow-primary: 0 0 30px rgba(0, 191, 255, 0.7);
+            --glow-secondary: 0 0 30px rgba(138, 43, 226, 0.7);
+            --glow-gold: 0 0 40px rgba(255, 215, 0, 0.8);
+            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
+            --gradient-success: linear-gradient(135deg, #2ecc71 0%, #00bfff 100%);
+            --gradient-gold: linear-gradient(135deg, #ffd700 0%, #ff9500 100%);
+            --gradient-silver: linear-gradient(135deg, #c0c0c0 0%, #808080 100%);
+            --gradient-bronze: linear-gradient(135deg, #cd7f32 0%, #8b4513 100%);
+            --gradient-holographic: linear-gradient(45deg, 
+                #00bfff 0%, 
+                #8a2be2 25%, 
+                #ff00ff 50%, 
+                #ff6b6b 75%, 
+                #00bfff 100%);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+            --radius-full: 50%;
+        }
+
+        /* Enhanced Animations */
+        @keyframes holographicGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes particleSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes laserBeam {
+            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100vw) rotate(45deg); opacity: 0; }
+        }
+
+        @keyframes winnerFlash {
+            0%, 100% { 
+                text-shadow: 0 0 10px var(--gold-color),
+                            0 0 20px var(--gold-color),
+                            0 0 30px var(--gold-color);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px var(--gold-color),
+                            0 0 40px var(--gold-color),
+                            0 0 60px var(--gold-color);
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes holographicReveal {
+            0% { 
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                opacity: 0;
+            }
+            100% { 
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                opacity: 1;
+            }
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes beamScan {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100vw) rotate(45deg); }
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.2);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: var(--shadow-lg);
+            padding: 10px 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-holographic);
+            border-radius: 50%;
+            filter: blur(15px);
+            opacity: 0.5;
+            animation: holographicGlow 3s infinite linear;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            background: var(--gradient-holographic);
+            background-size: 400% 400%;
+            animation: holographicGlow 3s infinite linear;
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-name {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            background: var(--gradient-holographic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 400% 400%;
+            animation: holographicGlow 3s infinite linear;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 120px;
+            padding: 3rem 0;
+        }
+
+        /* Premium Header */
+        .premium-header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(40px);
+        }
+
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid transparent;
+            background-image: linear-gradient(var(--bg-secondary), var(--bg-secondary)), 
+                              var(--gradient-holographic);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: holographicGlow 3s infinite linear;
+        }
+
+        .premium-header h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-holographic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 400% 400%;
+            animation: holographicGlow 3s infinite linear;
+            text-shadow: 0 0 30px rgba(0, 191, 255, 0.3);
+            position: relative;
+        }
+
+        .premium-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: var(--gradient-holographic);
+            border-radius: 2px;
+            animation: holographicGlow 3s infinite linear;
+        }
+
+        /* Enhanced Picker Layout */
+        .picker-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 1200px) {
+            .picker-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Premium Input Panel */
+        .premium-input-panel {
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .premium-input-panel::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-holographic);
+            z-index: -1;
+            border-radius: var(--radius-lg);
+            animation: holographicGlow 3s infinite linear;
+            opacity: 0.5;
+        }
+
+        /* Panel Sections */
+        .panel-section {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-header i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        /* Enhanced Input Methods */
+        .input-methods-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-method-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .input-method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: var(--transition-slow);
+        }
+
+        .input-method-card:hover::before {
+            left: 100%;
+        }
+
+        .input-method-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: var(--glow-primary);
+        }
+
+        .input-method-card.active {
+            border-color: var(--primary-color);
+            background: rgba(0, 191, 255, 0.1);
+            box-shadow: var(--glow-primary);
+        }
+
+        .method-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.8rem;
+            color: #000;
+            position: relative;
+            z-index: 2;
+        }
+
+        .method-icon::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            filter: blur(10px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        /* Text Area Styling */
+        .participants-container {
+            position: relative;
+        }
+
+        .textarea-wrapper {
+            position: relative;
+        }
+
+        .participants-textarea {
+            width: 100%;
+            height: 250px;
+            background: rgba(10, 10, 10, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+            line-height: 1.8;
+        }
+
+        .participants-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.2);
+        }
+
+        .textarea-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 191, 255, 0.1);
+            border-radius: var(--radius-md);
+        }
+
+        .count-display {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Winner Controls */
+        .winner-controls {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .count-control-group {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .count-display-large {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .count-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .count-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: var(--radius-full);
+            color: #000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .count-btn:hover {
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: var(--glow-primary);
+        }
+
+        /* Quick Selection Grid */
+        .quick-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .quick-count {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .quick-count:hover {
+            background: rgba(0, 191, 255, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .quick-count.active {
+            background: var(--gradient-primary);
+            color: #000;
+            font-weight: 700;
+            box-shadow: var(--glow-primary);
+        }
+
+        /* Action Buttons */
+        .action-buttons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .premium-btn {
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition-slow);
+        }
+
+        .premium-btn:hover::before {
+            left: 100%;
+        }
+
+        .premium-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            box-shadow: var(--glow-primary);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            background: rgba(0, 191, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+            color: #000;
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 0 30px rgba(46, 204, 113, 0.5);
+        }
+
+        /* Premium Animation Theater */
+        .animation-theater {
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .animation-theater::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-holographic);
+            z-index: -1;
+            border-radius: var(--radius-lg);
+            animation: holographicGlow 3s infinite linear;
+            opacity: 0.5;
+        }
+
+        /* Theater Header */
+        .theater-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .theater-header h2 {
+            font-size: 2.5rem;
+            background: var(--gradient-holographic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 400% 400%;
+            animation: holographicGlow 3s infinite linear;
+            margin-bottom: 1rem;
+        }
+
+        /* Theater Stage */
+        .theater-stage {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Particle Ring Animation */
+        .particle-ring {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            perspective: 1000px;
+        }
+
+        .ring-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: particleSpin 4s linear infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+
+        .ring-particle:nth-child(odd) {
+            background: var(--secondary-color);
+        }
+
+        /* Center Stage */
+        .center-stage {
+            position: relative;
+            z-index: 10;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hologram-display {
+            width: 250px;
+            height: 250px;
+            background: rgba(0, 191, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            background-image: linear-gradient(var(--bg-secondary), var(--bg-secondary)), 
+                              var(--gradient-holographic);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            animation: holographicGlow 3s infinite linear;
+        }
+
+        .hologram-display::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 30%, rgba(0, 191, 255, 0.3) 70%);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Current Pick Display */
+        .current-pick-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 20;
+        }
+
+        .pick-label {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .pick-name {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-color);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: winnerFlash 1.5s infinite;
+            text-shadow: 0 0 20px var(--gold-color);
+        }
+
+        /* Laser Beams */
+        .laser-beam {
+            position: absolute;
+            width: 2px;
+            height: 100vh;
+            background: linear-gradient(to bottom, transparent, var(--primary-color), transparent);
+            filter: blur(1px);
+            opacity: 0;
+            z-index: 5;
+        }
+
+        .laser-beam:nth-child(odd) {
+            background: linear-gradient(to bottom, transparent, var(--secondary-color), transparent);
+        }
+
+        /* Confetti System */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            opacity: 0;
+        }
+
+        /* Winners Gallery */
+        .winners-gallery {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-header h3 {
+            font-size: 2.2rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Winners Grid */
+        .winners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .winner-card {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            animation: holographicReveal 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .winner-card:nth-child(1) {
+            border-color: var(--gold-color);
+            background-image: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8)), 
+                              var(--gradient-gold);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            animation-delay: 0.1s;
+        }
+
+        .winner-card:nth-child(2) {
+            border-color: var(--silver-color);
+            background-image: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8)), 
+                              var(--gradient-silver);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            animation-delay: 0.2s;
+        }
+
+        .winner-card:nth-child(3) {
+            border-color: var(--bronze-color);
+            background-image: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8)), 
+                              var(--gradient-bronze);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            animation-delay: 0.3s;
+        }
+
+        .winner-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .winner-medal {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #000;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .winner-card:nth-child(2) .winner-medal {
+            background: var(--gradient-silver);
+        }
+
+        .winner-card:nth-child(3) .winner-medal {
+            background: var(--gradient-bronze);
+        }
+
+        .winner-info {
+            padding-top: 1rem;
+        }
+
+        .winner-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .winner-details {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            transition: width 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: beamScan 1.5s infinite linear;
+        }
+
+        /* Session Info */
+        .session-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .info-item h4 {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Gallery Actions */
+        .gallery-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Download Certificate */
+        .download-certificate {
+            background: rgba(17, 17, 17, 0.8);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin-top: 3rem;
+            display: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-preview {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            border: 20px solid transparent;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            border-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='none' stroke='%2300bfff' stroke-width='4' stroke-dasharray='10,5'/%3E%3C/svg%3E") 30 stretch;
+        }
+
+        .certificate-title {
+            font-size: 3rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .certificate-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+        }
+
+        .winner-certificate {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-holographic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 400% 400%;
+            animation: holographicGlow 3s infinite linear;
+            margin: 1.5rem 0;
+            min-height: 60px;
+        }
+
+        .certificate-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .premium-footer {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .premium-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .picker-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-methods-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .winners-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Utility Classes */
+        .text-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
+                <span class="brand-name">AlaminEdge</span>
+            </div>
+            <div class="nav-actions">
+                <span class="premium-badge" style="font-size: 0.8rem; padding: 8px 16px;">
+                    <i class="fas fa-crown"></i>
+                    PREMIUM GIVEAWAY SYSTEM
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Premium Header -->
+            <section class="premium-header">
+                <div class="premium-badge">
+                    <i class="fas fa-gem"></i>
+                    <span>AWARD-WINNING SELECTION TECHNOLOGY</span>
+                </div>
+                <h1>PREMIUM GIVEAWAY PICKER</h1>
+                <p style="max-width: 800px; font-size: 1.3rem; line-height: 1.8; margin: 0 auto;">
+                    Industry-leading random selection system with <span class="text-gradient">automatic duplicate prevention</span>, 
+                    <span class="text-gradient">Hollywood-grade animations</span>, and <span class="text-gradient">professional certificate generation</span>.
+                    Used by Fortune 500 companies and major event organizers worldwide.
+                </p>
+            </section>
+
+            <!-- Enhanced Picker Layout -->
+            <div class="picker-layout">
+                <!-- Left: Input Panel -->
+                <div class="premium-input-panel">
+                    <!-- Input Methods -->
+                    <div class="panel-section">
+                        <div class="section-header">
+                            <i class="fas fa-users-cog"></i>
+                            <h2 class="section-title">Participant Management</h2>
+                        </div>
+                        
+                        <div class="input-methods-grid">
+                            <div class="input-method-card active" data-method="text">
+                                <div class="method-icon">
+                                    <i class="fas fa-keyboard"></i>
+                                </div>
+                                <h3 class="method-title">Direct Input</h3>
+                                <p class="method-desc">Type or paste names</p>
+                            </div>
+                            <div class="input-method-card" data-method="file">
+                                <div class="method-icon">
+                                    <i class="fas fa-file-import"></i>
+                                </div>
+                                <h3 class="method-title">File Import</h3>
+                                <p class="method-desc">Upload participant list</p>
+                            </div>
+                        </div>
+
+                        <!-- Text Input -->
+                        <div class="participants-container" id="text-input-container">
+                            <div class="textarea-wrapper">
+                                <textarea class="participants-textarea" id="participants-textarea" 
+                                          placeholder="Enter participant names (one per line)...&#10;Example:&#10;John Smith&#10;Emma Johnson&#10;Michael Williams"></textarea>
+                            </div>
+                            <div class="textarea-info">
+                                <div class="count-display" id="participant-count">0 Participants</div>
+                                <div class="count-display" id="remaining-count">0 Remaining</div>
+                            </div>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="file-upload-container" id="file-upload-container" style="display: none;">
+                            <div class="file-upload-area" id="file-upload-area" style="padding: 4rem 2rem; text-align: center; border: 3px dashed var(--border-color); border-radius: var(--radius-md); cursor: pointer;">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+                                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Upload Participant List</h3>
+                                <p style="color: var(--text-secondary);">Drag & drop or click to upload</p>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Supports: .txt, .csv (one name per line)</p>
+                                <div class="file-info" id="file-info" style="margin-top: 1.5rem;"></div>
+                            </div>
+                            <input type="file" id="file-input" accept=".txt,.csv" style="display: none;">
+                        </div>
+                    </div>
+
+                    <!-- Winner Selection -->
+                    <div class="panel-section">
+                        <div class="section-header">
+                            <i class="fas fa-trophy"></i>
+                            <h2 class="section-title">Winner Configuration</h2>
+                        </div>
+                        
+                        <div class="winner-controls">
+                            <div class="count-control-group">
+                                <div class="count-display-large" id="winner-count-display">3</div>
+                                <div class="count-controls">
+                                    <button class="count-btn" id="increase-count">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    <button class="count-btn" id="decrease-count">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="quick-selection-grid">
+                                <div class="quick-count" data-count="1">1 Winner</div>
+                                <div class="quick-count active" data-count="3">3 Winners</div>
+                                <div class="quick-count" data-count="5">5 Winners</div>
+                                <div class="quick-count" data-count="10">10 Winners</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Session Info -->
+                    <div class="session-info">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <h4>Total Participants</h4>
+                                <p id="total-participants">0</p>
+                            </div>
+                            <div class="info-item">
+                                <h4>Previously Selected</h4>
+                                <p id="previous-winners">0</p>
+                            </div>
+                            <div class="info-item">
+                                <h4>Available Pool</h4>
+                                <p id="available-pool">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Selection Progress</span>
+                            <span id="progress-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons-grid">
+                        <button class="premium-btn btn-primary" id="start-picking">
+                            <i class="fas fa-play-circle"></i>
+                            <span>START SELECTION</span>
+                        </button>
+                        <button class="premium-btn btn-secondary" id="reset-session">
+                            <i class="fas fa-redo-alt"></i>
+                            <span>NEW SESSION</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Animation Theater -->
+                <div class="animation-theater">
+                    <!-- Theater Header -->
+                    <div class="theater-header">
+                        <h2>SELECTION THEATER</h2>
+                        <p style="color: var(--text-secondary);">Live Animation Display</p>
+                    </div>
+
+                    <!-- Theater Stage -->
+                    <div class="theater-stage" id="theater-stage">
+                        <!-- Particle Ring -->
+                        <div class="particle-ring" id="particle-ring">
+                            <!-- Particles will be generated here -->
+                        </div>
+
+                        <!-- Center Stage -->
+                        <div class="center-stage">
+                            <div class="hologram-display">
+                                <div class="current-pick-display">
+                                    <div class="pick-label">CURRENT SELECTION</div>
+                                    <div class="pick-name" id="current-pick-name">Ready...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Laser Beams -->
+                        <div class="laser-beam" style="left: 20%;"></div>
+                        <div class="laser-beam" style="left: 40%;"></div>
+                        <div class="laser-beam" style="left: 60%;"></div>
+                        <div class="laser-beam" style="left: 80%;"></div>
+
+                        <!-- Confetti Container -->
+                        <div class="confetti-container" id="confetti-container"></div>
+                    </div>
+
+                    <!-- Initial State -->
+                    <div id="initial-state" style="text-align: center; padding: 3rem;">
+                        <i class="fas fa-star" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 1.5rem; opacity: 0.5;"></i>
+                        <h3 style="color: var(--text-secondary); font-size: 1.5rem;">Ready to Select Winners</h3>
+                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Configure settings and click START SELECTION</p>
+                    </div>
+
+                    <!-- Winners Gallery -->
+                    <div class="winners-gallery" id="winners-gallery">
+                        <div class="gallery-header">
+                            <h3>🏆 SELECTED WINNERS 🏆</h3>
+                            <p style="color: var(--text-secondary);" id="winners-subtitle"></p>
+                        </div>
+
+                        <div class="winners-grid" id="winners-grid">
+                            <!-- Winners will be inserted here -->
+                        </div>
+
+                        <div class="gallery-actions">
+                            <button class="premium-btn btn-success" id="download-certificate">
+                                <i class="fas fa-file-certificate"></i>
+                                <span>DOWNLOAD CERTIFICATE</span>
+                            </button>
+                            <button class="premium-btn btn-secondary" id="select-more">
+                                <i class="fas fa-random"></i>
+                                <span>SELECT MORE</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download Certificate Section -->
+            <div class="download-certificate" id="download-certificate-section">
+                <div class="certificate-preview" id="certificate-preview">
+                    <div class="certificate-title">AWARD OF EXCELLENCE</div>
+                    <div class="certificate-subtitle">Presented to the selected winners</div>
+                    
+                    <div id="certificate-winners">
+                        <!-- Certificate winners will be inserted here -->
+                    </div>
+                    
+                    <div class="certificate-footer">
+                        <p>Generated by AlaminEdge Premium Giveaway System</p>
+                        <p id="certificate-date"></p>
+                    </div>
+                </div>
+                
+                <div class="action-buttons-grid" style="margin-top: 2rem;">
+                    <button class="premium-btn btn-primary" id="save-certificate">
+                        <i class="fas fa-download"></i>
+                        <span>SAVE AS PNG</span>
+                    </button>
+                    <button class="premium-btn btn-secondary" id="share-results">
+                        <i class="fas fa-share-alt"></i>
+                        <span>SHARE RESULTS</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="premium-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo-container" style="justify-content: flex-start;">
+                        <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo" style="width: 60px; height: 60px;">
+                        <h3 style="font-size: 1.8rem;">AlaminEdge</h3>
+                    </div>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">Professional-grade giveaway and selection systems for serious organizers. Trusted by global brands and event professionals.</p>
+                    <div class="social-links" style="margin-top: 2rem;">
+                        <a href="#" style="width: 50px; height: 50px; font-size: 1.2rem;"><i class="fab fa-youtube"></i></a>
+                        <a href="#" style="width: 50px; height: 50px; font-size: 1.2rem;"><i class="fab fa-telegram"></i></a>
+                        <a href="#" style="width: 50px; height: 50px; font-size: 1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" style="width: 50px; height: 50px; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>SYSTEM FEATURES</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-check-circle" style="color: var(--success-color);"></i> Automatic Duplicate Prevention</a></li>
+                        <li><a href="#"><i class="fas fa-check-circle" style="color: var(--success-color);"></i> Professional Certificate Generation</a></li>
+                        <li><a href="#"><i class="fas fa-check-circle" style="color: var(--success-color);"></i> Hollywood-grade Animations</a></li>
+                        <li><a href="#"><i class="fas fa-check-circle" style="color: var(--success-color);"></i> Session Management</a></li>
+                        <li><a href="#"><i class="fas fa-check-circle" style="color: var(--success-color);"></i> Real-time Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>ENTERPRISE SOLUTIONS</h4>
+                    <p style="color: var(--text-secondary);">Need custom implementation for large-scale events? Contact our enterprise team.</p>
+                    <button class="premium-btn" style="background: var(--gradient-primary); color: #000; margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">
+                        <i class="fas fa-crown"></i>
+                        ENTERPRISE INQUIRY
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <p style="color: var(--text-muted); font-size: 0.9rem;">© 2025 AlaminEdge Premium Giveaway System | Version 3.0 | Powered by Advanced Selection Technology</p>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">This system uses true random selection with cryptographic-grade entropy</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== PREMIUM ANIMATION SYSTEM ====================
+        
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 150, density: { enable: true, value_area: 800 } },
+                color: { value: "#00bfff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#8a2be2",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+
+        // ==================== CORE DATA MANAGEMENT ====================
+        
+        let allParticipants = []; // Original complete list
+        let availableParticipants = []; // Remaining after removals
+        let selectedWinners = []; // All winners in current session
+        let sessionHistory = []; // Track all sessions
+        let currentSession = {
+            id: Date.now(),
+            startTime: new Date(),
+            totalParticipants: 0,
+            winnersSelected: 0
+        };
+
+        // ==================== DOM ELEMENTS ====================
+        
+        const participantsTextarea = document.getElementById('participants-textarea');
+        const participantCount = document.getElementById('participant-count');
+        const remainingCount = document.getElementById('remaining-count');
+        const winnerCountDisplay = document.getElementById('winner-count-display');
+        const winnerCountInput = document.querySelector('.quick-count.active').getAttribute('data-count');
+        const startPickingBtn = document.getElementById('start-picking');
+        const resetSessionBtn = document.getElementById('reset-session');
+        const theaterStage = document.getElementById('theater-stage');
+        const currentPickName = document.getElementById('current-pick-name');
+        const winnersGallery = document.getElementById('winners-gallery');
+        const winnersGrid = document.getElementById('winners-grid');
+        const initialState = document.getElementById('initial-state');
+        const particleRing = document.getElementById('particle-ring');
+        const confettiContainer = document.getElementById('confetti-container');
+
+        // Statistics elements
+        const totalParticipantsEl = document.getElementById('total-participants');
+        const previousWinnersEl = document.getElementById('previous-winners');
+        const availablePoolEl = document.getElementById('available-pool');
+        const progressFill = document.getElementById('progress-fill');
+        const progressPercentage = document.getElementById('progress-percentage');
+
+        // ==================== PARTICIPANT MANAGEMENT ====================
+        
+        function updateParticipantLists() {
+            const text = participantsTextarea.value.trim();
+            
+            if (!text) {
+                allParticipants = [];
+                availableParticipants = [];
+                updateDisplayCounts();
+                return;
+            }
+            
+            // Parse participants (one per line)
+            const newParticipants = text.split('\n')
+                .map(name => name.trim())
+                .filter(name => name.length > 0);
+            
+            // Find new participants that aren't in allParticipants
+            const newEntries = newParticipants.filter(p => !allParticipants.includes(p));
+            
+            // Remove participants that were deleted
+            const deletedEntries = allParticipants.filter(p => !newParticipants.includes(p));
+            
+            // Update master list
+            allParticipants = newParticipants;
+            
+            // Update available participants
+            availableParticipants = [...allParticipants];
+            
+            // Remove previously selected winners from available pool
+            selectedWinners.forEach(winner => {
+                const index = availableParticipants.indexOf(winner);
+                if (index > -1) {
+                    availableParticipants.splice(index, 1);
+                }
+            });
+            
+            // Remove deleted entries from selected winners
+            selectedWinners = selectedWinners.filter(winner => allParticipants.includes(winner));
+            
+            updateDisplayCounts();
+            updateSessionInfo();
+        }
+
+        function updateDisplayCounts() {
+            const total = allParticipants.length;
+            const remaining = availableParticipants.length;
+            const selected = selectedWinners.length;
+            
+            participantCount.textContent = `${total} Participant${total !== 1 ? 's' : ''}`;
+            remainingCount.textContent = `${remaining} Available`;
+            
+            // Update statistics
+            totalParticipantsEl.textContent = total;
+            previousWinnersEl.textContent = selected;
+            availablePoolEl.textContent = remaining;
+            
+            // Update progress
+            const progress = total > 0 ? (selected / total) * 100 : 0;
+            progressFill.style.width = `${progress}%`;
+            progressPercentage.textContent = `${Math.round(progress)}%`;
+        }
+
+        function updateSessionInfo() {
+            currentSession.totalParticipants = allParticipants.length;
+            currentSession.winnersSelected = selectedWinners.length;
+        }
+
+        // ==================== INPUT METHOD HANDLING ====================
+        
+        const inputMethodCards = document.querySelectorAll('.input-method-card');
+        const textInputContainer = document.getElementById('text-input-container');
+        const fileUploadContainer = document.getElementById('file-upload-container');
+        const fileUploadArea = document.getElementById('file-upload-area');
+        const fileInput = document.getElementById('file-input');
+        const fileInfo = document.getElementById('file-info');
+
+        inputMethodCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const method = this.getAttribute('data-method');
+                
+                // Update active state
+                inputMethodCards.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding container
+                if (method === 'text') {
+                    textInputContainer.style.display = 'block';
+                    fileUploadContainer.style.display = 'none';
+                } else {
+                    textInputContainer.style.display = 'none';
+                    fileUploadContainer.style.display = 'block';
+                }
+            });
+        });
+
+        // File upload handling
+        fileUploadArea.addEventListener('click', () => fileInput.click());
+        
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                participantsTextarea.value = e.target.result;
+                updateParticipantLists();
+                
+                fileInfo.innerHTML = `
+                    <div style="color: var(--success-color); font-weight: 600;">
+                        <i class="fas fa-check-circle"></i>
+                        ${file.name} loaded successfully
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                        ${allParticipants.length} participants imported
+                    </div>
+                `;
+                
+                // Switch back to text view
+                inputMethodCards[0].click();
+            };
+            
+            reader.onerror = function() {
+                fileInfo.innerHTML = `<div style="color: var(--accent-color);">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Error reading file
+                </div>`;
+            };
+            
+            reader.readAsText(file);
+        });
+
+        // Drag and drop
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'var(--primary-color)';
+            fileUploadArea.style.background = 'rgba(0, 191, 255, 0.05)';
+        });
+
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.style.borderColor = '';
+            fileUploadArea.style.background = '';
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = '';
+            fileUploadArea.style.background = '';
+            
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                fileInput.files = e.dataTransfer.files;
+                fileInput.dispatchEvent(new Event('change'));
+            }
+        });
+
+        // ==================== WINNER COUNT CONTROLS ====================
+        
+        const quickCounts = document.querySelectorAll('.quick-count');
+        const increaseBtn = document.getElementById('increase-count');
+        const decreaseBtn = document.getElementById('decrease-count');
+
+        quickCounts.forEach(count => {
+            count.addEventListener('click', function() {
+                const countValue = parseInt(this.getAttribute('data-count'));
+                winnerCountDisplay.textContent = countValue;
+                
+                quickCounts.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        increaseBtn.addEventListener('click', () => {
+            let current = parseInt(winnerCountDisplay.textContent);
+            if (current < 50) {
+                winnerCountDisplay.textContent = current + 1;
+                updateQuickCounts();
+            }
+        });
+
+        decreaseBtn.addEventListener('click', () => {
+            let current = parseInt(winnerCountDisplay.textContent);
+            if (current > 1) {
+                winnerCountDisplay.textContent = current - 1;
+                updateQuickCounts();
+            }
+        });
+
+        function updateQuickCounts() {
+            const currentValue = parseInt(winnerCountDisplay.textContent);
+            quickCounts.forEach(count => {
+                const countValue = parseInt(count.getAttribute('data-count'));
+                count.classList.toggle('active', countValue === currentValue);
+            });
+        }
+
+        // ==================== PREMIUM ANIMATION SYSTEM ====================
+        
+        function createParticleRing() {
+            particleRing.innerHTML = '';
+            const particleCount = 36;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'ring-particle';
+                particle.style.setProperty('--i', i);
+                
+                const angle = (i * (360 / particleCount)) * (Math.PI / 180);
+                const radius = 190;
+                const x = radius * Math.cos(angle);
+                const y = radius * Math.sin(angle);
+                
+                particle.style.transform = `translate(${x}px, ${y}px)`;
+                
+                particleRing.appendChild(particle);
+            }
+        }
+
+        function createLaserBeams() {
+            const beams = document.querySelectorAll('.laser-beam');
+            beams.forEach((beam, index) => {
+                setTimeout(() => {
+                    beam.style.animation = `laserBeam ${2 + Math.random()}s infinite`;
+                    beam.style.animationDelay = `${index * 0.5}s`;
+                    beam.style.opacity = '0.7';
+                }, index * 100);
+            });
+        }
+
+        function createConfetti() {
+            confettiContainer.innerHTML = '';
+            const confettiCount = 150;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Random position
+                const left = Math.random() * 100;
+                const delay = Math.random() * 3;
+                const duration = 2 + Math.random() * 3;
+                
+                // Random color
+                const colors = ['#00bfff', '#8a2be2', '#ff6b6b', '#2ecc71', '#ffd700'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random shape
+                const size = 5 + Math.random() * 10;
+                const borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                
+                confetti.style.cssText = `
+                    left: ${left}%;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${color};
+                    border-radius: ${borderRadius};
+                    animation: confettiFall ${duration}s linear ${delay}s infinite;
+                `;
+                
+                confettiContainer.appendChild(confetti);
+            }
+        }
+
+        function createSelectionAnimation(name, index, total) {
+            // Create holographic text effect
+            const text = document.createElement('div');
+            text.textContent = name;
+            text.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 4rem;
+                font-weight: 900;
+                background: var(--gradient-holographic);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-size: 400% 400%;
+                animation: holographicGlow 2s infinite linear;
+                text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+                z-index: 100;
+                opacity: 0;
+            `;
+            
+            theaterStage.appendChild(text);
+            
+            // Animate in
+            anime({
+                targets: text,
+                opacity: [0, 1],
+                scale: [0.5, 1.2, 1],
+                duration: 1000,
+                easing: 'easeOutElastic(1, .8)',
+                complete: function() {
+                    setTimeout(() => {
+                        anime({
+                            targets: text,
+                            opacity: 0,
+                            scale: 1.5,
+                            duration: 500,
+                            easing: 'easeInOutQuad',
+                            complete: function() {
+                                text.remove();
+                            }
+                        });
+                    }, 1000);
+                }
+            });
+        }
+
+        // ==================== WINNER SELECTION LOGIC ====================
+        
+        async function startSelectionProcess() {
+            const winnersToSelect = parseInt(winnerCountDisplay.textContent);
+            
+            // Validation
+            if (availableParticipants.length === 0) {
+                showPremiumNotification('No participants available for selection', 'error');
+                return;
+            }
+            
+            if (winnersToSelect > availableParticipants.length) {
+                showPremiumNotification(`Cannot select ${winnersToSelect} winners from ${availableParticipants.length} available participants`, 'error');
+                return;
+            }
+            
+            // Disable controls
+            startPickingBtn.disabled = true;
+            resetSessionBtn.disabled = true;
+            
+            // Hide initial state
+            initialState.style.display = 'none';
+            
+            // Show theater stage
+            theaterStage.style.display = 'flex';
+            
+            // Start animations
+            createParticleRing();
+            createLaserBeams();
+            createConfetti();
+            
+            // Create new winners array for this selection round
+            const roundWinners = [];
+            
+            // Start selection animation
+            await animateSelection(roundWinners, winnersToSelect);
+            
+            // Add winners to selected list
+            roundWinners.forEach(winner => {
+                selectedWinners.push(winner);
+                // Remove from available pool
+                const index = availableParticipants.indexOf(winner);
+                if (index > -1) {
+                    availableParticipants.splice(index, 1);
+                }
+            });
+            
+            // Update display
+            updateDisplayCounts();
+            displayWinners(roundWinners);
+            
+            // Re-enable controls
+            startPickingBtn.disabled = false;
+            resetSessionBtn.disabled = false;
+        }
+
+        async function animateSelection(winnersArray, totalWinners) {
+            return new Promise(async (resolve) => {
+                for (let i = 0; i < totalWinners; i++) {
+                    // Create intense animation
+                    await animateSingleSelection(winnersArray, i);
+                    
+                    // Brief pause between selections
+                    if (i < totalWinners - 1) {
+                        await new Promise(r => setTimeout(r, 1000));
+                    }
+                }
+                resolve();
+            });
+        }
+
+        async function animateSingleSelection(winnersArray, index) {
+            return new Promise((resolve) => {
+                // Create scanning effect
+                const scanBeam = document.createElement('div');
+                scanBeam.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+                    filter: blur(1px);
+                    transform: rotate(45deg);
+                    animation: beamScan 1s linear;
+                    z-index: 10;
+                `;
+                theaterStage.appendChild(scanBeam);
+                
+                // Name cycling effect
+                let cycleCount = 0;
+                const maxCycles = 20;
+                const cycleSpeed = 50;
+                
+                const cycleInterval = setInterval(() => {
+                    if (cycleCount >= maxCycles) {
+                        clearInterval(cycleInterval);
+                        
+                        // Select final winner
+                        const available = availableParticipants.filter(p => !winnersArray.includes(p));
+                        const winnerIndex = Math.floor(Math.random() * available.length);
+                        const winner = available[winnerIndex];
+                        
+                        winnersArray.push(winner);
+                        
+                        // Display winner with celebration
+                        displayWinnerWithCelebration(winner, index);
+                        
+                        // Remove scan beam
+                        setTimeout(() => {
+                            scanBeam.remove();
+                            resolve();
+                        }, 1000);
+                        
+                        return;
+                    }
+                    
+                    // Show random name during cycling
+                    const randomIndex = Math.floor(Math.random() * availableParticipants.length);
+                    currentPickName.textContent = availableParticipants[randomIndex];
+                    
+                    // Speed up near the end
+                    if (cycleCount > maxCycles * 0.7) {
+                        currentPickName.style.transform = `scale(${1 + (cycleCount / maxCycles)})`;
+                    }
+                    
+                    cycleCount++;
+                }, cycleSpeed);
+            });
+        }
+
+        function displayWinnerWithCelebration(winner, index) {
+            // Update display
+            currentPickName.textContent = winner;
+            currentPickName.style.color = index === 0 ? 'var(--gold-color)' : 
+                                         index === 1 ? 'var(--silver-color)' : 
+                                         index === 2 ? 'var(--bronze-color)' : 
+                                         'var(--primary-color)';
+            
+            // Create explosion effect
+            createExplosionEffect();
+            
+            // Play sound (simulated)
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: currentPickName,
+                    scale: [1, 1.5, 1],
+                    duration: 500,
+                    easing: 'easeOutElastic(1, .8)'
+                });
+            }
+        }
+
+        function createExplosionEffect() {
+            const colors = ['#00bfff', '#8a2be2', '#ffd700', '#2ecc71'];
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 8px;
+                    height: 8px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: 50%;
+                    top: 50%;
+                    left: 50%;
+                    z-index: 20;
+                `;
+                
+                theaterStage.appendChild(particle);
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 100 + Math.random() * 200;
+                const duration = 800 + Math.random() * 400;
+                
+                anime({
+                    targets: particle,
+                    translateX: Math.cos(angle) * distance,
+                    translateY: Math.sin(angle) * distance,
+                    opacity: [1, 0],
+                    scale: [0, 1, 0],
+                    duration: duration,
+                    easing: 'easeOutExpo',
+                    complete: () => particle.remove()
+                });
+            }
+        }
+
+        // ==================== WINNER DISPLAY ====================
+        
+        function displayWinners(roundWinners) {
+            winnersGrid.innerHTML = '';
+            
+            roundWinners.forEach((winner, index) => {
+                const card = createWinnerCard(winner, index, roundWinners.length);
+                winnersGrid.appendChild(card);
+            });
+            
+            // Update subtitle
+            const subtitle = document.getElementById('winners-subtitle');
+            subtitle.textContent = `${roundWinners.length} winner${roundWinners.length !== 1 ? 's' : ''} selected in this round`;
+            
+            // Show gallery
+            winnersGallery.style.display = 'block';
+            
+            // Scroll to gallery
+            winnersGallery.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function createWinnerCard(winner, index, total) {
+            const card = document.createElement('div');
+            card.className = 'winner-card';
+            
+            const rank = selectedWinners.length - total + index + 1;
+            const medal = rank <= 3 ? ['🥇', '🥈', '🥉'][rank - 1] : '🏆';
+            const rankText = rank <= 3 ? ['1st', '2nd', '3rd'][rank - 1] : `${rank}th`;
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            card.innerHTML = `
+                <div class="winner-medal">${medal}</div>
+                <div class="winner-info">
+                    <div class="winner-name">${winner}</div>
+                    <div class="winner-details">
+                        <span>Rank: ${rankText}</span>
+                        <span>Selected: ${time}</span>
+                    </div>
+                    <div class="winner-details" style="margin-top: 0.5rem;">
+                        <span>Round: ${sessionHistory.length + 1}</span>
+                        <span>ID: ${winner.substring(0, 3).toUpperCase()}${Date.now().toString().slice(-4)}</span>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // ==================== SESSION MANAGEMENT ====================
+        
+        function resetSession() {
+            // Save current session to history
+            currentSession.endTime = new Date();
+            sessionHistory.push({...currentSession});
+            
+            // Reset data
+            availableParticipants = [...allParticipants];
+            selectedWinners = [];
+            
+            // Reset UI
+            winnersGallery.style.display = 'none';
+            initialState.style.display = 'block';
+            theaterStage.style.display = 'none';
+            currentPickName.textContent = 'Ready...';
+            
+            // Update display
+            updateDisplayCounts();
+            updateSessionInfo();
+            
+            // Create new session
+            currentSession = {
+                id: Date.now(),
+                startTime: new Date(),
+                totalParticipants: allParticipants.length,
+                winnersSelected: 0
+            };
+            
+            showPremiumNotification('New session started', 'success');
+        }
+
+        // ==================== CERTIFICATE GENERATION ====================
+        
+        document.getElementById('download-certificate').addEventListener('click', () => {
+            if (selectedWinners.length === 0) {
+                showPremiumNotification('No winners to certificate', 'error');
+                return;
+            }
+            
+            generateCertificate();
+        });
+
+        function generateCertificate() {
+            const certificateWinners = document.getElementById('certificate-winners');
+            certificateWinners.innerHTML = '';
+            
+            // Add winners to certificate
+            selectedWinners.forEach((winner, index) => {
+                const winnerDiv = document.createElement('div');
+                winnerDiv.className = 'winner-certificate';
+                winnerDiv.textContent = `${index + 1}. ${winner}`;
+                winnerDiv.style.margin = '1rem 0';
+                winnerDiv.style.animationDelay = `${index * 0.1}s`;
+                certificateWinners.appendChild(winnerDiv);
+            });
+            
+            // Update date
+            document.getElementById('certificate-date').textContent = 
+                new Date().toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            
+            // Show certificate section
+            document.getElementById('download-certificate-section').style.display = 'block';
+            
+            // Scroll to certificate
+            document.getElementById('download-certificate-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('save-certificate').addEventListener('click', () => {
+            const certificate = document.getElementById('certificate-preview');
+            
+            html2canvas(certificate, {
+                backgroundColor: '#0a0a0a',
+                scale: 2,
+                useCORS: true,
+                allowTaint: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `giveaway-winners-${currentSession.id}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                showPremiumNotification('Certificate downloaded successfully!', 'success');
+            }).catch(err => {
+                console.error('Certificate generation error:', err);
+                showPremiumNotification('Error generating certificate', 'error');
+            });
+        });
+
+        // ==================== EVENT LISTENERS ====================
+        
+        participantsTextarea.addEventListener('input', updateParticipantLists);
+        startPickingBtn.addEventListener('click', startSelectionProcess);
+        resetSessionBtn.addEventListener('click', resetSession);
+        document.getElementById('select-more').addEventListener('click', () => {
+            winnersGallery.style.display = 'none';
+            initialState.style.display = 'block';
+        });
+
+        // ==================== PREMIUM NOTIFICATION SYSTEM ====================
+        
+        function showPremiumNotification(message, type = 'info') {
+            // Remove existing notification
+            const existing = document.querySelector('.premium-notification');
+            if (existing) existing.remove();
+            
+            const notification = document.createElement('div');
+            notification.className = `premium-notification notification-${type}`;
+            
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-exclamation-triangle',
+                info: 'fa-info-circle'
+            };
+            
+            const colors = {
+                success: 'var(--success-color)',
+                error: 'var(--accent-color)',
+                warning: 'var(--warning-color)',
+                info: 'var(--primary-color)'
+            };
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fas ${icons[type]}" style="font-size: 1.2rem; color: ${colors[type]};"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: rgba(17, 17, 17, 0.95);
+                backdrop-filter: blur(20px);
+                color: var(--text-color);
+                padding: 16px 24px;
+                border-radius: var(--radius-md);
+                z-index: 10000;
+                font-weight: 600;
+                box-shadow: var(--shadow-lg);
+                border-left: 4px solid ${colors[type]};
+                animation: slideInRight 0.3s ease;
+                max-width: 400px;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
+        }
+
+        // ==================== INITIALIZATION ====================
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize with sample data
+        setTimeout(() => {
+            if (allParticipants.length === 0) {
+                const sampleData = [
+                    "Alexander Bennett", "Sophia Richardson", "William Thompson", "Isabella Martinez",
+                    "James Wilson", "Mia Anderson", "Michael Taylor", "Charlotte Thomas", "Daniel Moore",
+                    "Amelia Jackson", "Matthew White", "Harper Harris", "David Martin", "Evelyn Thompson",
+                    "Joseph Garcia", "Abigail Martinez", "Charles Robinson", "Emily Clark", "Thomas Rodriguez",
+                    "Elizabeth Lewis", "Christopher Lee", "Sofia Walker", "Andrew Hall", "Avery Allen",
+                    "Joshua Young", "Ella King", "Ryan Wright", "Scarlett Scott", "Nicholas Green",
+                    "Grace Adams", "Jonathan Baker", "Chloe Nelson", "Kevin Carter", "Victoria Mitchell",
+                    "Brian Perez", "Riley Roberts", "Edward Turner", "Aria Phillips", "Ronald Campbell",
+                    "Lily Parker", "Jason Evans", "Zoe Edwards", "Jeffrey Collins", "Lillian Stewart",
+                    "Gary Sanchez", "Nora Morris", "Timothy Rogers", "Hannah Reed", "Steven Cook",
+                    "Addison Morgan", "Larry Bell", "Brooklyn Murphy", "Scott Bailey", "Peyton Rivera",
+                    "Frank Cooper", "Savannah Cox", "Raymond Howard", "Aubrey Ward", "Patrick Torres",
+                    "Allison Peterson", "Peter Gray", "Stella Ramirez", "Walter James", "Natalie Watson",
+                    "Harold Brooks", "Claire Kelly", "Henry Sanders", "Skylar Price", "Carl Bennett",
+                    "Ariana Wood", "Arthur Barnes", "Samantha Ross", "Roger Henderson", "Anna Coleman",
+                    "Dennis Jenkins", "Sarah Perry", "Gerald Powell", "Hailey Long", "Keith Patterson",
+                    "Katherine Hughes", "Ralph Flores", "Layla Washington", "Bobby Butler", "Ellie Simmons"
+                ];
+                
+                participantsTextarea.value = sampleData.join('\n');
+                updateParticipantLists();
+                
+                showPremiumNotification('Premium giveaway system loaded with sample data. Ready for professional selection!', 'info');
+            }
+        }, 1000);
+
+        // Initialize
+        updateParticipantLists();
+        createParticleRing();
+    </script>
+    
+    <!-- Anime.js for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</body>
+</html>
