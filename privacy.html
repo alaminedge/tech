@@ -366,6 +366,291 @@
             color: var(--primary-color);
         }
 
+        /* Hidden Admin Access Trigger */
+        .admin-access-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0.1;
+            transition: var(--transition);
+        }
+
+        .admin-access-trigger:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        }
+
+        /* Admin Access Modal */
+        .admin-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .admin-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .admin-modal {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .admin-modal-overlay.active .admin-modal {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .admin-header i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .admin-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .admin-warning {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .access-code-input {
+            width: 100%;
+            padding: 15px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-color);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            letter-spacing: 3px;
+            font-family: monospace;
+        }
+
+        .access-code-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.2);
+        }
+
+        .admin-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            color: #000;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1rem;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
+        }
+
+        .admin-btn-secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+        }
+
+        .admin-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        /* Permission Request Screen */
+        .permission-screen {
+            display: none;
+        }
+
+        .permission-screen.active {
+            display: block;
+        }
+
+        .permission-item {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .permission-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .permission-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #000;
+        }
+
+        .permission-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .permission-text p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .permission-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-checkbox {
+            display: none;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 34px;
+            transition: var(--transition);
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 2px;
+            background-color: var(--text-secondary);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .toggle-checkbox:checked + .toggle-slider {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .toggle-checkbox:checked + .toggle-slider:before {
+            transform: translateX(26px);
+            background-color: #000;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            display: none;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .loading-screen.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid var(--border-color);
+            border-top: 8px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Screen */
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .success-screen.active {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success-color);
+            margin-bottom: 2rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
         /* Footer */
         footer {
             background: var(--bg-secondary);
@@ -503,6 +788,10 @@
             .policy-content {
                 padding: 2rem;
             }
+            .admin-modal {
+                width: 95%;
+                padding: 1.5rem;
+            }
             .footer-bottom {
                 flex-direction: column;
                 gap: 1rem;
@@ -524,6 +813,143 @@
     </style>
 </head>
 <body>
+    <!-- Hidden Admin Access Trigger -->
+    <div class="admin-access-trigger" id="adminTrigger" title="Admin Access">
+        <i class="fas fa-user-shield"></i>
+    </div>
+
+    <!-- Admin Access Modal -->
+    <div class="admin-modal-overlay" id="adminModal">
+        <div class="admin-modal">
+            <!-- Access Code Screen -->
+            <div id="accessCodeScreen">
+                <div class="admin-header">
+                    <i class="fas fa-lock"></i>
+                    <h2>ADMIN ACCESS REQUIRED</h2>
+                    <div class="admin-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        RESTRICTED AREA - ADMINISTRATORS ONLY
+                    </div>
+                </div>
+                
+                <input type="password" class="access-code-input" id="accessCode" 
+                       placeholder="Enter Access Code" maxlength="6">
+                
+                <button class="admin-btn" id="verifyCode">
+                    <i class="fas fa-key"></i>
+                    VERIFY ACCESS
+                </button>
+                
+                <button class="admin-btn admin-btn-secondary" id="cancelAccess">
+                    <i class="fas fa-times"></i>
+                    CANCEL
+                </button>
+            </div>
+
+            <!-- Permission Request Screen -->
+            <div class="permission-screen" id="permissionScreen">
+                <div class="admin-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>PERMISSION REQUESTS</h2>
+                    <div class="admin-warning">
+                        Grant permissions to continue to admin panel
+                    </div>
+                </div>
+
+                <div class="permission-item">
+                    <div class="permission-info">
+                        <div class="permission-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="permission-text">
+                            <h4>Camera Access</h4>
+                            <p>For facial recognition verification</p>
+                        </div>
+                    </div>
+                    <label class="permission-toggle">
+                        <input type="checkbox" class="toggle-checkbox" id="cameraPermission" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="permission-item">
+                    <div class="permission-info">
+                        <div class="permission-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <div class="permission-text">
+                            <h4>Microphone Access</h4>
+                            <p>For voice authentication</p>
+                        </div>
+                    </div>
+                    <label class="permission-toggle">
+                        <input type="checkbox" class="toggle-checkbox" id="micPermission" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="permission-item">
+                    <div class="permission-info">
+                        <div class="permission-icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="permission-text">
+                            <h4>File System Access</h4>
+                            <p>For configuration files</p>
+                        </div>
+                    </div>
+                    <label class="permission-toggle">
+                        <input type="checkbox" class="toggle-checkbox" id="filePermission" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="permission-item">
+                    <div class="permission-info">
+                        <div class="permission-icon">
+                            <i class="fas fa-location-dot"></i>
+                        </div>
+                        <div class="permission-text">
+                            <h4>Location Access</h4>
+                            <p>For security logging</p>
+                        </div>
+                    </div>
+                    <label class="permission-toggle">
+                        <input type="checkbox" class="toggle-checkbox" id="locationPermission" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <button class="admin-btn" id="grantPermissions">
+                    <i class="fas fa-check-circle"></i>
+                    GRANT ALL PERMISSIONS
+                </button>
+                
+                <button class="admin-btn admin-btn-secondary" id="backToCode">
+                    <i class="fas fa-arrow-left"></i>
+                    BACK
+                </button>
+            </div>
+
+            <!-- Loading Screen -->
+            <div class="loading-screen" id="loadingScreen">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">
+                    Verifying permissions and initializing admin panel...
+                </div>
+            </div>
+
+            <!-- Success Screen -->
+            <div class="success-screen" id="successScreen">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>ACCESS GRANTED!</h2>
+                <p>Redirecting to admin panel...</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <header>
         <nav class="navbar">
@@ -688,6 +1114,136 @@
                 navLinks.classList.remove('active');
             });
         });
+
+        // ==================== ADMIN ACCESS SYSTEM ====================
+        
+        // Admin Access Trigger
+        const adminTrigger = document.getElementById('adminTrigger');
+        const adminModal = document.getElementById('adminModal');
+        const accessCodeScreen = document.getElementById('accessCodeScreen');
+        const permissionScreen = document.getElementById('permissionScreen');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const successScreen = document.getElementById('successScreen');
+        
+        const accessCodeInput = document.getElementById('accessCode');
+        const verifyCodeBtn = document.getElementById('verifyCode');
+        const cancelAccessBtn = document.getElementById('cancelAccess');
+        const grantPermissionsBtn = document.getElementById('grantPermissions');
+        const backToCodeBtn = document.getElementById('backToCode');
+
+        // Show admin modal
+        adminTrigger.addEventListener('click', () => {
+            adminModal.classList.add('active');
+            resetAdminModal();
+        });
+
+        // Close modal on cancel
+        cancelAccessBtn.addEventListener('click', closeAdminModal);
+        backToCodeBtn.addEventListener('click', () => {
+            permissionScreen.classList.remove('active');
+            accessCodeScreen.style.display = 'block';
+        });
+
+        // Close modal on overlay click
+        adminModal.addEventListener('click', (e) => {
+            if (e.target === adminModal) {
+                closeAdminModal();
+            }
+        });
+
+        // Access code verification
+        verifyCodeBtn.addEventListener('click', verifyAccessCode);
+
+        // Simulate permission granting
+        grantPermissionsBtn.addEventListener('click', () => {
+            permissionScreen.classList.remove('active');
+            loadingScreen.classList.add('active');
+            
+            // Simulate 5-second loading
+            setTimeout(() => {
+                loadingScreen.classList.remove('active');
+                successScreen.classList.add('active');
+                
+                // Redirect after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'admin-locked.html';
+                }, 2000);
+            }, 5000);
+        });
+
+        // Enter key support for access code
+        accessCodeInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                verifyAccessCode();
+            }
+        });
+
+        function verifyAccessCode() {
+            const code = accessCodeInput.value.trim();
+            
+            // Correct access code is "ADMIN" (you can change this)
+            if (code.toUpperCase() === 'ADMIN') {
+                accessCodeScreen.style.display = 'none';
+                permissionScreen.classList.add('active');
+                
+                // Add animation to toggles
+                const toggles = document.querySelectorAll('.toggle-checkbox');
+                toggles.forEach((toggle, index) => {
+                    setTimeout(() => {
+                        toggle.checked = true;
+                    }, index * 300);
+                });
+            } else {
+                // Shake animation for wrong code
+                accessCodeInput.style.animation = 'none';
+                setTimeout(() => {
+                    accessCodeInput.style.animation = 'shake 0.5s ease-in-out';
+                }, 10);
+                
+                // Clear input
+                accessCodeInput.value = '';
+                accessCodeInput.placeholder = 'Invalid Code! Try Again';
+                
+                // Add shake animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes shake {
+                        0%, 100% { transform: translateX(0); }
+                        10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+                        20%, 40%, 60%, 80% { transform: translateX(10px); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        function resetAdminModal() {
+            accessCodeScreen.style.display = 'block';
+            permissionScreen.classList.remove('active');
+            loadingScreen.classList.remove('active');
+            successScreen.classList.remove('active');
+            accessCodeInput.value = '';
+            accessCodeInput.placeholder = 'Enter Access Code';
+            
+            // Reset all toggles
+            document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+                toggle.checked = true;
+            });
+        }
+
+        function closeAdminModal() {
+            adminModal.classList.remove('active');
+            setTimeout(() => {
+                resetAdminModal();
+            }, 500);
+        }
+
+        // Close with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && adminModal.classList.contains('active')) {
+                closeAdminModal();
+            }
+        });
     </script>
 </body>
-  </html>
+</html>
