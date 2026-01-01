@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results | AlaminEdge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00bfff;
+            --primary-dark: #0099cc;
+            --primary-light: #33ccff;
+            --secondary-color: #8a2be2;
+            --accent-color: #ff6b6b;
+            --success-color: #00ff88;
+            --warning-color: #ffaa00;
+            --info-color: #2e86de;
+            --bg-color: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
+            --gradient-success: linear-gradient(135deg, #00ff88 0%, #00bfff 100%);
+            --gradient-warning: linear-gradient(135deg, #ffaa00 0%, #ff6b6b 100%);
+            --gradient-result: linear-gradient(135deg, #00bfff 0%, #00ff88 100%);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 191, 255, 0.07) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(138, 43, 226, 0.07) 0%, transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(255, 107, 107, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+            animation: bgPulse 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: var(--shadow);
+            padding: 10px 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+        }
+
+        .logo:hover {
+            transform: rotate(15deg);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        }
+
+        .brand-name {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            animation: badgeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 2rem auto;
+            border: 1px solid var(--border-color);
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .search-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .search-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--font-primary);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gradient-primary);
+            border: none;
+            color: #000;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .search-button:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+        }
+
+        .search-hint {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Result Card */
+        .result-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem auto;
+            border: 1px solid var(--border-color);
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            display: none;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-success);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .result-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--success-color);
+        }
+
+        .result-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Result Details */
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .result-item {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .eligibility-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .eligible {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--success-color);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .not-eligible {
+            background: rgba(255, 107, 107, 0.15);
+            color: var(--accent-color);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        /* Certificate Section */
+        .certificate-section {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .certificate-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .certificate-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            padding: 10px 20px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 40px 0 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1002;
+            max-width: 350px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .search-section, .result-card {
+                padding: 1.5rem;
+            }
+            
+            .result-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .certificate-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.6rem;
+            }
+            
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+            
+            .search-input {
+                padding: 14px 45px 14px 15px;
+                font-size: 0.95rem;
+            }
+            
+            .result-value {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="https://iili.io/KQTiJg2.md.png" alt="AlaminEdge Logo" class="logo">
+                <span class="brand-name">AlaminEdge</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-badge animate-in">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>PRIVATE RESULTS PORTAL</span>
+                </div>
+                <h1 class="hero-title animate-in" style="animation-delay: 0.1s">Your Quiz Result</h1>
+                <p class="hero-subtitle animate-in" style="animation-delay: 0.2s">
+                    View your personal 2026 New Year Quiz result securely. No one else can see your score.
+                </p>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section animate-in" style="animation-delay: 0.3s">
+            <h2 class="search-title">Find Your Result</h2>
+            <p class="search-subtitle">Enter your name exactly as you submitted during the quiz</p>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" id="name-input" placeholder="Example: Al Mustansir Shawon">
+                <button class="search-button" id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <p class="search-hint">
+                <i class="fas fa-info-circle"></i> Only you can see your result. Results are private.
+            </p>
+        </section>
+
+        <!-- Result Card -->
+        <div class="container">
+            <div class="result-card" id="result-card">
+                <div class="result-header">
+                    <div class="result-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h2 class="result-title" id="result-title">Your Result</h2>
+                    <p class="result-subtitle" id="result-subtitle">2026 New Year Quiz</p>
+                </div>
+
+                <div class="result-grid">
+                    <div class="result-item">
+                        <span class="result-label">Your Position</span>
+                        <div class="result-value" id="position-value">-</div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Your Score</span>
+                        <div class="result-value" id="score-value">-</div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Course Giveaway</span>
+                        <div id="eligibility-value">
+                            <span class="eligibility-badge eligible" style="display: none;">Eligible ✓</span>
+                            <span class="eligibility-badge not-eligible" style="display: none;">Not Eligible</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Performance Level</span>
+                        <div class="result-value" id="performance-value">-</div>
+                    </div>
+                </div>
+
+                <!-- Certificate Section (Only for eligible candidates) -->
+                <div class="certificate-section" id="certificate-section" style="display: none;">
+                    <h3 class="certificate-title">
+                        <i class="fas fa-certificate"></i> Your Certificate
+                    </h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Download your certificate for participating in the 2026 New Year Quiz
+                    </p>
+                    <div class="certificate-actions">
+                        <button class="btn btn-primary" id="download-certificate-btn">
+                            <i class="fas fa-download"></i> Download Certificate
+                        </button>
+                        <button class="btn btn-success" id="view-certificate-btn">
+                            <i class="fas fa-external-link-alt"></i> View Certificate
+                        </button>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-secondary" id="close-result-btn">
+                        <i class="fas fa-times"></i> Clear Result
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="search-section animate-in" style="animation-delay: 0.4s; margin-top: 3rem;">
+            <h3 class="search-title">
+                <i class="fas fa-lock"></i> Privacy Guaranteed
+            </h3>
+            <p class="search-subtitle" style="font-size: 0.95rem;">
+                • No public leaderboard is displayed<br>
+                • Only you can see your individual result<br>
+                • Your name must match exactly to view your score<br>
+                • Results are stored securely and privately
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <img src="https://iili.io/KQTiJg2.md.png" alt="AlaminEdge Logo" class="footer-logo">
+            <p class="footer-text">
+                AlaminEdge • Where Learning Meets Innovation<br>
+                2026 New Year Quiz Results Portal
+            </p>
+            <div class="footer-links">
+                <a href="https://alaminedge.pages.dev" target="_blank">Main Website</a>
+                <a href="https://t.me/adamzampas" target="_blank">Telegram</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.8rem;">
+                © 2026 AlaminEdge. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-bell notification-icon"></i>
+        <div>
+            <strong id="notification-title"></strong>
+            <p id="notification-message" style="font-size: 0.9rem;"></p>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Results Data (Only stored in memory)
+        const QUIZ_RESULTS = [
+            { name: "AE Tech Inc.", score: 17.75, certificate: "https://drive.google.com/file/d/11BxBDCTPMO0UjAcq7hG-RaEfzXHGNFaR/view?usp=drivesdk", position: 1, eligible: true },
+            { name: "Al Mustansir Shawon", score: 14, certificate: "https://drive.google.com/file/d/1gzagjOAOJQp4XwOnJ7JUcdlYWrOdIqKr/view?usp=drivesdk", position: 2, eligible: true },
+            { name: "Deodheh", score: 13.25, certificate: "https://drive.google.com/file/d/1FL4sLeVaplduAjsJjKfWC7C6zN6pAZ6h/view?usp=drivesdk", position: 3, eligible: true },
+            { name: "Shabiha Farjana", score: 11.5, certificate: "https://drive.google.com/file/d/1a8vLKk5-kKxHnXJexszhBEu6rI6nujn-/view?usp=drivesdk", position: 4, eligible: true },
+            { name: "Sadia Akter Mim", score: 11.25, certificate: "https://drive.google.com/file/d/1ojGnz2OgH5LIN5k2NQ6NGZtqyKCG18U2/view?usp=drivesdk", position: 5, eligible: true },
+            { name: "Md Israil", score: 10, certificate: "", position: 6, eligible: false },
+            { name: "Nazmin", score: 9.5, certificate: "", position: 7, eligible: false },
+            { name: "Riya Islam", score: 9.25, certificate: "", position: 8, eligible: false },
+            { name: "Deep", score: 7.5, certificate: "", position: 9, eligible: false },
+            { name: "আভা", score: 6.75, certificate: "", position: 10, eligible: false },
+            { name: "Anu", score: 6.5, certificate: "", position: 11, eligible: false },
+            { name: "rifat", score: 6.25, certificate: "", position: 12, eligible: false },
+            { name: "Shadman", score: 5, certificate: "", position: 13, eligible: false },
+            { name: "kibriya", score: 5, certificate: "", position: 14, eligible: false },
+            { name: "Aiman", score: 3.25, certificate: "", position: 15, eligible: false },
+            { name: "Anandy", score: 3, certificate: "", position: 16, eligible: false },
+            { name: "Md Sajib Molla", score: 1.5, certificate: "", position: 17, eligible: false },
+            { name: "Shahariar", score: 1.25, certificate: "", position: 18, eligible: false },
+            { name: "Ak", score: -0.25, certificate: "", position: 19, eligible: false },
+            { name: "Diddy", score: 0, certificate: "", position: 20, eligible: false },
+            { name: "Md. Nazmul Islam", score: 0, certificate: "", position: 21, eligible: false },
+            { name: "Miraj", score: 0, certificate: "", position: 22, eligible: false },
+            { name: "Abu Bakor Siddik", score: 0, certificate: "", position: 23, eligible: false }
+        ];
+
+        // DOM Elements
+        const nameInput = document.getElementById('name-input');
+        const searchBtn = document.getElementById('search-btn');
+        const resultCard = document.getElementById('result-card');
+        const resultTitle = document.getElementById('result-title');
+        const resultSubtitle = document.getElementById('result-subtitle');
+        const positionValue = document.getElementById('position-value');
+        const scoreValue = document.getElementById('score-value');
+        const eligibilityValue = document.getElementById('eligibility-value');
+        const performanceValue = document.getElementById('performance-value');
+        const certificateSection = document.getElementById('certificate-section');
+        const downloadCertificateBtn = document.getElementById('download-certificate-btn');
+        const viewCertificateBtn = document.getElementById('view-certificate-btn');
+        const closeResultBtn = document.getElementById('close-result-btn');
+        const notification = document.getElementById('notification');
+        const notificationTitle = document.getElementById('notification-title');
+        const notificationMessage = document.getElementById('notification-message');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            nameInput.focus();
+            
+            // Event Listeners
+            searchBtn.addEventListener('click', searchResult);
+            nameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') searchResult();
+            });
+            
+            closeResultBtn.addEventListener('click', closeResult);
+            downloadCertificateBtn.addEventListener('click', downloadCertificate);
+            viewCertificateBtn.addEventListener('click', viewCertificate);
+            
+            // Close result on ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && resultCard.style.display === 'block') {
+                    closeResult();
+                }
+            });
+            
+            // Welcome notification
+            setTimeout(() => {
+                showNotification('Welcome', 'Enter your name to view your personal result');
+            }, 1000);
+        });
+
+        // Search for result
+        function searchResult() {
+            const searchTerm = nameInput.value.trim();
+            
+            if (!searchTerm) {
+                showNotification('Required', 'Please enter your name');
+                return;
+            }
+            
+            // Find exact or similar match
+            const foundResult = findResult(searchTerm);
+            
+            if (foundResult) {
+                displayResult(foundResult);
+                showNotification('Found', 'Your result is displayed below');
+                
+                // Scroll to result
+                setTimeout(() => {
+                    resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            } else {
+                showNotification('Not Found', 'Name not found. Check spelling.');
+            }
+        }
+
+        // Find result with fuzzy matching
+        function findResult(searchTerm) {
+            const searchLower = searchTerm.toLowerCase().trim();
+            
+            // First try exact match
+            let result = QUIZ_RESULTS.find(r => 
+                r.name.toLowerCase() === searchLower ||
+                r.name.toLowerCase().includes(searchLower) ||
+                searchLower.includes(r.name.toLowerCase())
+            );
+            
+            // If no exact match, try fuzzy match
+            if (!result) {
+                result = QUIZ_RESULTS.find(r => {
+                    const similarity = calculateSimilarity(r.name.toLowerCase(), searchLower);
+                    return similarity > 0.7;
+                });
+            }
+            
+            return result;
+        }
+
+        // Display result
+        function displayResult(result) {
+            resultTitle.textContent = `${result.name}'s Result`;
+            resultSubtitle.textContent = '2026 New Year Quiz Challenge';
+            
+            positionValue.textContent = `${result.position}${getOrdinalSuffix(result.position)}`;
+            scoreValue.textContent = `${result.score}/20`;
+            
+            // Performance level
+            if (result.score >= 15) {
+                performanceValue.textContent = 'Excellent';
+                performanceValue.style.background = 'linear-gradient(135deg, #00ff88 0%, #00bfff 100%)';
+            } else if (result.score >= 10) {
+                performanceValue.textContent = 'Good';
+                performanceValue.style.background = 'linear-gradient(135deg, #00bfff 0%, #8a2be2 100%)';
+            } else if (result.score >= 5) {
+                performanceValue.textContent = 'Average';
+                performanceValue.style.background = 'linear-gradient(135deg, #ffaa00 0%, #ff6b6b 100%)';
+            } else {
+                performanceValue.textContent = 'Needs Practice';
+                performanceValue.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%)';
+            }
+            
+            // Eligibility
+            const eligibleBadge = eligibilityValue.querySelector('.eligible');
+            const notEligibleBadge = eligibilityValue.querySelector('.not-eligible');
+            
+            if (result.eligible) {
+                eligibleBadge.style.display = 'inline-block';
+                notEligibleBadge.style.display = 'none';
+                certificateSection.style.display = 'block';
+                
+                // Set certificate download link
+                downloadCertificateBtn.onclick = () => downloadCertificate(result.certificate);
+                viewCertificateBtn.onclick = () => viewCertificate(result.certificate);
+            } else {
+                eligibleBadge.style.display = 'none';
+                notEligibleBadge.style.display = 'inline-block';
+                certificateSection.style.display = 'none';
+            }
+            
+            resultCard.style.display = 'block';
+        }
+
+        // Close result
+        function closeResult() {
+            resultCard.style.display = 'none';
+            nameInput.value = '';
+            nameInput.focus();
+            showNotification('Cleared', 'Search cleared. Enter another name if needed.');
+        }
+
+        // Download certificate
+        function downloadCertificate(url) {
+            if (!url) return;
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `AlaminEdge_Certificate_2026.pdf`;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification('Downloading', 'Certificate download started');
+        }
+
+        // View certificate
+        function viewCertificate(url) {
+            if (!url) return;
+            
+            window.open(url, '_blank', 'noopener,noreferrer');
+            showNotification('Opening', 'Certificate opening in new tab');
+        }
+
+        // Helper functions
+        function calculateSimilarity(str1, str2) {
+            const words1 = str1.toLowerCase().split(/\s+/);
+            const words2 = str2.toLowerCase().split(/\s+/);
+            
+            const intersection = words1.filter(word => words2.includes(word));
+            const union = [...new Set([...words1, ...words2])];
+            
+            return intersection.length / union.length;
+        }
+
+        function getOrdinalSuffix(n) {
+            if (n % 100 >= 11 && n % 100 <= 13) return 'th';
+            switch (n % 10) {
+                case 1: return 'st';
+                case 2: return 'nd';
+                case 3: return 'rd';
+                default: return 'th';
+            }
+        }
+
+        function showNotification(title, message) {
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        // Auto-clear after 2 minutes of inactivity
+        let clearTimer;
+        function resetClearTimer() {
+            clearTimeout(clearTimer);
+            clearTimer = setTimeout(() => {
+                if (resultCard.style.display === 'block') {
+                    closeResult();
+                    showNotification('Auto-cleared', 'Result cleared for privacy after 2 minutes');
+                }
+            }, 120000); // 2 minutes
+        }
+
+        // Reset timer on user interaction
+        document.addEventListener('click', resetClearTimer);
+        document.addEventListener('keypress', resetClearTimer);
+        resetClearTimer(); // Start timer
+    </script>
+</body>
+  </html>
