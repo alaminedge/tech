@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 { margin-bottom: 20px; }
+
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #2196F3;
+      color: white;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0b7dda;
+    }
+
+    #quiz-box {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="quiz-title">Smart Quiz</h1>
+
+  <select id="level">
+    <option value="general">General Knowledge</option>
+    <!-- Add more quizzes here like "physics", "math" -->
+  </select>
+
+  <button onclick="startQuiz()">Start Quiz</button>
+
+  <div id="quiz-box"></div>
+
+  <script>
+    let questions = [];
+    let current = 0;
+    let score = 0;
+
+    function startQuiz() {
+      const level = document.getElementById("level").value;
+
+      fetch(`data/${level}.json`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("quiz-title").innerText = data.title;
+          questions = data.questions;
+          current = 0;
+          score = 0;
+          showQuestion();
+        })
+        .catch(err => {
+          alert("Failed to load questions. Check JSON path or file name.");
+          console.error(err);
+        });
+    }
+
+    function showQuestion() {
+      const q = questions[current];
+      let html = `<h2>${q.question}</h2>`;
+      q.options.forEach(opt => {
+        html += `<button onclick="checkAnswer('${opt}')">${opt}</button>`;
+      });
+      document.getElementById("quiz-box").innerHTML = html;
+    }
+
+    function checkAnswer(selected) {
+      if (selected === questions[current].answer) score++;
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        endQuiz();
+      }
+    }
+
+    function endQuiz() {
+      document.getElementById("quiz-box").innerHTML =
+        `<h2>Quiz Finished!</h2>
+         <p>Score: ${score} / ${questions.length}</p>
+         <button onclick="startQuiz()">Restart Quiz</button>`;
+    }
+  </script>
+
+</body>
+</html>
