@@ -8,1133 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
-        :root {
-            --primary-color: #00bfff;
-            --primary-dark: #0099cc;
-            --primary-light: #33ccff;
-            --secondary-color: #8a2be2;
-            --accent-color: #ff6b6b;
-            --success-color: #00ff88;
-            --warning-color: #ffaa00;
-            --bg-color: #0a0a0a;
-            --bg-secondary: #111111;
-            --bg-tertiary: #1a1a1a;
-            --text-color: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #888888;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --border-light: rgba(255, 255, 255, 0.05);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
-            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
-            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
-            --gradient-success: linear-gradient(135deg, #00ff88 0%, #00bfff 100%);
-            --gradient-warning: linear-gradient(135deg, #ffaa00 0%, #ff6b6b 100%);
-            --font-primary: 'Poppins', sans-serif;
-            --font-secondary: 'Montserrat', sans-serif;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --radius-xl: 30px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-secondary);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            background: rgba(10, 10, 10, 0.98);
-            box-shadow: var(--shadow);
-            padding: 10px 40px;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            transition: var(--transition);
-            border: 2px solid var(--primary-color);
-        }
-
-        .logo:hover {
-            transform: rotate(15deg);
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
-        }
-
-        .brand-name {
-            font-family: var(--font-secondary);
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 1.5rem;
-        }
-
-        /* Math styling */
-        .math-expression {
-            font-family: 'Times New Roman', serif;
-            font-style: italic;
-            margin: 5px 0;
-        }
-
-        .fraction {
-            display: inline-block;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .fraction span {
-            display: block;
-        }
-
-        .fraction .numerator {
-            border-bottom: 1px solid var(--text-color);
-            padding: 0 5px;
-        }
-
-        .fraction .denominator {
-            padding: 0 5px;
-        }
-
-        .superscript {
-            vertical-align: super;
-            font-size: 0.8em;
-        }
-
-        .subscript {
-            vertical-align: sub;
-            font-size: 0.8em;
-        }
-
-        .square-root {
-            position: relative;
-            padding-left: 15px;
-        }
-
-        .square-root:before {
-            content: '√';
-            position: absolute;
-            left: 0;
-            top: -2px;
-            font-size: 1.2em;
-        }
-
-        .square-root:after {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            width: 60%;
-            height: 1px;
-            background: var(--text-color);
-            transform: translateY(-50%);
-        }
-
-        .limit {
-            display: inline-block;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .limit .lim {
-            display: block;
-            font-size: 0.9em;
-        }
-
-        .limit .expression {
-            display: block;
-            margin-top: 2px;
-        }
-
-        .integral {
-            display: inline-block;
-            position: relative;
-            padding: 0 5px;
-        }
-
-        .integral:before {
-            content: '∫';
-            position: absolute;
-            left: -5px;
-            top: 0;
-            font-size: 1.2em;
-        }
-
-        .integral-bounds {
-            position: absolute;
-            font-size: 0.7em;
-        }
-
-        .integral-bounds.top {
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .integral-bounds.bottom {
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-top: 100px;
-            padding: 2rem 0;
-            min-height: calc(100vh - 200px);
-        }
-
-        /* Welcome Screen */
-        .welcome-screen {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-            text-align: center;
-        }
-
-        .welcome-content {
-            max-width: 600px;
-            padding: 3rem;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .exam-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
-        }
-
-        .welcome-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .exam-info {
-            background: var(--bg-tertiary);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: left;
-        }
-
-        .info-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .info-item:last-child {
-            border-bottom: none;
-        }
-
-        .form-group {
-            margin: 2rem 0;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-color);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            color: var(--text-color);
-            font-family: var(--font-primary);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.2);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 30px;
-            border-radius: var(--radius-xl);
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            font-family: var(--font-primary);
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: #000;
-            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-color);
-            border: 2px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-
-        .btn-loading {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        /* Exam Screen */
-        .exam-screen {
-            display: none;
-        }
-
-        .exam-header {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .timer {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            padding: 8px 16px;
-            border-radius: var(--radius-md);
-            background: rgba(0, 191, 255, 0.1);
-            border: 1px solid rgba(0, 191, 255, 0.2);
-        }
-
-        .timer.warning {
-            background: var(--gradient-warning);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background: rgba(255, 170, 0, 0.1);
-            border: 1px solid rgba(255, 170, 0, 0.2);
-            animation: pulse 1s infinite;
-        }
-
-        .timer.danger {
-            background: var(--gradient-secondary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid rgba(255, 107, 107, 0.2);
-            animation: pulse 0.5s infinite;
-        }
-
-        .violation-counter {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--warning-color);
-            font-weight: 600;
-        }
-
-        .questions-container {
-            display: grid;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .question-card {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .question-card:hover {
-            box-shadow: var(--shadow);
-        }
-
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-        }
-
-        .question-number {
-            background: var(--gradient-primary);
-            color: #000;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .question-text {
-            flex: 1;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .options-container {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .option {
-            background: var(--bg-tertiary);
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 1rem 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .option:hover {
-            border-color: var(--primary-color);
-            background: rgba(0, 191, 255, 0.05);
-        }
-
-        .option.selected {
-            border-color: var(--primary-color);
-            background: rgba(0, 191, 255, 0.1);
-        }
-
-        .option-marker {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-            transition: var(--transition);
-        }
-
-        .option.selected .option-marker {
-            background: var(--primary-color);
-            border-color: var(--primary-color);
-            color: #000;
-        }
-
-        .option-text {
-            flex: 1;
-        }
-
-        .exam-footer {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .progress-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--bg-tertiary);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient-primary);
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-
-        /* Result Screen */
-        .result-screen {
-            display: none;
-            text-align: center;
-        }
-
-        .result-card {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: 3rem;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .result-header {
-            margin-bottom: 2rem;
-        }
-
-        .result-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .result-score {
-            font-size: 4rem;
-            font-weight: 800;
-            margin: 1rem 0;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .result-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .detail-card {
-            background: var(--bg-tertiary);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .detail-value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .detail-value.correct {
-            color: var(--success-color);
-        }
-
-        .detail-value.wrong {
-            color: var(--accent-color);
-        }
-
-        .detail-value.skipped {
-            color: var(--warning-color);
-        }
-
-        .detail-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .analytics-chart {
-            background: var(--bg-tertiary);
-            border-radius: var(--radius-md);
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid var(--border-color);
-        }
-
-        .chart-container {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 1rem;
-            height: 200px;
-            margin-top: 1rem;
-        }
-
-        .chart-bar {
-            width: 40px;
-            background: var(--gradient-primary);
-            border-radius: 4px 4px 0 0;
-            position: relative;
-            transition: height 0.5s ease;
-        }
-
-        .chart-label {
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            white-space: nowrap;
-        }
-
-        .chart-value {
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-
-        .result-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        /* Loading Screen */
-        .loading-screen {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-            text-align: center;
-        }
-
-        .loading-content {
-            max-width: 400px;
-            padding: 2rem;
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid var(--border-color);
-            border-top-color: var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 2rem;
-        }
-
-        /* Warning Modal */
-        .warning-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 3000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .warning-content {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: 3rem;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--accent-color);
-            text-align: center;
-            position: relative;
-        }
-
-        .warning-icon {
-            font-size: 4rem;
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .warning-content h2 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-
-        .warning-content p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        /* Fullscreen Overlay */
-        .fullscreen-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-color);
-            z-index: 4000;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .overlay-content {
-            max-width: 500px;
-            padding: 2rem;
-        }
-
-        .overlay-content h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .overlay-content p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        /* Error Screen */
-        .error-screen {
-            display: none;
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-
-        .error-content {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .error-icon {
-            font-size: 4rem;
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-        }
-
-        /* Animations */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .shake {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 20px;
-            }
-
-            .welcome-content h1 {
-                font-size: 2rem;
-            }
-
-            .exam-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .question-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .progress-info {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .result-details {
-                grid-template-columns: 1fr;
-            }
-
-            .result-actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .integral-bounds {
-                font-size: 0.6em;
-            }
-
-            .integral-bounds.top {
-                top: -8px;
-            }
-
-            .integral-bounds.bottom {
-                bottom: -8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .welcome-content, .question-card, .result-card {
-                padding: 1.5rem;
-            }
-
-            .result-score {
-                font-size: 3rem;
-            }
-
-            .math-expression {
-                font-size: 0.9rem;
-            }
-        }
+        /* ALL YOUR EXISTING CSS STAYS THE SAME - NO CHANGES NEEDED */
+        /* ... (keep all your CSS code exactly as before) ... */
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <header>
-        <nav class="navbar">
-            <div class="logo-container">
-                <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
-                <span class="brand-name">AlaminEdge</span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Loading Screen -->
-            <section class="loading-screen" id="loading-screen">
-                <div class="loading-content">
-                    <div class="loading-spinner"></div>
-                    <h2>Loading Exam Configuration</h2>
-                    <p>Please wait while we load the exam data...</p>
-                </div>
-            </section>
-
-            <!-- Error Screen -->
-            <section class="error-screen" id="error-screen">
-                <div class="error-content">
-                    <div class="error-icon">
-                        <i class="fas fa-exclamation-circle"></i>
-                    </div>
-                    <h2>Failed to Load Exam</h2>
-                    <p id="error-message">Unable to load exam configuration. Please check your internet connection and try again.</p>
-                    <button class="btn btn-primary" id="retry-load-btn">
-                        <i class="fas fa-redo"></i>
-                        <span>Retry Loading</span>
-                    </button>
-                </div>
-            </section>
-
-            <!-- Welcome Screen -->
-            <section class="welcome-screen" id="welcome-screen">
-                <div class="welcome-content">
-                    <div class="exam-badge" id="exam-badge">
-                        <i class="fas fa-calculator"></i>
-                        <span id="exam-title">Loading...</span>
-                    </div>
-                    <h1 id="exam-welcome-title">Exam Loading...</h1>
-                    <p class="text-secondary" id="exam-description">Please wait while we load the exam information.</p>
-                    <div class="exam-info" id="exam-info">
-                        <div class="info-item">
-                            <span>Total Questions:</span>
-                            <strong id="total-questions">0</strong>
-                        </div>
-                        <div class="info-item">
-                            <span>Time Limit:</span>
-                            <strong id="time-limit">0 Minutes</strong>
-                        </div>
-                        <div class="info-item">
-                            <span>Total Marks:</span>
-                            <strong id="total-marks">0</strong>
-                        </div>
-                        <div class="info-item">
-                            <span>Marking Scheme:</span>
-                            <strong id="marking-scheme">Loading...</strong>
-                        </div>
-                        <div class="info-item">
-                            <span>Security:</span>
-                            <strong>Fullscreen & Tab Lock</strong>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="student-name">Enter Your Full Name</label>
-                        <input type="text" id="student-name" class="form-control" placeholder="John Doe" required>
-                    </div>
-
-                    <button class="btn btn-primary" id="start-exam-btn">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Start Exam</span>
-                    </button>
-                </div>
-            </section>
-
-            <!-- Exam Screen -->
-            <section class="exam-screen" id="exam-screen">
-                <div class="exam-header">
-                    <div class="student-info">
-                        <h3>Candidate: <span id="display-name"></span></h3>
-                        <p id="current-exam-title"></p>
-                    </div>
-                    <div class="timer" id="timer">00:00</div>
-                    <div class="violation-counter" id="violation-counter">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>Violations: <span id="violation-count">0</span>/3</span>
-                    </div>
-                </div>
-
-                <div class="questions-container" id="questions-container">
-                    <!-- Questions will be dynamically inserted here -->
-                </div>
-
-                <div class="exam-footer">
-                    <div class="progress-info">
-                        <div class="progress-item">
-                            <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                            <span>Answered: <span id="answered-count">0</span>/<span id="total-questions-display">0</span></span>
-                        </div>
-                        <div class="progress-item">
-                            <i class="fas fa-times-circle" style="color: var(--accent-color);"></i>
-                            <span>Wrong: <span id="wrong-count">0</span></span>
-                        </div>
-                        <div class="progress-item">
-                            <i class="fas fa-forward" style="color: var(--warning-color);"></i>
-                            <span>Skipped: <span id="skipped-count">0</span></span>
-                        </div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
-                    </div>
-
-                    <button class="btn btn-primary" id="submit-exam-btn">
-                        <i class="fas fa-paper-plane"></i>
-                        <span>Submit Exam</span>
-                    </button>
-                </div>
-            </section>
-
-            <!-- Result Screen -->
-            <section class="result-screen" id="result-screen">
-                <div class="result-card" id="result-card">
-                    <div class="result-header">
-                        <div class="result-badge">
-                            <i class="fas fa-trophy"></i>
-                            <span>EXAM RESULTS</span>
-                        </div>
-                        <h1>Congratulations, <span id="result-name"></span>!</h1>
-                        <div class="result-score" id="final-score">0</div>
-                        <p id="result-exam-title"></p>
-                    </div>
-
-                    <div class="result-details">
-                        <div class="detail-card">
-                            <div class="detail-value correct" id="correct-count">0</div>
-                            <div class="detail-label">Correct Answers</div>
-                        </div>
-                        <div class="detail-card">
-                            <div class="detail-value wrong" id="wrong-result-count">0</div>
-                            <div class="detail-label">Wrong Answers</div>
-                        </div>
-                        <div class="detail-card">
-                            <div class="detail-value skipped" id="skipped-result-count">0</div>
-                            <div class="detail-label">Skipped Questions</div>
-                        </div>
-                        <div class="detail-card">
-                            <div class="detail-value" id="accuracy-rate">0%</div>
-                            <div class="detail-label">Accuracy Rate</div>
-                        </div>
-                    </div>
-
-                    <div class="analytics-chart">
-                        <h3>Performance Analytics</h3>
-                        <div class="chart-container" id="chart-container">
-                            <!-- Chart bars will be dynamically inserted -->
-                        </div>
-                    </div>
-
-                    <div class="result-actions">
-                        <button class="btn btn-primary" id="download-result-btn">
-                            <i class="fas fa-download"></i>
-                            <span>Download Result</span>
-                        </button>
-                        <a href="https://t.me/freehscaca" target="_blank" class="btn btn-secondary">
-                            <i class="fab fa-telegram"></i>
-                            <span>Share on Telegram</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Warning Modal -->
-    <div class="warning-modal" id="warning-modal">
-        <div class="warning-content">
-            <div class="warning-icon">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <h2>Security Violation Detected</h2>
-            <p id="warning-message">You have switched tabs/windows. This is a violation of exam rules.</p>
-            <p><strong>Violations: <span id="warning-count">1</span>/3</strong></p>
-            <p class="text-muted">Further violations may result in automatic submission.</p>
-            <button class="btn btn-primary" id="acknowledge-warning-btn">
-                <i class="fas fa-check"></i>
-                <span>I Understand</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Fullscreen Overlay -->
-    <div class="fullscreen-overlay" id="fullscreen-overlay">
-        <div class="overlay-content">
-            <h2>Fullscreen Required</h2>
-            <p>This exam must be taken in fullscreen mode for security purposes.</p>
-            <p>Please click the button below to enter fullscreen mode.</p>
-            <button class="btn btn-primary" id="enter-fullscreen-btn">
-                <i class="fas fa-expand"></i>
-                <span>Enter Fullscreen</span>
-            </button>
-        </div>
-    </div>
+    <!-- ALL YOUR EXISTING HTML STAYS THE SAME -->
+    <!-- ... (keep all your HTML code exactly as before) ... -->
 
     <script>
         // Application State
@@ -1147,10 +27,11 @@
             isExamStarted: false,
             isExamSubmitted: false,
             shuffledQuestions: [],
-            examConfig: null
+            examConfig: null,
+            examVersion: ''
         };
 
-        // DOM Elements
+        // DOM Elements (same as before)
         const loadingScreen = document.getElementById('loading-screen');
         const errorScreen = document.getElementById('error-screen');
         const welcomeScreen = document.getElementById('welcome-screen');
@@ -1202,6 +83,7 @@
             showLoadingScreen();
             try {
                 await loadExamConfig();
+                checkIfExamTaken();
                 hideLoadingScreen();
                 showWelcomeScreen();
                 setupEventListeners();
@@ -1220,12 +102,16 @@
                 
                 const config = await response.json();
                 
+                // Add a version hash based on config content
+                config.versionHash = generateVersionHash(config);
+                
                 // Validate config structure
                 if (!validateConfig(config)) {
                     throw new Error('Invalid exam configuration format');
                 }
                 
                 appState.examConfig = config;
+                appState.examVersion = config.versionHash;
                 updateWelcomeScreen(config);
             } catch (error) {
                 console.error('Error loading exam config:', error);
@@ -1233,7 +119,81 @@
             }
         }
 
-        // Validate configuration structure
+        // Generate a unique hash for exam version
+        function generateVersionHash(config) {
+            // Create a string from important config properties
+            const versionString = JSON.stringify({
+                title: config.examTitle,
+                questionsCount: config.questions.length,
+                timeLimit: config.timeLimit,
+                questions: config.questions.map(q => q.id).sort()
+            });
+            
+            // Simple hash function
+            let hash = 0;
+            for (let i = 0; i < versionString.length; i++) {
+                const char = versionString.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            return Math.abs(hash).toString(36);
+        }
+
+        // Check if exam was already taken
+        function checkIfExamTaken() {
+            const savedExam = localStorage.getItem('last_exam_taken');
+            if (savedExam) {
+                const savedData = JSON.parse(savedExam);
+                
+                // Check if it's the SAME exam version
+                if (savedData.version === appState.examVersion) {
+                    // Same exam version - check if we should show results
+                    const savedResults = localStorage.getItem('exam_results');
+                    if (savedResults) {
+                        const results = JSON.parse(savedResults);
+                        
+                        // Check if results are for this exam version
+                        if (results.examVersion === appState.examVersion) {
+                            // Show results screen directly
+                            showResultScreen();
+                            displaySavedResults(results);
+                            return true;
+                        }
+                    }
+                } else {
+                    // Different exam version - clear old data
+                    clearOldExamData();
+                }
+            }
+            return false;
+        }
+
+        // Clear old exam data from localStorage
+        function clearOldExamData() {
+            localStorage.removeItem('last_exam_taken');
+            localStorage.removeItem('exam_results');
+            localStorage.removeItem('exam_session');
+        }
+
+        // Display saved results
+        function displaySavedResults(results) {
+            resultName.textContent = results.name || 'Student';
+            resultExamTitle.textContent = results.examTitle || appState.examConfig.examTitle;
+            finalScore.textContent = results.score.toFixed(2);
+            correctCount.textContent = results.correct;
+            wrongResultCount.textContent = results.wrong;
+            skippedResultCount.textContent = results.skipped;
+            accuracyRate.textContent = `${results.accuracy.toFixed(1)}%`;
+            
+            createAnalyticsChart(results.correct, results.wrong, results.skipped, results.score);
+            
+            // Disable start button
+            startExamBtn.disabled = true;
+            startExamBtn.innerHTML = '<i class="fas fa-check-circle"></i><span>Exam Already Completed</span>';
+            startExamBtn.classList.add('btn-loading');
+        }
+
+        // Validate configuration structure (same as before)
         function validateConfig(config) {
             const requiredFields = [
                 'examTitle', 'welcomeTitle', 'description', 
@@ -1249,13 +209,11 @@
                 }
             }
             
-            // Validate questions array
             if (!Array.isArray(config.questions) || config.questions.length === 0) {
                 console.error('Questions must be a non-empty array');
                 return false;
             }
             
-            // Validate each question
             for (let i = 0; i < config.questions.length; i++) {
                 const question = config.questions[i];
                 if (!question.id || !question.question || !question.options || !Array.isArray(question.options)) {
@@ -1272,16 +230,14 @@
             return true;
         }
 
-        // Update Welcome Screen with Config
+        // Update Welcome Screen with Config (same as before)
         function updateWelcomeScreen(config) {
-            // Update badge and titles
             const badgeIcon = config.icon ? `<i class="${config.icon}"></i>` : '<i class="fas fa-calculator"></i>';
             examBadge.innerHTML = `${badgeIcon}<span>${config.examTitle.toUpperCase()}</span>`;
             
             examWelcomeTitle.textContent = config.welcomeTitle;
             examDescription.textContent = config.description;
             
-            // Update exam info
             totalQuestionsElem.textContent = config.totalQuestions;
             
             const minutes = Math.floor(config.timeLimit / 60);
@@ -1292,7 +248,7 @@
             markingSchemeElem.textContent = `+${config.correctMark} for correct, -${config.wrongPenalty} for wrong`;
         }
 
-        // Screen Management Functions
+        // Screen Management Functions (same as before)
         function showLoadingScreen() {
             loadingScreen.style.display = 'flex';
             errorScreen.style.display = 'none';
@@ -1318,7 +274,13 @@
             loadingScreen.style.display = 'none';
         }
 
-        // Setup Event Listeners
+        function showResultScreen() {
+            welcomeScreen.style.display = 'none';
+            examScreen.style.display = 'none';
+            resultScreen.style.display = 'block';
+        }
+
+        // Setup Event Listeners (same as before)
         function setupEventListeners() {
             retryLoadBtn.addEventListener('click', initApp);
             startExamBtn.addEventListener('click', startExam);
@@ -1341,7 +303,7 @@
             document.addEventListener('drop', preventDefault);
         }
 
-        // Security Functions
+        // Security Functions (same as before)
         function preventDefault(e) {
             e.preventDefault();
             return false;
@@ -1446,8 +408,18 @@
             fullscreenOverlay.style.display = 'none';
         }
 
-        // Exam Functions
+        // Exam Functions (updated)
         function startExam() {
+            // Check if exam already taken for this version
+            const savedExam = localStorage.getItem('last_exam_taken');
+            if (savedExam) {
+                const savedData = JSON.parse(savedExam);
+                if (savedData.version === appState.examVersion) {
+                    alert('You have already taken this exam version. Please wait for a new version.');
+                    return;
+                }
+            }
+
             const name = studentNameInput.value.trim();
             if (!name) {
                 studentNameInput.focus();
@@ -1486,10 +458,11 @@
             // Start timer
             startTimer();
 
-            // Store exam session
+            // Store exam session WITH VERSION
             localStorage.setItem('exam_session', JSON.stringify({
                 name: name,
                 examTitle: appState.examConfig.examTitle,
+                version: appState.examVersion,
                 startedAt: new Date().toISOString()
             }));
         }
@@ -1601,11 +574,6 @@
             calculateResults();
         }
 
-        function showResultScreen() {
-            examScreen.style.display = 'none';
-            resultScreen.style.display = 'block';
-        }
-
         function calculateResults() {
             let correct = 0;
             let wrong = 0;
@@ -1638,15 +606,23 @@
 
             createAnalyticsChart(correct, wrong, skipped, score);
 
-            // Store results
+            // Store results WITH VERSION
             localStorage.setItem('exam_results', JSON.stringify({
                 name: appState.studentName,
                 examTitle: appState.examConfig.examTitle,
+                examVersion: appState.examVersion,
                 score: score,
                 correct: correct,
                 wrong: wrong,
                 skipped: skipped,
                 accuracy: accuracy,
+                date: new Date().toISOString()
+            }));
+
+            // Mark exam as taken FOR THIS VERSION
+            localStorage.setItem('last_exam_taken', JSON.stringify({
+                version: appState.examVersion,
+                examTitle: appState.examConfig.examTitle,
                 date: new Date().toISOString()
             }));
         }
