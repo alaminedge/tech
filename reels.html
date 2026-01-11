@@ -76,10 +76,6 @@
             line-height: 1.2;
         }
 
-        p {
-            margin-bottom: 1rem;
-        }
-
         a {
             text-decoration: none;
             color: inherit;
@@ -105,13 +101,6 @@
             padding: 15px 40px;
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            background: rgba(10, 10, 10, 0.98);
-            box-shadow: var(--shadow);
-            padding: 10px 40px;
         }
 
         .logo-container {
@@ -124,14 +113,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            object-fit: cover;
-            transition: var(--transition);
             border: 2px solid var(--primary-color);
-        }
-
-        .logo:hover {
-            transform: rotate(15deg);
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
         }
 
         .brand-name {
@@ -143,25 +125,7 @@
             font-size: 1.5rem;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: var(--radius-md);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
+        /* Hero */
         .hero {
             margin-top: 100px;
             padding: 4rem 0;
@@ -169,77 +133,11 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        /* Stats */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Filters */
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-xl);
-            color: var(--text-color);
-            font-family: var(--font-primary);
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-btn:hover {
-            border-color: var(--primary-color);
-            background: rgba(0, 191, 255, 0.05);
-        }
-
-        .filter-btn.active {
-            background: var(--gradient-primary);
-            color: #000;
-            border-color: transparent;
         }
 
         /* Reels Grid */
@@ -257,7 +155,6 @@
             overflow: hidden;
             border: 1px solid var(--border-color);
             transition: var(--transition);
-            position: relative;
         }
 
         .reel-card:hover {
@@ -266,47 +163,8 @@
             border-color: var(--primary-color);
         }
 
-        .reel-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .reel-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--primary-color);
-        }
-
-        .reel-creator {
-            flex: 1;
-        }
-
-        .reel-creator h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .reel-date {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .reel-category {
-            background: rgba(0, 191, 255, 0.1);
-            color: var(--primary-color);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        /* Reel Video Container - BLOCKS REDIRECTS */
-        .reel-video-container {
+        /* Video Container - BLOCKS REDIRECTS */
+        .video-container {
             position: relative;
             width: 100%;
             padding-top: 177.78%; /* 16:9 Aspect Ratio */
@@ -314,17 +172,17 @@
             overflow: hidden;
         }
 
-        .reel-video {
+        .video-iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: none;
-            pointer-events: none; /* Blocks all clicks on iframe */
+            pointer-events: none; /* BLOCKS ALL CLICKS */
         }
 
-        .reel-overlay {
+        .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -335,75 +193,48 @@
             cursor: pointer;
         }
 
-        .play-button {
+        .play-btn {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
+            font-size: 1.5rem;
             opacity: 0;
             transition: var(--transition);
         }
 
-        .reel-overlay:hover .play-button {
+        .video-overlay:hover .play-btn {
             opacity: 1;
         }
 
-        /* Reel Content */
         .reel-content {
             padding: 1.5rem;
         }
 
         .reel-title {
             font-size: 1.2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
         }
 
         .reel-description {
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
+            margin-bottom: 1rem;
         }
 
-        /* Reel Stats */
-        .reel-stats {
+        .reel-meta {
             display: flex;
             justify-content: space-between;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .reel-stat {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 0.9rem;
-        }
-
-        .reel-stat i {
-            font-size: 1.1rem;
-        }
-
-        .reel-stat.likes i {
-            color: var(--accent-color);
-        }
-
-        .reel-stat.comments i {
-            color: var(--primary-color);
-        }
-
-        .reel-stat.shares i {
-            color: var(--success-color);
         }
 
         /* Modal */
@@ -421,42 +252,11 @@
         }
 
         .modal-content {
+            width: 90%;
+            max-width: 800px;
             background: var(--bg-secondary);
             border-radius: var(--radius-lg);
-            padding: 3rem;
-            max-width: 600px;
-            width: 90%;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            text-align: center;
-        }
-
-        .modal-icon {
-            font-size: 4rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-content h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-content p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .code-block {
-            background: var(--bg-tertiary);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            text-align: left;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            border: 1px solid var(--border-color);
+            overflow: hidden;
         }
 
         /* Loading */
@@ -465,258 +265,80 @@
             padding: 4rem;
         }
 
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
+        .spinner {
+            width: 50px;
+            height: 50px;
             border: 4px solid var(--border-color);
             border-top-color: var(--primary-color);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 2rem;
+            margin: 0 auto 1rem;
         }
 
-        /* Footer */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 3rem 0;
-            margin-top: 4rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bg-tertiary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-        }
-
-        .social-link:hover {
-            background: var(--gradient-primary);
-            transform: translateY(-3px);
-            border-color: transparent;
-        }
-
-        .telegram-link {
-            background: var(--gradient-primary);
-            border: none;
-        }
-
-        /* Animations */
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
             .reels-grid {
                 grid-template-columns: 1fr;
             }
-
-            .stats {
-                gap: 1.5rem;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
+            
             .hero h1 {
                 font-size: 2rem;
-            }
-
-            .reel-header {
-                padding: 1rem;
-            }
-
-            .reel-content {
-                padding: 1rem;
-            }
-
-            .modal-content {
-                padding: 2rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navbar -->
-    <header>
-        <nav class="navbar">
-            <div class="logo-container">
-                <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
-                <span class="brand-name">AlaminEdge Reels</span>
-            </div>
-            <div class="nav-links">
-                <a href="#" class="nav-link active">Home</a>
-                <a href="#reels" class="nav-link">Reels</a>
-                <a href="#" class="nav-link">About</a>
-            </div>
-        </nav>
-    </header>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge" class="logo">
+            <span class="brand-name">AlaminEdge Reels</span>
+        </div>
+    </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
         <div class="container">
             <h1>Educational Short Videos</h1>
-            <p class="hero-subtitle">Watch bite-sized educational content from top creators. Learn something new in 60 seconds or less!</p>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number" id="total-reels">0</div>
-                    <div class="stat-label">Reels Available</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="total-views">0</div>
-                    <div class="stat-label">Total Views</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="total-creators">0</div>
-                    <div class="stat-label">Content Creators</div>
-                </div>
-            </div>
-
-            <div class="filters" id="filters">
-                <button class="filter-btn active" data-filter="all">All Reels</button>
-                <!-- Filters will be generated from JSON -->
-            </div>
+            <p>Watch bite-sized educational content. All videos embedded safely - no redirects to YouTube!</p>
         </div>
     </section>
 
     <!-- Reels Grid -->
-    <section class="reels-section" id="reels">
-        <div class="container">
-            <div class="reels-grid" id="reels-grid">
-                <!-- Reels will be loaded here -->
-            </div>
-            
-            <div class="loading" id="loading">
-                <div class="loading-spinner"></div>
-                <p>Loading educational reels...</p>
-            </div>
+    <section class="container">
+        <div class="reels-grid" id="reelsContainer">
+            <!-- Reels will be loaded here from JSON -->
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading educational reels...</p>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo-container" style="justify-content: center; margin-bottom: 1.5rem;">
-                    <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge Logo" class="logo">
-                    <span class="brand-name">AlaminEdge</span>
-                </div>
-                <p>Providing quality educational content through short, engaging videos.</p>
-                
-                <div class="social-links">
-                    <a href="https://t.me/freehscaca" target="_blank" class="social-link telegram-link">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
-                
-                <p class="text-muted" style="color: var(--text-muted); font-size: 0.9rem;">
-                    &copy; 2024 AlaminEdge. All rights reserved.
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JSON Setup Modal -->
-    <div class="modal" id="json-setup-modal">
-        <div class="modal-content fade-in">
-            <div class="modal-icon">
-                <i class="fas fa-code"></i>
-            </div>
-            <h2>Setup Required</h2>
-            <p>To use this reels system, you need to create a JSON file with your video data.</p>
-            
-            <div class="code-block">
-                <pre><code>{
-    "reels": [
-        {
-            "id": 1,
-            "title": "Physics Concept Explained",
-            "description": "Short explanation of Newton's Laws",
-            "videoId": "dQw4w9WgXcQ",
-            "category": "Physics",
-            "creator": "Science Academy",
-            "creatorAvatar": "https://example.com/avatar.jpg",
-            "date": "2024-01-15",
-            "likes": 1500,
-            "comments": 45,
-            "shares": 120
-        }
-    ]
-}</code></pre>
-            </div>
-            
-            <p>Save this as <code>reels-data.json</code> in the same folder as this HTML file.</p>
-            
-            <button class="btn btn-primary" id="setup-done-btn">
-                <i class="fas fa-check"></i>
-                <span>I've Created the JSON File</span>
-            </button>
-        </div>
-    </div>
-
     <!-- Video Modal -->
-    <div class="modal" id="video-modal">
-        <div class="modal-content" style="max-width: 800px; padding: 1rem;">
-            <div class="reel-video-container" style="border-radius: var(--radius-md);">
-                <iframe class="reel-video" id="modal-video" 
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <div class="video-container">
+                <iframe class="video-iframe" id="modalVideo" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
-                <div class="reel-overlay" onclick="closeVideoModal()">
-                    <div class="play-button">
+                <div class="video-overlay" onclick="closeModal()">
+                    <div class="play-btn">
                         <i class="fas fa-times"></i>
                     </div>
                 </div>
@@ -724,55 +346,30 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 AlaminEdge. All videos embedded securely.</p>
+    </footer>
+
     <script>
-        // Configuration
-        const JSON_FILE_PATH = 'reels-data.json'; // Change this to your JSON file path
+        // Configuration - SET THIS TO YOUR JSON FILE PATH
+        const JSON_FILE_PATH = 'reels-data.json'; // Change if needed
         
-        // Application State
-        let appState = {
-            reels: [],
-            filteredReels: [],
-            categories: [],
-            currentFilter: 'all',
-            stats: {
-                totalReels: 0,
-                totalViews: 0,
-                totalCreators: 0
-            }
-        };
-
         // DOM Elements
-        const reelsGrid = document.getElementById('reels-grid');
+        const reelsContainer = document.getElementById('reelsContainer');
         const loading = document.getElementById('loading');
-        const filtersContainer = document.getElementById('filters');
-        const totalReelsElem = document.getElementById('total-reels');
-        const totalViewsElem = document.getElementById('total-views');
-        const totalCreatorsElem = document.getElementById('total-creators');
-        const jsonSetupModal = document.getElementById('json-setup-modal');
-        const setupDoneBtn = document.getElementById('setup-done-btn');
-        const videoModal = document.getElementById('video-modal');
-        const modalVideo = document.getElementById('modal-video');
+        const videoModal = document.getElementById('videoModal');
+        const modalVideo = document.getElementById('modalVideo');
 
-        // Initialize Application
-        async function initApp() {
+        // Load reels from JSON
+        async function loadReels() {
             try {
-                await loadReelsData();
-                hideLoading();
-                updateStats();
-                renderFilters();
-                renderReels();
-            } catch (error) {
-                console.error('Error loading reels:', error);
-                showJsonSetupModal();
-            }
-        }
-
-        // Load Reels from JSON
-        async function loadReelsData() {
-            try {
+                console.log('Loading reels from:', JSON_FILE_PATH);
+                
                 const response = await fetch(JSON_FILE_PATH);
+                
                 if (!response.ok) {
-                    throw new Error(`Failed to load ${JSON_FILE_PATH}`);
+                    throw new Error(`Failed to load JSON: ${response.status}`);
                 }
                 
                 const data = await response.json();
@@ -781,187 +378,77 @@
                     throw new Error('Invalid JSON format: Missing "reels" array');
                 }
                 
-                appState.reels = data.reels;
-                appState.filteredReels = [...data.reels];
-                
-                // Extract unique categories
-                const categoriesSet = new Set();
-                data.reels.forEach(reel => {
-                    if (reel.category) {
-                        categoriesSet.add(reel.category);
-                    }
-                });
-                appState.categories = Array.from(categoriesSet);
+                renderReels(data.reels);
+                loading.style.display = 'none';
                 
             } catch (error) {
-                console.error('Error in loadReelsData:', error);
-                throw error;
-            }
-        }
-
-        // Show JSON Setup Modal
-        function showJsonSetupModal() {
-            jsonSetupModal.style.display = 'flex';
-        }
-
-        // Hide Loading
-        function hideLoading() {
-            loading.style.display = 'none';
-        }
-
-        // Update Statistics
-        function updateStats() {
-            appState.stats.totalReels = appState.reels.length;
-            
-            // Calculate total views (assuming each like ≈ 100 views for demo)
-            appState.stats.totalViews = appState.reels.reduce((sum, reel) => {
-                return sum + (reel.likes || 0) * 100;
-            }, 0);
-            
-            // Count unique creators
-            const creatorSet = new Set(appState.reels.map(reel => reel.creator));
-            appState.stats.totalCreators = creatorSet.size;
-            
-            // Update UI
-            totalReelsElem.textContent = appState.stats.totalReels.toLocaleString();
-            totalViewsElem.textContent = Math.floor(appState.stats.totalViews / 1000) + 'K';
-            totalCreatorsElem.textContent = appState.stats.totalCreators;
-        }
-
-        // Render Category Filters
-        function renderFilters() {
-            // Clear existing filters (except "All")
-            while (filtersContainer.children.length > 1) {
-                filtersContainer.removeChild(filtersContainer.lastChild);
-            }
-            
-            // Add category filters
-            appState.categories.forEach(category => {
-                const button = document.createElement('button');
-                button.className = 'filter-btn';
-                button.textContent = category;
-                button.dataset.filter = category.toLowerCase();
-                button.addEventListener('click', () => filterReels(category));
-                filtersContainer.appendChild(button);
-            });
-        }
-
-        // Filter Reels by Category
-        function filterReels(category) {
-            // Update active button
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            appState.currentFilter = category.toLowerCase();
-            
-            if (category === 'all') {
-                appState.filteredReels = [...appState.reels];
-            } else {
-                appState.filteredReels = appState.reels.filter(reel => 
-                    reel.category && reel.category.toLowerCase() === category.toLowerCase()
-                );
-            }
-            
-            renderReels();
-        }
-
-        // Render Reels Grid
-        function renderReels() {
-            reelsGrid.innerHTML = '';
-            
-            if (appState.filteredReels.length === 0) {
-                reelsGrid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem;">
-                        <i class="fas fa-video-slash" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
-                        <h3>No reels found</h3>
-                        <p style="color: var(--text-secondary);">Try selecting a different category</p>
+                console.error('Error loading reels:', error);
+                loading.innerHTML = `
+                    <div style="color: var(--accent-color);">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <h3>Failed to load reels</h3>
+                        <p>${error.message}</p>
+                        <p style="margin-top: 1rem;">Make sure <code>${JSON_FILE_PATH}</code> exists and contains valid JSON.</p>
                     </div>
                 `;
-                return;
             }
+        }
+
+        // Render reels to the page
+        function renderReels(reels) {
+            reelsContainer.innerHTML = '';
             
-            appState.filteredReels.forEach(reel => {
-                const reelCard = createReelCard(reel);
-                reelsGrid.appendChild(reelCard);
+            reels.forEach(reel => {
+                const reelElement = createReelElement(reel);
+                reelsContainer.appendChild(reelElement);
             });
         }
 
-        // Create Reel Card HTML
-        function createReelCard(reel) {
-            const card = document.createElement('div');
-            card.className = 'reel-card fade-in';
+        // Create HTML for a single reel
+        function createReelElement(reel) {
+            const div = document.createElement('div');
+            div.className = 'reel-card';
             
-            // Format numbers
-            const likes = reel.likes ? reel.likes.toLocaleString() : '0';
-            const comments = reel.comments ? reel.comments.toLocaleString() : '0';
-            const shares = reel.shares ? reel.shares.toLocaleString() : '0';
+            // Create YouTube embed URL
+            const embedUrl = `https://www.youtube.com/embed/${reel.videoId}?rel=0&modestbranding=1`;
             
-            // Create YouTube embed URL (SHORTS FORMAT)
-            const videoUrl = `https://www.youtube.com/embed/${reel.videoId}?autoplay=1&modestbranding=1&rel=0`;
-            
-            card.innerHTML = `
-                <div class="reel-header">
-                    <img src="${reel.creatorAvatar || 'https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png'}" 
-                         alt="${reel.creator}" class="reel-avatar">
-                    <div class="reel-creator">
-                        <h3>${reel.creator}</h3>
-                        <div class="reel-date">${reel.date || 'Recently'}</div>
-                    </div>
-                    <span class="reel-category">${reel.category || 'Education'}</span>
-                </div>
-                
-                <div class="reel-video-container">
-                    <iframe class="reel-video" 
-                        src="${videoUrl}"
+            div.innerHTML = `
+                <div class="video-container">
+                    <iframe class="video-iframe" 
+                        src="${embedUrl}"
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen>
                     </iframe>
-                    <div class="reel-overlay" onclick="openVideoModal('${reel.videoId}')">
-                        <div class="play-button">
+                    <div class="video-overlay" onclick="openModal('${reel.videoId}')">
+                        <div class="play-btn">
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
                 </div>
-                
                 <div class="reel-content">
-                    <h3 class="reel-title">${reel.title}</h3>
-                    <p class="reel-description">${reel.description || 'Watch this educational short video.'}</p>
-                    
-                    <div class="reel-stats">
-                        <div class="reel-stat likes">
-                            <i class="fas fa-heart"></i>
-                            <span>${likes}</span>
-                        </div>
-                        <div class="reel-stat comments">
-                            <i class="fas fa-comment"></i>
-                            <span>${comments}</span>
-                        </div>
-                        <div class="reel-stat shares">
-                            <i class="fas fa-share"></i>
-                            <span>${shares}</span>
-                        </div>
+                    <h3 class="reel-title">${reel.title || 'Educational Video'}</h3>
+                    <p class="reel-description">${reel.description || 'Watch this educational short.'}</p>
+                    <div class="reel-meta">
+                        <span>${reel.category || 'Education'}</span>
+                        <span>${reel.date || ''}</span>
                     </div>
                 </div>
             `;
             
-            return card;
+            return div;
         }
 
-        // Open Video in Modal (BLOCKS REDIRECT)
-        function openVideoModal(videoId) {
-            const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`;
-            modalVideo.src = videoUrl;
+        // Open video in modal
+        function openModal(videoId) {
+            const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+            modalVideo.src = embedUrl;
             videoModal.style.display = 'flex';
-            
-            // Prevent any clicks from leaving the page
             document.body.style.overflow = 'hidden';
         }
 
-        // Close Video Modal
-        function closeVideoModal() {
+        // Close modal
+        function closeModal() {
             videoModal.style.display = 'none';
             modalVideo.src = '';
             document.body.style.overflow = 'auto';
@@ -970,35 +457,12 @@
         // Close modal when clicking outside
         videoModal.addEventListener('click', (e) => {
             if (e.target === videoModal) {
-                closeVideoModal();
+                closeModal();
             }
         });
 
-        // Setup Done Button
-        setupDoneBtn.addEventListener('click', () => {
-            jsonSetupModal.style.display = 'none';
-            initApp();
-        });
-
-        // Close JSON modal when clicking outside
-        jsonSetupModal.addEventListener('click', (e) => {
-            if (e.target === jsonSetupModal) {
-                jsonSetupModal.style.display = 'none';
-            }
-        });
-
-        // Initialize
-        initApp();
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+        // Load reels when page loads
+        document.addEventListener('DOMContentLoaded', loadReels);
     </script>
 </body>
 </html>
