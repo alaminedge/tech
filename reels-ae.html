@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlaminEdge Reels | Infinite Scroll Shorts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00bfff;
+            --primary-dark: #0099cc;
+            --primary-light: #33ccff;
+            --secondary-color: #8a2be2;
+            --accent-color: #ff6b6b;
+            --success-color: #00ff88;
+            --warning-color: #ffaa00;
+            --bg-color: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
+            --gradient-success: linear-gradient(135deg, #00ff88 0%, #00bfff 100%);
+            --gradient-warning: linear-gradient(135deg, #ffaa00 0%, #ff6b6b 100%);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+        }
+
+        .brand-name {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 100px;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Reels Feed - Single Column like YouTube Shorts */
+        .reels-feed {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Reel Item - Full height view */
+        .reel-item {
+            margin-bottom: 20px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            position: relative;
+            height: calc(100vh - 180px);
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Video Container - Takes most space */
+        .video-container {
+            flex: 1;
+            position: relative;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none; /* BLOCKS ALL CLICKS */
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        /* Reel Info */
+        .reel-info {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .reel-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .reel-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .reel-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Loading Indicator */
+        .loading-indicator {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            z-index: 999;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 800px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        /* End of Feed */
+        .end-feed {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .reels-feed {
+                max-width: 100%;
+            }
+            
+            .reel-item {
+                height: calc(100vh - 150px);
+                min-height: 500px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge" class="logo">
+            <span class="brand-name">AlaminEdge Shorts</span>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Scroll for More Educational Shorts</h1>
+            <p style="color: var(--text-secondary);">Like YouTube Shorts - keep scrolling for infinite content</p>
+        </div>
+    </section>
+
+    <!-- Reels Feed -->
+    <section class="container">
+        <!-- Scroll Progress Indicator -->
+        <div class="scroll-progress">
+            Loaded: <span id="loadedCount">0</span> / <span id="totalCount">0</span>
+        </div>
+
+        <!-- Reels Container -->
+        <div class="reels-feed" id="reelsFeed">
+            <!-- Reels will be loaded here automatically as you scroll -->
+        </div>
+
+        <!-- Loading Indicator -->
+        <div class="loading-indicator" id="loadingIndicator">
+            <div class="spinner"></div>
+            <p>Loading more educational shorts...</p>
+        </div>
+
+        <!-- End of Feed -->
+        <div class="end-feed" id="endFeed" style="display: none;">
+            <i class="fas fa-check-circle" style="font-size: 2rem; color: var(--success-color); margin-bottom: 1rem;"></i>
+            <h3>You've reached the end!</h3>
+            <p>All available educational shorts have been loaded.</p>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <div class="video-container">
+                <iframe class="video-iframe" id="modalVideo" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+                <div class="video-overlay" onclick="closeModal()">
+                    <div style="position: absolute; top: 20px; right: 20px; color: white; font-size: 1.5rem;">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================= CONFIGURATION =================
+        const JSON_FILE_PATH = 'reels-data.json'; // Your JSON file
+        const REELS_PER_LOAD = 3; // How many reels to load each time
+        const LOAD_THRESHOLD = 300; // pixels from bottom to trigger load
+
+        // ================= STATE =================
+        let appState = {
+            allReels: [],
+            loadedReels: [],
+            currentIndex: 0,
+            isLoading: false,
+            hasMore: true,
+            observer: null
+        };
+
+        // ================= DOM ELEMENTS =================
+        const reelsFeed = document.getElementById('reelsFeed');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const endFeed = document.getElementById('endFeed');
+        const loadedCount = document.getElementById('loadedCount');
+        const totalCount = document.getElementById('totalCount');
+        const videoModal = document.getElementById('videoModal');
+        const modalVideo = document.getElementById('modalVideo');
+
+        // ================= INITIALIZE =================
+        async function initApp() {
+            try {
+                // Load all reels from JSON
+                await loadAllReels();
+                
+                // Show initial reels
+                loadMoreReels();
+                
+                // Set up infinite scroll
+                setupInfiniteScroll();
+                
+            } catch (error) {
+                console.error('Error initializing app:', error);
+                showError('Failed to load reels. Please check your JSON file.');
+            }
+        }
+
+        // ================= LOAD ALL REELS FROM JSON =================
+        async function loadAllReels() {
+            const response = await fetch(JSON_FILE_PATH);
+            if (!response.ok) {
+                throw new Error(`Failed to load ${JSON_FILE_PATH}`);
+            }
+            
+            const data = await response.json();
+            if (!data.reels || !Array.isArray(data.reels)) {
+                throw new Error('Invalid JSON: Missing "reels" array');
+            }
+            
+            appState.allReels = data.reels;
+            totalCount.textContent = data.reels.length;
+        }
+
+        // ================= LOAD MORE REELS (INFINITE SCROLL) =================
+        function loadMoreReels() {
+            if (appState.isLoading || !appState.hasMore) return;
+            
+            appState.isLoading = true;
+            loadingIndicator.style.display = 'block';
+            
+            // Simulate loading delay (remove in production)
+            setTimeout(() => {
+                const nextBatch = appState.allReels.slice(
+                    appState.currentIndex,
+                    appState.currentIndex + REELS_PER_LOAD
+                );
+                
+                if (nextBatch.length === 0) {
+                    appState.hasMore = false;
+                    loadingIndicator.style.display = 'none';
+                    endFeed.style.display = 'block';
+                    return;
+                }
+                
+                // Render the batch
+                renderReels(nextBatch);
+                
+                // Update state
+                appState.currentIndex += nextBatch.length;
+                appState.loadedReels = [...appState.loadedReels, ...nextBatch];
+                loadedCount.textContent = appState.loadedReels.length;
+                
+                appState.isLoading = false;
+                loadingIndicator.style.display = 'none';
+                
+                // Check if we've loaded everything
+                if (appState.currentIndex >= appState.allReels.length) {
+                    appState.hasMore = false;
+                    endFeed.style.display = 'block';
+                }
+                
+            }, 500); // Simulated delay
+        }
+
+        // ================= RENDER REELS =================
+        function renderReels(reels) {
+            reels.forEach((reel, index) => {
+                const reelElement = createReelElement(reel);
+                reelsFeed.appendChild(reelElement);
+                
+                // Add fade-in animation with delay
+                setTimeout(() => {
+                    reelElement.classList.add('fade-in');
+                }, index * 100);
+            });
+        }
+
+        // ================= CREATE REEL ELEMENT =================
+        function createReelElement(reel) {
+            const div = document.createElement('div');
+            div.className = 'reel-item';
+            
+            const embedUrl = `https://www.youtube.com/embed/${reel.videoId}?rel=0&modestbranding=1&autoplay=0`;
+            
+            div.innerHTML = `
+                <div class="video-container">
+                    <iframe class="video-iframe" 
+                        src="${embedUrl}"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                    <div class="video-overlay" onclick="openModal('${reel.videoId}')">
+                        <div style="position: absolute; bottom: 20px; right: 20px; color: white; font-size: 1.2rem; background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 5px;">
+                            <i class="fas fa-expand"></i> Fullscreen
+                        </div>
+                    </div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">${reel.title || 'Educational Short'}</h3>
+                    <p class="reel-description">${reel.description || 'Watch this educational content.'}</p>
+                    <div class="reel-meta">
+                        <span>${reel.category || 'Education'}</span>
+                        <span>${reel.date || ''}</span>
+                    </div>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // ================= INFINITE SCROLL OBSERVER =================
+        function setupInfiniteScroll() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && appState.hasMore && !appState.isLoading) {
+                        loadMoreReels();
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: `${LOAD_THRESHOLD}px`,
+                threshold: 0.1
+            });
+            
+            // Observe the loading indicator
+            observer.observe(loadingIndicator);
+            appState.observer = observer;
+        }
+
+        // ================= VIDEO MODAL FUNCTIONS =================
+        function openModal(videoId) {
+            const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+            modalVideo.src = embedUrl;
+            videoModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            videoModal.style.display = 'none';
+            modalVideo.src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) closeModal();
+        });
+
+        // ================= ERROR HANDLING =================
+        function showError(message) {
+            reelsFeed.innerHTML = `
+                <div style="text-align: center; padding: 3rem; color: var(--accent-color);">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <h3>Error Loading Content</h3>
+                    <p>${message}</p>
+                    <button onclick="location.reload()" style="margin-top: 1rem; padding: 10px 20px; background: var(--primary-color); border: none; border-radius: 5px; color: black; cursor: pointer;">
+                        <i class="fas fa-redo"></i> Reload Page
+                    </button>
+                </div>
+            `;
+            loadingIndicator.style.display = 'none';
+        }
+
+        // ================= INITIALIZE ON LOAD =================
+        document.addEventListener('DOMContentLoaded', initApp);
+
+        // ================= SCROLL EVENT (Alternative) =================
+        window.addEventListener('scroll', () => {
+            if (appState.isLoading || !appState.hasMore) return;
+            
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight;
+            
+            // Load more when near bottom
+            if (scrollTop + clientHeight >= scrollHeight - LOAD_THRESHOLD) {
+                loadMoreReels();
+            }
+        });
+    </script>
+</body>
+</html>
