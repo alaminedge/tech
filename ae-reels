@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlaminEdge Shorts | Auto-Play Scroll</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00bfff;
+            --primary-dark: #0099cc;
+            --primary-light: #33ccff;
+            --secondary-color: #8a2be2;
+            --accent-color: #ff6b6b;
+            --success-color: #00ff88;
+            --warning-color: #ffaa00;
+            --bg-color: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
+            --gradient-success: linear-gradient(135deg, #00ff88 0%, #00bfff 100%);
+            --gradient-warning: linear-gradient(135deg, #ffaa00 0%, #ff6b6b 100%);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            overscroll-behavior-y: none; /* Prevent pull-to-refresh */
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Hide scrollbar but keep functionality */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+        }
+
+        .brand-name {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+
+        /* Container - Full Height Snap Scrolling */
+        .container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            scroll-snap-align: start;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.1) 0%, rgba(138, 43, 226, 0.1) 100%);
+        }
+
+        .hero-content {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-secondary);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-10px) translateX(-50%);}
+            60% {transform: translateY(-5px) translateX(-50%);}
+        }
+
+        /* Reel Container - Each takes full screen */
+        .reel-container {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Video Wrapper - Takes most space */
+        .video-wrapper {
+            flex: 1;
+            position: relative;
+            background: #000;
+            overflow: hidden;
+        }
+
+        /* Video Iframe - AUTO-PLAY enabled */
+        .video-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none; /* BLOCKS REDIRECTS */
+        }
+
+        /* Video Overlay - For controls */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        /* Top Controls */
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .volume-btn {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .volume-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Bottom Controls */
+        .bottom-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .reel-info {
+            max-width: 70%;
+        }
+
+        .reel-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .reel-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .reel-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Action Buttons (Like, Comment, Share) */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .action-btn i {
+            font-size: 1.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-count {
+            font-size: 0.8rem;
+        }
+
+        /* Current Reel Indicator */
+        .current-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .reel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .reel-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.3);
+        }
+
+        /* Loading */
+        .loading {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: start;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* End of Feed */
+        .end-feed {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            scroll-snap-align: start;
+            color: var(--text-secondary);
+        }
+
+        /* Pause/Play Overlay */
+        .pause-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+        }
+
+        .pause-overlay.active {
+            display: flex;
+        }
+
+        .pause-icon {
+            font-size: 4rem;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .reel-title {
+                font-size: 1rem;
+            }
+            
+            .action-btn i {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .current-indicator {
+                right: 10px;
+            }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1001;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/V6v8hd75/IMG-20251106-141117-745.png" alt="AlaminEdge" class="logo">
+            <span class="brand-name">AlaminEdge Shorts</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </nav>
+
+    <!-- Main Container with Snap Scrolling -->
+    <div class="container" id="mainContainer">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Educational Shorts</h1>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                    Scroll down to watch educational shorts. Each reel auto-plays when in view.
+                </p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button onclick="startWatching()" style="padding: 12px 30px; background: var(--gradient-primary); border: none; border-radius: var(--radius-xl); color: black; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-play"></i> Start Watching
+                    </button>
+                </div>
+            </div>
+            <div class="scroll-hint">
+                <i class="fas fa-chevron-down"></i>
+                <p>Scroll down</p>
+            </div>
+        </section>
+
+        <!-- Reels will be loaded here from JSON -->
+        <div id="reelsContainer"></div>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- End of Feed -->
+        <div class="end-feed" id="endFeed" style="display: none;">
+            <div>
+                <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success-color); margin-bottom: 1rem;"></i>
+                <h2>You've watched all shorts!</h2>
+                <p style="margin: 1rem 0;">Come back later for more educational content.</p>
+                <button onclick="scrollToTop()" style="padding: 10px 20px; background: var(--gradient-primary); border: none; border-radius: var(--radius-xl); color: black; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                    <i class="fas fa-arrow-up"></i> Back to Top
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current Reel Indicator -->
+    <div class="current-indicator" id="currentIndicator"></div>
+
+    <script>
+        // ================= CONFIGURATION =================
+        const JSON_FILE_PATH = 'reels-data.json';
+        const AUTO_PLAY_THRESHOLD = 0.7; // 70% of video must be visible to auto-play
+        const VIDEO_VOLUME = 0.5; // Default volume (0 to 1)
+        const SCROLL_DEBOUNCE = 100; // ms
+
+        // ================= STATE =================
+        let appState = {
+            reels: [],
+            currentReelIndex: 0,
+            isMuted: true, // Start muted (YouTube policy)
+            isLoading: false,
+            isScrolling: false,
+            scrollTimeout: null,
+            videoPlayers: {}, // Store YouTube iframe APIs
+            lastScrollTime: 0
+        };
+
+        // ================= DOM ELEMENTS =================
+        const mainContainer = document.getElementById('mainContainer');
+        const reelsContainer = document.getElementById('reelsContainer');
+        const loading = document.getElementById('loading');
+        const endFeed = document.getElementById('endFeed');
+        const currentIndicator = document.getElementById('currentIndicator');
+        const progressFill = document.getElementById('progressFill');
+
+        // ================= INITIALIZE =================
+        async function initApp() {
+            try {
+                await loadReels();
+                createReelDots();
+                setupIntersectionObserver();
+                setupScrollEvents();
+            } catch (error) {
+                console.error('Error:', error);
+                showError();
+            }
+        }
+
+        // ================= LOAD REELS FROM JSON =================
+        async function loadReels() {
+            const response = await fetch(JSON_FILE_PATH);
+            const data = await response.json();
+            
+            if (!data.reels) throw new Error('Invalid JSON');
+            
+            appState.reels = data.reels;
+            renderReels();
+            loading.style.display = 'none';
+        }
+
+        // ================= RENDER REELS =================
+        function renderReels() {
+            reelsContainer.innerHTML = '';
+            
+            appState.reels.forEach((reel, index) => {
+                const reelElement = createReelElement(reel, index);
+                reelsContainer.appendChild(reelElement);
+            });
+            
+            // Add end feed
+            endFeed.style.display = 'flex';
+        }
+
+        // ================= CREATE REEL ELEMENT =================
+        function createReelElement(reel, index) {
+            const div = document.createElement('div');
+            div.className = 'reel-container';
+            div.id = `reel-${index}`;
+            
+            // YouTube embed with autoplay parameters
+            const videoUrl = `https://www.youtube.com/embed/${reel.videoId}?autoplay=0&mute=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
+            
+            div.innerHTML = `
+                <div class="video-wrapper">
+                    <iframe class="video-iframe" 
+                        id="video-${index}"
+                        src="${videoUrl}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                    
+                    <!-- Pause Overlay -->
+                    <div class="pause-overlay" id="pause-${index}">
+                        <div class="pause-icon">
+                            <i class="fas fa-pause"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Controls Overlay -->
+                    <div class="video-overlay">
+                        <div class="top-controls">
+                            <button class="volume-btn" onclick="toggleMute(${index})" id="volume-btn-${index}">
+                                <i class="fas fa-volume-mute"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="bottom-controls">
+                            <div class="reel-info">
+                                <h3 class="reel-title">${reel.title || 'Educational Short'}</h3>
+                                <p class="reel-description">${reel.description || ''}</p>
+                                <div class="reel-meta">
+                                    <span>${reel.category || 'Education'}</span>
+                                    <span>${reel.views ? `${formatNumber(reel.views)} views` : ''}</span>
+                                    <span>${reel.date || ''}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons">
+                                <button class="action-btn" onclick="likeReel(${index})">
+                                    <i class="fas fa-heart"></i>
+                                    <span class="action-count" id="likes-${index}">${formatNumber(reel.likes || 0)}</span>
+                                </button>
+                                <button class="action-btn" onclick="commentReel(${index})">
+                                    <i class="fas fa-comment"></i>
+                                    <span class="action-count" id="comments-${index}">${formatNumber(reel.comments || 0)}</span>
+                                </button>
+                                <button class="action-btn" onclick="shareReel(${index})">
+                                    <i class="fas fa-share"></i>
+                                    <span class="action-count" id="shares-${index}">${formatNumber(reel.shares || 0)}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // ================= CREATE REEL DOTS INDICATOR =================
+        function createReelDots() {
+            currentIndicator.innerHTML = '';
+            appState.reels.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'reel-dot';
+                dot.dataset.index = index;
+                dot.onclick = () => scrollToReel(index);
+                currentIndicator.appendChild(dot);
+            });
+        }
+
+        // ================= INTERSECTION OBSERVER FOR AUTO-PLAY =================
+        function setupIntersectionObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const reelIndex = parseInt(entry.target.id.split('-')[1]);
+                    
+                    if (entry.isIntersecting && entry.intersectionRatio >= AUTO_PLAY_THRESHOLD) {
+                        // This reel is now in view - PLAY IT
+                        playReel(reelIndex);
+                        updateCurrentIndicator(reelIndex);
+                        updateProgress(reelIndex);
+                        
+                        // Pause all other reels
+                        pauseOtherReels(reelIndex);
+                    } else if (!entry.isIntersecting || entry.intersectionRatio < 0.3) {
+                        // This reel is out of view - PAUSE IT
+                        pauseReel(reelIndex);
+                    }
+                });
+            }, {
+                threshold: [0.3, 0.7, 1.0], // Multiple thresholds
+                rootMargin: '0px'
+            });
+            
+            // Observe all reels
+            appState.reels.forEach((_, index) => {
+                const reelElement = document.getElementById(`reel-${index}`);
+                if (reelElement) observer.observe(reelElement);
+            });
+        }
+
+        // ================= VIDEO CONTROL FUNCTIONS =================
+        function playReel(index) {
+            const iframe = document.getElementById(`video-${index}`);
+            if (!iframe) return;
+            
+            // Update current reel index
+            appState.currentReelIndex = index;
+            
+            // Try to play using YouTube IFrame API
+            try {
+                const player = appState.videoPlayers[index];
+                if (player && typeof player.playVideo === 'function') {
+                    player.playVideo();
+                    player.unMute();
+                }
+            } catch (e) {
+                // Fallback: reload iframe with autoplay
+                const src = iframe.src.replace('autoplay=0', 'autoplay=1');
+                iframe.src = src;
+            }
+            
+            // Hide pause overlay
+            const pauseOverlay = document.getElementById(`pause-${index}`);
+            if (pauseOverlay) pauseOverlay.classList.remove('active');
+        }
+
+        function pauseReel(index) {
+            const iframe = document.getElementById(`video-${index}`);
+            if (!iframe) return;
+            
+            // Try to pause using YouTube IFrame API
+            try {
+                const player = appState.videoPlayers[index];
+                if (player && typeof player.pauseVideo === 'function') {
+                    player.pauseVideo();
+                }
+            } catch (e) {
+                // Fallback: reload iframe without autoplay
+                const src = iframe.src.replace('autoplay=1', 'autoplay=0');
+                iframe.src = src;
+            }
+            
+            // Show pause overlay
+            const pauseOverlay = document.getElementById(`pause-${index}`);
+            if (pauseOverlay) pauseOverlay.classList.add('active');
+        }
+
+        function pauseOtherReels(currentIndex) {
+            appState.reels.forEach((_, index) => {
+                if (index !== currentIndex) {
+                    pauseReel(index);
+                }
+            });
+        }
+
+        function toggleMute(index) {
+            appState.isMuted = !appState.isMuted;
+            const btn = document.getElementById(`volume-btn-${index}`);
+            
+            try {
+                const player = appState.videoPlayers[index];
+                if (player) {
+                    if (appState.isMuted) {
+                        player.mute();
+                        btn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    } else {
+                        player.unMute();
+                        player.setVolume(VIDEO_VOLUME * 100);
+                        btn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    }
+                }
+            } catch (e) {
+                console.error('Mute toggle error:', e);
+            }
+        }
+
+        // ================= SCROLL FUNCTIONS =================
+        function setupScrollEvents() {
+            let lastScrollTop = 0;
+            let scrollDirection = 'down';
+            
+            mainContainer.addEventListener('scroll', () => {
+                // Debounce scroll events
+                clearTimeout(appState.scrollTimeout);
+                appState.scrollTimeout = setTimeout(handleScroll, SCROLL_DEBOUNCE);
+                
+                // Detect scroll direction
+                const scrollTop = mainContainer.scrollTop;
+                scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up';
+                lastScrollTop = scrollTop;
+                
+                // Update progress bar
+                updateScrollProgress();
+            });
+            
+            // Prevent default scroll behavior
+            mainContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const scrollAmount = window.innerHeight * 0.8;
+                mainContainer.scrollBy({
+                    top: e.deltaY > 0 ? scrollAmount : -scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Touch events for mobile
+            let touchStartY = 0;
+            mainContainer.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+            });
+            
+            mainContainer.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            });
+            
+            mainContainer.addEventListener('touchend', (e) => {
+                const touchEndY = e.changedTouches[0].clientY;
+                const diff = touchStartY - touchEndY;
+                
+                if (Math.abs(diff) > 50) {
+                    const scrollAmount = window.innerHeight;
+                    mainContainer.scrollBy({
+                        top: diff > 0 ? scrollAmount : -scrollAmount,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
+
+        function handleScroll() {
+            // Find which reel is currently most visible
+            const containerRect = mainContainer.getBoundingClientRect();
+            let maxVisibility = 0;
+            let mostVisibleIndex = appState.currentReelIndex;
+            
+            appState.reels.forEach((_, index) => {
+                const reel = document.getElementById(`reel-${index}`);
+                if (!reel) return;
+                
+                const reelRect = reel.getBoundingClientRect();
+                const visibleHeight = Math.min(reelRect.bottom, containerRect.bottom) - 
+                                    Math.max(reelRect.top, containerRect.top);
+                const visibility = visibleHeight / reelRect.height;
+                
+                if (visibility > maxVisibility) {
+                    maxVisibility = visibility;
+                    mostVisibleIndex = index;
+                }
+            });
+            
+            // If a new reel is most visible, switch to it
+            if (mostVisibleIndex !== appState.currentReelIndex && maxVisibility > AUTO_PLAY_THRESHOLD) {
+                playReel(mostVisibleIndex);
+                pauseOtherReels(mostVisibleIndex);
+                updateCurrentIndicator(mostVisibleIndex);
+            }
+        }
+
+        function updateCurrentIndicator(index) {
+            document.querySelectorAll('.reel-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function updateProgress(index) {
+            const progress = ((index + 1) / appState.reels.length) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        function updateScrollProgress() {
+            const scrollTop = mainContainer.scrollTop;
+            const scrollHeight = mainContainer.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        // ================= UTILITY FUNCTIONS =================
+        function scrollToReel(index) {
+            const reel = document.getElementById(`reel-${index}`);
+            if (reel) {
+                reel.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function scrollToTop() {
+            mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startWatching() {
+            scrollToReel(0);
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        }
+
+        function likeReel(index) {
+            const countElem = document.getElementById(`likes-${index}`);
+            let count = parseInt(countElem.textContent) || 0;
+            count++;
+            countElem.textContent = formatNumber(count);
+            
+            // Visual feedback
+            const heart = countElem.parentElement.querySelector('i');
+            heart.style.color = 'var(--accent-color)';
+            setTimeout(() => {
+                heart.style.color = '';
+            }, 300);
+        }
+
+        function commentReel(index) {
+            const countElem = document.getElementById(`comments-${index}`);
+            let count = parseInt(countElem.textContent) || 0;
+            count++;
+            countElem.textContent = formatNumber(count);
+        }
+
+        function shareReel(index) {
+            const countElem = document.getElementById(`shares-${index}`);
+            let count = parseInt(countElem.textContent) || 0;
+            count++;
+            countElem.textContent = formatNumber(count);
+            
+            // Copy link to clipboard
+            const reel = appState.reels[index];
+            const shareUrl = `${window.location.origin}?reel=${index}`;
+            navigator.clipboard.writeText(shareUrl);
+            
+            alert('Link copied to clipboard!');
+        }
+
+        function showError() {
+            loading.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                    <h3>Failed to load reels</h3>
+                    <p>Please check if <code>${JSON_FILE_PATH}</code> exists</p>
+                    <button onclick="location.reload()" style="margin-top: 1rem; padding: 10px 20px; background: var(--primary-color); border: none; border-radius: 5px; color: black; cursor: pointer;">
+                        <i class="fas fa-redo"></i> Reload
+                    </button>
+                </div>
+            `;
+        }
+
+        // ================= YOUTUBE IFRAME API =================
+        // Load YouTube IFrame API
+        function loadYouTubeAPI() {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+
+        // YouTube API ready callback
+        window.onYouTubeIframeAPIReady = function() {
+            appState.reels.forEach((reel, index) => {
+                const iframe = document.getElementById(`video-${index}`);
+                if (iframe) {
+                    const player = new YT.Player(iframe, {
+                        events: {
+                            'onReady': (event) => {
+                                appState.videoPlayers[index] = event.target;
+                                event.target.mute(); // Start muted
+                            },
+                            'onStateChange': (event) => {
+                                // Handle video state changes if needed
+                            }
+                        }
+                    });
+                }
+            });
+        };
+
+        // ================= INITIALIZE ON LOAD =================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadYouTubeAPI();
+            initApp();
+        });
+    </script>
+</body>
+</html>
