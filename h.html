@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Merge 5 Images</title>
+  <title>6-Image Merge Upload</title>
 </head>
 <body>
-  <h2>Upload 5 Images to Merge</h2>
+  <h2>Upload 6 Screenshots for Giveaway</h2>
 
   <input type="file" id="images" accept="image/*" multiple>
   <button onclick="mergeAndUpload()">Merge & Upload</button>
 
   <p id="status"></p>
   <img id="preview" style="max-width:500px; display:none; margin-top:10px;">
-  
+
   <script>
     const API_KEY = "61efcea661db85bc3909f88fd02010d3"; // replace with your key
-    const MAX_IMAGES = 5;
-    const CANVAS_WIDTH = 1000; // final image width
-    const CANVAS_HEIGHT = 1000; // final image height
+    const MAX_IMAGES = 6;
+    const CANVAS_WIDTH = 1200; // final merged image width
+    const CANVAS_HEIGHT = 1200; // final merged image height
 
     async function mergeAndUpload() {
       const files = document.getElementById("images").files;
@@ -38,7 +38,7 @@
       canvas.height = CANVAS_HEIGHT;
       const ctx = canvas.getContext("2d");
 
-      // Grid layout: 2 rows x 3 columns (fits 5 images nicely)
+      // Grid layout: 3 columns x 2 rows for 6 images
       const cols = 3;
       const rows = 2;
       const cellWidth = CANVAS_WIDTH / cols;
@@ -65,7 +65,7 @@
       // Convert canvas to blob & upload
       canvas.toBlob(async blob => {
         status.innerText = "Uploading merged image...";
-        
+
         const formData = new FormData();
         formData.append("image", blob);
 
@@ -81,7 +81,7 @@
             const url = data.data.url;
             preview.src = url;
             preview.style.display = "block";
-            status.innerText = "Merged image uploaded!";
+            status.innerText = "Merged image uploaded successfully!";
             console.log("Merged image URL:", url);
           } else {
             status.innerText = "Upload failed!";
