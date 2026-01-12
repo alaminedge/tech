@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One-Time Giveaway Submission | AlaminEdge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00bfff;
+            --primary-dark: #0099cc;
+            --primary-light: #33ccff;
+            --secondary-color: #8a2be2;
+            --accent-color: #ff6b6b;
+            --success-color: #00ff88;
+            --warning-color: #ffaa00;
+            --info-color: #2e86de;
+            --bg-color: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
+            --gradient-success: linear-gradient(135deg, #00ff88 0%, #00bfff 100%);
+            --gradient-warning: linear-gradient(135deg, #ffaa00 0%, #ff6b6b 100%);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 191, 255, 0.07) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(138, 43, 226, 0.07) 0%, transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(255, 107, 107, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+            animation: bgPulse 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: var(--shadow);
+            padding: 10px 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+        }
+
+        .logo:hover {
+            transform: rotate(15deg);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        }
+
+        .brand-name {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            animation: badgeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 2rem auto;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .form-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--font-primary);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+        }
+
+        /* Already Submitted Section */
+        .already-submitted {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            margin: 2rem auto;
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .already-submitted-icon {
+            font-size: 4rem;
+            color: var(--warning-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-box {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-warning);
+            color: #000;
+            padding: 14px 32px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 170, 0, 0.4);
+        }
+
+        /* Upload Box */
+        .upload-box {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--bg-tertiary);
+            transition: var(--transition);
+            margin-bottom: 2rem;
+        }
+
+        .upload-box.drag-over {
+            border-color: var(--primary-color);
+            background: rgba(0, 191, 255, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-primary);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
+        }
+
+        .image-count {
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .image-count.selected {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .image-item {
+            position: relative;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .image-preview {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 107, 107, 0.9);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .remove-image:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            padding: 12px 30px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        /* Result Section */
+        .result-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 2rem auto;
+            border: 1px solid var(--border-color);
+            display: none;
+            position: relative;
+        }
+
+        .result-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-success);
+        }
+
+        .result-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--success-color);
+            text-align: center;
+        }
+
+        .merged-image {
+            max-width: 100%;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .result-note {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .result-note p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            margin: 1rem 0;
+            text-align: center;
+            display: none;
+        }
+
+        .status-loading {
+            background: rgba(0, 191, 255, 0.1);
+            border-left: 4px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .status-success {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 4px solid var(--success-color);
+            color: var(--success-color);
+        }
+
+        .status-error {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 40px 0 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .form-section, .result-section, .already-submitted {
+                padding: 1.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.6rem;
+            }
+            
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+            
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="https://iili.io/KQTiJg2.md.png" alt="AlaminEdge Logo" class="logo">
+                <span class="brand-name">AlaminEdge</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-badge animate-in">
+                    <i class="fas fa-gift"></i>
+                    <span>ONE-TIME GIVEAWAY SUBMISSION</span>
+                </div>
+                <h1 class="hero-title animate-in" style="animation-delay: 0.1s">Submit Your Entry</h1>
+                <p class="hero-subtitle animate-in" style="animation-delay: 0.2s">
+                    Upload exactly 6 screenshots for the course giveaway. One submission per user allowed.
+                </p>
+            </div>
+        </section>
+
+        <!-- Already Submitted Section -->
+        <section class="already-submitted" id="alreadySubmitted">
+            <div class="container">
+                <div class="already-submitted-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h2 style="color: var(--warning-color); margin-bottom: 1rem;">
+                    Submission Already Made
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    You have already submitted your giveaway entry. Each user is allowed only one submission.
+                </p>
+                
+                <div class="contact-box">
+                    <h3 style="color: var(--warning-color); margin-bottom: 1rem;">
+                        <i class="fas fa-life-ring"></i> Need Help?
+                    </h3>
+                    <p style="color: var(--text-secondary);">
+                        If you need to:
+                    </p>
+                    <ul style="color: var(--text-secondary); margin: 1rem 0 1rem 2rem;">
+                        <li>Submit different screenshots</li>
+                        <li>Update your submission</li>
+                        <li>Report an error with your submission</li>
+                        <li>Have any other questions</li>
+                    </ul>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">
+                        Please contact our support team for assistance.
+                    </p>
+                </div>
+                
+                <a href="contact.html" class="contact-button" target="_blank">
+                    <i class="fas fa-headset"></i>
+                    <span>Contact Support Team</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Form Section (Only shown if not submitted yet) -->
+        <section class="form-section" id="formSection">
+            <h2 class="form-title">Enter Your Details</h2>
+            <p class="form-subtitle">
+                Fill in your information and upload exactly 6 screenshots. Only one submission allowed.
+            </p>
+
+            <!-- User Details Form -->
+            <div class="form-group">
+                <label class="form-label" for="nameInput">
+                    <i class="fas fa-user"></i> Full Name
+                </label>
+                <input type="text" class="form-input" id="nameInput" placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="districtInput">
+                    <i class="fas fa-map-marker-alt"></i> District
+                </label>
+                <input type="text" class="form-input" id="districtInput" placeholder="Enter your district">
+            </div>
+
+            <!-- Upload Section -->
+            <div class="upload-box" id="uploadBox">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>Upload 6 Screenshots</h3>
+                <p style="color: var(--text-secondary); margin: 1rem 0;">
+                    Drag & drop images here or click to browse files (Exactly 6 images required)
+                </p>
+                
+                <div class="file-input-wrapper">
+                    <input type="file" class="file-input" id="imageInput" accept="image/*" multiple>
+                    <label class="file-label" for="imageInput">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Select 6 Screenshots</span>
+                    </label>
+                </div>
+                
+                <p class="image-count" id="imageCount">0/6 screenshots selected</p>
+            </div>
+
+            <!-- Image Grid Preview -->
+            <div class="image-grid" id="imageGrid">
+                <!-- Images will be dynamically added here -->
+            </div>
+
+            <!-- Status Messages -->
+            <div class="status-message status-loading" id="statusLoading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span id="loadingText">Processing images...</span>
+            </div>
+
+            <div class="status-message status-success" id="statusSuccess">
+                <i class="fas fa-check-circle"></i>
+                <span id="successText">Submission completed successfully!</span>
+            </div>
+
+            <div class="status-message status-error" id="statusError">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">Error occurred. Please try again.</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-secondary" id="clearBtn">
+                    <i class="fas fa-trash"></i>
+                    <span>Clear All</span>
+                </button>
+                <button class="btn btn-primary" id="mergeBtn" disabled>
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Submit Entry</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Result Section -->
+        <section class="result-section" id="resultSection">
+            <h2 class="result-title">Submission Successful!</h2>
+            
+            <div style="text-align: center;">
+                <img class="merged-image" id="mergedImage" alt="Merged Result">
+                
+                <div class="result-note">
+                    <p><i class="fas fa-check-circle" style="color: var(--success-color);"></i> Your submission has been recorded</p>
+                    <p><i class="fas fa-lock" style="color: var(--primary-color);"></i> You cannot submit again (One submission limit)</p>
+                    <p><i class="fas fa-save" style="color: var(--warning-color);"></i> Submission saved to local storage</p>
+                    <p><i class="fas fa-info-circle" style="color: var(--info-color);"></i> Need changes? Contact support</p>
+                </div>
+
+                <p style="color: var(--text-secondary); margin: 1rem 0;">
+                    Your giveaway entry has been successfully submitted. You have reached the submission limit.
+                </p>
+                
+                <div class="action-buttons">
+                    <a href="contact.html" class="btn btn-secondary" target="_blank">
+                        <i class="fas fa-headset"></i>
+                        <span>Contact Support</span>
+                    </a>
+                    <button class="btn btn-primary" id="viewEntryBtn">
+                        <i class="fas fa-eye"></i>
+                        <span>View My Entry</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <img src="https://iili.io/KQTiJg2.md.png" alt="AlaminEdge Logo" class="footer-logo">
+            <p class="footer-text">
+                AlaminEdge • Where Learning Meets Innovation<br>
+                One-Time Giveaway Submission Portal
+            </p>
+            <div class="footer-links">
+                <a href="https://alaminedge.pages.dev" target="_blank">Main Website</a>
+                <a href="https://t.me/adamzampas" target="_blank">Telegram</a>
+                <a href="contact.html">Contact Support</a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.8rem;">
+                © 2026 AlaminEdge. One submission per user.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Secure API Configuration
+        const API_CONFIG = {
+            key: atob("NjFlZmNlYTY2MWRiODViYzM5MDlmODhmZDAyMDEwZDM="),
+            endpoint: "https://api.imgbb.com/1/upload",
+            maxImages: 6,
+            canvasWidth: 1200,
+            canvasHeight: 1200
+        };
+
+        // Local Storage Keys
+        const STORAGE_KEYS = {
+            SUBMITTED: 'alaminedge_giveaway_submitted',
+            USER_DATA: 'alaminedge_user_data',
+            TIMESTAMP: 'alaminedge_submission_timestamp'
+        };
+
+        // DOM Elements
+        const nameInput = document.getElementById('nameInput');
+        const districtInput = document.getElementById('districtInput');
+        const imageInput = document.getElementById('imageInput');
+        const uploadBox = document.getElementById('uploadBox');
+        const imageGrid = document.getElementById('imageGrid');
+        const imageCount = document.getElementById('imageCount');
+        const mergeBtn = document.getElementById('mergeBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const statusLoading = document.getElementById('statusLoading');
+        const statusSuccess = document.getElementById('statusSuccess');
+        const statusError = document.getElementById('statusError');
+        const loadingText = document.getElementById('loadingText');
+        const successText = document.getElementById('successText');
+        const errorText = document.getElementById('errorText');
+        const resultSection = document.getElementById('resultSection');
+        const formSection = document.getElementById('formSection');
+        const alreadySubmitted = document.getElementById('alreadySubmitted');
+        const mergedImage = document.getElementById('mergedImage');
+        const viewEntryBtn = document.getElementById('viewEntryBtn');
+
+        // State
+        let selectedImages = [];
+
+        // Check if user has already submitted
+        function checkSubmissionStatus() {
+            const hasSubmitted = localStorage.getItem(STORAGE_KEYS.SUBMITTED) === 'true';
+            
+            if (hasSubmitted) {
+                formSection.style.display = 'none';
+                alreadySubmitted.style.display = 'block';
+                return true;
+            }
+            
+            formSection.style.display = 'block';
+            alreadySubmitted.style.display = 'none';
+            return false;
+        }
+
+        // Save submission to local storage
+        function saveSubmission(userData, imageUrl) {
+            localStorage.setItem(STORAGE_KEYS.SUBMITTED, 'true');
+            localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(userData));
+            localStorage.setItem(STORAGE_KEYS.TIMESTAMP, new Date().toISOString());
+            
+            // Store image URL if provided
+            if (imageUrl) {
+                localStorage.setItem('alaminedge_submission_image', imageUrl);
+            }
+        }
+
+        // Get submission data
+        function getSubmissionData() {
+            const data = localStorage.getItem(STORAGE_KEYS.USER_DATA);
+            return data ? JSON.parse(data) : null;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check submission status
+            if (checkSubmissionStatus()) {
+                return; // User already submitted, don't show form
+            }
+
+            // Event Listeners
+            imageInput.addEventListener('change', handleImageSelect);
+            uploadBox.addEventListener('dragover', handleDragOver);
+            uploadBox.addEventListener('dragleave', handleDragLeave);
+            uploadBox.addEventListener('drop', handleDrop);
+            mergeBtn.addEventListener('click', mergeAndUpload);
+            clearBtn.addEventListener('click', clearAll);
+            viewEntryBtn.addEventListener('click', viewMyEntry);
+            
+            // Form validation
+            nameInput.addEventListener('input', validateForm);
+            districtInput.addEventListener('input', validateForm);
+
+            hideAllStatus();
+        });
+
+        // Handle image selection
+        function handleImageSelect(event) {
+            const files = Array.from(event.target.files);
+            addImages(files);
+        }
+
+        // Handle drag over
+        function handleDragOver(event) {
+            event.preventDefault();
+            uploadBox.classList.add('drag-over');
+        }
+
+        // Handle drag leave
+        function handleDragLeave(event) {
+            event.preventDefault();
+            uploadBox.classList.remove('drag-over');
+        }
+
+        // Handle drop
+        function handleDrop(event) {
+            event.preventDefault();
+            uploadBox.classList.remove('drag-over');
+            
+            const files = Array.from(event.dataTransfer.files);
+            const imageFiles = files.filter(file => file.type.startsWith('image/'));
+            
+            if (imageFiles.length > 0) {
+                addImages(imageFiles);
+            }
+        }
+
+        // Add images to selection
+        function addImages(files) {
+            const remainingSlots = API_CONFIG.maxImages - selectedImages.length;
+            
+            if (files.length > remainingSlots) {
+                showError(`You can only select ${remainingSlots} more images`);
+                return;
+            }
+
+            files.slice(0, remainingSlots).forEach(file => {
+                if (!file.type.startsWith('image/')) {
+                    showError('Please select image files only');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    selectedImages.push({
+                        file: file,
+                        dataUrl: e.target.result
+                    });
+                    
+                    updateUI();
+                    validateForm();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Update UI based on selected images
+        function updateUI() {
+            // Update count
+            imageCount.textContent = `${selectedImages.length}/${API_CONFIG.maxImages} screenshots selected`;
+            
+            if (selectedImages.length > 0) {
+                imageCount.classList.add('selected');
+            } else {
+                imageCount.classList.remove('selected');
+            }
+
+            // Update image grid
+            if (selectedImages.length > 0) {
+                imageGrid.style.display = 'grid';
+                renderImageGrid();
+            } else {
+                imageGrid.style.display = 'none';
+            }
+        }
+
+        // Render image grid
+        function renderImageGrid() {
+            imageGrid.innerHTML = '';
+            
+            selectedImages.forEach((image, index) => {
+                const imageItem = document.createElement('div');
+                imageItem.className = 'image-item';
+                
+                imageItem.innerHTML = `
+                    <img class="image-preview" src="${image.dataUrl}" alt="Screenshot ${index + 1}">
+                    <button class="remove-image" data-index="${index}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                imageGrid.appendChild(imageItem);
+            });
+
+            // Add remove event listeners
+            document.querySelectorAll('.remove-image').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeImage(index);
+                });
+            });
+        }
+
+        // Remove image
+        function removeImage(index) {
+            selectedImages.splice(index, 1);
+            updateUI();
+            validateForm();
+        }
+
+        // Clear all
+        function clearAll() {
+            selectedImages = [];
+            nameInput.value = '';
+            districtInput.value = '';
+            imageInput.value = '';
+            updateUI();
+            validateForm();
+            hideAllStatus();
+        }
+
+        // Validate form
+        function validateForm() {
+            const hasName = nameInput.value.trim().length > 0;
+            const hasDistrict = districtInput.value.trim().length > 0;
+            const hasCorrectImages = selectedImages.length === API_CONFIG.maxImages;
+            
+            mergeBtn.disabled = !(hasName && hasDistrict && hasCorrectImages);
+        }
+
+        // Merge and upload images with text
+        async function mergeAndUpload() {
+            const name = nameInput.value.trim();
+            const district = districtInput.value.trim();
+            
+            if (!name || !district) {
+                showError('Please enter your name and district');
+                return;
+            }
+
+            if (selectedImages.length !== API_CONFIG.maxImages) {
+                showError(`Please select exactly ${API_CONFIG.maxImages} images`);
+                return;
+            }
+
+            // Check if already submitted (extra safety)
+            if (localStorage.getItem(STORAGE_KEYS.SUBMITTED) === 'true') {
+                showError('You have already submitted. Contact support if you need changes.');
+                return;
+            }
+
+            showLoading('Merging screenshots...');
+            hideAllStatus();
+            statusLoading.style.display = 'block';
+
+            try {
+                // Create canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = API_CONFIG.canvasWidth;
+                canvas.height = API_CONFIG.canvasHeight;
+                const ctx = canvas.getContext('2d');
+
+                // Grid layout: 3 columns x 2 rows
+                const cols = 3;
+                const rows = 2;
+                const cellWidth = API_CONFIG.canvasWidth / cols;
+                const cellHeight = API_CONFIG.canvasHeight / rows;
+
+                // Load images
+                const imagePromises = selectedImages.map(image => {
+                    return new Promise((resolve, reject) => {
+                        const img = new Image();
+                        img.onload = () => resolve(img);
+                        img.onerror = reject;
+                        img.src = image.dataUrl;
+                    });
+                });
+
+                const images = await Promise.all(imagePromises);
+
+                // Draw images on canvas
+                images.forEach((img, index) => {
+                    const x = (index % cols) * cellWidth;
+                    const y = Math.floor(index / cols) * cellHeight;
+                    ctx.drawImage(img, x, y, cellWidth, cellHeight);
+                });
+
+                // Add text overlay (name and district)
+                const text = `${name} - ${district}`;
+                
+                // Text styling
+                ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+                ctx.fillRect(0, API_CONFIG.canvasHeight - 100, API_CONFIG.canvasWidth, 100);
+                
+                ctx.font = "bold 40px 'Montserrat', sans-serif";
+                ctx.fillStyle = "#ffffff";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                
+                // Draw text with shadow
+                ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+                
+                ctx.fillText(text, API_CONFIG.canvasWidth / 2, API_CONFIG.canvasHeight - 50);
+                
+                // Reset shadow
+                ctx.shadowColor = "transparent";
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+                // Convert canvas to blob
+                showLoading('Uploading merged image...');
+                
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, 'image/png', 1.0);
+                });
+
+                // Upload to imgBB
+                const formData = new FormData();
+                formData.append('image', blob);
+
+                const response = await fetch(`${API_CONFIG.endpoint}?key=${API_CONFIG.key}`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    mergedImage.src = result.data.url;
+                    
+                    // Save submission to local storage
+                    const userData = {
+                        name: name,
+                        district: district,
+                        imageUrl: result.data.url,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    saveSubmission(userData, result.data.url);
+                    
+                    // Log submission
+                    console.log('One-time submission recorded:', userData);
+                    
+                    showSuccess('Submission successful!');
+                    formSection.style.display = 'none';
+                    resultSection.style.display = 'block';
+                    
+                    // Scroll to result
+                    setTimeout(() => {
+                        resultSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 500);
+                } else {
+                    throw new Error(result.error?.message || 'Upload failed');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError(`Submission failed: ${error.message}`);
+            }
+        }
+
+        // View my entry
+        function viewMyEntry() {
+            const imageUrl = localStorage.getItem('alaminedge_submission_image');
+            if (imageUrl) {
+                window.open(imageUrl, '_blank');
+            } else {
+                showError('No submission found');
+            }
+        }
+
+        // Status display functions
+        function showLoading(text) {
+            hideAllStatus();
+            loadingText.textContent = text;
+            statusLoading.style.display = 'block';
+        }
+
+        function showSuccess(text) {
+            hideAllStatus();
+            successText.textContent = text;
+            statusSuccess.style.display = 'block';
+        }
+
+        function showError(text) {
+            hideAllStatus();
+            errorText.textContent = text;
+            statusError.style.display = 'block';
+            
+            // Auto-hide error after 5 seconds
+            setTimeout(() => {
+                statusError.style.display = 'none';
+            }, 5000);
+        }
+
+        function hideAllStatus() {
+            statusLoading.style.display = 'none';
+            statusSuccess.style.display = 'none';
+            statusError.style.display = 'none';
+        }
+
+        // Security measures
+        Object.freeze(API_CONFIG);
+        Object.freeze(STORAGE_KEYS);
+        
+        // Prevent right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showError('Right-click disabled for security');
+        });
+        
+        // Prevent developer tools
+        document.addEventListener('keydown', function(e) {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+                (e.ctrlKey && e.key === 'u')
+            ) {
+                e.preventDefault();
+                showError('Developer tools are disabled');
+            }
+        });
+
+        // Clear localStorage if needed (for testing)
+        // localStorage.clear();
+    </script>
+</body>
+</html>
