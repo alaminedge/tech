@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrupt Run - Political Maze Chase</title>
+    <link rel="stylesheet" href="cssfor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1><i class="fas fa-running"></i> CORRUPT RUN</h1>
+            <p class="subtitle">Escape. Collect. Evade. Survive.</p>
+        </header>
+        
+        <div class="game-content">
+            <div class="left-panel">
+                <div class="stats-panel">
+                    <h2><i class="fas fa-chart-line"></i> GAME STATS</h2>
+                    
+                    <div class="stat-row">
+                        <div class="stat-label">💰 BRIBE MONEY:</div>
+                        <div class="stat-value" id="money-counter">$0</div>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <div class="stat-label">👮 POLICE ACTIVE:</div>
+                        <div class="stat-value" id="police-counter">3</div>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <div class="stat-label">⏱️ TIME SURVIVED:</div>
+                        <div class="stat-value" id="time-counter">00:00</div>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <div class="stat-label">🏃 SPEED BOOST:</div>
+                        <div class="stat-value" id="boost-counter">100%</div>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <div class="stat-label">🎭 DISGUISE:</div>
+                        <div class="stat-value" id="disguise-counter">NO</div>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <div class="stat-label">🧲 MAGNET:</div>
+                        <div class="stat-value" id="magnet-counter">NO</div>
+                    </div>
+                    
+                    <div class="high-score">
+                        <h3><i class="fas fa-crown"></i> HIGH SCORE</h3>
+                        <div class="score-value" id="high-score">$12,500</div>
+                    </div>
+                </div>
+                
+                <div class="controls-panel">
+                    <h2><i class="fas fa-gamepad"></i> CONTROLS</h2>
+                    <div class="controls-grid">
+                        <div class="control-key" id="up-key">↑</div>
+                        <div class="control-desc">Move Up</div>
+                        
+                        <div class="control-key" id="left-key">←</div>
+                        <div class="control-desc">Move Left</div>
+                        
+                        <div class="control-key" id="down-key">↓</div>
+                        <div class="control-desc">Move Down</div>
+                        
+                        <div class="control-key" id="right-key">→</div>
+                        <div class="control-desc">Move Right</div>
+                        
+                        <div class="control-key" id="sprint-key">SHIFT</div>
+                        <div class="control-desc">Sprint (Limited)</div>
+                        
+                        <div class="control-key" id="space-key">SPACE</div>
+                        <div class="control-desc">Break Out of Jail</div>
+                    </div>
+                    <p class="controls-note">Use <strong>WASD</strong> or <strong>Arrow Keys</strong> to move</p>
+                </div>
+            </div>
+            
+            <div class="game-area">
+                <div class="game-canvas-container">
+                    <canvas id="gameCanvas" width="800" height="600"></canvas>
+                    
+                    <div class="game-overlay" id="startScreen">
+                        <div class="overlay-content">
+                            <h2><i class="fas fa-gavel"></i> CORRUPT RUN</h2>
+                            <p class="game-description">
+                                You're a corrupt official trying to escape justice!<br>
+                                Collect bribes while avoiding the police.<br>
+                                Use power-ups to gain advantages.<br>
+                                Don't get caught!
+                            </p>
+                            <div class="instructions">
+                                <h3><i class="fas fa-info-circle"></i> HOW TO PLAY</h3>
+                                <ul>
+                                    <li>Collect <span class="bribe-color">💰 BRIBE BAGS</span> for money</li>
+                                    <li>Avoid <span class="police-color">👮 POLICE OFFICERS</span></li>
+                                    <li>Use <span class="powerup-color">🎭 DISGUISES</span> to hide from police</li>
+                                    <li>Grab <span class="powerup-color">⚡ SPEED BOOSTS</span> to move faster</li>
+                                    <li>Activate <span class="powerup-color">🧲 BRIBE MAGNETS</span> to attract money</li>
+                                </ul>
+                            </div>
+                            <button id="startButton" class="start-button">
+                                <i class="fas fa-play-circle"></i> START ESCAPING
+                            </button>
+                            <p class="overlay-note">Press <strong>SPACE</strong> to break out of jail when the game starts</p>
+                        </div>
+                    </div>
+                    
+                    <div class="game-overlay" id="gameOverScreen" style="display: none;">
+                        <div class="overlay-content">
+                            <h2><i class="fas fa-handcuffs"></i> CAUGHT RED-HANDED!</h2>
+                            <div class="result-stats">
+                                <div class="result-stat">
+                                    <div class="result-label">Total Bribes Collected:</div>
+                                    <div class="result-value" id="final-money">$0</div>
+                                </div>
+                                <div class="result-stat">
+                                    <div class="result-label">Time Survived:</div>
+                                    <div class="result-value" id="final-time">00:00</div>
+                                </div>
+                                <div class="result-stat">
+                                    <div class="result-label">Police Evaded:</div>
+                                    <div class="result-value" id="police-evaded">0</div>
+                                </div>
+                            </div>
+                            <p class="game-over-message" id="gameOverMessage">You were caught by the police! Justice has been served.</p>
+                            <button id="restartButton" class="start-button">
+                                <i class="fas fa-redo"></i> TRY TO ESCAPE AGAIN
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="powerups-panel">
+                    <h3><i class="fas fa-star"></i> ACTIVE POWER-UPS</h3>
+                    <div class="powerups-list">
+                        <div class="powerup-item" id="disguise-status">
+                            <i class="fas fa-user-secret"></i>
+                            <span>DISGUISE: <span class="powerup-value">INACTIVE</span></span>
+                        </div>
+                        <div class="powerup-item" id="speed-status">
+                            <i class="fas fa-bolt"></i>
+                            <span>SPEED BOOST: <span class="powerup-value">INACTIVE</span></span>
+                        </div>
+                        <div class="powerup-item" id="magnet-status">
+                            <i class="fas fa-magnet"></i>
+                            <span>BRIBE MAGNET: <span class="powerup-value">INACTIVE</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <div class="bribes-panel">
+                    <h2><i class="fas fa-money-bill-wave"></i> BRIBE LOG</h2>
+                    <div class="bribes-list" id="bribes-list">
+                        <div class="bribe-item">
+                            <span class="bribe-amount">$1,000</span>
+                            <span class="bribe-type">Campaign Fund</span>
+                        </div>
+                        <div class="bribe-item">
+                            <span class="bribe-amount">$500</span>
+                            <span class="bribe-type">Kickback</span>
+                        </div>
+                        <div class="bribe-item">
+                            <span class="bribe-amount">$2,000</span>
+                            <span class="bribe-type">Consulting Fee</span>
+                        </div>
+                        <!-- More bribe items will be added by JavaScript -->
+                    </div>
+                    <div class="total-bribes">
+                        <span>TOTAL:</span>
+                        <span id="total-bribes">$0</span>
+                    </div>
+                </div>
+                
+                <div class="police-log">
+                    <h2><i class="fas fa-police-box"></i> POLICE ACTIVITY</h2>
+                    <div class="log-list" id="police-log">
+                        <div class="log-item">
+                            <span class="log-text">Police officer #1 spotted you!</span>
+                            <span class="log-time">0:05</span>
+                        </div>
+                        <div class="log-item">
+                            <span class="log-text">You picked up a bribe!</span>
+                            <span class="log-time">0:12</span>
+                        </div>
+                        <!-- More log items will be added by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="tips-panel">
+                    <h3><i class="fas fa-lightbulb"></i> TIPS</h3>
+                    <ul>
+                        <li>Police speed increases every 30 seconds</li>
+                        <li>New police spawn every 45 seconds</li>
+                        <li>Disguises make you invisible for 10 seconds</li>
+                        <li>Speed boosts also recharge your sprint energy</li>
+                        <li>Use maze corners to hide from police</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="game-footer">
+            <p>CORRUPT RUN | A Political Maze Chase Game | Use Arrow Keys or WASD to Move | Press SPACE to Break Out of Jail</p>
+            <p class="footer-note">This game is a satire and not meant to represent real political situations.</p>
+        </footer>
+    </div>
+    
+    <script src="jaba.js"></script>
+</body>
+</html>
