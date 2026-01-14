@@ -2,60 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Firebase Test</title>
+  <title>Google Login Test</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    #content { display: none; border: 1px solid #ccc; padding: 15px; }
+  </style>
 </head>
 <body>
 
-  <h2>Firebase Test Page</h2>
-  <p id="status">Checking Firebase...</p>
+<h2>Login with Google</h2>
+<button onclick="googleLogin()">Sign in with Google</button>
+<button onclick="logout()">Logout</button>
 
-  <button id="login">Anonymous Login</button>
-  <button id="logout">Logout</button>
+<p id="status">Not logged in</p>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<div id="content">
+  <h3>Premium Content</h3>
+  <p>Access granted. This user is allowed.</p>
+</div>
 
-  <script>
-    // Firebase config (testing)
-    const firebaseConfig = {
-      apiKey: "AIzaSyB704MhSDHL76EpI5DMFGOo-t5hla_MyrQ",
-      authDomain: "alaminedge-5ccea.firebaseapp.com",
-      projectId: "alaminedge-5ccea",
-      storageBucket: "alaminedge-5ccea.firebasestorage.app",
-      messagingSenderId: "769540906766",
-      appId: "1:769540906766:web:ec6fb26fa7eb1f4a69815f",
-      measurementId: "G-7HEEXR68GX"
-    };
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+<script>
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyB704MhSDHL76EpI5DMFGOo-t5hla_MyrQ",
+    authDomain: "alaminedge-5ccea.firebaseapp.com",
+    projectId: "alaminedge-5ccea",
+    storageBucket: "alaminedge-5ccea.firebasestorage.app",
+    messagingSenderId: "769540906766",
+    appId: "1:769540906766:web:ec6fb26fa7eb1f4a69815f",
+    measurementId: "G-7HEEXR68GX"
+  };
 
-    const status = document.getElementById("status");
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
 
-    // Auth state listener
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        status.textContent = "Logged in UID: " + user.uid;
-      } else {
-        status.textContent = "Not logged in";
-      }
-    });
+  // MANUALLY ALLOWED EMAILS (allowlist)
+  const ALLOWED_USERS = [
+    "yourgmail@gmail.com",
+    "admin@gmail.com"
+  ];
 
-    // Buttons
-    document.getElementById("login").onclick = async () => {
-      try {
-        await auth.signInAnonymously();
-      } catch (e) {
-        alert(e.message);
-      }
-    };
+  auth.onAuthStateChanged(user => {
+    if (user && ALLOWED_USERS.includes(user.email)) {
+      document.getElementById("status").innerText =
+        "Logged in: " + user.email;
+      document.getElementById("content").style.display = "block";
+    } else if (user) {
+      document.getElementById("status").innerText =
+        "Access denied: " + user.email;
+      auth.signOut();
+    } else {
+      document.getElementById("status").innerText = "Not logged in";
+      document.getElementById("content").style.display = "none";
+    }
+  });
 
-    document.getElementById("logout").onclick = async () => {
-      await auth.signOut();
-    };
-  </script>
+  function googleLogin() {
+    auth.signInWithPopup(provider)
+      .catch(err => alert(err.message));
+  }
+
+  function logout() {
+    auth.signOut();
+  }
+</script>
 
 </body>
 </html>
