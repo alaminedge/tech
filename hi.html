@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Test</title>
+</head>
+<body>
+
+  <h2>Firebase Test Page</h2>
+  <p id="status">Checking Firebase...</p>
+
+  <button id="login">Anonymous Login</button>
+  <button id="logout">Logout</button>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // Firebase config (testing)
+    const firebaseConfig = {
+      apiKey: "AIzaSyB704MhSDHL76EpI5DMFGOo-t5hla_MyrQ",
+      authDomain: "alaminedge-5ccea.firebaseapp.com",
+      projectId: "alaminedge-5ccea",
+      storageBucket: "alaminedge-5ccea.firebasestorage.app",
+      messagingSenderId: "769540906766",
+      appId: "1:769540906766:web:ec6fb26fa7eb1f4a69815f",
+      measurementId: "G-7HEEXR68GX"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const status = document.getElementById("status");
+
+    // Auth state listener
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        status.textContent = "Logged in UID: " + user.uid;
+      } else {
+        status.textContent = "Not logged in";
+      }
+    });
+
+    // Buttons
+    document.getElementById("login").onclick = async () => {
+      try {
+        await auth.signInAnonymously();
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+
+    document.getElementById("logout").onclick = async () => {
+      await auth.signOut();
+    };
+  </script>
+
+</body>
+</html>
