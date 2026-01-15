@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Premium Access</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        button { padding: 15px 30px; font-size: 18px; background: #4285F4; color: white; border: none; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Please Login to Verify</h2>
+    <p>You need to verify your email to access content.</p>
+    <button onclick="handleLogin()">Login with Google</button>
+    <p id="status" style="color: red;"></p>
+
+    <!-- Firebase SDK v8 (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script>
+        // 1. PASTE YOUR CONFIG HERE
+        const firebaseConfig = {
+            apiKey: "AIzaSyB704MhSDHL76EpI5DMFGOo-t5hla_MyrQ",
+            authDomain: "alaminedge-5ccea.firebaseapp.com",
+            projectId: "alaminedge-5ccea",
+            storageBucket: "alaminedge-5ccea.firebasestorage.app",
+            messagingSenderId: "769540906766",
+            appId: "1:769540906766:web:ec6fb26fa7eb1f4a69815f",
+            measurementId: "G-7HEEXR68GX"
+        };
+
+        // 2. INITIALIZE FIREBASE
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // 3. LOGIN FUNCTION
+        async function handleLogin() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                await auth.signInWithPopup(provider);
+            } catch (error) {
+                document.getElementById("status").innerText = "Error: " + error.message;
+            }
+        }
+
+        // 4. CHECK AUTH & DATABASE
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                const email = user.email;
+                console.log("User logged in:", email);
+
+                // Check Firestore 'allowed_emails' collection
+                db.collection("allowed_emails").doc(email).get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            // SUCCESS: Save ticket and redirect
+                            sessionStorage.setItem("authTicket", email);
+                            window.location.href = "secure-zone-test/content.html";
+                        } else {
+                            alert("Access Denied! Your email is not on the list.");
+                            auth.signOut(); // Log them out
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error checking document:", error);
+                    });
+            }
+        });
+    </script>
+</body>
+</html>
