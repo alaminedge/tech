@@ -18,7 +18,6 @@
         <button id="loginBtn" onclick="handleLogin()">Login with Google</button>
         <div id="status" style="margin-top:10px; color: red;"></div>
         
-        <!-- DEBUG BOX TO SEE WHAT IS HAPPENING -->
         <div id="debug">Debug: Waiting for action...</div>
     </div>
 
@@ -50,14 +49,20 @@
         }
 
         function handleLogin() {
-            logDebug("Button clicked. Starting redirect...");
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithRedirect(provider).catch(error => {
-                logDebug("ERROR: " + error.message);
-            });
+            // --- THE FIX: Set Persistence to SESSION ---
+            // This stores the login in memory so browsers don't block cookies
+            auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+                .then(() => {
+                    logDebug("Persistence set to SESSION. Starting redirect...");
+                    const provider = new firebase.auth.GoogleAuthProvider();
+                    return auth.signInWithRedirect(provider);
+                })
+                .catch((error) => {
+                    logDebug("ERROR: " + error.message);
+                });
         }
 
-        // 1. HANDLE THE REDIRECT COMING BACK
+        // 1. HANDLE REDIRECT
         auth.getRedirectResult().then((result) => {
             if (result.user) {
                 logDebug("User returned from Google: " + result.user.email);
@@ -69,13 +74,11 @@
             logDebug("Redirect Error: " + error.message);
         });
 
-        // 2. LISTEN TO STATE CHANGES
+        // 2. LISTEN TO STATE
         auth.onAuthStateChanged((user) => {
             if (user) {
-                // Only log here if we haven't just handled the redirect (prevents double-checking)
-                // But for safety, we check again
-                logDebug("Auth State Changed: User is " + user.email);
-                // verifyUser(user.email); // Commented out to prevent double-call conflicts
+                logDebug("Auth State: User is " + user.email);
+                // verifyUser(user.email); // Already handled by redirect
             } else {
                 logDebug("Auth State: Signed Out");
             }
