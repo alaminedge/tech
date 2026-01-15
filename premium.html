@@ -5,57 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Premium Access</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-card {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-        }
-        h2 { margin-top: 0; color: #333; }
-        button {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            background-color: #4285F4;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background 0.3s;
-        }
-        button:hover { background-color: #357ae8; }
-        #status { margin-top: 15px; color: red; font-size: 14px; }
+        body { font-family: sans-serif; padding: 20px; text-align: center; background: #f0f0f0; }
+        .container { background: white; padding: 30px; border-radius: 8px; display: inline-block; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #4285F4; color: white; border: none; border-radius: 4px; }
+        #debug { margin-top: 20px; text-align: left; background: #eee; padding: 10px; font-size: 12px; border: 1px solid #ccc; }
     </style>
 </head>
 <body>
 
-    <div class="login-card">
+    <div class="container">
         <h2>Premium Login</h2>
-        <p>Please verify your email to access content.</p>
         <button id="loginBtn" onclick="handleLogin()">Login with Google</button>
-        <div id="status"></div>
+        <div id="status" style="margin-top:10px; color: red;"></div>
+        
+        <!-- DEBUG BOX TO SEE WHAT IS HAPPENING -->
+        <div id="debug">Debug: Waiting for action...</div>
     </div>
 
-    <!-- Firebase SDK v8 (Compat) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script>
-        // 1. PASTE YOUR CONFIG HERE
         const firebaseConfig = {
             apiKey: "AIzaSyB704MhSDHL76EpI5DMFGOo-t5hla_MyrQ",
             authDomain: "alaminedge-5ccea.firebaseapp.com",
@@ -66,69 +37,67 @@
             measurementId: "G-7HEEXR68GX"
         };
 
-        // 2. INITIALIZE FIREBASE
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         const auth = firebase.auth();
         const db = firebase.firestore();
+        const debugDiv = document.getElementById("debug");
 
-        // 3. LOGIN FUNCTION (Using Redirect to avoid popup conflicts)
-        function handleLogin() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithRedirect(provider)
-                .then(() => {
-                    console.log("Redirecting to Google...");
-                })
-                .catch((error) => {
-                    document.getElementById("status").innerText = "Error: " + error.message;
-                });
+        function logDebug(msg) {
+            console.log(msg);
+            debugDiv.innerHTML += "<br>> " + msg;
         }
 
-        // 4. CHECK AUTH & DATABASE
-        // This runs immediately when page loads to handle the return from Google
+        function handleLogin() {
+            logDebug("Button clicked. Starting redirect...");
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithRedirect(provider).catch(error => {
+                logDebug("ERROR: " + error.message);
+            });
+        }
+
+        // 1. HANDLE THE REDIRECT COMING BACK
         auth.getRedirectResult().then((result) => {
             if (result.user) {
+                logDebug("User returned from Google: " + result.user.email);
                 verifyUser(result.user.email);
+            } else {
+                logDebug("No redirect result found (Fresh visit).");
             }
         }).catch((error) => {
-            console.error("Redirect Error:", error);
+            logDebug("Redirect Error: " + error.message);
         });
 
-        // Also listen to general state changes
+        // 2. LISTEN TO STATE CHANGES
         auth.onAuthStateChanged((user) => {
             if (user) {
-                // If user is logged in, verify them
-                // Note: We check 'result' above first to catch the redirect flow
-                // This block handles if they were already logged in from before
-                verifyUser(user.email);
+                // Only log here if we haven't just handled the redirect (prevents double-checking)
+                // But for safety, we check again
+                logDebug("Auth State Changed: User is " + user.email);
+                // verifyUser(user.email); // Commented out to prevent double-call conflicts
+            } else {
+                logDebug("Auth State: Signed Out");
             }
         });
 
-        // 5. VERIFICATION LOGIC
         function verifyUser(email) {
-            console.log("Verifying email:", email);
-            const statusDiv = document.getElementById("status");
-            statusDiv.innerText = "Checking database...";
-
+            logDebug("Checking Firestore for email: " + email);
             db.collection("allowed_emails").doc(email).get()
                 .then((doc) => {
                     if (doc.exists) {
-                        // SUCCESS: User is in database
+                        logDebug("SUCCESS! Email found. Redirecting...");
                         sessionStorage.setItem("authTicket", email);
-                        
-                        // Redirect to content
                         window.location.href = "secure-zone-test/content.html";
                     } else {
-                        // FAILURE: User not in list
-                        alert("Access Denied!\n\nYour email (" + email + ") is not in the authorized list.");
-                        auth.signOut(); // Logout immediately
-                        statusDiv.innerText = "";
+                        logDebug("FAILED. Email not in list.");
+                        alert("Access Denied. Email not authorized.");
+                        auth.signOut();
                     }
                 })
                 .catch((error) => {
-                    console.error("Database Error:", error);
-                    statusDiv.innerText = "Database error. Check console.";
+                    logDebug("Database Error: " + error.message);
+                    alert("Error checking database. Check console.");
                 });
         }
     </script>
