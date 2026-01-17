@@ -1,144 +1,263 @@
 {
+  "app_name": "AlaminEdge Verification",
+  "description": "Verification database for exclusive Telegram group access",
+  "version": "1.0.0",
+  "last_updated": "2026-01-17",
   "users": [
     {
-      "name": "Mohammad Rahman",
-      "district": "Dhaka",
-      "group_name": "AlaminEdge Premium Group",
-      "telegram_link": "https://t.me/+dhaka_premium_group",
-      "access_code": "AE2024VIP001"
-    },
-    {
-      "name": "Fatima Begum",
+      "id": 1,
+      "name": "Ishrat Jahan Eva",
       "district": "Chittagong",
-      "group_name": "AlaminEdge Chittagong Group",
-      "telegram_link": "https://t.me/+chittagong_group",
-      "access_code": "AE2024VIP002"
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-CHT-001",
+      "approved": 0
     },
     {
-      "name": "Abdul Karim",
-      "district": "Sylhet",
-      "group_name": "AlaminEdge Sylhet Group",
-      "telegram_link": "https://t.me/+sylhet_group",
-      "access_code": "AE2024VIP003"
+      "id": 2,
+      "name": "Falguni Akter Ratri",
+      "district": "Dhaka",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-DHA-002",
+      "approved": 0
     },
     {
-      "name": "Ayesha Sultana",
-      "district": "Rajshahi",
-      "group_name": "AlaminEdge Rajshahi Group",
-      "telegram_link": "https://t.me/+rajshahi_group",
-      "access_code": "AE2024VIP004"
+      "id": 3,
+      "name": "Sumaiya Alam",
+      "district": "Chattagram",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-CTG-003",
+      "approved": 0
     },
     {
-      "name": "Kamal Hossain",
-      "district": "Khulna",
-      "group_name": "AlaminEdge Khulna Group",
-      "telegram_link": "https://t.me/+khulna_group",
-      "access_code": "AE2024VIP005"
-    },
-    {
-      "name": "Nusrat Jahan",
-      "district": "Barisal",
-      "group_name": "AlaminEdge Barisal Group",
-      "telegram_link": "https://t.me/+barisal_group",
-      "access_code": "AE2024VIP006"
-    },
-    {
-      "name": "Rahim Ahmed",
-      "district": "Rangpur",
-      "group_name": "AlaminEdge Rangpur Group",
-      "telegram_link": "https://t.me/+rangpur_group",
-      "access_code": "AE2024VIP007"
-    },
-    {
-      "name": "Sabina Akter",
-      "district": "Mymensingh",
-      "group_name": "AlaminEdge Mymensingh Group",
-      "telegram_link": "https://t.me/+mymensingh_group",
-      "access_code": "AE2024VIP008"
-    },
-    {
-      "name": "Imran Khan",
-      "district": "Comilla",
-      "group_name": "AlaminEdge Comilla Group",
-      "telegram_link": "https://t.me/+comilla_group",
-      "access_code": "AE2024VIP009"
-    },
-    {
-      "name": "Tasnim Faria",
-      "district": "Noakhali",
-      "group_name": "AlaminEdge Noakhali Group",
-      "telegram_link": "https://t.me/+noakhali_group",
-      "access_code": "AE2024VIP010"
-    },
-    {
-      "name": "Sajid Hasan",
-      "district": "Jessore",
-      "group_name": "AlaminEdge Jessore Group",
-      "telegram_link": "https://t.me/+jessore_group",
-      "access_code": "AE2024VIP011"
-    },
-    {
-      "name": "Mariam Chowdhury",
-      "district": "Bogra",
-      "group_name": "AlaminEdge Bogra Group",
-      "telegram_link": "https://t.me/+bogra_group",
-      "access_code": "AE2024VIP012"
-    },
-    {
-      "name": "Asif Iqbal",
-      "district": "Narayanganj",
-      "group_name": "AlaminEdge Narayanganj Group",
-      "telegram_link": "https://t.me/+narayanganj_group",
-      "access_code": "AE2024VIP013"
-    },
-    {
-      "name": "Jannatul Ferdous",
-      "district": "Tangail",
-      "group_name": "AlaminEdge Tangail Group",
-      "telegram_link": "https://t.me/+tangail_group",
-      "access_code": "AE2024VIP014"
-    },
-    {
-      "name": "Shafiqul Islam",
-      "district": "Pabna",
-      "group_name": "AlaminEdge Pabna Group",
-      "telegram_link": "https://t.me/+pabna_group",
-      "access_code": "AE2024VIP015"
-    },
-    {
-      "name": "Nadia Sultana",
-      "district": "Dinajpur",
-      "group_name": "AlaminEdge Dinajpur Group",
-      "telegram_link": "https://t.me/+dinajpur_group",
-      "access_code": "AE2024VIP016"
-    },
-    {
-      "name": "Rajib Hasan",
-      "district": "Faridpur",
-      "group_name": "AlaminEdge Faridpur Group",
-      "telegram_link": "https://t.me/+faridpur_group",
-      "access_code": "AE2024VIP017"
-    },
-    {
-      "name": "Sumaiya Akter",
+      "id": 4,
+      "name": "Mst Umme Raiyan poly",
       "district": "Kushtia",
-      "group_name": "AlaminEdge Kushtia Group",
-      "telegram_link": "https://t.me/+kushtia_group",
-      "access_code": "AE2024VIP018"
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-KUS-004",
+      "approved": 0
     },
     {
-      "name": "Moinul Haque",
-      "district": "Chandpur",
-      "group_name": "AlaminEdge Chandpur Group",
-      "telegram_link": "https://t.me/+chandpur_group",
-      "access_code": "AE2024VIP019"
+      "id": 5,
+      "name": "Tasmim Jahan Juthi",
+      "district": "Khulna",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-KHU-005",
+      "approved": 0
     },
     {
-      "name": "Sharmin Ahmed",
-      "district": "Lakshmipur",
-      "group_name": "AlaminEdge Lakshmipur Group",
-      "telegram_link": "https://t.me/+lakshmipur_group",
-      "access_code": "AE2024VIP020"
+      "id": 6,
+      "name": "Sadia Akter Mim",
+      "district": "Mymensingh",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-MYM-006",
+      "approved": 0
+    },
+    {
+      "id": 7,
+      "name": "Mahide Hasan",
+      "district": "Noakhali",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-NOA-007",
+      "approved": 0
+    },
+    {
+      "id": 8,
+      "name": "Mohammad Apel",
+      "district": "Munshiganj",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-MUN-008",
+      "approved": 0
+    },
+    {
+      "id": 9,
+      "name": "Anhas Ali",
+      "district": "Rangpur",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-RAN-009",
+      "approved": 0
+    },
+    {
+      "id": 10,
+      "name": "FAHIM",
+      "district": "Sylhet",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-SYL-010",
+      "approved": 0
+    },
+    {
+      "id": 11,
+      "name": "Darpan Roy",
+      "district": "Dhaka",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-DHA-011",
+      "approved": 0
+    },
+    {
+      "id": 12,
+      "name": "Bappy",
+      "district": "Rajshahi",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-RAJ-012",
+      "approved": 0
+    },
+    {
+      "id": 13,
+      "name": "Md Shuvo",
+      "district": "Pabna",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-PAB-013",
+      "approved": 0
+    },
+    {
+      "id": 14,
+      "name": "MD ABUSAID",
+      "district": "Jashore",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-JAS-014",
+      "approved": 0
+    },
+    {
+      "id": 15,
+      "name": "Jannatul Islam",
+      "district": "Tangail",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-TAN-015",
+      "approved": 0
+    },
+    {
+      "id": 16,
+      "name": "MD Musfiqur Rahman Shuvo",
+      "district": "Dhaka",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-DHA-016",
+      "approved": 0
+    },
+    {
+      "id": 17,
+      "name": "Fardin Shahriar",
+      "district": "Dhaka",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-DHA-017",
+      "approved": 0
+    },
+    {
+      "id": 18,
+      "name": "Samul",
+      "district": "Dinajpur",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-DIN-018",
+      "approved": 0
+    },
+    {
+      "id": 19,
+      "name": "Emon",
+      "district": "Dhaka",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-DHA-019",
+      "approved": 0
+    },
+    {
+      "id": 20,
+      "name": "Imtiaj",
+      "district": "Chittagong",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-CHT-020",
+      "approved": 0
+    },
+    {
+      "id": 21,
+      "name": "Jannat Ara",
+      "district": "Barguna",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-BAR-021",
+      "approved": 0
+    },
+    {
+      "id": 22,
+      "name": "Oppenheimer",
+      "district": "Ohio",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-OHI-022",
+      "approved": 0
+    },
+    {
+      "id": 23,
+      "name": "Samin Khan",
+      "district": "Dhaka",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-DHA-023",
+      "approved": 0
+    },
+    {
+      "id": 24,
+      "name": "ABIR AHMED",
+      "district": "Dhaka",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-DHA-024",
+      "approved": 0
+    },
+    {
+      "id": 25,
+      "name": "@END_GAME_47",
+      "district": "Rajshahi",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-RAJ-025",
+      "approved": 0
+    },
+    {
+      "id": 26,
+      "name": "Md: Jahangir Alom Razu",
+      "district": "Rajshahi",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-RAJ-026",
+      "approved": 0
+    },
+    {
+      "id": 27,
+      "name": "Abidah",
+      "district": "Jhenidah",
+      "telegram_link": "https://t.me/+SeBCGzz-mIY3OTdl",
+      "group_name": "AlaminEdge Exclusive Group",
+      "access_code": "AE-JHE-027",
+      "approved": 0
     }
-  ]
+  ],
+  "settings": {
+    "not_approved_message": "Your account is not approved for verification.",
+    "not_found_message": "Account not found. Please check your details.",
+    "case_sensitive": false
+  },
+  "metadata": {
+    "total_users": 27,
+    "approved_users": 0,
+    "pending_users": 27,
+    "telegram_group": "https://t.me/+SeBCGzz-mIY3OTdl",
+    "group_name": "AlaminEdge Exclusive Group"
+  }
 }
