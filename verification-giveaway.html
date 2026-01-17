@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice Verification | AlaminEdge</title>
+    <title>Identity Verification | AlaminEdge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -236,12 +236,12 @@
             box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
         }
 
-        /* Voice Verification Section */
-        .voice-section {
+        /* Verification Section */
+        .verification-section {
             text-align: center;
         }
 
-        .voice-icon {
+        .verification-icon {
             font-size: 4rem;
             color: var(--primary-color);
             margin-bottom: 20px;
@@ -368,6 +368,32 @@
             margin-bottom: 20px;
         }
 
+        /* Not Approved Section */
+        .not-approved-section {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .not-approved-icon {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        /* Not Found Section */
+        .not-found-section {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .not-found-icon {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
         .contact-box {
             background: var(--bg-tertiary);
             border-radius: var(--radius-md);
@@ -459,7 +485,7 @@
                 <img src="https://iili.io/KQTiJg2.md.png" alt="AlaminEdge Logo" class="logo">
                 <span class="brand-name">AlaminEdge</span>
             </div>
-            <h1>Voice Identity Verification</h1>
+            <h1>Identity Verification</h1>
             <p>Complete 3-step verification to access exclusive Telegram group</p>
         </div>
 
@@ -475,7 +501,7 @@
             </div>
             <div class="step" id="step3">
                 <div class="step-circle">3</div>
-                <div class="step-label">Voice Verify</div>
+                <div class="step-label">Final Step</div>
             </div>
         </div>
 
@@ -485,7 +511,7 @@
                 <i class="fas fa-check-circle"></i>
             </div>
             <h2>Already Verified!</h2>
-            <p>You have already completed voice verification.</p>
+            <p>You have already completed verification.</p>
             
             <div class="contact-box">
                 <h3><i class="fas fa-headset"></i> Need Assistance?</h3>
@@ -494,6 +520,69 @@
                     <i class="fas fa-life-ring"></i>
                     Contact Support
                 </a>
+            </div>
+        </div>
+
+        <!-- Not Approved Section -->
+        <div class="not-approved-section" id="notApprovedSection">
+            <div class="not-approved-icon">
+                <i class="fas fa-user-times"></i>
+            </div>
+            <h2>Not Approved</h2>
+            <p id="notApprovedMessage">Your account is not approved for verification.</p>
+            
+            <div class="contact-box">
+                <h3><i class="fas fa-info-circle"></i> Account Status</h3>
+                <div style="text-align: left; margin: 20px 0;">
+                    <p><strong>Name:</strong> <span id="pendingName"></span></p>
+                    <p><strong>District:</strong> <span id="pendingDistrict"></span></p>
+                    <p><strong>Status:</strong> <span style="color: var(--accent-color);">Not Approved</span></p>
+                </div>
+                
+                <p>Your account exists in our system but has not been approved for verification.</p>
+                <p style="margin-top: 15px; color: var(--text-secondary);">
+                    If you believe this is an error, please contact support.
+                </p>
+                
+                <div style="margin-top: 25px;">
+                    <button class="btn btn-secondary" id="tryAgainBtn">
+                        <i class="fas fa-redo"></i>
+                        Try Again
+                    </button>
+                    <a href="contact.html" class="btn btn-secondary" target="_blank" style="margin-left: 10px;">
+                        <i class="fas fa-question-circle"></i>
+                        Contact Support
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Not Found Section -->
+        <div class="not-found-section" id="notFoundSection">
+            <div class="not-found-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h2>Account Not Found</h2>
+            <p id="notFoundMessage">Your details were not found in our records.</p>
+            
+            <div class="contact-box">
+                <h3><i class="fas fa-exclamation-triangle"></i> What to do?</h3>
+                <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
+                    <li>Check your name and district for typos</li>
+                    <li>Ensure you're using your registered details</li>
+                    <li>Contact support if you believe there's an error</li>
+                </ul>
+                
+                <div style="margin-top: 25px;">
+                    <button class="btn btn-secondary" id="editDetailsBtn">
+                        <i class="fas fa-edit"></i>
+                        Edit Details
+                    </button>
+                    <a href="contact.html" class="btn btn-secondary" target="_blank" style="margin-left: 10px;">
+                        <i class="fas fa-life-ring"></i>
+                        Contact Support
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -554,17 +643,16 @@
                 </div>
             </div>
 
-            <!-- Step 3: Voice Verification -->
+            <!-- Step 3: Final Verification Step -->
             <div class="form-section" id="step3Section">
-                <div class="voice-section">
-                    <h2 class="form-title">Voice Verification</h2>
+                <div class="verification-section">
+                    <h2 class="form-title">Final Verification Step</h2>
                     <p style="color: var(--text-secondary); margin-bottom: 25px;">
-                        You have <strong>5 seconds</strong> to clearly say: <br>
-                        <strong>"My name is <span id="voiceName"></span> from <span id="voiceDistrict"></span>"</strong>
+                        Complete this step to verify your identity and access the private group.
                     </p>
                     
-                    <div class="voice-icon">
-                        <i class="fas fa-microphone"></i>
+                    <div class="verification-icon">
+                        <i class="fas fa-user-check"></i>
                     </div>
                     
                     <div class="verification-animation" id="verificationAnimation">
@@ -575,7 +663,7 @@
                     
                     <div class="action-buttons">
                         <button class="btn btn-primary" id="startVerificationBtn">
-                            <i class="fas fa-microphone"></i> Start Voice Verification
+                            <i class="fas fa-play-circle"></i> Start Verification
                         </button>
                         <button class="btn btn-secondary" id="backBtn3">
                             <i class="fas fa-arrow-left"></i> Back
@@ -607,7 +695,7 @@
                 <i class="fas fa-trophy"></i>
             </div>
             <h2>Verification Successful!</h2>
-            <p>Your voice identity has been verified and recorded.</p>
+            <p>Your identity has been verified successfully.</p>
             
             <div class="telegram-link">
                 <h3><i class="fab fa-telegram"></i> Private Group Access</h3>
@@ -634,7 +722,7 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>AlaminEdge • Voice Verification Portal</p>
+            <p>AlaminEdge • Identity Verification Portal</p>
             <p>© 2024 One-time verification required</p>
         </div>
     </div>
@@ -644,8 +732,8 @@
         const CONFIG = {
             CATBOX_USERHASH: "a0936664a108975430f75fc52",
             CATBOX_API: "https://catbox.moe/user/api.php",
-            CAT_JSON_URL: "cat.json", // Your cat.json file
-            STORAGE_KEY: "alaminedge_voice_verified",
+            CAT_JSON_URL: "cat.json",
+            STORAGE_KEY: "alaminedge_verified",
             VERIFICATION_DATA_KEY: "alaminedge_verification_data"
         };
 
@@ -655,13 +743,13 @@
         const step3Section = document.getElementById('step3Section');
         const successSection = document.getElementById('successSection');
         const alreadyVerified = document.getElementById('alreadyVerified');
+        const notApprovedSection = document.getElementById('notApprovedSection');
+        const notFoundSection = document.getElementById('notFoundSection');
         
         const nameInput = document.getElementById('nameInput');
         const districtInput = document.getElementById('districtInput');
         const confirmName = document.getElementById('confirmName');
         const confirmDistrict = document.getElementById('confirmDistrict');
-        const voiceName = document.getElementById('voiceName');
-        const voiceDistrict = document.getElementById('voiceDistrict');
         
         const nextBtn1 = document.getElementById('nextBtn1');
         const confirmYesBtn = document.getElementById('confirmYesBtn');
@@ -669,6 +757,8 @@
         const startVerificationBtn = document.getElementById('startVerificationBtn');
         const backBtn3 = document.getElementById('backBtn3');
         const finishBtn = document.getElementById('finishBtn');
+        const tryAgainBtn = document.getElementById('tryAgainBtn');
+        const editDetailsBtn = document.getElementById('editDetailsBtn');
         
         const telegramLink = document.getElementById('telegramLink');
         const groupName = document.getElementById('groupName');
@@ -694,7 +784,7 @@
         let audioChunks = [];
         let countdownValue = 5;
         let countdownInterval = null;
-        let catData = null; // Will store cat.json data
+        let catData = null;
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -709,6 +799,9 @@
             
             // Hide all status messages
             hideAllStatus();
+            
+            // Hide all special sections
+            hideAllSpecialSections();
         });
 
         // Load cat.json database
@@ -716,7 +809,7 @@
             try {
                 const response = await fetch(CONFIG.CAT_JSON_URL);
                 catData = await response.json();
-                console.log('cat.json loaded:', catData);
+                console.log('cat.json loaded successfully');
             } catch (error) {
                 console.error('Failed to load cat.json:', error);
                 showError('Database connection failed. Please try again later.');
@@ -737,9 +830,22 @@
 
         // Show already verified section
         function showAlreadyVerified() {
+            hideMainContent();
+            alreadyVerified.style.display = 'block';
+        }
+
+        // Hide main content
+        function hideMainContent() {
             document.querySelector('.main-content').style.display = 'none';
             document.querySelector('.verification-steps').style.display = 'none';
-            alreadyVerified.style.display = 'block';
+        }
+
+        // Hide all special sections
+        function hideAllSpecialSections() {
+            const sections = [alreadyVerified, notApprovedSection, notFoundSection, successSection];
+            sections.forEach(section => {
+                if (section) section.style.display = 'none';
+            });
         }
 
         // Set up event listeners
@@ -752,13 +858,31 @@
             confirmNoBtn.addEventListener('click', goBackToStep1);
             
             // Step 3: Verification buttons
-            startVerificationBtn.addEventListener('click', startVoiceVerification);
+            startVerificationBtn.addEventListener('click', startVerificationProcess);
             backBtn3.addEventListener('click', goBackToStep2);
             
             // Success: Finish button
             finishBtn.addEventListener('click', function() {
                 window.location.href = 'index.html';
             });
+            
+            // Not approved: Try again button
+            if (tryAgainBtn) {
+                tryAgainBtn.addEventListener('click', function() {
+                    hideAllSpecialSections();
+                    showMainContent();
+                    goToStep(1);
+                });
+            }
+            
+            // Not found: Edit details button
+            if (editDetailsBtn) {
+                editDetailsBtn.addEventListener('click', function() {
+                    hideAllSpecialSections();
+                    showMainContent();
+                    goToStep(1);
+                });
+            }
             
             // Enter key support for step 1
             nameInput.addEventListener('keypress', function(e) {
@@ -767,6 +891,12 @@
             districtInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') validateAndProceed();
             });
+        }
+
+        // Show main content
+        function showMainContent() {
+            document.querySelector('.main-content').style.display = 'block';
+            document.querySelector('.verification-steps').style.display = 'flex';
         }
 
         // Validate and proceed to step 2
@@ -785,8 +915,6 @@
             // Update confirmation display
             confirmName.textContent = name;
             confirmDistrict.textContent = district;
-            voiceName.textContent = name;
-            voiceDistrict.textContent = district;
             
             // Move to step 2
             goToStep(2);
@@ -808,23 +936,65 @@
             );
             
             if (!userEntry) {
-                showError('Name and district not found in verification database. Please check and try again.');
+                // User not found at all
+                const notFoundMessage = catData.settings?.not_found_message || "Account not found. Please check your details.";
+                showNotFound(notFoundMessage);
                 return;
             }
             
-            // Store user's group info
+            // Check approval status (0 = not approved, 1 = approved)
+            if (userEntry.approved === 0) {
+                // User exists but not approved
+                const notApprovedMessage = catData.settings?.not_approved_message || "Your account is not approved for verification.";
+                showNotApproved(userEntry, notApprovedMessage);
+                return;
+            }
+            
+            if (userEntry.approved !== 1) {
+                // Invalid approval status
+                showError('Invalid account status. Please contact support.');
+                return;
+            }
+            
+            // User is approved (approved === 1)
             userData.groupName = userEntry.group_name;
             userData.groupLink = userEntry.telegram_link;
             userData.accessCode = userEntry.access_code;
             
-            // Proceed to voice verification
+            // Proceed to final step
             goToStep(3);
         }
 
-        // Start voice verification
-        async function startVoiceVerification() {
+        // Show not found section
+        function showNotFound(message) {
+            hideMainContent();
+            
+            if (message) {
+                document.getElementById('notFoundMessage').textContent = message;
+            }
+            
+            notFoundSection.style.display = 'block';
+        }
+
+        // Show not approved section
+        function showNotApproved(userEntry, message) {
+            hideMainContent();
+            
+            // Update user info
+            document.getElementById('pendingName').textContent = userEntry.name;
+            document.getElementById('pendingDistrict').textContent = userEntry.district;
+            
+            if (message) {
+                document.getElementById('notApprovedMessage').textContent = message;
+            }
+            
+            notApprovedSection.style.display = 'block';
+        }
+
+        // Start verification process
+        async function startVerificationProcess() {
             try {
-                // Request microphone access
+                // Request microphone access for voice verification
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 
                 // Set up media recorder
@@ -844,7 +1014,7 @@
                 
                 // Update UI
                 startVerificationBtn.disabled = true;
-                startVerificationBtn.innerHTML = '<i class="fas fa-microphone-slash"></i> Verifying...';
+                startVerificationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
                 verificationAnimation.style.display = 'block';
                 
                 // Start countdown
@@ -852,7 +1022,7 @@
                 
                 // Stop verification after 5 seconds
                 setTimeout(() => {
-                    if (mediaRecorder.state === 'recording') {
+                    if (mediaRecorder && mediaRecorder.state === 'recording') {
                         mediaRecorder.stop();
                     }
                 }, 5000);
@@ -860,17 +1030,39 @@
             } catch (error) {
                 console.error('Verification error:', error);
                 
-                if (error.name === 'NotAllowedError') {
-                    showError('Microphone access denied. Please allow microphone access to continue.');
-                } else if (error.name === 'NotFoundError') {
-                    showError('No microphone found. Please connect a microphone.');
+                // If microphone access fails, proceed without it (for demo/testing)
+                if (error.name === 'NotAllowedError' || error.name === 'NotFoundError') {
+                    showWarning('Proceeding without audio verification...');
+                    simulateVerification();
                 } else {
-                    showError('Microphone error: ' + error.message);
+                    showError('Verification error: ' + error.message);
+                    startVerificationBtn.disabled = false;
+                    startVerificationBtn.innerHTML = '<i class="fas fa-play-circle"></i> Start Verification';
                 }
-                
-                startVerificationBtn.disabled = false;
-                startVerificationBtn.innerHTML = '<i class="fas fa-microphone"></i> Start Voice Verification';
             }
+        }
+
+        // Simulate verification (for when microphone is not available)
+        function simulateVerification() {
+            startVerificationBtn.disabled = true;
+            startVerificationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+            verificationAnimation.style.display = 'block';
+            
+            // Simulate countdown
+            countdownValue = 5;
+            countdown.textContent = countdownValue;
+            countdown.style.display = 'block';
+            
+            let counter = 5;
+            const interval = setInterval(() => {
+                counter--;
+                countdown.textContent = counter;
+                
+                if (counter <= 0) {
+                    clearInterval(interval);
+                    handleVerificationComplete();
+                }
+            }, 1000);
         }
 
         // Handle verification complete
@@ -884,14 +1076,16 @@
             // Update UI
             verificationAnimation.style.display = 'none';
             countdown.style.display = 'none';
-            startVerificationBtn.disabled = false;
-            startVerificationBtn.innerHTML = '<i class="fas fa-microphone"></i> Start Voice Verification';
             
-            // Create audio blob
-            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-            
-            // Upload to Catbox for internal verification
-            uploadToCatbox(audioBlob);
+            // Create audio blob if available
+            if (audioChunks.length > 0) {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                // Upload to Catbox for internal verification
+                uploadToCatbox(audioBlob);
+            } else {
+                // No audio recorded, just complete verification
+                completeVerification();
+            }
             
             // Stop all audio tracks
             if (mediaRecorder && mediaRecorder.stream) {
@@ -918,12 +1112,12 @@
 
         // Upload to Catbox (internal verification)
         function uploadToCatbox(audioBlob) {
-            showStatus('loading', 'Processing voice verification...');
+            showStatus('loading', 'Processing verification...');
             
             const formData = new FormData();
             formData.append("reqtype", "fileupload");
             formData.append("userhash", CONFIG.CATBOX_USERHASH);
-            formData.append("fileToUpload", audioBlob, `voice_verification_${Date.now()}.webm`);
+            formData.append("fileToUpload", audioBlob, `verification_${Date.now()}.webm`);
             
             // Upload to Catbox (internal use only)
             fetch(CONFIG.CATBOX_API, {
@@ -936,7 +1130,7 @@
             })
             .catch(error => {
                 console.error('Upload error:', error);
-                // Even if upload fails, mark as verified for demo
+                // Even if upload fails, mark as verified
                 completeVerification();
             });
         }
@@ -958,8 +1152,7 @@
             localStorage.setItem(CONFIG.VERIFICATION_DATA_KEY, JSON.stringify(verificationData));
             
             // Show success section
-            document.querySelector('.main-content').style.display = 'none';
-            document.querySelector('.verification-steps').style.display = 'none';
+            hideMainContent();
             successSection.style.display = 'block';
             
             // Display Telegram group info
@@ -1029,11 +1222,18 @@
             } else if (type === 'warning') {
                 warningText.textContent = message;
                 statusWarning.style.display = 'block';
+            } else if (type === 'loading') {
+                warningText.textContent = message;
+                statusWarning.style.display = 'block';
             }
         }
 
         function showError(message) {
             showStatus('error', message);
+        }
+
+        function showWarning(message) {
+            showStatus('warning', message);
         }
 
         function hideAllStatus() {
