@@ -6,7 +6,6 @@
     <title>CALCULUS BATTLE 2026 — STANDARD QUESTION PAPER | AlaminEdge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
         :root {
             --primary-color: #00bfff;
@@ -391,7 +390,7 @@
             line-height: 1.6;
         }
 
-        /* Options for MCQ */
+        /* Options for MCQ - CANNOT DESELECT */
         .options-container {
             display: grid;
             gap: 1rem;
@@ -409,7 +408,7 @@
             gap: 1rem;
         }
 
-        .option:hover {
+        .option:hover:not(.selected) {
             border-color: var(--primary-color);
             background: rgba(0, 191, 255, 0.05);
         }
@@ -417,6 +416,7 @@
         .option.selected {
             border-color: var(--primary-color);
             background: rgba(0, 191, 255, 0.1);
+            cursor: default;
         }
 
         .option-marker {
@@ -522,8 +522,8 @@
 
         .image-preview-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
             margin: 2rem 0;
         }
 
@@ -537,7 +537,7 @@
 
         .image-preview img {
             width: 100%;
-            height: 200px;
+            height: 300px;
             object-fit: contain;
             background: var(--bg-color);
         }
@@ -565,29 +565,6 @@
 
         .remove-image:hover {
             transform: scale(1.1);
-        }
-
-        .merge-preview {
-            margin: 2rem 0;
-            padding: 2rem;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            display: none;
-        }
-
-        .merged-image-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background: white;
-            border-radius: var(--radius-md);
-        }
-
-        #mergedImage {
-            width: 100%;
-            height: auto;
-            display: block;
         }
 
         /* Exam Footer */
@@ -692,9 +669,6 @@
             border-radius: var(--radius-md);
             padding: 1.5rem;
             margin: 2rem 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
             text-align: left;
         }
 
@@ -847,6 +821,10 @@
             .written-section,
             .final-card {
                 padding: 1.5rem;
+            }
+            
+            .image-preview-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1015,18 +993,18 @@
                         <span>SUBMIT WRITTEN ANSWERS</span>
                     </div>
                     <h1>Upload Your Written Answers</h1>
-                    <p class="text-secondary">Please upload clear images of your written answers. You need to upload exactly 3 images.</p>
+                    <p class="text-secondary">Please upload clear images of your written answers.</p>
                     
                     <div class="upload-instructions">
-                        <h3>Instructions:</h3>
+                        <h3>Important Instructions:</h3>
                         <ol>
-                            <li>Write your answers on paper with your <strong>Name, District, and MCQ Score</strong> on top</li>
+                            <li>Write your answers on paper with your <strong>Name and District</strong> clearly written on top</li>
                             <li>Take clear photos in good lighting</li>
-                            <li>Upload exactly 3 images (one image per page or multiple pages per image)</li>
-                            <li>Images will be automatically merged into a single sheet</li>
-                            <li>The merged sheet will be submitted to our evaluation system</li>
+                            <li>You can upload 1-3 images as needed</li>
+                            <li>Each image should be clear and readable</li>
+                            <li>Make sure your name and district are visible in at least one image</li>
                         </ol>
-                        <p><strong>Note:</strong> Your MCQ score will be calculated but not shown immediately.</p>
+                        <p><strong>Note:</strong> Your MCQ answers have been recorded. Results will be announced later.</p>
                     </div>
 
                     <div class="upload-zone" id="upload-zone">
@@ -1035,19 +1013,14 @@
                         </div>
                         <h3>Drag & Drop Images Here</h3>
                         <p class="text-muted">or click to select files (JPG, PNG, max 5MB each)</p>
+                        <p class="text-muted" style="margin-top: 10px; color: var(--primary-light);">
+                            <i class="fas fa-info-circle"></i> Upload 1-3 images as needed
+                        </p>
                         <input type="file" id="image-input" accept="image/*" multiple style="display: none;">
                     </div>
 
                     <div class="image-preview-container" id="image-preview-container">
                         <!-- Image previews will be added here -->
-                    </div>
-
-                    <div class="merge-preview" id="merge-preview">
-                        <h3>Merged Answer Sheet Preview</h3>
-                        <p class="text-muted">This combined sheet will be submitted for evaluation</p>
-                        <div class="merged-image-container">
-                            <img id="mergedImage" src="" alt="Merged Answers">
-                        </div>
                     </div>
 
                     <div id="upload-status"></div>
@@ -1079,12 +1052,12 @@
                             <strong id="info-district"></strong>
                         </div>
                         <div class="info-row">
-                            <span>MCQ Score:</span>
-                            <strong id="info-mcq-score">Calculating...</strong>
+                            <span>MCQ Section:</span>
+                            <strong>Submitted</strong>
                         </div>
                         <div class="info-row">
                             <span>Written Images:</span>
-                            <strong id="info-images">3 uploaded</strong>
+                            <strong id="info-images">0 uploaded</strong>
                         </div>
                         <div class="info-row">
                             <span>Submission Time:</span>
@@ -1094,15 +1067,12 @@
 
                     <div class="exam-info" style="margin: 2rem 0;">
                         <h3>Important Information</h3>
-                        <p class="text-muted">Your answers are being evaluated. Results will be announced soon.</p>
-                        <p><strong>Do not close this page until you receive confirmation.</strong></p>
+                        <p class="text-muted">Your answers have been recorded successfully.</p>
+                        <p><strong>Please keep this window open for confirmation.</strong></p>
+                        <p>Results will be announced through official channels.</p>
                     </div>
 
                     <div class="result-actions">
-                        <button class="btn btn-secondary" id="download-merged-btn" style="display: none;">
-                            <i class="fas fa-download"></i>
-                            <span>Download Merged Sheet</span>
-                        </button>
                         <a href="https://t.me/freehscaca" target="_blank" class="btn btn-primary">
                             <i class="fab fa-telegram"></i>
                             <span>Join Telegram for Updates</span>
@@ -1116,8 +1086,8 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loader"></div>
-        <h3 id="loading-text">Processing Images...</h3>
-        <p class="text-muted">Please wait while we merge and upload your answers</p>
+        <h3 id="loading-text">Processing Submission...</h3>
+        <p class="text-muted">Please wait while we process your answers</p>
     </div>
 
     <!-- Warning Modal -->
@@ -1159,8 +1129,7 @@
             correctMark: 1,
             wrongPenalty: 0.5,
             maxViolations: 3,
-            maxImages: 3,
-            imagebbApiKey: '61efcea661db85bc3909f88fd02010d3'
+            maxImages: 3
         };
 
         // MCQ Questions Data
@@ -1308,18 +1277,14 @@
         const uploadZone = document.getElementById('upload-zone');
         const imageInput = document.getElementById('image-input');
         const imagePreviewContainer = document.getElementById('image-preview-container');
-        const mergePreview = document.getElementById('merge-preview');
-        const mergedImage = document.getElementById('mergedImage');
         const submitAllBtn = document.getElementById('submit-all-btn');
         const uploadStatus = document.getElementById('upload-status');
         
         const finalName = document.getElementById('final-name');
         const infoName = document.getElementById('info-name');
         const infoDistrict = document.getElementById('info-district');
-        const infoMcqScore = document.getElementById('info-mcq-score');
         const infoImages = document.getElementById('info-images');
         const infoTime = document.getElementById('info-time');
-        const downloadMergedBtn = document.getElementById('download-merged-btn');
         
         const warningModal = document.getElementById('warning-modal');
         const warningMessage = document.getElementById('warning-message');
@@ -1354,7 +1319,6 @@
             submitAllBtn.addEventListener('click', submitAllAnswers);
             acknowledgeWarningBtn.addEventListener('click', closeWarningModal);
             enterFullscreenBtn.addEventListener('click', enterFullscreen);
-            downloadMergedBtn.addEventListener('click', downloadMergedSheet);
 
             // Image upload handlers
             uploadZone.addEventListener('click', () => imageInput.click());
@@ -1540,18 +1504,24 @@
                         <div class="question-text">${question.question}</div>
                     </div>
                     <div class="options-container">
-                        ${question.options.map((option, optIndex) => `
-                            <div class="option" data-question="${index}" data-option="${optIndex}">
-                                <div class="option-marker">${String.fromCharCode(65 + optIndex)}</div>
-                                <div class="option-text">${option}</div>
-                            </div>
-                        `).join('')}
+                        ${question.options.map((option, optIndex) => {
+                            const isSelected = appState.userAnswers[index] === optIndex;
+                            return `
+                                <div class="option ${isSelected ? 'selected' : ''}" 
+                                     data-question="${index}" 
+                                     data-option="${optIndex}"
+                                     ${isSelected ? 'style="cursor: default;"' : ''}>
+                                    <div class="option-marker">${String.fromCharCode(65 + optIndex)}</div>
+                                    <div class="option-text">${option}</div>
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
                 `;
                 mcqQuestionsContainer.appendChild(questionCard);
             });
 
-            // Add event listeners to options
+            // Add event listeners to options - CANNOT DESELECT
             document.querySelectorAll('.option').forEach(option => {
                 option.addEventListener('click', handleOptionSelect);
             });
@@ -1564,14 +1534,14 @@
             const questionIndex = parseInt(optionElement.dataset.question);
             const optionIndex = parseInt(optionElement.dataset.option);
 
-            // Deselect all options in this question
-            const questionCard = optionElement.closest('.question-card');
-            questionCard.querySelectorAll('.option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
+            // If already selected, do nothing (cannot deselect)
+            if (appState.userAnswers[questionIndex] !== null) {
+                return;
+            }
 
             // Select the clicked option
             optionElement.classList.add('selected');
+            optionElement.style.cursor = 'default';
             appState.userAnswers[questionIndex] = optionIndex;
 
             updateMCQProgress();
@@ -1636,7 +1606,7 @@
             const score = Math.max(0, (correct * EXAM_CONFIG.correctMark) - (wrong * EXAM_CONFIG.wrongPenalty));
             appState.mcqScore = score;
             
-            // Store score for later use
+            // Store score locally
             localStorage.setItem('mcq_score', score.toFixed(2));
             localStorage.setItem('correct_count', correct);
             localStorage.setItem('wrong_count', wrong);
@@ -1772,9 +1742,9 @@
                 const preview = document.createElement('div');
                 preview.className = 'image-preview';
                 preview.innerHTML = `
-                    <img src="${image.data}" alt="Answer ${index + 1}">
+                    <img src="${image.data}" alt="Written Answer ${index + 1}">
                     <div class="image-info">
-                        <span>Answer ${index + 1}</span>
+                        <span>Image ${index + 1}</span>
                         <button class="remove-image" data-index="${index}">
                             <i class="fas fa-times"></i>
                         </button>
@@ -1795,16 +1765,12 @@
         }
 
         function checkUploadComplete() {
-            if (appState.uploadedImages.length === EXAM_CONFIG.maxImages) {
+            if (appState.uploadedImages.length > 0) {
                 submitAllBtn.style.display = 'inline-flex';
-                showUploadStatus('Ready to submit! Click "Submit All Answers" button.', 'success');
-                
-                // Create merged preview
-                createMergedPreview();
+                showUploadStatus(`Ready to submit ${appState.uploadedImages.length} image(s). Click "Submit All Answers" button.`, 'success');
             } else {
                 submitAllBtn.style.display = 'none';
-                mergePreview.style.display = 'none';
-                showUploadStatus(`Upload ${EXAM_CONFIG.maxImages - appState.uploadedImages.length} more images`, 'info');
+                showUploadStatus('Upload 1-3 images of your written answers', 'info');
             }
         }
 
@@ -1828,193 +1794,30 @@
             `;
         }
 
-        async function createMergedPreview() {
-            loadingText.textContent = 'Creating merged sheet...';
-            loadingScreen.style.display = 'flex';
-            
-            try {
-                // Create canvas for merged image
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                
-                // Set canvas size (A4 aspect ratio: 210x297 mm = 595x842 pixels at 72 DPI)
-                canvas.width = 595 * 2;
-                canvas.height = 842 * 2;
-                
-                // Fill with white background
-                ctx.fillStyle = '#FFFFFF';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Add student info section (top 25%)
-                const infoHeight = canvas.height * 0.25;
-                ctx.fillStyle = '#F0F0F0';
-                ctx.fillRect(0, 0, canvas.width, infoHeight);
-                
-                // Add borders
-                ctx.strokeStyle = '#000000';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(0, 0, canvas.width, canvas.height);
-                ctx.strokeRect(0, 0, canvas.width, infoHeight);
-                
-                // Add student info text
-                ctx.fillStyle = '#000000';
-                ctx.font = 'bold 40px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('CALCULUS BATTLE 2026', canvas.width / 2, 60);
-                
-                ctx.font = '30px Arial';
-                ctx.fillText('Submitted Answer Sheet', canvas.width / 2, 110);
-                
-                ctx.font = '24px Arial';
-                ctx.textAlign = 'left';
-                ctx.fillText(`Name: ${appState.studentName}`, 50, 170);
-                ctx.fillText(`District: ${appState.district}`, 50, 210);
-                ctx.fillText(`MCQ Score: ${appState.mcqScore.toFixed(2)}`, 50, 250);
-                ctx.fillText(`Submission: ${new Date().toLocaleString()}`, 50, 290);
-                
-                // Draw grid for images (3 images in 2x2 grid with info section)
-                const imagesPerRow = 2;
-                const imageWidth = canvas.width / imagesPerRow;
-                const imageHeight = (canvas.height - infoHeight) / imagesPerRow;
-                
-                // Load and draw images
-                const imagePromises = appState.uploadedImages.map(imgData => {
-                    return new Promise((resolve) => {
-                        const img = new Image();
-                        img.onload = () => resolve(img);
-                        img.src = imgData.data;
-                    });
-                });
-                
-                const images = await Promise.all(imagePromises);
-                
-                // Draw images in grid
-                images.forEach((img, index) => {
-                    const row = Math.floor(index / imagesPerRow);
-                    const col = index % imagesPerRow;
-                    
-                    const x = col * imageWidth;
-                    const y = infoHeight + row * imageHeight;
-                    
-                    // Draw border around image
-                    ctx.strokeStyle = '#CCCCCC';
-                    ctx.lineWidth = 1;
-                    ctx.strokeRect(x, y, imageWidth, imageHeight);
-                    
-                    // Draw image number
-                    ctx.fillStyle = '#666666';
-                    ctx.font = '20px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(`Answer ${index + 1}`, x + imageWidth / 2, y + 30);
-                    
-                    // Calculate image dimensions to fit in cell with padding
-                    const padding = 40;
-                    const maxWidth = imageWidth - padding * 2;
-                    const maxHeight = imageHeight - padding * 2 - 30;
-                    
-                    let drawWidth = img.width;
-                    let drawHeight = img.height;
-                    
-                    // Scale image to fit
-                    const scale = Math.min(maxWidth / drawWidth, maxHeight / drawHeight);
-                    drawWidth *= scale;
-                    drawHeight *= scale;
-                    
-                    // Center image in cell
-                    const drawX = x + (imageWidth - drawWidth) / 2;
-                    const drawY = y + 40 + (maxHeight - drawHeight) / 2;
-                    
-                    ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-                });
-                
-                // Convert to data URL and display
-                const mergedDataUrl = canvas.toDataURL('image/jpeg', 0.9);
-                mergedImage.src = mergedDataUrl;
-                mergePreview.style.display = 'block';
-                
-                // Store merged image for download/submission
-                appState.mergedImageData = mergedDataUrl;
-                
-                // Scroll to preview
-                mergePreview.scrollIntoView({ behavior: 'smooth' });
-                
-            } catch (error) {
-                console.error('Error creating merged preview:', error);
-                showUploadStatus('Error creating preview. Please try again.', 'warning');
-            } finally {
-                loadingScreen.style.display = 'none';
-            }
-        }
-
         async function submitAllAnswers() {
-            if (appState.uploadedImages.length !== EXAM_CONFIG.maxImages) {
-                showUploadStatus(`Please upload exactly ${EXAM_CONFIG.maxImages} images`, 'warning');
+            if (appState.uploadedImages.length === 0) {
+                showUploadStatus('Please upload at least 1 image', 'warning');
                 return;
             }
             
-            loadingText.textContent = 'Uploading to ImageBB...';
+            loadingText.textContent = 'Processing submission...';
             loadingScreen.style.display = 'flex';
             
             try {
-                // Convert merged image to blob
-                const mergedBlob = await dataURLtoBlob(appState.mergedImageData);
+                // Simulate processing delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
                 
-                // Upload to ImageBB
-                const uploadResult = await uploadToImageBB(mergedBlob);
-                
-                if (uploadResult.success) {
-                    // Show final screen
-                    showFinalScreen(uploadResult.data.url);
-                } else {
-                    throw new Error(uploadResult.message || 'Upload failed');
-                }
+                // Show final screen
+                showFinalScreen();
                 
             } catch (error) {
-                console.error('Upload error:', error);
-                showUploadStatus(`Upload failed: ${error.message}`, 'warning');
+                console.error('Submission error:', error);
+                showUploadStatus(`Submission failed: ${error.message}`, 'warning');
                 loadingScreen.style.display = 'none';
             }
         }
 
-        function dataURLtoBlob(dataURL) {
-            return new Promise((resolve) => {
-                const arr = dataURL.split(',');
-                const mime = arr[0].match(/:(.*?);/)[1];
-                const bstr = atob(arr[1]);
-                let n = bstr.length;
-                const u8arr = new Uint8Array(n);
-                
-                while (n--) {
-                    u8arr[n] = bstr.charCodeAt(n);
-                }
-                
-                resolve(new Blob([u8arr], { type: mime }));
-            });
-        }
-
-        async function uploadToImageBB(blob) {
-            const formData = new FormData();
-            formData.append('image', blob, `calculus_${appState.studentName}_${Date.now()}.jpg`);
-            
-            try {
-                // Using ImageBB API
-                const response = await fetch(`https://api.imgbb.com/1/upload?key=${EXAM_CONFIG.imagebbApiKey}`, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                // Store upload result
-                appState.uploadResult = result;
-                
-                return result;
-            } catch (error) {
-                throw new Error('Network error: ' + error.message);
-            }
-        }
-
-        function showFinalScreen(imageUrl) {
+        function showFinalScreen() {
             loadingScreen.style.display = 'none';
             uploadScreen.style.display = 'none';
             finalScreen.style.display = 'block';
@@ -2024,17 +1827,8 @@
             finalName.textContent = appState.studentName;
             infoName.textContent = appState.studentName;
             infoDistrict.textContent = appState.district;
-            infoMcqScore.textContent = appState.mcqScore.toFixed(2);
-            infoImages.textContent = `${appState.uploadedImages.length} images uploaded`;
+            infoImages.textContent = `${appState.uploadedImages.length} image(s) uploaded`;
             infoTime.textContent = new Date().toLocaleString();
-            
-            // Show download button with uploaded image
-            if (appState.uploadResult?.data?.url) {
-                downloadMergedBtn.style.display = 'inline-flex';
-                downloadMergedBtn.onclick = () => {
-                    window.open(appState.uploadResult.data.url, '_blank');
-                };
-            }
             
             // Store final submission data
             localStorage.setItem('final_submission', JSON.stringify({
@@ -2042,21 +1836,11 @@
                 district: appState.district,
                 mcqScore: appState.mcqScore,
                 uploadedImages: appState.uploadedImages.length,
-                imageUrl: appState.uploadResult?.data?.url,
                 submissionTime: new Date().toISOString()
             }));
             
             // Clear exam started flag
             localStorage.removeItem('exam_started');
-        }
-
-        function downloadMergedSheet() {
-            if (appState.mergedImageData) {
-                const link = document.createElement('a');
-                link.download = `Calculus_Battle_${appState.studentName}_${Date.now()}.jpg`;
-                link.href = appState.mergedImageData;
-                link.click();
-            }
         }
 
         // Initialize the application
